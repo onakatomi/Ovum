@@ -27,17 +27,15 @@ struct ChatDetail: View {
                             ForEach(viewModel.messages) { message in
                                 ChatBubble(content: message.content, author: message.author)
                             }
-                            Button("Reverse", action: {viewModel.reverseList()})
-                                .id("button")
                             if (awaitingResponse) {
                                 TypingIndicator()
                                     .frame(width: 80, height: 40, alignment: .leading)
-                                    .id("typing")
+                                    .id("typingIndicator")
                             }
                         }
                         .onChange(of: viewModel.messages.count) {
                             withAnimation {
-                                scrollViewProxy.scrollTo("typing", anchor: .bottom)
+                                scrollViewProxy.scrollTo("typingIndicator", anchor: .bottom)
                             }
                         }
                         .onChange(of: awaitingResponse) {
@@ -61,7 +59,7 @@ struct ChatDetail: View {
             MessageInputField(textInput: $inputText) {
                 awaitingResponse = true
                 await viewModel.addMessage(message: Message(author: "John", fromOvum: false, content: inputText))
-                await Task.sleep(5_000_000_000)
+                await viewModel.postRequest(message: inputText)
                 awaitingResponse = false
             }
                 .padding([.horizontal], 20)
