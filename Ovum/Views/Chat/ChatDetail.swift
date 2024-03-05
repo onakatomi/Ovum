@@ -17,7 +17,9 @@ struct ChatDetail: View {
                 HStack(alignment: .top) {
                     Header(firstLine: "Chat with", secondLine: "Ovum", colour: Color(red: 0.4, green: 0.16, blue: 0.06))
                     Spacer()
-                    Image("green_circle")
+                    Image("level_high")
+                        .resizable()
+                        .frame(width: 49, height: 49)
                 }
                 Divider()
                     .background(Color(red: 0.4, green: 0.16, blue: 0.06))
@@ -39,13 +41,18 @@ struct ChatDetail: View {
                             }
                         }
                         .onChange(of: awaitingResponse) {
+                            if (!viewModel.messages.isEmpty) {
                                 withAnimation {
                                     scrollViewProxy.scrollTo(viewModel.messages[viewModel.messages.count - 1].id , anchor: .bottom)
                                 }
+                            }
                         }
                         .onAppear {
-                            withAnimation {
-                                scrollViewProxy.scrollTo(viewModel.messages[viewModel.messages.count - 1].id , anchor: .bottom)
+                            if (!viewModel.messages.isEmpty) {
+                                withAnimation {
+                                    scrollViewProxy.scrollTo(viewModel.messages[viewModel.messages.count - 1].id , anchor: .bottom)
+                                }
+                                
                             }
                         }
                     }

@@ -16,6 +16,16 @@ func getImage(type: BaseViewType) -> Image {
         return Image("documents")
     }
 }
+func getHeaderImage(type: BaseViewType) -> Image {
+    switch type {
+    case .overview:
+        return Image("level_high")
+    case .chat:
+        return Image("level_medium")
+    case .documents:
+        return Image("level_low")
+    }
+}
 
 func getHeader(type: BaseViewType) -> Header {
     switch (type) {
@@ -47,44 +57,47 @@ struct BaseView: View {
     }
     
     var body: some View {
+        NavigationView {
             ZStack(alignment: .top) {
-                Rectangle()
-                ZStack(alignment: .top) {
-                    getImage(type: type)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                    .blur(radius: 10, opaque: true)
-                    VStack {
-                        Image(systemName: "filemenu.and.cursorarrow")
-                            .imageScale(.large)
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                            .padding(.trailing, 8)
-                            .foregroundColor(.white)
-                        Divider()
-                            .background(.white)
-                        HStack(alignment: .top) {
-                            getHeader(type: type)
-                            
-                            Spacer()
-                        Image("green_circle")
+                    Rectangle()
+                    ZStack(alignment: .top) {
+                        getImage(type: type)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                        .blur(radius: 10, opaque: true)
+                        VStack {
+                            Image(systemName: "filemenu.and.cursorarrow")
+                                .imageScale(.large)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                                .padding(.trailing, 8)
+                                .foregroundColor(.white)
+                            Divider()
+                                .background(.white)
+                            HStack(alignment: .top) {
+                                getHeader(type: type)
+                                Spacer()
+                                getHeaderImage(type: type)
+                                    .resizable()
+                                    .frame(width: 49, height: 49)
+                            }
+                        }
+                        .padding([.top], 60)
+                        .padding([.horizontal], 20)
+                    }
+                    .background(Color.yellow)
+                    
+                    ZStack(alignment: .top) {
+                        Color(Color(red: 0.98, green: 0.96, blue: 0.92))
+                        VStack {
+                            getContent(type: type)
                         }
                     }
-                    .padding([.top], 60)
-                    .padding([.horizontal], 20)
+                    .cornerRadius(12)
+                    .padding([.top], 220)
                 }
-                .background(Color.yellow)
-                
-                ZStack(alignment: .top) {
-                    Color(Color(red: 0.98, green: 0.96, blue: 0.92))
-                    VStack {
-                        getContent(type: type)
-                    }
-                }
-                .cornerRadius(12)
-                .padding([.top], 220)
-            }
-            .ignoresSafeArea()
+            .ignoresSafeArea(.all, edges: Edge.Set(Edge.top))
         }
+    }
 }
 
 #Preview {

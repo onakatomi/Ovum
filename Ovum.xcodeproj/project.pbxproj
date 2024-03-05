@@ -23,6 +23,9 @@
 		B2D6A3F92B9159590045CCD1 /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3F82B9159590045CCD1 /* ChatBubble.swift */; };
 		B2D6A3FB2B91749D0045CCD1 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3FA2B91749D0045CCD1 /* IconButton.swift */; };
 		B2D6A3FD2B917FB20045CCD1 /* TypingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3FC2B917FB20045CCD1 /* TypingIndicator.swift */; };
+		B2D6A3FF2B96BE260045CCD1 /* ChatHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3FE2B96BE260045CCD1 /* ChatHistory.swift */; };
+		B2D6A4012B96CB730045CCD1 /* ChatSessionTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A4002B96CB730045CCD1 /* ChatSessionTile.swift */; };
+		B2D6A4032B96CBE90045CCD1 /* ChatTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A4022B96CBE90045CCD1 /* ChatTile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +46,9 @@
 		B2D6A3F82B9159590045CCD1 /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
 		B2D6A3FA2B91749D0045CCD1 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		B2D6A3FC2B917FB20045CCD1 /* TypingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingIndicator.swift; sourceTree = "<group>"; };
+		B2D6A3FE2B96BE260045CCD1 /* ChatHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatHistory.swift; path = Ovum/Views/Chat/ChatHistory.swift; sourceTree = SOURCE_ROOT; };
+		B2D6A4002B96CB730045CCD1 /* ChatSessionTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSessionTile.swift; sourceTree = "<group>"; };
+		B2D6A4022B96CBE90045CCD1 /* ChatTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,9 +112,10 @@
 			isa = PBXGroup;
 			children = (
 				B2D6A3B02B8F1AB20045CCD1 /* BaseView.swift */,
-				B2D6A3E82B9055640045CCD1 /* ChatHomeContent.swift */,
 				B2D6A3EE2B914AEB0045CCD1 /* MessageInputField.swift */,
 				B2D6A3FC2B917FB20045CCD1 /* TypingIndicator.swift */,
+				B2D6A4022B96CBE90045CCD1 /* ChatTile.swift */,
+				B2D6A3F82B9159590045CCD1 /* ChatBubble.swift */,
 				B2D6A3FA2B91749D0045CCD1 /* IconButton.swift */,
 				B2D6A3EC2B905B0B0045CCD1 /* TextFieldSendButton.swift */,
 				B2D6A3EA2B9056050045CCD1 /* ChatHistoryButton.swift */,
@@ -120,9 +127,10 @@
 		B2D6A3F02B914D540045CCD1 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				B2D6A3F62B9157020045CCD1 /* MessageViewModel.swift */,
+				B2D6A3E82B9055640045CCD1 /* ChatHomeContent.swift */,
 				B2D6A3F12B914D620045CCD1 /* ChatDetail.swift */,
-				B2D6A3F82B9159590045CCD1 /* ChatBubble.swift */,
+				B2D6A3FE2B96BE260045CCD1 /* ChatHistory.swift */,
+				B2D6A3F62B9157020045CCD1 /* MessageViewModel.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -131,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				B2D6A3F42B91565C0045CCD1 /* Message.swift */,
+				B2D6A4002B96CB730045CCD1 /* ChatSessionTile.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -212,13 +221,16 @@
 				B2D6A3EF2B914AEB0045CCD1 /* MessageInputField.swift in Sources */,
 				B2D6A3B12B8F1AB20045CCD1 /* BaseView.swift in Sources */,
 				B2D6A3FB2B91749D0045CCD1 /* IconButton.swift in Sources */,
+				B2D6A4012B96CB730045CCD1 /* ChatSessionTile.swift in Sources */,
 				B2D6A3A42B8EFEF80045CCD1 /* ContentView.swift in Sources */,
 				B2D6A3F92B9159590045CCD1 /* ChatBubble.swift in Sources */,
+				B2D6A4032B96CBE90045CCD1 /* ChatTile.swift in Sources */,
 				B2D6A3F52B91565C0045CCD1 /* Message.swift in Sources */,
 				B2D6A3FD2B917FB20045CCD1 /* TypingIndicator.swift in Sources */,
 				B2D6A3E92B9055640045CCD1 /* ChatHomeContent.swift in Sources */,
 				B2D6A3F72B9157020045CCD1 /* MessageViewModel.swift in Sources */,
 				B2D6A3A22B8EFEF80045CCD1 /* OvumApp.swift in Sources */,
+				B2D6A3FF2B96BE260045CCD1 /* ChatHistory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
