@@ -11,7 +11,7 @@ struct ChatHomeContent: View {
             Text("How can we help today?")
                 .font(.title)
                 .foregroundColor(Color(red: 0.49, green: 0.27, blue: 0.18))
-                .padding([.bottom], 107)
+//                .padding([.bottom], 107)
                 .padding([.top], 16)
             Spacer()
             NavigationLink(destination: ChatHistory()) {
@@ -24,7 +24,7 @@ struct ChatHomeContent: View {
                                 .inset(by: 0.5)
                                 .stroke(Color(red: 0.49, green: 0.27, blue: 0.18), lineWidth: 1)
                         )
-                        .padding([.bottom], 20)
+                        .padding([.bottom], 30)
             }
             Divider()
             VStack {

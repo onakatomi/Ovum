@@ -10,38 +10,28 @@ struct ContentView: View {
                 Group {
                     BaseView(BaseViewType.overview)
                         .tabItem {
-                            Label("Overview", systemImage: "allergens")
+                            Image(selectedTab == 0 ? "tab_overview_active" : "tab_overview_inactive")
+                            Text("Overview")
                         }
-//                            .toolbarBackground(
-//                                Color.yellow,
-//                                for: .tabBar)
                         .tag(0)
                     BaseView(BaseViewType.chat)
                         .tabItem {
-                            Label("Chat", systemImage: "bubble.right")
+                            Image(selectedTab == 1 ? "tab_chat_active" : "tab_chat_inactive")
+                            Text("Chat")
                         }
                         .tag(1)
                     BaseView(BaseViewType.documents)
                         .tabItem {
-                            Label("Records", systemImage: "doc.fill")
+                            Image(selectedTab == 2 ? "tab_records_active" : "tab_records_inactive")
+                            Text("Records")
                         }
                         .tag(2)
                 }
                 .toolbarBackground(Color(Color(red: 0.98, green: 0.96, blue: 0.92)), for: .tabBar)
                 .toolbarBackground(.visible, for: .tabBar)
-
-//                .toolbarColorScheme(.dark, for: .tabBar)
             }
-//                .ignoresSafeArea()
+            .accentColor(Color(red: 0.3, green: 0.1, blue: 0.04))
         }
-//        .ignoresSafeArea()
-        
-//        .toolbarBackground(.visible, for: .tabBar)
-//        .tabViewStyle(DefaultTabViewStyle())
-        
-//            .onChange(of: selectedTab) {
-//                    print(selectedTab)
-//                }
         }
     }
 

@@ -92,7 +92,14 @@ struct BaseView: View {
                             getContent(type: type)
                         }
                     }
-                    .cornerRadius(12)
+                    .clipShape(
+                        .rect(
+                            topLeadingRadius: 12,
+                            bottomLeadingRadius: 0,
+                            bottomTrailingRadius: 0,
+                            topTrailingRadius: 12
+                        )
+                    )
                     .padding([.top], 220)
                 }
             .ignoresSafeArea(.all, edges: Edge.Set(Edge.top))
