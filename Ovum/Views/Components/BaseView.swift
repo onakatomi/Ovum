@@ -38,17 +38,6 @@ func getHeader(type: BaseViewType) -> Header {
     }
 }
 
-func getContent(type: BaseViewType) -> ChatHomeContent {
-    switch (type) {
-    case BaseViewType.chat:
-        ChatHomeContent()
-    case BaseViewType.overview:
-        ChatHomeContent()
-    case BaseViewType.documents:
-        ChatHomeContent()
-    }
-}
-
 struct BaseView: View {
     let type: BaseViewType
     
@@ -89,7 +78,14 @@ struct BaseView: View {
                     ZStack(alignment: .top) {
                         Color(Color(red: 0.98, green: 0.96, blue: 0.92))
                         VStack {
-                            getContent(type: type)
+                            switch (type) {
+                            case BaseViewType.chat:
+                                ChatHomeContent()
+                            case BaseViewType.overview:
+                                ChatHomeContent()
+                            case BaseViewType.documents:
+                                RecordsHomeContent()
+                            }
                         }
                     }
                     .clipShape(
@@ -108,5 +104,6 @@ struct BaseView: View {
 }
 
 #Preview {
-    BaseView(BaseViewType.chat)
+    BaseView(BaseViewType.documents)
+        .environment(MessageViewModel())
 }

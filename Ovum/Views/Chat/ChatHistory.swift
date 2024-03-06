@@ -5,7 +5,7 @@ struct ChatHistory: View {
     @State private var searchText: String = ""
     @Environment(\.dismiss) private var dismiss
     
-    var filteredSessions: [ChatSessionTile] {
+    var filteredSessions: [ChatSession] {
         if (searchText == "") {
             viewModel.chatSessions
         } else {
@@ -56,7 +56,7 @@ struct ChatHistory: View {
                 VStack(alignment: .leading, spacing: 0) {
                     ForEach(filteredSessions) { chatSession in
                         NavigationLink {
-                            ChatHomeContent()
+                            ChatHistoryDetail(chatSession: chatSession)
                         } label: {
                             ChatTile(chatTile: chatSession)
                         }

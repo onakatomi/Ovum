@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct ChatTile: View {
-    let chatTile: ChatSession
+struct DocumentListTile: View {
+    let document: Document
     
     var body: some View {
         VStack(spacing: 0) {
@@ -11,23 +11,25 @@ struct ChatTile: View {
             HStack {
                 ZStack {
                     Circle()
-                        .fill(chatTile.colour)
+                        .fill(Color(red: 0.4, green: 0.16, blue: 0.06))
                         .frame(width: 40, height: 40)
-                    Image("chat_bubble")
+                    document.type.getImage(isSelected: true)
                         .resizable()
+                        .aspectRatio(contentMode: .fit)
                         .frame(width: 22, height: 22)
                 }
                 Spacer()
                     .frame(width: 24)
-                VStack(alignment: .leading) {
-                    Text(chatTile.title)
+                HStack {
+                    Text(document.title)
                         .font(Font.headline.weight(.bold))
-                    Text(chatTile.date)
+                    Text("·")
+                    Text(document.date)
                         .font(Font.headline.weight(.light))
                 }
                 .foregroundStyle(Color(red: 0.4, green: 0.16, blue: 0.06))
                 Spacer()
-                Image(systemName: "arrow.right")
+                Image("forward_arrow")
             }
             .padding(.bottom, 24)
         }
@@ -35,5 +37,5 @@ struct ChatTile: View {
 }
 
 #Preview {
-    ChatTile(chatTile: ChatSession(messages: [Message(author: "John", fromOvum: false, content: "Are you there?")], title: "Irregular bleeding patterns", date: "17/2/22", colour: Color(red: 0.95, green: 0.82, blue: 0.83)))
+    DocumentListTile(document: Document(title: "Hormones", date: "17/2/22", type: RecordType.pathology))
 }

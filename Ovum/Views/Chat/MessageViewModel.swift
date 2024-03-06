@@ -4,22 +4,20 @@ import SwiftUI
 @Observable
 class MessageViewModel {
     var messages: [Message] = []
-    var chatSessions: [ChatSessionTile] = []
+    var chatSessions: [ChatSession] = []
+    var documents: [Document] = []
     
     let baseUrl = "http://127.0.0.1:5000"
     let endpoint = "/get_next_message"
     
     init() {
-        addMessages()
-    }
-    
-    func addMessages() {
         messages = []
         chatSessions = chatSessionsMock
+        documents = documentsMock
     }
     
     func addMessage(message: Message) async {
-        print("hey \(message.content)")
+        print("---> \(message.content)")
         messages.append(message)
     }
     
@@ -65,12 +63,17 @@ let chatData: [Message] = [
     Message(author: "John", fromOvum: false, content: "Don't gooooo"),
 ]
 
-let chatSessionsMock: [ChatSessionTile] = [
-    ChatSessionTile(title: "Irregular bleeding patterns", date: "17/2/22", colour: Color(red: 0.95, green: 0.82, blue: 0.83)),
-    ChatSessionTile(title: "Regular nausea", date: "17/2/22", colour: Color(red: 0.76, green: 0.73, blue: 0.95)),
-    ChatSessionTile(title: "Concern with knee joints", date: "17/2/22", colour: Color(red: 0.7, green: 0.88, blue: 0.61)),
-    ChatSessionTile(title: "Early period", date: "17/2/22", colour: Color(red: 1, green: 0.82, blue: 0.6)),
-    ChatSessionTile(title: "Explaining your blood results", date: "17/2/22", colour: Color(red: 0.74, green: 0.95, blue: 0.92)),
-    ChatSessionTile(title: "Irregular bleeding patterns", date: "17/2/22", colour: Color(red: 0.95, green: 0.82, blue: 0.83)),
-    ChatSessionTile(title: "Irregular bleeding patterns", date: "17/2/22", colour: Color(red: 0.95, green: 0.82, blue: 0.83)),
+let chatSessionsMock: [ChatSession] = [
+    ChatSession(messages: chatData, title: "Irregular bleeding patterns", date: "17/2/22", colour: Color(red: 0.95, green: 0.82, blue: 0.83)),
+    ChatSession(messages: chatData, title: "Regular nausea", date: "17/2/22", colour: Color(red: 0.76, green: 0.73, blue: 0.95)),
+    ChatSession(messages: chatData, title: "Concern with knee joints", date: "17/2/22", colour: Color(red: 0.7, green: 0.88, blue: 0.61)),
+    ChatSession(messages: chatData, title: "Early period", date: "17/2/22", colour: Color(red: 1, green: 0.82, blue: 0.6)),
+    ChatSession(messages: chatData, title: "Explaining your blood results", date: "17/2/22", colour: Color(red: 0.74, green: 0.95, blue: 0.92)),
+    ChatSession(messages: chatData, title: "Irregular bleeding patterns", date: "17/2/22", colour: Color(red: 0.95, green: 0.82, blue: 0.83)),
+    ChatSession(messages: chatData, title: "Irregular bleeding patterns", date: "17/2/22", colour: Color(red: 0.95, green: 0.82, blue: 0.83)),
+]
+
+let documentsMock: [Document] = [
+    Document(title: "Hormones", date: "17/2/22", type: RecordType.pathology),
+    Document(title: "Referral", date: "17/2/22", type: RecordType.letters),
 ]
