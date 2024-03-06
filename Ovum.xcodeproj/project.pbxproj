@@ -14,7 +14,6 @@
 		B2D6A3B12B8F1AB20045CCD1 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3B02B8F1AB20045CCD1 /* BaseView.swift */; };
 		B2D6A3E72B9041B10045CCD1 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3E62B9041B10045CCD1 /* Header.swift */; };
 		B2D6A3E92B9055640045CCD1 /* ChatHomeContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3E82B9055640045CCD1 /* ChatHomeContent.swift */; };
-		B2D6A3EB2B9056050045CCD1 /* ChatHistoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3EA2B9056050045CCD1 /* ChatHistoryButton.swift */; };
 		B2D6A3ED2B905B0B0045CCD1 /* TextFieldSendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3EC2B905B0B0045CCD1 /* TextFieldSendButton.swift */; };
 		B2D6A3EF2B914AEB0045CCD1 /* MessageInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3EE2B914AEB0045CCD1 /* MessageInputField.swift */; };
 		B2D6A3F22B914D630045CCD1 /* ChatDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3F12B914D620045CCD1 /* ChatDetail.swift */; };
@@ -26,6 +25,7 @@
 		B2D6A3FF2B96BE260045CCD1 /* ChatHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3FE2B96BE260045CCD1 /* ChatHistory.swift */; };
 		B2D6A4012B96CB730045CCD1 /* ChatSessionTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A4002B96CB730045CCD1 /* ChatSessionTile.swift */; };
 		B2D6A4032B96CBE90045CCD1 /* ChatTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A4022B96CBE90045CCD1 /* ChatTile.swift */; };
+		B2D6A4052B97E2410045CCD1 /* SendMessageField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A4042B97E2410045CCD1 /* SendMessageField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +37,6 @@
 		B2D6A3B02B8F1AB20045CCD1 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		B2D6A3E62B9041B10045CCD1 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		B2D6A3E82B9055640045CCD1 /* ChatHomeContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHomeContent.swift; sourceTree = "<group>"; };
-		B2D6A3EA2B9056050045CCD1 /* ChatHistoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryButton.swift; sourceTree = "<group>"; };
 		B2D6A3EC2B905B0B0045CCD1 /* TextFieldSendButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldSendButton.swift; sourceTree = "<group>"; };
 		B2D6A3EE2B914AEB0045CCD1 /* MessageInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputField.swift; sourceTree = "<group>"; };
 		B2D6A3F12B914D620045CCD1 /* ChatDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetail.swift; sourceTree = "<group>"; };
@@ -49,6 +48,7 @@
 		B2D6A3FE2B96BE260045CCD1 /* ChatHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatHistory.swift; path = Ovum/Views/Chat/ChatHistory.swift; sourceTree = SOURCE_ROOT; };
 		B2D6A4002B96CB730045CCD1 /* ChatSessionTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSessionTile.swift; sourceTree = "<group>"; };
 		B2D6A4022B96CBE90045CCD1 /* ChatTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTile.swift; sourceTree = "<group>"; };
+		B2D6A4042B97E2410045CCD1 /* SendMessageField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,12 +113,12 @@
 			children = (
 				B2D6A3B02B8F1AB20045CCD1 /* BaseView.swift */,
 				B2D6A3EE2B914AEB0045CCD1 /* MessageInputField.swift */,
+				B2D6A4042B97E2410045CCD1 /* SendMessageField.swift */,
 				B2D6A3FC2B917FB20045CCD1 /* TypingIndicator.swift */,
 				B2D6A4022B96CBE90045CCD1 /* ChatTile.swift */,
 				B2D6A3F82B9159590045CCD1 /* ChatBubble.swift */,
 				B2D6A3FA2B91749D0045CCD1 /* IconButton.swift */,
 				B2D6A3EC2B905B0B0045CCD1 /* TextFieldSendButton.swift */,
-				B2D6A3EA2B9056050045CCD1 /* ChatHistoryButton.swift */,
 				B2D6A3E62B9041B10045CCD1 /* Header.swift */,
 			);
 			path = Components;
@@ -214,12 +214,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2D6A3EB2B9056050045CCD1 /* ChatHistoryButton.swift in Sources */,
 				B2D6A3F22B914D630045CCD1 /* ChatDetail.swift in Sources */,
 				B2D6A3E72B9041B10045CCD1 /* Header.swift in Sources */,
 				B2D6A3ED2B905B0B0045CCD1 /* TextFieldSendButton.swift in Sources */,
 				B2D6A3EF2B914AEB0045CCD1 /* MessageInputField.swift in Sources */,
 				B2D6A3B12B8F1AB20045CCD1 /* BaseView.swift in Sources */,
+				B2D6A4052B97E2410045CCD1 /* SendMessageField.swift in Sources */,
 				B2D6A3FB2B91749D0045CCD1 /* IconButton.swift in Sources */,
 				B2D6A4012B96CB730045CCD1 /* ChatSessionTile.swift in Sources */,
 				B2D6A3A42B8EFEF80045CCD1 /* ContentView.swift in Sources */,

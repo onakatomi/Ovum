@@ -1,17 +1,17 @@
 import SwiftUI
 
 struct ChatDetail: View {
+    @Environment(MessageViewModel.self) var viewModel
     @State private var inputText: String = ""
     @State private var awaitingResponse: Bool = false
-    @ObservedObject var viewModel = MessageViewModel()
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             VStack {
-                Image(systemName: "filemenu.and.cursorarrow")
-                    .imageScale(.large)
+                Image("menu_brown")
                     .frame(maxWidth: .infinity, alignment: .trailing)
-                    .foregroundColor(.black)
+                    .padding(.trailing, 8)
+                    .padding(.bottom, 18)
                 Divider()
                     .background(Color(red: 0.4, green: 0.16, blue: 0.06))
                 HStack(alignment: .top) {
@@ -34,50 +34,52 @@ struct ChatDetail: View {
                                     .frame(width: 80, height: 40, alignment: .leading)
                                     .id("typingIndicator")
                             }
+                            Rectangle()
+                                .fill(Color(red: 0.98, green: 0.96, blue: 0.92))
+                                .frame(height: 1)
+                                .id("bottomRect")
                         }
+                        .padding([.bottom], 10)
                         .onChange(of: viewModel.messages.count) {
                             withAnimation {
-                                scrollViewProxy.scrollTo("typingIndicator", anchor: .bottom)
-                            }
-                        }
-                        .onChange(of: awaitingResponse) {
-                            if (!viewModel.messages.isEmpty) {
-                                withAnimation {
-                                    scrollViewProxy.scrollTo(viewModel.messages[viewModel.messages.count - 1].id , anchor: .bottom)
-                                }
+                                scrollViewProxy.scrollTo(viewModel.messages[viewModel.messages.count - 1].id, anchor: .top)
                             }
                         }
                         .onAppear {
                             if (!viewModel.messages.isEmpty) {
                                 withAnimation {
-                                    scrollViewProxy.scrollTo(viewModel.messages[viewModel.messages.count - 1].id , anchor: .bottom)
+                                    scrollViewProxy.scrollTo("bottomRect", anchor: .bottom)
                                 }
                                 
                             }
                         }
                     }
-//                    .frame(maxWidth: .infinity)
                 }
             }
             .padding([.horizontal], 20)
             Divider()
                 .background(Color(red: 0.4, green: 0.16, blue: 0.06))
-                .padding([.vertical], 15)
-            MessageInputField(textInput: $inputText) {
+            SendMessageField(textInput: $inputText) {
                 awaitingResponse = true
-                await viewModel.addMessage(message: Message(author: "John", fromOvum: false, content: inputText))
-                await viewModel.postRequest(message: inputText)
+                let textCopy: String = inputText
+                self.inputText = ""
+                await viewModel.addMessage(message: Message(author: "John", fromOvum: false, content: textCopy))
+                await viewModel.postRequest(message: textCopy)
                 awaitingResponse = false
             }
-                .padding([.horizontal], 20)
+            .padding([.horizontal], 20)
+            .padding([.vertical], 15)
         }
         .background {
             Color(red: 0.98, green: 0.96, blue: 0.92)
-                .ignoresSafeArea()
+                .ignoresSafeArea(.all, edges: Edge.Set(Edge.top))
         }
+        .navigationBarBackButtonHidden(true)
     }
+
 }
 
 #Preview {
     ChatDetail()
+        .environment(MessageViewModel())
 }

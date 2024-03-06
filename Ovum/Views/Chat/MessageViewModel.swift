@@ -1,9 +1,10 @@
 import Foundation
 import SwiftUI
 
-class MessageViewModel: ObservableObject {
-    @Published var messages: [Message] = []
-    @Published var chatSessions: [ChatSessionTile] = []
+@Observable
+class MessageViewModel {
+    var messages: [Message] = []
+    var chatSessions: [ChatSessionTile] = []
     
     let baseUrl = "http://127.0.0.1:5000"
     let endpoint = "/get_next_message"
@@ -32,7 +33,6 @@ class MessageViewModel: ObservableObject {
             "user_name": "Sarah",
             "message": message
         ]
-        print("pls")
         if let url = URL(string: baseUrl + endpoint) {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"

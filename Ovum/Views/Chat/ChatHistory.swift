@@ -1,8 +1,9 @@
 import SwiftUI
 
 struct ChatHistory: View {
+    @Environment(MessageViewModel.self) var viewModel
     @State private var searchText: String = ""
-    @ObservedObject var viewModel = MessageViewModel()
+    @Environment(\.dismiss) private var dismiss
     
     var filteredSessions: [ChatSessionTile] {
         if (searchText == "") {
@@ -14,28 +15,33 @@ struct ChatHistory: View {
         }
     }
     
-//    print(filteredSessions)
-    
     var body: some View {
         VStack(spacing: 0) {
-                Image(systemName: "filemenu.and.cursorarrow")
-                    .imageScale(.large)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .foregroundColor(.black)
-                Divider()
-                    .background(Color(red: 0.4, green: 0.16, blue: 0.06))
-                    .padding(.bottom, 16)
-                HStack(alignment: .top) {
-                    Header(firstLine: "Chat", secondLine: "History", colour: Color(red: 0.4, green: 0.16, blue: 0.06))
-                    Spacer()
-                    Image("chat_history")
-                        .resizable()
-                        .frame(width: 44.0, height: 44.0)
+            HStack {
+                Button {
+                    print("Action")
+                    dismiss()
+                } label: {
+                    Image("back_button")
                 }
-                    .padding(.bottom, 16)
-                Divider()
-                    .background(Color(red: 0.4, green: 0.16, blue: 0.06))
-                    .padding(.bottom, 16)
+                Spacer()
+                Image("menu_brown")
+            }
+            .padding(.bottom, 18)
+            Divider()
+                .background(Color(red: 0.4, green: 0.16, blue: 0.06))
+                .padding(.bottom, 16)
+            HStack(alignment: .top) {
+                Header(firstLine: "Chat", secondLine: "History", colour: Color(red: 0.4, green: 0.16, blue: 0.06))
+                Spacer()
+                Image("chat_history")
+                    .resizable()
+                    .frame(width: 44.0, height: 44.0)
+            }
+                .padding(.bottom, 16)
+            Divider()
+                .background(Color(red: 0.4, green: 0.16, blue: 0.06))
+                .padding(.bottom, 16)
             HStack(spacing: 14) {
                     Image("search")
                         .resizable()
@@ -55,6 +61,7 @@ struct ChatHistory: View {
                             ChatTile(chatTile: chatSession)
                         }
                     }
+                    .animation(.default, value: filteredSessions)
                 }
             }
         }
@@ -63,9 +70,11 @@ struct ChatHistory: View {
             Color(red: 0.98, green: 0.96, blue: 0.92)
                 .ignoresSafeArea()
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
 #Preview {
     ChatHistory()
+        .environment(MessageViewModel())
 }

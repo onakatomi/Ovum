@@ -65,14 +65,14 @@ struct BaseView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                         .blur(radius: 10, opaque: true)
-                        VStack {
-                            Image(systemName: "filemenu.and.cursorarrow")
-                                .imageScale(.large)
+                        VStack(spacing: 0) {
+                            Image("menu_white")
                                 .frame(maxWidth: .infinity, alignment: .trailing)
                                 .padding(.trailing, 8)
-                                .foregroundColor(.white)
+                                .padding(.bottom, 18)
                             Divider()
                                 .background(.white)
+                                .padding(.bottom, 13)
                             HStack(alignment: .top) {
                                 getHeader(type: type)
                                 Spacer()

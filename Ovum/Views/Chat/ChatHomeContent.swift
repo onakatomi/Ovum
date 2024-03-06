@@ -11,7 +11,6 @@ struct ChatHomeContent: View {
             Text("How can we help today?")
                 .font(.title)
                 .foregroundColor(Color(red: 0.49, green: 0.27, blue: 0.18))
-//                .padding([.bottom], 107)
                 .padding([.top], 16)
             Spacer()
             NavigationLink(destination: ChatHistory()) {
@@ -26,21 +25,19 @@ struct ChatHomeContent: View {
                         )
                         .padding([.bottom], 30)
             }
+            .navigationBarBackButtonHidden(true)
             Divider()
             VStack {
                 NavigationLink(destination: ChatDetail()) {
-                    MessageInputField(textInput: $textInput, handler: doIt)
+                    SendMessageField(textInput: $textInput, isDisabled: true)
                         .padding([.top], 15)
                         .padding([.bottom], 15)
                 }
+                .navigationBarBackButtonHidden(true)
             }
         }
             .padding([.horizontal], 20)
     }
-}
-
-func doIt() {
-    print("do nothing")
 }
 
 #Preview {
