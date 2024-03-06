@@ -32,6 +32,7 @@
 		B2D6A4102B98299D0045CCD1 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A40F2B98299D0045CCD1 /* PrimaryButton.swift */; };
 		B2D6A4122B98310E0045CCD1 /* DocumentListTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A4112B98310E0045CCD1 /* DocumentListTile.swift */; };
 		B2D6A4142B98313A0045CCD1 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A4132B98313A0045CCD1 /* Document.swift */; };
+		B2D6A4172B983DCF0045CCD1 /* OverviewHomeContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A4162B983DCF0045CCD1 /* OverviewHomeContent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		B2D6A40F2B98299D0045CCD1 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		B2D6A4112B98310E0045CCD1 /* DocumentListTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentListTile.swift; sourceTree = "<group>"; };
 		B2D6A4132B98313A0045CCD1 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		B2D6A4162B983DCF0045CCD1 /* OverviewHomeContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewHomeContent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 		B2D6A3AF2B8F1A960045CCD1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B2D6A4152B983DB50045CCD1 /* Overview */,
 				B2D6A3A32B8EFEF80045CCD1 /* ContentView.swift */,
 				B2D6A3E52B9038DB0045CCD1 /* Components */,
 				B2D6A3F02B914D540045CCD1 /* Chat */,
@@ -168,6 +171,14 @@
 				B2D6A40D2B9817890045CCD1 /* RecordTypeTile.swift */,
 			);
 			path = Records;
+			sourceTree = "<group>";
+		};
+		B2D6A4152B983DB50045CCD1 /* Overview */ = {
+			isa = PBXGroup;
+			children = (
+				B2D6A4162B983DCF0045CCD1 /* OverviewHomeContent.swift */,
+			);
+			path = Overview;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,6 +258,7 @@
 				B2D6A4072B980BAD0045CCD1 /* ChatSession.swift in Sources */,
 				B2D6A3ED2B905B0B0045CCD1 /* TextFieldSendButton.swift in Sources */,
 				B2D6A3EF2B914AEB0045CCD1 /* MessageInputField.swift in Sources */,
+				B2D6A4172B983DCF0045CCD1 /* OverviewHomeContent.swift in Sources */,
 				B2D6A3B12B8F1AB20045CCD1 /* BaseView.swift in Sources */,
 				B2D6A4142B98313A0045CCD1 /* Document.swift in Sources */,
 				B2D6A4052B97E2410045CCD1 /* SendMessageField.swift in Sources */,

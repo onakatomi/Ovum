@@ -75,13 +75,13 @@ struct BaseView: View {
                     }
                     .background(Color.yellow)
                     
-                    ZStack(alignment: .top) {
+                    ZStack(alignment: .center) {
                         Color(Color(red: 0.98, green: 0.96, blue: 0.92))
                         VStack {
                             switch (type) {
-                            case BaseViewType.chat:
-                                ChatHomeContent()
                             case BaseViewType.overview:
+                                OverviewHomeContent()
+                            case BaseViewType.chat:
                                 ChatHomeContent()
                             case BaseViewType.documents:
                                 RecordsHomeContent()
@@ -104,6 +104,6 @@ struct BaseView: View {
 }
 
 #Preview {
-    BaseView(BaseViewType.documents)
+    BaseView(BaseViewType.overview)
         .environment(MessageViewModel())
 }
