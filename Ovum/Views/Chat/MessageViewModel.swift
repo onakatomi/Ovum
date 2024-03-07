@@ -12,7 +12,7 @@ class MessageViewModel {
     
     init() {
         messages = []
-        chatSessions = chatSessionsMock
+        chatSessions = []
         documents = documentsMock
     }
     
@@ -21,11 +21,21 @@ class MessageViewModel {
         messages.append(message)
     }
     
-    func reverseList() {
-        messages.reverse()
+    func createSession() {
+        
     }
     
-    func postRequest(message: String) async {
+    func addSession(session: ChatSession) {
+        let indexOfSession: Int? = chatSessions.firstIndex(where: {$0.id == session.id})
+        if let indexOfSession {
+            chatSessions[indexOfSession] = session // Update session with updated messages array.
+        } else {
+            // Else session doesn't exist yet.
+            chatSessions.append(session)
+        }
+    }
+    
+    func postRequest(message: String) async -> Message? {
         let dataToSend: [String: Any] = [
             "user_id": "1",
             "user_name": "Sarah",
@@ -42,11 +52,14 @@ class MessageViewModel {
                 let decoder = JSONDecoder()
                 let product = try decoder.decode(Response.self, from: data)
                 print(product.response)
-                await addMessage(message: Message(author: "Ovum", fromOvum: true, content: product.response))
+                let responseMessage: Message = Message(author: "Ovum", fromOvum: true, content: product.response)
+                await addMessage(message: responseMessage)
+                return responseMessage
             } catch {
                 print("POST Request Failed:", error)
             }
         }
+        return nil
     }
 }
 

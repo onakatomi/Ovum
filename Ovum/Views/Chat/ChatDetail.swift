@@ -4,14 +4,22 @@ struct ChatDetail: View {
     @Environment(MessageViewModel.self) var viewModel
     @State private var inputText: String = ""
     @State private var awaitingResponse: Bool = false
+    @State private var currentSession: ChatSession = ChatSession(messages: [], title: "Chat Session", date: DateFormatter().string(from: Date.now), colour: Color(red: 0.95, green: 0.82, blue: 0.83))
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack(spacing: 0) {
             VStack {
-                Image("menu_brown")
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding(.trailing, 8)
-                    .padding(.bottom, 18)
+                HStack {
+                    Button {
+                        print("Action")
+                        dismiss()
+                    } label: {
+                        Image("back_button")
+                    }
+                    Spacer()
+                    Image("menu_brown")
+                }
                 Divider()
                     .background(Color(red: 0.4, green: 0.16, blue: 0.06))
                 HStack(alignment: .top) {
@@ -26,7 +34,7 @@ struct ChatDetail: View {
                 ScrollViewReader { scrollViewProxy in
                     ScrollView(.vertical) {
                         VStack(alignment: .leading, spacing: 15) {
-                            ForEach(viewModel.messages) { message in
+                            ForEach(currentSession.messages) { message in
                                 ChatBubble(content: message.content, author: message.author)
                             }
                             if (awaitingResponse) {
@@ -40,13 +48,13 @@ struct ChatDetail: View {
                                 .id("bottomRect")
                         }
                         .padding([.bottom], 10)
-                        .onChange(of: viewModel.messages.count) {
+                        .onChange(of: currentSession.messages.count) {
                             withAnimation {
                                 scrollViewProxy.scrollTo(viewModel.messages[viewModel.messages.count - 1].id, anchor: .top)
                             }
                         }
                         .onAppear {
-                            if (!viewModel.messages.isEmpty) {
+                            if (!currentSession.messages.isEmpty) {
                                 withAnimation {
                                     scrollViewProxy.scrollTo("bottomRect", anchor: .bottom)
                                 }
@@ -60,11 +68,20 @@ struct ChatDetail: View {
             Divider()
                 .background(Color(red: 0.4, green: 0.16, blue: 0.06))
             SendMessageField(textInput: $inputText) {
+                print(currentSession.id)
                 awaitingResponse = true
                 let textCopy: String = inputText
                 self.inputText = ""
-                await viewModel.addMessage(message: Message(author: "John", fromOvum: false, content: textCopy))
-                await viewModel.postRequest(message: textCopy)
+                let sentMessage = Message(author: "John", fromOvum: false, content: textCopy)
+                currentSession.messages.append(sentMessage)
+                
+                // Call async functions
+                await viewModel.addMessage(message: sentMessage)
+                let ovumReply = await viewModel.postRequest(message: textCopy)
+                if let ovumReply {
+                    currentSession.messages.append(ovumReply)
+                }
+                viewModel.addSession(session: currentSession)
                 awaitingResponse = false
             }
             .padding([.horizontal], 20)

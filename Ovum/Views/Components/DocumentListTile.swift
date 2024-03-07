@@ -29,7 +29,7 @@ struct DocumentListTile: View {
                 }
                 .foregroundStyle(Color(red: 0.4, green: 0.16, blue: 0.06))
                 Spacer()
-                Image("forward_arrow")
+                Image("forward_button")
             }
             .padding(.bottom, 24)
         }
