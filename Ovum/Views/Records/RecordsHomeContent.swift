@@ -90,7 +90,7 @@ struct RecordsHomeContent: View {
                 VStack(alignment: .leading, spacing: 0) {
                     ForEach(filteredDocuments) { document in
                         NavigationLink {
-                            ChatHistory()
+                            RecordDetail(document: document)
                         } label: {
                             DocumentListTile(document: document)
                         }

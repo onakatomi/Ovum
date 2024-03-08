@@ -339,5 +339,84 @@
             landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A23810F0-60BB-487E-A4F6-34D7ABD977C3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Ovum/Constants.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "base64ToImage(_:)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C567BE84-56FC-4298-8F0D-B9992BD67B7F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Ovum/Constants.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "base64ToImage(_:)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "C567BE84-56FC-4298-8F0D-B9992BD67B7F - f1b34fa59db64a17"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Ovum.base64ToImage(Swift.String) -&gt; Swift.Optional&lt;SwiftUI.Image&gt;"
+                  moduleName = "Ovum"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/olliequarm/Desktop/development/projects/swift/Ovum/Ovum/Constants.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "132">
+               </Location>
+               <Location
+                  uuid = "C567BE84-56FC-4298-8F0D-B9992BD67B7F - f1b34fa59db64a17"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Ovum.base64ToImage(Swift.String) -&gt; Swift.Optional&lt;SwiftUI.Image&gt;"
+                  moduleName = "Ovum"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/olliequarm/Desktop/development/projects/swift/Ovum/Ovum/Constants.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "138">
+               </Location>
+               <Location
+                  uuid = "C567BE84-56FC-4298-8F0D-B9992BD67B7F - f1b34fa59db64a76"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Ovum.base64ToImage(Swift.String) -&gt; Swift.Optional&lt;SwiftUI.Image&gt;"
+                  moduleName = "Ovum"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/olliequarm/Desktop/development/projects/swift/Ovum/Ovum/Constants.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "135">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

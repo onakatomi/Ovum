@@ -21,7 +21,7 @@ func getDateAsString(date: Date) -> String {
     let dateFormatter = DateFormatter()
 
     // Set the date format you desire
-    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    dateFormatter.dateFormat = "dd/MM/yyyy"
 
     // Create a Date object
     let date = Date()
@@ -30,13 +30,23 @@ func getDateAsString(date: Date) -> String {
     return dateFormatter.string(from: date)
 }
 
-func base64ToImage(b64String: String) -> Image? {
-    guard let stringData = Data(base64Encoded: b64String),
-          let uiImage = UIImage(data: stringData) else {
-              print("Error: couldn't create UIImage")
-              return nil
-          }
-    return Image(uiImage: uiImage)
+func base64ToImage(_ base64String: String) -> Image? {
+    // Convert the base64 string to data
+    let afterEqualsTo: String
+    if let index = base64String.firstIndex(of: ",") {
+        afterEqualsTo = String(base64String.suffix(from: index).dropFirst())
+    } else { return nil }
+    
+    guard let imageData = Data(base64Encoded: afterEqualsTo) else {
+        return nil
+    }
+    
+    // Convert the data to UIImage
+    guard let image = UIImage(data: imageData) else {
+        return nil
+    }
+    
+    return Image(uiImage: image)
 }
 
 func imageToBase64(_ image: UIImage) -> String? {

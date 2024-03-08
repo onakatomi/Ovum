@@ -21,10 +21,29 @@ struct RecordDetail: View {
                 .background(AppColours.maroon)
                 .padding(.bottom, 16)
             Text(document.title)
+                .font(Font.title.weight(.bold))
+                .frame(maxWidth: .infinity, alignment: .leading)
             Text(document.date)
-            base64ToImage(b64String: document.file)
+                .font(Font.title2)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom, 60)
+            if (base64ToImage(document.file) != nil) {
+                base64ToImage(document.file)!
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 350, height: 350)
+                    
+            }
+            Spacer()
             
         }
+        .padding(.horizontal, 20)
+        .background {
+            AppColours.brown
+                .ignoresSafeArea()
+        }
+        .foregroundColor(AppColours.maroon)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
