@@ -16,7 +16,7 @@ struct TextFieldClearButton: ViewModifier {
                 },
                 label: {
                     Image(systemName: "arrow.up.circle.fill")
-                        .foregroundColor(Color(red: 0.4, green: 0.16, blue: 0.06))
+                        .foregroundColor(AppColours.maroon)
                 }
             )
             

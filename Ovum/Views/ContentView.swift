@@ -27,7 +27,7 @@ struct ContentView: View {
                         }
                         .tag(2)
                 }
-                .toolbarBackground(Color(Color(red: 0.98, green: 0.96, blue: 0.92)), for: .tabBar)
+                .toolbarBackground(Color(AppColours.brown), for: .tabBar)
                 .toolbarBackground(.visible, for: .tabBar)
             }
             .accentColor(Color(red: 0.3, green: 0.1, blue: 0.04))

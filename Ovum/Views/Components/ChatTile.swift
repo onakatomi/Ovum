@@ -6,7 +6,7 @@ struct ChatTile: View {
     var body: some View {
         VStack(spacing: 0) {
             Divider()
-                .background(Color(red: 0.4, green: 0.16, blue: 0.06))
+                .background(AppColours.maroon)
                 .padding(.bottom, 24)
             HStack {
                 ZStack {
@@ -25,7 +25,7 @@ struct ChatTile: View {
                     Text(chatTile.date)
                         .font(Font.headline.weight(.light))
                 }
-                .foregroundStyle(Color(red: 0.4, green: 0.16, blue: 0.06))
+                .foregroundStyle(AppColours.maroon)
                 Spacer()
                 Image(systemName: "arrow.right")
             }
@@ -35,5 +35,5 @@ struct ChatTile: View {
 }
 
 #Preview {
-    ChatTile(chatTile: ChatSession(messages: [Message(author: "John", fromOvum: false, content: "Are you there?")], title: "Irregular bleeding patterns", date: "17/2/22", colour: Color(red: 0.95, green: 0.82, blue: 0.83)))
+    ChatTile(chatTile: ChatSession(messages: [Message(author: "John", fromOvum: false, content: "Are you there?")], title: "Irregular bleeding patterns", date: getDateAsString(date: Date.now), colour: AppColours.pink))
 }

@@ -27,12 +27,12 @@ struct ChatHistory: View {
                 Spacer()
                 Image("menu_brown")
             }
-            .padding(.bottom, 18)
+                .padding(.bottom, 18)
             Divider()
-                .background(Color(red: 0.4, green: 0.16, blue: 0.06))
+                .background(AppColours.maroon)
                 .padding(.bottom, 16)
             HStack(alignment: .top) {
-                Header(firstLine: "Chat", secondLine: "History", colour: Color(red: 0.4, green: 0.16, blue: 0.06))
+                Header(firstLine: "Chat", secondLine: "History", colour: AppColours.maroon)
                 Spacer()
                 Image("chat_history")
                     .resizable()
@@ -40,7 +40,7 @@ struct ChatHistory: View {
             }
                 .padding(.bottom, 16)
             Divider()
-                .background(Color(red: 0.4, green: 0.16, blue: 0.06))
+                .background(AppColours.maroon)
                 .padding(.bottom, 16)
             HStack(spacing: 14) {
                     Image("search")
@@ -67,7 +67,7 @@ struct ChatHistory: View {
         }
         .padding(.horizontal, 20)
         .background {
-            Color(red: 0.98, green: 0.96, blue: 0.92)
+            AppColours.brown
                 .ignoresSafeArea()
         }
         .navigationBarBackButtonHidden(true)

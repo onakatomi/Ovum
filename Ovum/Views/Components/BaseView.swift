@@ -76,7 +76,7 @@ struct BaseView: View {
                     .background(Color.yellow)
                     
                     ZStack(alignment: .center) {
-                        Color(Color(red: 0.98, green: 0.96, blue: 0.92))
+                        Color(AppColours.brown)
                         VStack {
                             switch (type) {
                             case BaseViewType.overview:

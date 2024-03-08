@@ -1,10 +1,15 @@
 import SwiftUI
 
 struct ChatDetail: View {
+    enum FocusedField {
+        case inputText
+    }
+    
     @Environment(MessageViewModel.self) var viewModel
     @State private var inputText: String = ""
+    @FocusState private var textFieldIsFocused: Bool
     @State private var awaitingResponse: Bool = false
-    @State private var currentSession: ChatSession = ChatSession(messages: [], title: "Chat Session", date: DateFormatter().string(from: Date.now), colour: Color(red: 0.95, green: 0.82, blue: 0.83))
+    @State private var isNewSession: Bool = true
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -13,7 +18,11 @@ struct ChatDetail: View {
                 HStack {
                     Button {
                         print("Action")
-                        dismiss()
+                        Task {
+                            await viewModel.summariseConversation()
+                            viewModel.endSession()
+                            dismiss()
+                        }
                     } label: {
                         Image("back_button")
                     }
@@ -21,20 +30,20 @@ struct ChatDetail: View {
                     Image("menu_brown")
                 }
                 Divider()
-                    .background(Color(red: 0.4, green: 0.16, blue: 0.06))
+                    .background(AppColours.maroon)
                 HStack(alignment: .top) {
-                    Header(firstLine: "Chat with", secondLine: "Ovum", colour: Color(red: 0.4, green: 0.16, blue: 0.06))
+                    Header(firstLine: "Chat with", secondLine: "Ovum", colour: AppColours.maroon)
                     Spacer()
                     Image("level_high")
                         .resizable()
                         .frame(width: 49, height: 49)
                 }
                 Divider()
-                    .background(Color(red: 0.4, green: 0.16, blue: 0.06))
+                    .background(AppColours.maroon)
                 ScrollViewReader { scrollViewProxy in
                     ScrollView(.vertical) {
                         VStack(alignment: .leading, spacing: 15) {
-                            ForEach(currentSession.messages) { message in
+                            ForEach(viewModel.currentSession.messages) { message in
                                 ChatBubble(content: message.content, author: message.author)
                             }
                             if (awaitingResponse) {
@@ -43,18 +52,20 @@ struct ChatDetail: View {
                                     .id("typingIndicator")
                             }
                             Rectangle()
-                                .fill(Color(red: 0.98, green: 0.96, blue: 0.92))
+                                .fill(AppColours.brown)
                                 .frame(height: 1)
                                 .id("bottomRect")
                         }
                         .padding([.bottom], 10)
-                        .onChange(of: currentSession.messages.count) {
-                            withAnimation {
-                                scrollViewProxy.scrollTo(viewModel.messages[viewModel.messages.count - 1].id, anchor: .top)
+                        .onChange(of: viewModel.currentSession.messages.count) {
+                            if (viewModel.currentSession.messages.count != 0) {
+                                withAnimation {
+                                    scrollViewProxy.scrollTo(viewModel.currentSession.messages[viewModel.currentSession.messages.count - 1].id, anchor: .top)
+                                }                                
                             }
                         }
                         .onAppear {
-                            if (!currentSession.messages.isEmpty) {
+                            if (!viewModel.currentSession.messages.isEmpty) {
                                 withAnimation {
                                     scrollViewProxy.scrollTo("bottomRect", anchor: .bottom)
                                 }
@@ -66,29 +77,24 @@ struct ChatDetail: View {
             }
             .padding([.horizontal], 20)
             Divider()
-                .background(Color(red: 0.4, green: 0.16, blue: 0.06))
+                .background(AppColours.maroon)
             SendMessageField(textInput: $inputText) {
-                print(currentSession.id)
+                viewModel.addSession(isNewSession: isNewSession)
+                print(viewModel.currentSession.id)
                 awaitingResponse = true
-                let textCopy: String = inputText
-                self.inputText = ""
-                let sentMessage = Message(author: "John", fromOvum: false, content: textCopy)
-                currentSession.messages.append(sentMessage)
-                
-                // Call async functions
-                await viewModel.addMessage(message: sentMessage)
-                let ovumReply = await viewModel.postRequest(message: textCopy)
-                if let ovumReply {
-                    currentSession.messages.append(ovumReply)
-                }
-                viewModel.addSession(session: currentSession)
+                let textCopy: String = inputText // Make copy so that message passed to API isn't blank.
+                self.inputText = "" // Reset text field.
+                let sentMessage = Message(author: "John", fromOvum: false, content: textCopy) // Construct message model.
+                viewModel.addMessage(message: sentMessage) // Add to conversation session.
+                await viewModel.getOvumResponse(message: textCopy) // Get Ovum's response.
                 awaitingResponse = false
+                isNewSession = false
             }
             .padding([.horizontal], 20)
             .padding([.vertical], 15)
         }
         .background {
-            Color(red: 0.98, green: 0.96, blue: 0.92)
+            AppColours.brown
                 .ignoresSafeArea(.all, edges: Edge.Set(Edge.top))
         }
         .navigationBarBackButtonHidden(true)

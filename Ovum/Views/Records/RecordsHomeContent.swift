@@ -4,6 +4,7 @@ struct RecordsHomeContent: View {
     @Environment(MessageViewModel.self) var viewModel
     @State private var selectedType: Int = 0
     @State private var searchText: String = ""
+    @State private var showAddDocumentTray = false
     
     var filteredDocuments: [Document] {
         if (searchText == "") {
@@ -42,6 +43,7 @@ struct RecordsHomeContent: View {
                 .padding([.top], 35)
             Button {
                 print("add doc")
+                showAddDocumentTray.toggle()
             } label: {
                 HStack(spacing: 14) {
                     Image("add_button")
@@ -52,8 +54,12 @@ struct RecordsHomeContent: View {
                     .background(
                         RoundedRectangle(cornerRadius: 10)
                             .fill(Color(red: 0.86, green: 0.84, blue: 0.98))
-//                            .stroke(Color(red: 0.4, green: 0.16, blue: 0.06), lineWidth: 1)
+//                            .stroke(AppColours.maroon, lineWidth: 1)
                     )
+                    .sheet(isPresented: $showAddDocumentTray) {
+                        AddDocumentTray()
+                            .presentationDetents([.medium])
+                    }
             }
                 .padding([.bottom], 24)
             Divider()
@@ -93,7 +99,7 @@ struct RecordsHomeContent: View {
                 }
             }
         }
-        .foregroundColor(Color(red: 0.4, green: 0.16, blue: 0.06))
+        .foregroundColor(AppColours.maroon)
         .padding([.horizontal], 20)
     }
 }

@@ -39,7 +39,7 @@ enum RecordType {
         case .imaging:
             return Color(red: 0.7, green: 0.45, blue: 0.25)
         case .pathology:
-            return Color(red: 0.4, green: 0.16, blue: 0.06)
+            return AppColours.maroon
         case .letters:
             return Color(red: 0.7, green: 0.45, blue: 0.25)
         }
@@ -59,14 +59,14 @@ struct RecordTypeTile: View {
                 .padding(30)
                 .background(
                   RoundedRectangle(cornerRadius: 6)
-                    .fill(isSelected ? Color(red: 0.4, green: 0.16, blue: 0.06) : .clear)
-                    .stroke(Color(red: 0.4, green: 0.16, blue: 0.06), lineWidth: 1)
+                    .fill(isSelected ? AppColours.maroon : .clear)
+                    .stroke(AppColours.maroon, lineWidth: 1)
                     .frame(height: 80)
                 )
                 .padding(.bottom, 0)
             Text(recordType.getName())
                 .font(Font.callout.weight(.semibold))
-                .foregroundColor(Color(red: 0.4, green: 0.16, blue: 0.06))
+                .foregroundColor(AppColours.maroon)
         }
     }
 }

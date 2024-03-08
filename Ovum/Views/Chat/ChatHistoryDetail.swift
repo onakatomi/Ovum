@@ -17,13 +17,13 @@ struct ChatHistoryDetail: View {
             }
             .padding(.bottom, 18)
             Divider()
-                .background(Color(red: 0.4, green: 0.16, blue: 0.06))
+                .background(AppColours.maroon)
                 .padding(.bottom, 16)
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
                     Text(chatSession.title)
                         .font(Font.title3.weight(.bold))
-                        .foregroundColor(Color(red: 0.4, green: 0.16, blue: 0.06))
+                        .foregroundColor(AppColours.maroon)
                     Text(chatSession.date)
                         .font(Font.headline.weight(.thin))
                 }
@@ -34,7 +34,7 @@ struct ChatHistoryDetail: View {
             }
                 .padding(.bottom, 40)
             Divider()
-                .background(Color(red: 0.4, green: 0.16, blue: 0.06))
+                .background(AppColours.maroon)
                 .padding(.bottom, 16)
             
             ScrollView {
@@ -47,7 +47,7 @@ struct ChatHistoryDetail: View {
         }
         .padding(.horizontal, 20)
         .background {
-            Color(red: 0.98, green: 0.96, blue: 0.92)
+            AppColours.brown
                 .ignoresSafeArea()
         }
         .navigationBarBackButtonHidden(true)
