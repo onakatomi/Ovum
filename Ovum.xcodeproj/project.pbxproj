@@ -40,6 +40,8 @@
 		B2D6A4212B9E789E0045CCD1 /* BubbleBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A4202B9E789E0045CCD1 /* BubbleBackground.swift */; };
 		B2D6A4232B9E7DFE0045CCD1 /* BubbleTransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A4222B9E7DFE0045CCD1 /* BubbleTransitionView.swift */; };
 		B2D6A4252B9ECA7D0045CCD1 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A4242B9ECA7D0045CCD1 /* PhotoPicker.swift */; };
+		B2D6A4272B9FBDDD0045CCD1 /* CaptureImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A4262B9FBDDD0045CCD1 /* CaptureImage.swift */; };
+		B2D6A4292B9FCDFD0045CCD1 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A4282B9FCDFD0045CCD1 /* Router.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +79,8 @@
 		B2D6A4202B9E789E0045CCD1 /* BubbleBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleBackground.swift; sourceTree = "<group>"; };
 		B2D6A4222B9E7DFE0045CCD1 /* BubbleTransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTransitionView.swift; sourceTree = "<group>"; };
 		B2D6A4242B9ECA7D0045CCD1 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
+		B2D6A4262B9FBDDD0045CCD1 /* CaptureImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureImage.swift; sourceTree = "<group>"; };
+		B2D6A4282B9FCDFD0045CCD1 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,7 @@
 				B2D6A3F32B9155FA0045CCD1 /* Model */,
 				B2D6A3A52B8EFF050045CCD1 /* Assets.xcassets */,
 				B2D6A3A72B8EFF050045CCD1 /* Preview Content */,
+				B2D6A4282B9FCDFD0045CCD1 /* Router.swift */,
 			);
 			path = Ovum;
 			sourceTree = "<group>";
@@ -146,6 +151,7 @@
 				B2D6A3F82B9159590045CCD1 /* ChatBubble.swift */,
 				B2D6A41E2B9E77BD0045CCD1 /* MapOnboardingBubbleShape.swift */,
 				B2D6A4202B9E789E0045CCD1 /* BubbleBackground.swift */,
+				B2D6A4262B9FBDDD0045CCD1 /* CaptureImage.swift */,
 				B2D6A4222B9E7DFE0045CCD1 /* BubbleTransitionView.swift */,
 				B2D6A41A2B9AB3830045CCD1 /* AddDocumentTray.swift */,
 				B2D6A4022B96CBE90045CCD1 /* ChatTile.swift */,
@@ -276,6 +282,7 @@
 				B2D6A41D2B9AC08F0045CCD1 /* RecordDetail.swift in Sources */,
 				B2D6A3F22B914D630045CCD1 /* ChatDetail.swift in Sources */,
 				B2D6A40E2B9817890045CCD1 /* RecordTypeTile.swift in Sources */,
+				B2D6A4272B9FBDDD0045CCD1 /* CaptureImage.swift in Sources */,
 				B2D6A3E72B9041B10045CCD1 /* Header.swift in Sources */,
 				B2D6A4092B980ED40045CCD1 /* ChatHistoryDetail.swift in Sources */,
 				B2D6A4072B980BAD0045CCD1 /* ChatSession.swift in Sources */,
@@ -293,6 +300,7 @@
 				B2D6A4032B96CBE90045CCD1 /* ChatTile.swift in Sources */,
 				B2D6A4232B9E7DFE0045CCD1 /* BubbleTransitionView.swift in Sources */,
 				B2D6A3F52B91565C0045CCD1 /* Message.swift in Sources */,
+				B2D6A4292B9FCDFD0045CCD1 /* Router.swift in Sources */,
 				B2D6A3FD2B917FB20045CCD1 /* TypingIndicator.swift in Sources */,
 				B2D6A4212B9E789E0045CCD1 /* BubbleBackground.swift in Sources */,
 				B2D6A3E92B9055640045CCD1 /* ChatHomeContent.swift in Sources */,

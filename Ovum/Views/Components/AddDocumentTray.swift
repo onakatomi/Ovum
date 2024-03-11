@@ -25,15 +25,15 @@ struct AddDocumentTray: View {
                 } label: {
                     HStack(spacing: 14) {
                         Image(systemName: "camera")
-                        Text("Take a photo of a document")
+                        CaptureImage()
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color(red: 0.49, green: 0.27, blue: 0.18), lineWidth: 1)
-                            .fill(Color(.clear))
-                    )
+                        .frame(maxWidth: .infinity)
+                        .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color(red: 0.49, green: 0.27, blue: 0.18), lineWidth: 1)
+                                .fill(Color(.clear))
+                        )
                 }
             }
             .padding(.vertical, 32)

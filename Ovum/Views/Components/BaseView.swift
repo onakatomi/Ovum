@@ -46,7 +46,7 @@ struct BaseView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack(alignment: .top) {
                     Rectangle()
                     ZStack(alignment: .top) {

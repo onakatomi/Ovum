@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ChatHomeContent: View {
+    @Environment(Router.self) var router
     func viewChatHistory() { print("hey") }
     @State private var textInput = ""
     
@@ -25,7 +26,7 @@ struct ChatHomeContent: View {
                         )
                         .padding([.bottom], 30)
             }
-            .navigationBarBackButtonHidden(true)
+                .navigationBarBackButtonHidden(true)
             Divider()
             VStack {
                 NavigationLink(destination: ChatDetail()) {
@@ -42,4 +43,5 @@ struct ChatHomeContent: View {
 
 #Preview {
     ChatHomeContent()
+        .environment(Router())
 }

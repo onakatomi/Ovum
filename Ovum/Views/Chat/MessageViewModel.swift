@@ -7,6 +7,7 @@ class MessageViewModel {
     var currentSession: ChatSession
     var chatSessions: [ChatSession] = []
     var documents: [Document] = []
+    var isLoading: Bool = false
     
     let baseUrl = "http://192.168.89.1:5001"
     
