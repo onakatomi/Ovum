@@ -28,7 +28,7 @@ struct ChatBubble: View {
 
 #Preview {
     ZStack {
-        Color.red
+        Color.clear
         VStack {
             ChatBubble(content: "My period was a few days late, and when i got it, I was bleeding for 8 days straight, and then now 5 days later I'm bleeding again. What's going on?", author: "John")
             ChatBubble(content: "My period was a few days late, and when i got it, I was bleeding for 8 days straight, and then now 5 days later I'm bleeding again. What's going on?", author: "Ovum")

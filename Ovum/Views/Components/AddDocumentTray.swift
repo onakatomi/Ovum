@@ -1,10 +1,3 @@
-//
-//  AddDocumentTray.swift
-//  Ovum
-//
-//  Created by Ollie Quarm on 8/3/2024.
-//
-
 import SwiftUI
 
 struct AddDocumentTray: View {
@@ -16,12 +9,9 @@ struct AddDocumentTray: View {
             Spacer().frame(height: 12)
             Divider()
             VStack(spacing: 12) {
-                Button {
-                    print("add doc")
-                } label: {
                     HStack(spacing: 14) {
                         Image(systemName: "square.and.arrow.up")
-                        Text("Import from your device")
+                        PhotoPicker()
                     }
                         .frame(maxWidth: .infinity)
                         .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
@@ -30,7 +20,6 @@ struct AddDocumentTray: View {
                                 .stroke(Color(red: 0.49, green: 0.27, blue: 0.18), lineWidth: 1)
                                 .fill(Color(.clear))
                         )
-                }
                 Button {
                     print("add doc")
                 } label: {

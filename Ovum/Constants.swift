@@ -21,7 +21,7 @@ func getDateAsString(date: Date) -> String {
     let dateFormatter = DateFormatter()
 
     // Set the date format you desire
-    dateFormatter.dateFormat = "dd/MM/yyyy"
+    dateFormatter.dateFormat = "dd/MM/yyyy K:mm a"
 
     // Create a Date object
     let date = Date()

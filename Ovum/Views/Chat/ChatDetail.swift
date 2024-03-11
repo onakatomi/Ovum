@@ -11,6 +11,7 @@ struct ChatDetail: View {
     @State private var awaitingResponse: Bool = false
     @State private var isNewSession: Bool = true
     @Environment(\.dismiss) private var dismiss
+    var document: String?
     
     var body: some View {
         VStack(spacing: 0) {
@@ -56,29 +57,39 @@ struct ChatDetail: View {
                                 .frame(height: 1)
                                 .id("bottomRect")
                         }
-                        .padding([.bottom], 10)
-                        .onChange(of: viewModel.currentSession.messages.count) {
-                            if (viewModel.currentSession.messages.count != 0) {
-                                withAnimation {
-                                    scrollViewProxy.scrollTo(viewModel.currentSession.messages[viewModel.currentSession.messages.count - 1].id, anchor: .top)
-                                }                                
-                            }
-                        }
-                        .onAppear {
-                            if (!viewModel.currentSession.messages.isEmpty) {
-                                withAnimation {
-                                    scrollViewProxy.scrollTo("bottomRect", anchor: .bottom)
+                            .padding([.bottom], 10)
+                            .onChange(of: viewModel.currentSession.messages.count) {
+                                if (viewModel.currentSession.messages.count != 0) {
+                                    withAnimation {
+                                        scrollViewProxy.scrollTo(viewModel.currentSession.messages[viewModel.currentSession.messages.count - 1].id, anchor: .top)
+                                    }
                                 }
-                                
                             }
-                        }
+                            .onAppear {
+                                if (!viewModel.currentSession.messages.isEmpty) {
+                                    withAnimation {
+                                        scrollViewProxy.scrollTo("bottomRect", anchor: .bottom)
+                                    }
+                                    
+                                }
+                                if let document {
+                                    Task {
+                                        print("analysing...")
+                                        viewModel.addSession(isNewSession: isNewSession)
+                                        awaitingResponse = true
+                                        await viewModel.analyseDocument(document: document)
+                                        awaitingResponse = false
+                                        isNewSession = false
+                                    }
+                                }
+                            }
                     }
                 }
             }
-            .padding([.horizontal], 20)
+                .padding([.horizontal], 20)
             Divider()
                 .background(AppColours.maroon)
-            SendMessageField(textInput: $inputText) {
+            SendMessageField(textInput: $inputText, isDisabled: awaitingResponse) {
                 viewModel.addSession(isNewSession: isNewSession)
                 print(viewModel.currentSession.id)
                 awaitingResponse = true
@@ -99,7 +110,6 @@ struct ChatDetail: View {
         }
         .navigationBarBackButtonHidden(true)
     }
-
 }
 
 #Preview {

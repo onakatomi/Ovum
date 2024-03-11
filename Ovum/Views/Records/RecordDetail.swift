@@ -31,10 +31,16 @@ struct RecordDetail: View {
                 base64ToImage(document.file)!
                     .resizable()
                     .scaledToFill()
+                    .cornerRadius(6)
                     .frame(width: 350, height: 350)
                     
             }
             Spacer()
+            NavigationLink(destination: ChatDetail(document: document.file)) {
+                BubbleTransitionView()
+                    .padding(.horizontal, 70)
+                    .padding(.bottom, 15)
+            }
             
         }
         .padding(.horizontal, 20)
