@@ -55,9 +55,7 @@ struct ChatHistory: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
                     ForEach(filteredSessions) { chatSession in
-                        NavigationLink {
-                            ChatHistoryDetail(chatSession: chatSession)
-                        } label: {
+                        NavigationLink(value: ChatNavDestination.chatHistoryDetail(session: chatSession)) {
                             ChatTile(chatTile: chatSession)
                         }
                     }

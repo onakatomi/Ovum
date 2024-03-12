@@ -36,7 +36,7 @@ struct RecordDetail: View {
                     
             }
             Spacer()
-            NavigationLink(destination: ChatDetail(document: document.file)) {
+            NavigationLink(value: RecordsNavDestination.chatOnDocument(document: document)) {
                 BubbleTransitionView()
                     .padding(.horizontal, 70)
                     .padding(.bottom, 15)

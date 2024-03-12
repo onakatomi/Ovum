@@ -39,7 +39,3 @@ struct SendMessageField: View {
             .cornerRadius(50)
     }
 }
-
-#Preview {
-    ContentView()
-}

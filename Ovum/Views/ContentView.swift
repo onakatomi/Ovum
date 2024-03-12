@@ -1,41 +1,102 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var selectedTab = 0
+    //    @Environment(Router.self) var router
+    @StateObject var router = Router()
     
     var body: some View {
         ZStack {
-            Color.blue
-            TabView(selection: $selectedTab) {
+            Color.red
+            TabView(selection: createTabViewBinding()) {
                 Group {
-                    BaseView(BaseViewType.overview)
+                    NavigationStack(path: $router.overviewNavigation) {
+                        BaseView(BaseViewType.overview)
+                    }
                         .tabItem {
-                            Image(selectedTab == 0 ? "tab_overview_active" : "tab_overview_inactive")
+                            Image(router.selectedTab == .overview ? "tab_overview_active" : "tab_overview_inactive")
                             Text("Overview")
                         }
-                        .tag(0)
-                    BaseView(BaseViewType.chat)
+                        .tag(ContentViewTab.overview)
+                    NavigationStack(path: $router.chatNavigation) {
+                        BaseView(BaseViewType.chat)
+                            .navigationDestination(for: ChatNavDestination.self) { destination in
+                                switch destination {
+                                case .chatHistory:
+                                    ChatHistory()
+                                    
+                                case .chatDetail:
+                                    ChatDetail()
+                                
+                                case .chatHistoryDetail(let session):
+                                    ChatHistoryDetail(chatSession: session)
+                                }
+                            }
+                    }
                         .tabItem {
-                            Image(selectedTab == 1 ? "tab_chat_active" : "tab_chat_inactive")
+                            Image(router.selectedTab == .chat ? "tab_chat_active" : "tab_chat_inactive")
                             Text("Chat")
                         }
-                        .tag(1)
-                    BaseView(BaseViewType.documents)
+                        .tag(ContentViewTab.chat)
+                    NavigationStack(path: $router.recordsNavigation) {
+                        BaseView(BaseViewType.documents)
+                            .navigationDestination(for: RecordsNavDestination.self) { destination in
+                                switch destination {
+                                case .documentDetail(let document):
+                                    RecordDetail(document: document)
+                                    
+                                case .chatOnDocument(let document):
+                                    ChatDetail(document: document.file)
+                                }
+                            }
+                    }
                         .tabItem {
-                            Image(selectedTab == 2 ? "tab_records_active" : "tab_records_inactive")
+                            Image(router.selectedTab == .records ? "tab_records_active" : "tab_records_inactive")
                             Text("Records")
                         }
-                        .tag(2)
+                        .tag(ContentViewTab.records)
                 }
                 .toolbarBackground(Color(AppColours.brown), for: .tabBar)
                 .toolbarBackground(.visible, for: .tabBar)
             }
+            .environmentObject(router)
             .accentColor(Color(red: 0.3, green: 0.1, blue: 0.04))
         }
-        }
     }
+    
+    private func createTabViewBinding() -> Binding<ContentViewTab> {
+        Binding<ContentViewTab>(
+            get: { router.selectedTab },
+            set: { selectedTab in
+                if selectedTab == router.selectedTab {
+                    print("tapped same tab")
+
+                    switch selectedTab {
+                    case .overview:
+                        withAnimation {
+                            router.overviewNavigation = []
+                        }
+
+                    case .chat:
+                        withAnimation {
+                            router.chatNavigation = []
+                        }
+
+                    case .records:
+                        withAnimation {
+                            router.recordsNavigation = []
+                        }
+                    }
+                }
+
+                // Make sure the new value is persisted.
+                router.selectedTab = selectedTab
+            }
+        )
+    }
+}
 
 #Preview {
-    ContentView()
+    ContentView(router: Router())
+    //        .environment(Router())
         .environment(MessageViewModel())
 }

@@ -89,9 +89,7 @@ struct RecordsHomeContent: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
                     ForEach(filteredDocuments) { document in
-                        NavigationLink {
-                            RecordDetail(document: document)
-                        } label: {
+                        NavigationLink(value: RecordsNavDestination.documentDetail(document: document)) {
                             DocumentListTile(document: document)
                         }
                     }
