@@ -71,7 +71,7 @@ struct RecordTypeTile: View {
     }
 }
 
-#Preview {
-    ContentView(selectedTab: 2)
-        .environment(MessageViewModel())
-}
+//#Preview {
+//    ContentView(selectedTab: .records)
+//        .environment(MessageViewModel())
+//}

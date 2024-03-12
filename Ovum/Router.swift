@@ -1,19 +1,35 @@
 import Foundation
 import SwiftUI
 
-@Observable
-class Router {
-    var navPath = NavigationPath()
+enum ContentViewTab {
+    case overview
+    case chat
+    case records
+}
+
+enum ChatNavDestination: Hashable {
+    case chatDetail
+    case chatHistory
+    case chatHistoryDetail(session: ChatSession)
+}
+
+enum RecordsNavDestination: Hashable {
+    case documentDetail(document: Document)
+    case chatOnDocument(document: Document)
+}
+
+enum OverviewNavDestination {
+    case unsure
+}
+
+class Router: ObservableObject {
+    @Published var selectedTab: ContentViewTab = .overview
+    @Published var overviewNavigation: [OverviewNavDestination] = []
+    @Published var chatNavigation: [ChatNavDestination] = []
+    @Published var recordsNavigation: [RecordsNavDestination] = []
     
-    public enum Destination: Codable, Hashable {
-        case livingroom
-        case bedroom(owner: String)
-    }
-    
-    func navigate(to destination: Destination) {
-        navPath.append(destination)
-    }
-    
+    @Published var navPath = NavigationPath()
+
     func navigateBack() {
         navPath.removeLast()
     }

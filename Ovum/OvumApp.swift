@@ -1,10 +1,3 @@
-//
-//  OvumApp.swift
-//  Ovum
-//
-//  Created by Ollie Quarm on 28/2/2024.
-//
-
 import SwiftUI
 
 @main
@@ -14,9 +7,9 @@ struct OvumApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(router: router)
+//                .environment(router) // supply it access to the router.
                 .environment(viewModel) // supply it to ContentView using the environment(_:) modifier.
-                .environment(router) // supply it access to the router.
         }
     }
 }
