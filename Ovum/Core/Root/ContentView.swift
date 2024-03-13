@@ -2,64 +2,71 @@ import SwiftUI
 
 struct ContentView: View {
     //    @Environment(Router.self) var router
-    @StateObject var router = Router()
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var router: Router
     
     var body: some View {
-        ZStack {
-            Color.red
-            TabView(selection: createTabViewBinding()) {
-                Group {
-                    NavigationStack(path: $router.overviewNavigation) {
-                        BaseView(BaseViewType.overview)
-                    }
-                        .tabItem {
-                            Image(router.selectedTab == .overview ? "tab_overview_active" : "tab_overview_inactive")
-                            Text("Overview")
-                        }
-                        .tag(ContentViewTab.overview)
-                    NavigationStack(path: $router.chatNavigation) {
-                        BaseView(BaseViewType.chat)
-                            .navigationDestination(for: ChatNavDestination.self) { destination in
-                                switch destination {
-                                case .chatHistory:
-                                    ChatHistory()
-                                    
-                                case .chatDetail:
-                                    ChatDetail()
-                                
-                                case .chatHistoryDetail(let session):
-                                    ChatHistoryDetail(chatSession: session)
-                                }
+        Group {
+            if authViewModel.userSession == nil {
+                LoginView()
+            } else {
+                ZStack {
+                    Color.red
+                    TabView(selection: createTabViewBinding()) {
+                        Group {
+                            NavigationStack(path: $router.overviewNavigation) {
+                                BaseView(BaseViewType.overview)
                             }
-                    }
-                        .tabItem {
-                            Image(router.selectedTab == .chat ? "tab_chat_active" : "tab_chat_inactive")
-                            Text("Chat")
-                        }
-                        .tag(ContentViewTab.chat)
-                    NavigationStack(path: $router.recordsNavigation) {
-                        BaseView(BaseViewType.documents)
-                            .navigationDestination(for: RecordsNavDestination.self) { destination in
-                                switch destination {
-                                case .documentDetail(let document):
-                                    RecordDetail(document: document)
-                                    
-                                case .chatOnDocument(let document):
-                                    ChatDetail(document: document.file)
-                                }
+                            .tabItem {
+                                Image(router.selectedTab == .overview ? "tab_overview_active" : "tab_overview_inactive")
+                                Text("Overview")
                             }
-                    }
-                        .tabItem {
-                            Image(router.selectedTab == .records ? "tab_records_active" : "tab_records_inactive")
-                            Text("Records")
+                            .tag(ContentViewTab.overview)
+                            NavigationStack(path: $router.chatNavigation) {
+                                BaseView(BaseViewType.chat)
+                                    .navigationDestination(for: ChatNavDestination.self) { destination in
+                                        switch destination {
+                                        case .chatHistory:
+                                            ChatHistory()
+                                            
+                                        case .chatDetail:
+                                            ChatDetail()
+                                            
+                                        case .chatHistoryDetail(let session):
+                                            ChatHistoryDetail(chatSession: session)
+                                        }
+                                    }
+                            }
+                            .tabItem {
+                                Image(router.selectedTab == .chat ? "tab_chat_active" : "tab_chat_inactive")
+                                Text("Chat")
+                            }
+                            .tag(ContentViewTab.chat)
+                            NavigationStack(path: $router.recordsNavigation) {
+                                BaseView(BaseViewType.documents)
+                                    .navigationDestination(for: RecordsNavDestination.self) { destination in
+                                        switch destination {
+                                        case .documentDetail(let document):
+                                            RecordDetail(document: document)
+                                            
+                                        case .chatOnDocument(let document):
+                                            ChatDetail(document: document.file)
+                                        }
+                                    }
+                            }
+                            .tabItem {
+                                Image(router.selectedTab == .records ? "tab_records_active" : "tab_records_inactive")
+                                Text("Records")
+                            }
+                            .tag(ContentViewTab.records)
                         }
-                        .tag(ContentViewTab.records)
+                        .toolbarBackground(Color(AppColours.brown), for: .tabBar)
+                        .toolbarBackground(.visible, for: .tabBar)
+                    }
+                    .environmentObject(router)
+                    .accentColor(Color(red: 0.3, green: 0.1, blue: 0.04))
                 }
-                .toolbarBackground(Color(AppColours.brown), for: .tabBar)
-                .toolbarBackground(.visible, for: .tabBar)
             }
-            .environmentObject(router)
-            .accentColor(Color(red: 0.3, green: 0.1, blue: 0.04))
         }
     }
     
@@ -96,7 +103,8 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(router: Router())
+    ContentView()
     //        .environment(Router())
         .environment(MessageViewModel())
+//        .environment(AuthViewModel())
 }

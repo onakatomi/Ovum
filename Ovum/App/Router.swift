@@ -31,6 +31,7 @@ class Router: ObservableObject {
     @Published var overviewNavigation: [OverviewNavDestination] = []
     @Published var chatNavigation: [ChatNavDestination] = []
     @Published var recordsNavigation: [RecordsNavDestination] = []
+    @Published var tabViewsDisabled: Bool = false
     
     @Published var navPath = NavigationPath()
     

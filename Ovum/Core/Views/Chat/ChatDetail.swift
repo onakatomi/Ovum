@@ -6,6 +6,7 @@ struct ChatDetail: View {
     }
     
     @Environment(MessageViewModel.self) var viewModel
+    @EnvironmentObject var router: Router
     @State private var inputText: String = ""
     @FocusState private var textFieldIsFocused: Bool
     @State private var awaitingResponse: Bool = false
@@ -19,7 +20,6 @@ struct ChatDetail: View {
                 VStack {
                     HStack {
                         Button {
-                            print("Action")
                             Task {
                                 viewModel.isLoading = true
                                 await viewModel.summariseConversation()
@@ -93,12 +93,13 @@ struct ChatDetail: View {
                 Divider()
                     .background(AppColours.maroon)
                 SendMessageField(textInput: $inputText, isDisabled: awaitingResponse) {
+                    router.tabViewsDisabled = true
                     viewModel.addSession(isNewSession: isNewSession)
                     print(viewModel.currentSession.id)
                     awaitingResponse = true
                     let textCopy: String = inputText // Make copy so that message passed to API isn't blank.
                     self.inputText = "" // Reset text field.
-                    let sentMessage = Message(author: "John", fromOvum: false, content: textCopy) // Construct message model.
+                    let sentMessage = Message(author: "Jane", fromOvum: false, content: textCopy) // Construct message model.
                     viewModel.addMessage(message: sentMessage) // Add to conversation session.
                     await viewModel.getOvumResponse(message: textCopy) // Get Ovum's response.
                     awaitingResponse = false
