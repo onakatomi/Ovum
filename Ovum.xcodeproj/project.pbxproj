@@ -12,6 +12,7 @@
 		B24694102BA10DA100286A75 /* TransparentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246940F2BA10DA100286A75 /* TransparentButton.swift */; };
 		B24694122BA10FED00286A75 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694112BA10FED00286A75 /* SecondaryButton.swift */; };
 		B24694142BA116D600286A75 /* ThickDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694132BA116D600286A75 /* ThickDivider.swift */; };
+		B246941B2BA12C3300286A75 /* ChatHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246941A2BA12C3300286A75 /* ChatHistory.swift */; };
 		B2D6A3A22B8EFEF80045CCD1 /* OvumApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */; };
 		B2D6A3A42B8EFEF80045CCD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A32B8EFEF80045CCD1 /* ContentView.swift */; };
 		B2D6A3A62B8EFF050045CCD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2D6A3A52B8EFF050045CCD1 /* Assets.xcassets */; };
@@ -27,7 +28,6 @@
 		B2D6A3F92B9159590045CCD1 /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3F82B9159590045CCD1 /* ChatBubble.swift */; };
 		B2D6A3FB2B91749D0045CCD1 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3FA2B91749D0045CCD1 /* IconButton.swift */; };
 		B2D6A3FD2B917FB20045CCD1 /* TypingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3FC2B917FB20045CCD1 /* TypingIndicator.swift */; };
-		B2D6A3FF2B96BE260045CCD1 /* ChatHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3FE2B96BE260045CCD1 /* ChatHistory.swift */; };
 		B2D6A4032B96CBE90045CCD1 /* ChatTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A4022B96CBE90045CCD1 /* ChatTile.swift */; };
 		B2D6A4052B97E2410045CCD1 /* SendMessageField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A4042B97E2410045CCD1 /* SendMessageField.swift */; };
 		B2D6A4072B980BAD0045CCD1 /* ChatSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A4062B980BAD0045CCD1 /* ChatSession.swift */; };
@@ -55,6 +55,7 @@
 		B246940F2BA10DA100286A75 /* TransparentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentButton.swift; sourceTree = "<group>"; };
 		B24694112BA10FED00286A75 /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
 		B24694132BA116D600286A75 /* ThickDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThickDivider.swift; sourceTree = "<group>"; };
+		B246941A2BA12C3300286A75 /* ChatHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistory.swift; sourceTree = "<group>"; };
 		B2D6A39E2B8EFEF80045CCD1 /* Ovum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ovum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvumApp.swift; sourceTree = "<group>"; };
 		B2D6A3A32B8EFEF80045CCD1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,7 +72,6 @@
 		B2D6A3F82B9159590045CCD1 /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
 		B2D6A3FA2B91749D0045CCD1 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		B2D6A3FC2B917FB20045CCD1 /* TypingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingIndicator.swift; sourceTree = "<group>"; };
-		B2D6A3FE2B96BE260045CCD1 /* ChatHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatHistory.swift; path = Ovum/Views/Chat/ChatHistory.swift; sourceTree = SOURCE_ROOT; };
 		B2D6A4022B96CBE90045CCD1 /* ChatTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTile.swift; sourceTree = "<group>"; };
 		B2D6A4042B97E2410045CCD1 /* SendMessageField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageField.swift; sourceTree = "<group>"; };
 		B2D6A4062B980BAD0045CCD1 /* ChatSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSession.swift; sourceTree = "<group>"; };
@@ -104,6 +104,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B24694152BA12B0700286A75 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B2D6A4282B9FCDFD0045CCD1 /* Router.swift */,
+				B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */,
+				B2D6A4182B9A96B40045CCD1 /* Constants.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		B24694162BA12B1400286A75 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B24694182BA12B3900286A75 /* Authentication */,
+				B24694192BA12B4600286A75 /* Profile */,
+				B2D6A3AF2B8F1A960045CCD1 /* Views */,
+				B24694172BA12B2900286A75 /* Root */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		B24694172BA12B2900286A75 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				B2D6A3A32B8EFEF80045CCD1 /* ContentView.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		B24694182BA12B3900286A75 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		B24694192BA12B4600286A75 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		B2D6A3952B8EFEF80045CCD1 = {
 			isa = PBXGroup;
 			children = (
@@ -123,13 +166,12 @@
 		B2D6A3A02B8EFEF80045CCD1 /* Ovum */ = {
 			isa = PBXGroup;
 			children = (
-				B2D6A4182B9A96B40045CCD1 /* Constants.swift */,
-				B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */,
-				B2D6A3AF2B8F1A960045CCD1 /* Views */,
+				B24694152BA12B0700286A75 /* App */,
+				B24694162BA12B1400286A75 /* Core */,
+				B2D6A3E52B9038DB0045CCD1 /* Components */,
 				B2D6A3F32B9155FA0045CCD1 /* Model */,
 				B2D6A3A52B8EFF050045CCD1 /* Assets.xcassets */,
 				B2D6A3A72B8EFF050045CCD1 /* Preview Content */,
-				B2D6A4282B9FCDFD0045CCD1 /* Router.swift */,
 			);
 			path = Ovum;
 			sourceTree = "<group>";
@@ -146,8 +188,6 @@
 			isa = PBXGroup;
 			children = (
 				B2D6A4152B983DB50045CCD1 /* Overview */,
-				B2D6A3A32B8EFEF80045CCD1 /* ContentView.swift */,
-				B2D6A3E52B9038DB0045CCD1 /* Components */,
 				B2D6A3F02B914D540045CCD1 /* Chat */,
 				B2D6A40A2B9813E40045CCD1 /* Records */,
 				B246940B2BA026FA00286A75 /* Menu.swift */,
@@ -158,26 +198,26 @@
 		B2D6A3E52B9038DB0045CCD1 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				B2D6A3B02B8F1AB20045CCD1 /* BaseView.swift */,
-				B24694112BA10FED00286A75 /* SecondaryButton.swift */,
-				B2D6A3F82B9159590045CCD1 /* ChatBubble.swift */,
-				B24694132BA116D600286A75 /* ThickDivider.swift */,
-				B246940D2BA10D1600286A75 /* PurpleButton.swift */,
-				B2D6A41E2B9E77BD0045CCD1 /* MapOnboardingBubbleShape.swift */,
-				B246940F2BA10DA100286A75 /* TransparentButton.swift */,
-				B2D6A4202B9E789E0045CCD1 /* BubbleBackground.swift */,
-				B2D6A4262B9FBDDD0045CCD1 /* CaptureImage.swift */,
-				B2D6A4222B9E7DFE0045CCD1 /* BubbleTransitionView.swift */,
 				B2D6A41A2B9AB3830045CCD1 /* AddDocumentTray.swift */,
+				B2D6A3B02B8F1AB20045CCD1 /* BaseView.swift */,
+				B2D6A4202B9E789E0045CCD1 /* BubbleBackground.swift */,
+				B2D6A4222B9E7DFE0045CCD1 /* BubbleTransitionView.swift */,
+				B2D6A4262B9FBDDD0045CCD1 /* CaptureImage.swift */,
+				B2D6A3F82B9159590045CCD1 /* ChatBubble.swift */,
 				B2D6A4022B96CBE90045CCD1 /* ChatTile.swift */,
 				B2D6A4112B98310E0045CCD1 /* DocumentListTile.swift */,
 				B2D6A3E62B9041B10045CCD1 /* Header.swift */,
-				B2D6A4242B9ECA7D0045CCD1 /* PhotoPicker.swift */,
 				B2D6A3FA2B91749D0045CCD1 /* IconButton.swift */,
+				B2D6A41E2B9E77BD0045CCD1 /* MapOnboardingBubbleShape.swift */,
 				B2D6A3EE2B914AEB0045CCD1 /* MessageInputField.swift */,
+				B2D6A4242B9ECA7D0045CCD1 /* PhotoPicker.swift */,
 				B2D6A40F2B98299D0045CCD1 /* PrimaryButton.swift */,
+				B246940D2BA10D1600286A75 /* PurpleButton.swift */,
+				B24694112BA10FED00286A75 /* SecondaryButton.swift */,
 				B2D6A4042B97E2410045CCD1 /* SendMessageField.swift */,
 				B2D6A3EC2B905B0B0045CCD1 /* TextFieldSendButton.swift */,
+				B24694132BA116D600286A75 /* ThickDivider.swift */,
+				B246940F2BA10DA100286A75 /* TransparentButton.swift */,
 				B2D6A3FC2B917FB20045CCD1 /* TypingIndicator.swift */,
 			);
 			path = Components;
@@ -187,7 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				B2D6A3F12B914D620045CCD1 /* ChatDetail.swift */,
-				B2D6A3FE2B96BE260045CCD1 /* ChatHistory.swift */,
+				B246941A2BA12C3300286A75 /* ChatHistory.swift */,
 				B2D6A4082B980ED40045CCD1 /* ChatHistoryDetail.swift */,
 				B2D6A3E82B9055640045CCD1 /* ChatHomeContent.swift */,
 				B2D6A3F62B9157020045CCD1 /* MessageViewModel.swift */,
@@ -295,6 +335,7 @@
 			files = (
 				B24694102BA10DA100286A75 /* TransparentButton.swift in Sources */,
 				B2D6A4192B9A96B40045CCD1 /* Constants.swift in Sources */,
+				B246941B2BA12C3300286A75 /* ChatHistory.swift in Sources */,
 				B2D6A41D2B9AC08F0045CCD1 /* RecordDetail.swift in Sources */,
 				B2D6A3F22B914D630045CCD1 /* ChatDetail.swift in Sources */,
 				B2D6A40E2B9817890045CCD1 /* RecordTypeTile.swift in Sources */,
@@ -328,7 +369,6 @@
 				B2D6A40C2B9814220045CCD1 /* RecordsHomeContent.swift in Sources */,
 				B2D6A3A22B8EFEF80045CCD1 /* OvumApp.swift in Sources */,
 				B246940C2BA026FA00286A75 /* Menu.swift in Sources */,
-				B2D6A3FF2B96BE260045CCD1 /* ChatHistory.swift in Sources */,
 				B2D6A4252B9ECA7D0045CCD1 /* PhotoPicker.swift in Sources */,
 				B2D6A4122B98310E0045CCD1 /* DocumentListTile.swift in Sources */,
 			);
