@@ -4,6 +4,7 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var isSigningIn: Bool = false
+    @FocusState private var focusField: Bool
     @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
@@ -36,9 +37,9 @@ struct LoginView: View {
                     }
                     .padding(.bottom, 30)
                     VStack {
-                        InputView(text: $email, title: "Email Address", placeholder: "Enter your email")
+                        InputView(text: $email, title: "Email Address", placeholder: "Enter your email", fieldIsFocused: $focusField)
                             .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-                        InputView(text: $password, title: "Password", placeholder: "Enter your password", isSecureField: true)
+                        InputView(text: $password, title: "Password", placeholder: "Enter your password", isSecureField: true, fieldIsFocused: $focusField)
                             .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                     }
                     
@@ -46,6 +47,7 @@ struct LoginView: View {
 
                     PurpleButton(image: "upload", text: "Sign In") {
                         Task {
+                            focusField = false
                             isSigningIn = true
                             try await authViewModel.signIn(withEmail: email, password: password)
                             isSigningIn = false
@@ -75,7 +77,7 @@ struct LoginView: View {
                 
                 if isSigningIn {
                     ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: AppColours.maroon))
+                        .progressViewStyle(CircularProgressViewStyle(tint: AppColours.mint))
                 }
             }
         }

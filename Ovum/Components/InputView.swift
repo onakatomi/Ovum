@@ -2,9 +2,12 @@ import SwiftUI
 
 struct InputView: View {
     @Binding var text: String
+    
     let title: String
     let placeholder: String
     var isSecureField = false
+
+    @FocusState.Binding var fieldIsFocused: Bool
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -14,6 +17,7 @@ struct InputView: View {
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 16)
+                    .focused($fieldIsFocused)
                     .background(
                       RoundedRectangle(cornerRadius: 6)
                         .fill(.white)
@@ -24,6 +28,7 @@ struct InputView: View {
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 16)
+                    .focused($fieldIsFocused)
                     .background(
                       RoundedRectangle(cornerRadius: 6)
                         .fill(.white)

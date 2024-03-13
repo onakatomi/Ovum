@@ -3,7 +3,7 @@ import SwiftUI
 struct ContentView: View {
     //    @Environment(Router.self) var router
     @EnvironmentObject var authViewModel: AuthViewModel
-    @StateObject var router = Router()
+    @EnvironmentObject var router: Router
     
     var body: some View {
         Group {
@@ -103,7 +103,7 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(router: Router())
+    ContentView()
     //        .environment(Router())
         .environment(MessageViewModel())
 //        .environment(AuthViewModel())

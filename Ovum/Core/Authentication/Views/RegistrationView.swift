@@ -4,6 +4,7 @@ struct RegistrationView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var confirmPassword = ""
+    @FocusState private var focusField: Bool
     @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(\.dismiss) private var dismiss
     
@@ -36,11 +37,11 @@ struct RegistrationView: View {
                 }
                 .padding(.bottom, 30)
                 VStack(spacing: 15) {
-                    InputView(text: $email, title: "Email Address", placeholder: "Your email")
+                    InputView(text: $email, title: "Email Address", placeholder: "Your email", fieldIsFocused: $focusField)
                         .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-                    InputView(text: $password, title: "Password", placeholder: "Enter your password", isSecureField: true)
+                    InputView(text: $password, title: "Password", placeholder: "Enter your password", isSecureField: true, fieldIsFocused: $focusField)
                     ZStack(alignment: .trailing) {
-                        InputView(text: $confirmPassword, title: "Confirm Password", placeholder: "Confirm your password", isSecureField: true)
+                        InputView(text: $confirmPassword, title: "Confirm Password", placeholder: "Confirm your password", isSecureField: true, fieldIsFocused: $focusField)
                         if !password.isEmpty && !confirmPassword.isEmpty {
                             if password == confirmPassword {
                                 Image(systemName: "checkmark.circle.fill")
