@@ -13,6 +13,18 @@
 		B24694122BA10FED00286A75 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694112BA10FED00286A75 /* SecondaryButton.swift */; };
 		B24694142BA116D600286A75 /* ThickDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694132BA116D600286A75 /* ThickDivider.swift */; };
 		B246941B2BA12C3300286A75 /* ChatHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246941A2BA12C3300286A75 /* ChatHistory.swift */; };
+		B246941D2BA12D7700286A75 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246941C2BA12D7700286A75 /* LoginView.swift */; };
+		B246941F2BA12E2600286A75 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246941E2BA12E2600286A75 /* InputView.swift */; };
+		B24694212BA131DD00286A75 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694202BA131DD00286A75 /* RegistrationView.swift */; };
+		B24694232BA1336B00286A75 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694222BA1336B00286A75 /* ProfileView.swift */; };
+		B24694252BA134B500286A75 /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694242BA134B500286A75 /* SettingsRowView.swift */; };
+		B24694272BA1360600286A75 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694262BA1360600286A75 /* User.swift */; };
+		B24694292BA139CF00286A75 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B24694282BA139CF00286A75 /* GoogleService-Info.plist */; };
+		B24694382BA13B7000286A75 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B24694372BA13B7000286A75 /* FirebaseAuth */; };
+		B24694442BA13B7000286A75 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B24694432BA13B7000286A75 /* FirebaseFirestore */; };
+		B246945E2BA13B7000286A75 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B246945D2BA13B7000286A75 /* FirebaseStorage */; };
+		B24694632BA13C0700286A75 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B24694622BA13C0700286A75 /* FirebaseFirestoreSwift */; };
+		B24694672BA13C7900286A75 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694662BA13C7900286A75 /* AuthViewModel.swift */; };
 		B2D6A3A22B8EFEF80045CCD1 /* OvumApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */; };
 		B2D6A3A42B8EFEF80045CCD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A32B8EFEF80045CCD1 /* ContentView.swift */; };
 		B2D6A3A62B8EFF050045CCD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2D6A3A52B8EFF050045CCD1 /* Assets.xcassets */; };
@@ -56,6 +68,14 @@
 		B24694112BA10FED00286A75 /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
 		B24694132BA116D600286A75 /* ThickDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThickDivider.swift; sourceTree = "<group>"; };
 		B246941A2BA12C3300286A75 /* ChatHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistory.swift; sourceTree = "<group>"; };
+		B246941C2BA12D7700286A75 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		B246941E2BA12E2600286A75 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		B24694202BA131DD00286A75 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		B24694222BA1336B00286A75 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		B24694242BA134B500286A75 /* SettingsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
+		B24694262BA1360600286A75 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B24694282BA139CF00286A75 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		B24694662BA13C7900286A75 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		B2D6A39E2B8EFEF80045CCD1 /* Ovum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ovum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvumApp.swift; sourceTree = "<group>"; };
 		B2D6A3A32B8EFEF80045CCD1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -98,6 +118,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B24694442BA13B7000286A75 /* FirebaseFirestore in Frameworks */,
+				B24694382BA13B7000286A75 /* FirebaseAuth in Frameworks */,
+				B246945E2BA13B7000286A75 /* FirebaseStorage in Frameworks */,
+				B24694632BA13C0700286A75 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +160,8 @@
 		B24694182BA12B3900286A75 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				B24694652BA13C5600286A75 /* ViewModel */,
+				B24694642BA13C4B00286A75 /* Views */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -143,8 +169,33 @@
 		B24694192BA12B4600286A75 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				B24694222BA1336B00286A75 /* ProfileView.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		B24694612BA13C0700286A75 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B24694642BA13C4B00286A75 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B246941C2BA12D7700286A75 /* LoginView.swift */,
+				B24694202BA131DD00286A75 /* RegistrationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B24694652BA13C5600286A75 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B24694662BA13C7900286A75 /* AuthViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		B2D6A3952B8EFEF80045CCD1 = {
@@ -152,6 +203,7 @@
 			children = (
 				B2D6A3A02B8EFEF80045CCD1 /* Ovum */,
 				B2D6A39F2B8EFEF80045CCD1 /* Products */,
+				B24694612BA13C0700286A75 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -171,6 +223,7 @@
 				B2D6A3E52B9038DB0045CCD1 /* Components */,
 				B2D6A3F32B9155FA0045CCD1 /* Model */,
 				B2D6A3A52B8EFF050045CCD1 /* Assets.xcassets */,
+				B24694282BA139CF00286A75 /* GoogleService-Info.plist */,
 				B2D6A3A72B8EFF050045CCD1 /* Preview Content */,
 			);
 			path = Ovum;
@@ -199,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				B2D6A41A2B9AB3830045CCD1 /* AddDocumentTray.swift */,
+				B246941E2BA12E2600286A75 /* InputView.swift */,
 				B2D6A3B02B8F1AB20045CCD1 /* BaseView.swift */,
 				B2D6A4202B9E789E0045CCD1 /* BubbleBackground.swift */,
 				B2D6A4222B9E7DFE0045CCD1 /* BubbleTransitionView.swift */,
@@ -219,6 +273,7 @@
 				B24694132BA116D600286A75 /* ThickDivider.swift */,
 				B246940F2BA10DA100286A75 /* TransparentButton.swift */,
 				B2D6A3FC2B917FB20045CCD1 /* TypingIndicator.swift */,
+				B24694242BA134B500286A75 /* SettingsRowView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -241,6 +296,7 @@
 				B2D6A3F42B91565C0045CCD1 /* Message.swift */,
 				B2D6A4062B980BAD0045CCD1 /* ChatSession.swift */,
 				B2D6A4132B98313A0045CCD1 /* Document.swift */,
+				B24694262BA1360600286A75 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -279,6 +335,12 @@
 			dependencies = (
 			);
 			name = Ovum;
+			packageProductDependencies = (
+				B24694372BA13B7000286A75 /* FirebaseAuth */,
+				B24694432BA13B7000286A75 /* FirebaseFirestore */,
+				B246945D2BA13B7000286A75 /* FirebaseStorage */,
+				B24694622BA13C0700286A75 /* FirebaseFirestoreSwift */,
+			);
 			productName = Ovum;
 			productReference = B2D6A39E2B8EFEF80045CCD1 /* Ovum.app */;
 			productType = "com.apple.product-type.application";
@@ -307,6 +369,9 @@
 				Base,
 			);
 			mainGroup = B2D6A3952B8EFEF80045CCD1;
+			packageReferences = (
+				B246942A2BA13B7000286A75 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = B2D6A39F2B8EFEF80045CCD1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -323,6 +388,7 @@
 			files = (
 				B2D6A3A92B8EFF050045CCD1 /* Preview Assets.xcassets in Resources */,
 				B2D6A3A62B8EFF050045CCD1 /* Assets.xcassets in Resources */,
+				B24694292BA139CF00286A75 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B24694102BA10DA100286A75 /* TransparentButton.swift in Sources */,
+				B24694252BA134B500286A75 /* SettingsRowView.swift in Sources */,
 				B2D6A4192B9A96B40045CCD1 /* Constants.swift in Sources */,
 				B246941B2BA12C3300286A75 /* ChatHistory.swift in Sources */,
 				B2D6A41D2B9AC08F0045CCD1 /* RecordDetail.swift in Sources */,
@@ -364,12 +431,18 @@
 				B2D6A3FD2B917FB20045CCD1 /* TypingIndicator.swift in Sources */,
 				B2D6A4212B9E789E0045CCD1 /* BubbleBackground.swift in Sources */,
 				B2D6A3E92B9055640045CCD1 /* ChatHomeContent.swift in Sources */,
+				B24694272BA1360600286A75 /* User.swift in Sources */,
 				B2D6A41F2B9E77BD0045CCD1 /* MapOnboardingBubbleShape.swift in Sources */,
 				B2D6A3F72B9157020045CCD1 /* MessageViewModel.swift in Sources */,
+				B24694672BA13C7900286A75 /* AuthViewModel.swift in Sources */,
+				B24694212BA131DD00286A75 /* RegistrationView.swift in Sources */,
 				B2D6A40C2B9814220045CCD1 /* RecordsHomeContent.swift in Sources */,
 				B2D6A3A22B8EFEF80045CCD1 /* OvumApp.swift in Sources */,
 				B246940C2BA026FA00286A75 /* Menu.swift in Sources */,
+				B246941D2BA12D7700286A75 /* LoginView.swift in Sources */,
+				B246941F2BA12E2600286A75 /* InputView.swift in Sources */,
 				B2D6A4252B9ECA7D0045CCD1 /* PhotoPicker.swift in Sources */,
+				B24694232BA1336B00286A75 /* ProfileView.swift in Sources */,
 				B2D6A4122B98310E0045CCD1 /* DocumentListTile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -578,6 +651,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B246942A2BA13B7000286A75 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.22.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B24694372BA13B7000286A75 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B246942A2BA13B7000286A75 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		B24694432BA13B7000286A75 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B246942A2BA13B7000286A75 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		B246945D2BA13B7000286A75 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B246942A2BA13B7000286A75 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		B24694622BA13C0700286A75 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B246942A2BA13B7000286A75 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B2D6A3962B8EFEF80045CCD1 /* Project object */;
 }
