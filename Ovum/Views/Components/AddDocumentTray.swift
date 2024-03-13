@@ -47,7 +47,3 @@ struct AddDocumentTray: View {
         .padding(.horizontal, 20)
     }
 }
-
-#Preview {
-    AddDocumentTray()
-}

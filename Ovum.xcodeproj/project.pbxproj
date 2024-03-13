@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B246940C2BA026FA00286A75 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246940B2BA026FA00286A75 /* Menu.swift */; };
+		B246940E2BA10D1600286A75 /* PurpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246940D2BA10D1600286A75 /* PurpleButton.swift */; };
+		B24694102BA10DA100286A75 /* TransparentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246940F2BA10DA100286A75 /* TransparentButton.swift */; };
+		B24694122BA10FED00286A75 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694112BA10FED00286A75 /* SecondaryButton.swift */; };
+		B24694142BA116D600286A75 /* ThickDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694132BA116D600286A75 /* ThickDivider.swift */; };
 		B2D6A3A22B8EFEF80045CCD1 /* OvumApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */; };
 		B2D6A3A42B8EFEF80045CCD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A32B8EFEF80045CCD1 /* ContentView.swift */; };
 		B2D6A3A62B8EFF050045CCD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2D6A3A52B8EFF050045CCD1 /* Assets.xcassets */; };
@@ -45,6 +50,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B246940B2BA026FA00286A75 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		B246940D2BA10D1600286A75 /* PurpleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurpleButton.swift; sourceTree = "<group>"; };
+		B246940F2BA10DA100286A75 /* TransparentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentButton.swift; sourceTree = "<group>"; };
+		B24694112BA10FED00286A75 /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
+		B24694132BA116D600286A75 /* ThickDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThickDivider.swift; sourceTree = "<group>"; };
 		B2D6A39E2B8EFEF80045CCD1 /* Ovum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ovum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvumApp.swift; sourceTree = "<group>"; };
 		B2D6A3A32B8EFEF80045CCD1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -140,6 +150,7 @@
 				B2D6A3E52B9038DB0045CCD1 /* Components */,
 				B2D6A3F02B914D540045CCD1 /* Chat */,
 				B2D6A40A2B9813E40045CCD1 /* Records */,
+				B246940B2BA026FA00286A75 /* Menu.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -148,8 +159,12 @@
 			isa = PBXGroup;
 			children = (
 				B2D6A3B02B8F1AB20045CCD1 /* BaseView.swift */,
+				B24694112BA10FED00286A75 /* SecondaryButton.swift */,
 				B2D6A3F82B9159590045CCD1 /* ChatBubble.swift */,
+				B24694132BA116D600286A75 /* ThickDivider.swift */,
+				B246940D2BA10D1600286A75 /* PurpleButton.swift */,
 				B2D6A41E2B9E77BD0045CCD1 /* MapOnboardingBubbleShape.swift */,
+				B246940F2BA10DA100286A75 /* TransparentButton.swift */,
 				B2D6A4202B9E789E0045CCD1 /* BubbleBackground.swift */,
 				B2D6A4262B9FBDDD0045CCD1 /* CaptureImage.swift */,
 				B2D6A4222B9E7DFE0045CCD1 /* BubbleTransitionView.swift */,
@@ -278,6 +293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B24694102BA10DA100286A75 /* TransparentButton.swift in Sources */,
 				B2D6A4192B9A96B40045CCD1 /* Constants.swift in Sources */,
 				B2D6A41D2B9AC08F0045CCD1 /* RecordDetail.swift in Sources */,
 				B2D6A3F22B914D630045CCD1 /* ChatDetail.swift in Sources */,
@@ -286,8 +302,10 @@
 				B2D6A3E72B9041B10045CCD1 /* Header.swift in Sources */,
 				B2D6A4092B980ED40045CCD1 /* ChatHistoryDetail.swift in Sources */,
 				B2D6A4072B980BAD0045CCD1 /* ChatSession.swift in Sources */,
+				B24694142BA116D600286A75 /* ThickDivider.swift in Sources */,
 				B2D6A41B2B9AB3830045CCD1 /* AddDocumentTray.swift in Sources */,
 				B2D6A3ED2B905B0B0045CCD1 /* TextFieldSendButton.swift in Sources */,
+				B246940E2BA10D1600286A75 /* PurpleButton.swift in Sources */,
 				B2D6A3EF2B914AEB0045CCD1 /* MessageInputField.swift in Sources */,
 				B2D6A4172B983DCF0045CCD1 /* OverviewHomeContent.swift in Sources */,
 				B2D6A3B12B8F1AB20045CCD1 /* BaseView.swift in Sources */,
@@ -301,6 +319,7 @@
 				B2D6A4232B9E7DFE0045CCD1 /* BubbleTransitionView.swift in Sources */,
 				B2D6A3F52B91565C0045CCD1 /* Message.swift in Sources */,
 				B2D6A4292B9FCDFD0045CCD1 /* Router.swift in Sources */,
+				B24694122BA10FED00286A75 /* SecondaryButton.swift in Sources */,
 				B2D6A3FD2B917FB20045CCD1 /* TypingIndicator.swift in Sources */,
 				B2D6A4212B9E789E0045CCD1 /* BubbleBackground.swift in Sources */,
 				B2D6A3E92B9055640045CCD1 /* ChatHomeContent.swift in Sources */,
@@ -308,6 +327,7 @@
 				B2D6A3F72B9157020045CCD1 /* MessageViewModel.swift in Sources */,
 				B2D6A40C2B9814220045CCD1 /* RecordsHomeContent.swift in Sources */,
 				B2D6A3A22B8EFEF80045CCD1 /* OvumApp.swift in Sources */,
+				B246940C2BA026FA00286A75 /* Menu.swift in Sources */,
 				B2D6A3FF2B96BE260045CCD1 /* ChatHistory.swift in Sources */,
 				B2D6A4252B9ECA7D0045CCD1 /* PhotoPicker.swift in Sources */,
 				B2D6A4122B98310E0045CCD1 /* DocumentListTile.swift in Sources */,

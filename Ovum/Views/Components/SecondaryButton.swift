@@ -8,11 +8,23 @@
 import SwiftUI
 
 struct SecondaryButton: View {
+    let text: String
+    let handler: (() -> Void)
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button {
+            handler()
+        } label: {
+            Text(text)
+                .underline()
+                .font(Font.subheadline.weight(.bold))
+                .foregroundColor(Color(.white))
+        }
     }
 }
 
 #Preview {
-    SecondaryButton()
+    SecondaryButton(text: "Terms of Use") {
+        print("TODO")
+    }
 }

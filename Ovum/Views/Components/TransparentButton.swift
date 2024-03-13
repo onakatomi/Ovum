@@ -8,11 +8,28 @@
 import SwiftUI
 
 struct TransparentButton: View {
+    let text: String
+    let handler: (() -> Void)
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button {
+            handler()
+        } label: {
+            Text(text)
+                .frame(maxWidth: .infinity)
+                .foregroundColor(Color(.white))
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 6)
+                        .inset(by: 0.5)
+                        .stroke(Color(.white), lineWidth: 1)
+                )
+        }
     }
 }
 
 #Preview {
-    TransparentButton()
+    TransparentButton(text: "Sign Out") {
+        print("Signing Out")
+    }
 }

@@ -1,18 +1,15 @@
-//
-//  ThickDivider.swift
-//  Ovum
-//
-//  Created by Ollie Quarm on 13/3/2024.
-//
-
 import SwiftUI
 
 struct ThickDivider: View {
+    let color: Color
+    let width: CGFloat
+    let padding: CGFloat
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Rectangle()
+            .fill(color)
+            .frame(height: width)
+            .edgesIgnoringSafeArea(.horizontal)
+            .padding(.vertical, padding)
     }
-}
-
-#Preview {
-    ThickDivider()
 }

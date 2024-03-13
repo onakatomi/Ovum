@@ -55,10 +55,13 @@ struct BaseView: View {
                     .aspectRatio(contentMode: .fit)
                     .blur(radius: 10, opaque: true)
                 VStack(spacing: 0) {
-                    Image("menu_white")
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                        .padding(.trailing, 8)
-                        .padding(.bottom, 18)
+                    NavigationLink (destination: Menu().toolbar(.hidden, for: .tabBar)) {
+                        Image("menu_white")
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .padding(.trailing, 8)
+                            .padding(.bottom, 18)
+                    }
+                    .navigationBarBackButtonHidden()
                     Divider()
                         .background(.white)
                         .padding(.bottom, 13)

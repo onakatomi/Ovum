@@ -23,13 +23,22 @@ enum OverviewNavDestination {
 }
 
 class Router: ObservableObject {
+    public enum Destination: Codable, Hashable {
+        case menu
+    }
+    
     @Published var selectedTab: ContentViewTab = .overview
     @Published var overviewNavigation: [OverviewNavDestination] = []
     @Published var chatNavigation: [ChatNavDestination] = []
     @Published var recordsNavigation: [RecordsNavDestination] = []
     
     @Published var navPath = NavigationPath()
-
+    
+    func navigate(to destination: Destination) {
+        print("Navigating...")
+        navPath.append(destination)
+    }
+    
     func navigateBack() {
         navPath.removeLast()
     }
