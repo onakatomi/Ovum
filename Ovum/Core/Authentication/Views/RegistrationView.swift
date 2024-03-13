@@ -2,7 +2,6 @@ import SwiftUI
 
 struct RegistrationView: View {
     @State private var email = ""
-    @State private var fullname = ""
     @State private var password = ""
     @State private var confirmPassword = ""
     @EnvironmentObject var authViewModel: AuthViewModel
@@ -63,12 +62,12 @@ struct RegistrationView: View {
                 PurpleButton(image: "upload", text: "Sign Up") {
                     Task {
                         try await authViewModel.createUser(withEmail: email,
-                                                           password: password,
-                                                           fullName: fullname)
+                                                           password: password)
                     }
                     print("Signing up...")
                 }
                     .frame(width: UIScreen.main.bounds.width - 32)
+                    .padding(.bottom, 30)
                     .disabled(!formIsValid)
                     .opacity(formIsValid ? 1.0 : 0.5)
                 Button {
@@ -81,7 +80,7 @@ struct RegistrationView: View {
                     }
                 }
             }
-            .padding(.vertical)
+            .padding(.vertical, 30)
             .padding(.horizontal, 20)
         }
     }
@@ -96,7 +95,6 @@ extension RegistrationView: AuthenticationFormProtocol {
         && !password.isEmpty
         && password.count > 5
         && confirmPassword == password
-        && !fullname.isEmpty
     }
 }
 

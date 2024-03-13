@@ -34,11 +34,11 @@ class AuthViewModel: ObservableObject {
     }
     
     // Async function that can potentially throw an error
-    func createUser(withEmail email: String, password: String, fullName: String) async throws {
+    func createUser(withEmail email: String, password: String) async throws {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password) // Atempt to create user; await result
             self.userSession = result.user // Set userSession property with new user
-            let user = User(id: result.user.uid, fullName: fullName, email: email) // Create OUR user object
+            let user = User(id: result.user.uid, email: email) // Create OUR user object
             let encodedUser = try Firestore.Encoder().encode(user) // Encode this object
             // There's a collection of users, which contains documents of user ids. Each document id maps to a user object. setData sets this map to the id.
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser) // Upload this to Firebase

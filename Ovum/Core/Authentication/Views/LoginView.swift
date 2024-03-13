@@ -3,6 +3,7 @@ import SwiftUI
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
+    @State private var isSigningIn: Bool = false
     @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
@@ -35,7 +36,7 @@ struct LoginView: View {
                     }
                     .padding(.bottom, 30)
                     VStack {
-                        InputView(text: $email, title: "Email Address", placeholder: "name@example.com")
+                        InputView(text: $email, title: "Email Address", placeholder: "Enter your email")
                             .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                         InputView(text: $password, title: "Password", placeholder: "Enter your password", isSecureField: true)
                             .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
@@ -45,10 +46,13 @@ struct LoginView: View {
 
                     PurpleButton(image: "upload", text: "Sign In") {
                         Task {
+                            isSigningIn = true
                             try await authViewModel.signIn(withEmail: email, password: password)
+                            isSigningIn = false
                         }
                     }
                         .frame(width: UIScreen.main.bounds.width - 32)
+                        .padding(.bottom, 30)
 //                        .disabled(!formIsValid)
 //                        .opacity(formIsValid ? 1.0 : 0.5)
 
@@ -65,8 +69,14 @@ struct LoginView: View {
                         .foregroundColor(.white)
                     }
                 }
-                .padding(.vertical)
+                .padding(.vertical, 30)
                 .padding(.horizontal, 20)
+                .opacity(isSigningIn ? 0.5 : 1.0)
+                
+                if isSigningIn {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: AppColours.maroon))
+                }
             }
         }
     }

@@ -8,7 +8,7 @@ struct ProfileView: View {
             List {
                 Section {
                     HStack {
-                        Text(user.initials)
+                        Text("TU")
                             .font(.title)
                             .fontWeight(.semibold)
                             .foregroundColor(.white)
@@ -17,7 +17,7 @@ struct ProfileView: View {
                             .clipShape(Circle())
                         
                         VStack(alignment: .leading, spacing: 4) {
-                            Text(user.fullName)
+                            Text("Test User")
                                 .font(.subheadline)
                                 .fontWeight(.semibold)
                                 .padding(.top, 4)
