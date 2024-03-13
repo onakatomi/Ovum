@@ -8,23 +8,31 @@ struct InputView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(title)
-                .foregroundColor(Color(.darkGray))
-                .fontWeight(.semibold)
-                .font(.footnote)
             if isSecureField {
                 SecureField(placeholder, text: $text)
-                    .font(.system(size:14))
+                    .font(.system(size: 16))
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 16)
+                    .background(
+                      RoundedRectangle(cornerRadius: 6)
+                        .fill(.white)
+                    )
             } else {
                 TextField(placeholder, text: $text)
-                    .font(.system(size:14))
+                    .font(.system(size: 16))
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 16)
+                    .background(
+                      RoundedRectangle(cornerRadius: 6)
+                        .fill(.white)
+                    )
             }
-            
-            Divider()
         }
     }
 }
 
 #Preview {
-    InputView(text: .constant(""), title: "Email Address", placeholder: "name@example.com")
+    LoginView()
 }

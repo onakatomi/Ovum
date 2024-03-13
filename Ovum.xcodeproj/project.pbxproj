@@ -131,8 +131,8 @@
 		B24694152BA12B0700286A75 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				B2D6A4282B9FCDFD0045CCD1 /* Router.swift */,
 				B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */,
+				B2D6A4282B9FCDFD0045CCD1 /* Router.swift */,
 				B2D6A4182B9A96B40045CCD1 /* Constants.swift */,
 			);
 			path = App;

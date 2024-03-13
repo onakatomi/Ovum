@@ -2,8 +2,9 @@ import SwiftUI
 
 struct Menu: View {
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var authViewModel: AuthViewModel
     
-    var body: some View {
+    var body: some View {        
         ZStack {
             AppColours.darkBrown
             VStack(spacing: 0) {
@@ -36,6 +37,7 @@ struct Menu: View {
                 .padding(.bottom, 15)
                 TransparentButton(text: "Sign Out") {
                     print("Signing Out")
+                    authViewModel.signOut()
                 }
                 .padding(.bottom, 30)
                 SecondaryButton(text: "Privacy Policy") {
