@@ -2,6 +2,7 @@ import SwiftUI
 
 struct RegistrationView: View {
     @State private var email = ""
+    @State private var name = ""
     @State private var password = ""
     @State private var confirmPassword = ""
     @FocusState private var focusField: Bool
@@ -39,6 +40,8 @@ struct RegistrationView: View {
                 VStack(spacing: 15) {
                     InputView(text: $email, title: "Email Address", placeholder: "Your email", fieldIsFocused: $focusField)
                         .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    InputView(text: $name, title: "Name", placeholder: "Your name", fieldIsFocused: $focusField)
+                        .autocapitalization(.words)
                     InputView(text: $password, title: "Password", placeholder: "Enter your password", isSecureField: true, fieldIsFocused: $focusField)
                     ZStack(alignment: .trailing) {
                         InputView(text: $confirmPassword, title: "Confirm Password", placeholder: "Confirm your password", isSecureField: true, fieldIsFocused: $focusField)
@@ -63,7 +66,8 @@ struct RegistrationView: View {
                 PurpleButton(image: "upload", text: "Sign Up") {
                     Task {
                         try await authViewModel.createUser(withEmail: email,
-                                                           password: password)
+                                                           password: password,
+                                                           name: name)
                     }
                     print("Signing up...")
                 }

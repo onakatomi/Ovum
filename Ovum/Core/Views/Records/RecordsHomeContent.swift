@@ -2,15 +2,32 @@ import SwiftUI
 
 struct RecordsHomeContent: View {
     @Environment(MessageViewModel.self) var viewModel
-    @State private var selectedType: Int = 0
+    @State private var documentFilterType: DocumentType?
     @State private var searchText: String = ""
     @State private var showAddDocumentTray = false
     
     var filteredDocuments: [Document] {
+        // Assess if there is a type filter.
+        guard documentFilterType != nil else {
+            if (searchText == "") {
+                return viewModel.documents
+            } else {
+                return viewModel.documents.filter { document in
+                    document.title.lowercased().contains(searchText.lowercased())
+                }
+            }
+        }
+        
+        // Apply filter.
+        let typeFiltered = viewModel.documents.filter { document in
+            document.type == documentFilterType
+        }
+        
+        // Apply search query.
         if (searchText == "") {
-            viewModel.documents
+            return typeFiltered
         } else {
-            viewModel.documents.filter { document in
+            return typeFiltered.filter { document in
                 document.title.lowercased().contains(searchText.lowercased())
             }
         }
@@ -19,61 +36,60 @@ struct RecordsHomeContent: View {
     var body: some View {
         VStack {
             HStack {
-                RecordTypeTile(recordType: RecordType.all, isSelected: selectedType == 0 ? true : false)
+                RecordTypeTile(text: "All", image: documentFilterType == nil ? Image("home_white") : Image("home"), isSelected: documentFilterType == nil)
                     .onTapGesture {
-                        selectedType = 0
+                        documentFilterType = nil
                     }
                 Spacer()
-                RecordTypeTile(recordType: RecordType.imaging, isSelected: selectedType == 1 ? true : false)
+                RecordTypeTile(text: DocumentType.imaging.getName(), image: DocumentType.imaging.getImage(isSelected: documentFilterType == DocumentType.imaging), isSelected: documentFilterType == DocumentType.imaging)
                     .onTapGesture {
-                        selectedType = 1
+                        documentFilterType = DocumentType.imaging
                     }
                 Spacer()
-                RecordTypeTile(recordType: RecordType.pathology, isSelected: selectedType == 2 ? true : false)
+                RecordTypeTile(text: DocumentType.pathology.getName(), image: DocumentType.pathology.getImage(isSelected: documentFilterType == DocumentType.pathology), isSelected: documentFilterType == DocumentType.pathology)
                     .onTapGesture {
-                        selectedType = 2
+                        documentFilterType = DocumentType.pathology
                     }
                 Spacer()
-                RecordTypeTile(recordType: RecordType.letters, isSelected: selectedType == 3 ? true : false)
+                RecordTypeTile(text: DocumentType.letter.getName(), image: DocumentType.letter.getImage(isSelected: documentFilterType == DocumentType.letter), isSelected: documentFilterType == DocumentType.letter)
                     .onTapGesture {
-                        selectedType = 3
+                        documentFilterType = DocumentType.letter
                     }
             }
-                .padding([.bottom], 24)
-                .padding([.top], 35)
+            .padding([.bottom], 24)
+            .padding([.top], 35)
             Button {
-                print("add doc")
                 showAddDocumentTray.toggle()
             } label: {
                 HStack(spacing: 14) {
                     Image("add_button")
                     Text("Add a document")
                 }
-                    .frame(maxWidth: .infinity)
-                    .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(red: 0.86, green: 0.84, blue: 0.98))
-//                            .stroke(AppColours.maroon, lineWidth: 1)
-                    )
-                    .sheet(isPresented: $showAddDocumentTray) {
-                        AddDocumentTray()
-                            .presentationDetents([.medium])
-                    }
+                .frame(maxWidth: .infinity)
+                .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color(red: 0.86, green: 0.84, blue: 0.98))
+                    //                            .stroke(AppColours.maroon, lineWidth: 1)
+                )
+                .sheet(isPresented: $showAddDocumentTray) {
+                    AddDocumentTray()
+                        .presentationDetents([.medium])
+                }
             }
-                .padding([.bottom], 24)
+            .padding([.bottom], 24)
             Divider()
                 .padding([.bottom], 24)
             HStack(spacing: 14) {
-                    Image("search")
-                        .resizable()
-                        .frame(width: 18.0, height: 18.0)
-                    TextField("Search documents", text: $searchText)
+                Image("search")
+                    .resizable()
+                    .frame(width: 18.0, height: 18.0)
+                TextField("Search documents", text: $searchText)
             }
-                .padding(EdgeInsets(top: 22, leading: 18, bottom: 22, trailing: 18))
-                .background(Color(.white))
-                .cornerRadius(6)
-                .padding(.bottom, 24)
+            .padding(EdgeInsets(top: 22, leading: 18, bottom: 22, trailing: 18))
+            .background(Color(.white))
+            .cornerRadius(6)
+            .padding(.bottom, 24)
             HStack {
                 Text("Recent")
                 Spacer()
@@ -84,8 +100,8 @@ struct RecordsHomeContent: View {
                         .frame(width: 4, height: 9)
                 }
             }
-                .font(Font.callout.bold())
-                .padding(.bottom, 8)
+            .font(Font.callout.bold())
+            .padding(.bottom, 8)
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
                     ForEach(filteredDocuments) { document in

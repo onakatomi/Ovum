@@ -1,10 +1,3 @@
-//
-//  ChatBubble.swift
-//  Ovum
-//
-//  Created by Ollie Quarm on 1/3/2024.
-//
-
 import SwiftUI
 
 struct ChatBubble: View {

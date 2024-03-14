@@ -6,6 +6,8 @@ struct CaptureImage: View {
     @State private var showCamera = false
     @State private var selectedImage: UIImage?
     @State var image: UIImage?
+    @Binding var documentTitle: String
+    @Binding var documentType: DocumentType
     
     var body: some View {
         VStack {
@@ -25,7 +27,7 @@ struct CaptureImage: View {
                     .foregroundColor(.green)
                     .onAppear {
                         let b64_rep = imageToBase64(selectedImage)
-                        viewModel.addDocument(document: Document(title: "Document \(viewModel.documents.count + 1)", date: getDateAsString(date: Date.now), type: RecordType.pathology, file: b64_rep!))
+                        viewModel.addDocument(document: Document(title: documentTitle, date: getDateAsString(date: Date.now), type: documentType, file: b64_rep!))
                     }
             }
         }
@@ -67,8 +69,4 @@ class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerContro
         self.picker.selectedImage = selectedImage
         self.picker.isPresented.wrappedValue.dismiss()
     }
-}
-
-#Preview {
-    CaptureImage()
 }

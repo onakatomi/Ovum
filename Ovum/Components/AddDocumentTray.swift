@@ -1,6 +1,30 @@
 import SwiftUI
 
+//enum DocumentType: CaseIterable, Identifiable, CustomStringConvertible {
+//    case imaging
+//    case pathology
+//    case letter
+//    
+//    var id: Self { self }
+//    
+//    var description: String {
+//        switch self {
+//        case .imaging:
+//            return "Imaging"
+//        case .pathology:
+//            return "Pathology"
+//        case .letter:
+//            return "Letter"
+//        }
+//    }
+//}
+
 struct AddDocumentTray: View {
+    @State private var documentTitle = ""
+    @State private var documentType: DocumentType = DocumentType.imaging
+    
+    @State var readyToUpload: Bool = false
+    @FocusState private var focusField: Bool
     var body: some View {
         VStack(spacing: 0) {
             Text("Add documents")
@@ -8,42 +32,31 @@ struct AddDocumentTray: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             Spacer().frame(height: 12)
             Divider()
-            VStack(spacing: 12) {
-                    HStack(spacing: 14) {
-                        Image(systemName: "square.and.arrow.up")
-                        PhotoPicker()
-                    }
-                        .frame(maxWidth: .infinity)
-                        .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color(red: 0.49, green: 0.27, blue: 0.18), lineWidth: 1)
-                                .fill(Color(.clear))
-                        )
-                Button {
-                    print("add doc")
-                } label: {
-                    HStack(spacing: 14) {
-                        Image(systemName: "camera")
-                        CaptureImage()
-                    }
-                        .frame(maxWidth: .infinity)
-                        .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color(red: 0.49, green: 0.27, blue: 0.18), lineWidth: 1)
-                                .fill(Color(.clear))
-                        )
-                }
+                .padding(.bottom, 20)
+            if readyToUpload {
+                UploadDocument(documentTitle: $documentTitle, documentType: $documentType)
+                    .transition(.slide)
+            } else {
+                TagDocument(documentTitle: $documentTitle, documentType: $documentType, fieldIsFocused: $focusField)
             }
-            .padding(.vertical, 32)
-            Image("mail")
-            Spacer().frame(height: 12)
-            Text("Or have your clinic email them to")
-                .font(Font.body)
-            Text("D327THY1@ovum.com.au")
-                .font(Font.headline)
+            Spacer()
+            if (!readyToUpload) {
+                PurpleButton(image: "arrow.right", text: "Choose Document") {
+                    withAnimation {
+                        readyToUpload.toggle()
+                    }
+                }
+                .disabled(documentTitle == "")
+                .opacity(documentTitle == "" ? 0.5 : 1.0)
+            }
         }
         .padding(.horizontal, 20)
+        .padding(.vertical, 40)
+        .background(AppColours.brown)
     }
+}
+
+#Preview {
+    RecordsHomeContent()
+        .environment(MessageViewModel())
 }

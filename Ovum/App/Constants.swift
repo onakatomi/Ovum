@@ -10,6 +10,7 @@ struct AppColours {
     static let peach = Color(red: 1, green: 0.82, blue: 0.6)
     static let pink = Color(red: 0.95, green: 0.82, blue: 0.83)
     static let darkBrown = Color(red: 0.3, green: 0.1, blue: 0.04)
+    static let darkBeige = Color(red: 0.7, green: 0.45, blue: 0.25)
 }
 
 func getRandomColor() -> Color {

@@ -4,8 +4,9 @@ import Foundation
 struct User: Identifiable, Codable {
     let id: String
     let email: String
+    let name: String
 }
 
 extension User {
-    static var MOCK_USER = User(id: NSUUID().uuidString, email: "test@gmail.com")
+    static var MOCK_USER = User(id: NSUUID().uuidString, email: "test@gmail.com", name: "Jane")
 }

@@ -1,58 +1,67 @@
 import SwiftUI
 
-enum RecordType {
-    case all
+enum DocumentType: CaseIterable, Identifiable, CustomStringConvertible {
     case imaging
     case pathology
-    case letters
+    case letter
+    //            return isSelected ? Image("home_white"): Image("home")
     
     func getImage(isSelected: Bool) -> Image {
         switch self {
-        case .all:
-            return isSelected ? Image("home_white"): Image("home")
         case .imaging:
             return isSelected ? Image("imaging_white"): Image("imaging")
         case .pathology:
             return isSelected ? Image("drop_white"): Image("drop")
-        case .letters:
+        case .letter:
             return isSelected ? Image("records_white"): Image("records")
         }
     }    
     
     func getName() -> String {
         switch self {
-        case .all:
-            return "All"
         case .imaging:
             return "Imaging"
         case .pathology:
             return "Pathology"
-        case .letters:
+        case .letter:
             return "Letters"
         }
     }
     
     func getColor() -> Color {
         switch self {
-        case .all:
-            return Color(.clear)
         case .imaging:
-            return Color(red: 0.7, green: 0.45, blue: 0.25)
+            return AppColours.mint
         case .pathology:
             return AppColours.maroon
-        case .letters:
-            return Color(red: 0.7, green: 0.45, blue: 0.25)
+        case .letter:
+            return AppColours.darkBeige
+        }
+    }
+    
+    var id: Self { self }
+    
+    var description: String {
+        switch self {
+        case .imaging:
+            return "Imaging"
+        case .pathology:
+            return "Pathology"
+        case .letter:
+            return "Letter"
         }
     }
 }
 
 struct RecordTypeTile: View {
-    let recordType: RecordType
+    let text: String
+    let image: Image
     let isSelected: Bool
     
     var body: some View {
         VStack(spacing: 0) {
-            recordType.getImage(isSelected: isSelected)
+//            recordType.getImage(isSelected: isSelected)
+            image
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 28, height: 28)
@@ -64,7 +73,8 @@ struct RecordTypeTile: View {
                     .frame(height: 80)
                 )
                 .padding(.bottom, 0)
-            Text(recordType.getName())
+//            Text(recordType.getName())
+            Text(text)
                 .font(Font.callout.weight(.semibold))
                 .foregroundColor(AppColours.maroon)
         }

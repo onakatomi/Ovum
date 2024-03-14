@@ -12,7 +12,7 @@ struct BubbleTransitionView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 40, height: 40)
-                        Text("Need me to explain anything about this document? Let’s chat!")
+                        Text("Need me to explain anything about this document? Tap me to chat!")
                             .font(Font.caption)
                             .foregroundColor(.white)
                     }

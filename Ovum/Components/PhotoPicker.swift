@@ -2,6 +2,9 @@ import SwiftUI
 import PhotosUI
 
 struct PhotoPicker: View {
+    @Binding var documentTitle: String
+    @Binding var documentType: DocumentType
+    
     @Environment(MessageViewModel.self) var viewModel
     @State private var selectedItem: PhotosPickerItem?
     @State var image: UIImage?
@@ -15,7 +18,7 @@ struct PhotoPicker: View {
                         if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
                             image = UIImage(data: data)
                             let b64_rep = imageToBase64(image!)
-                            viewModel.addDocument(document: Document(title: "Document \(viewModel.documents.count + 1)", date: getDateAsString(date: Date.now), type: RecordType.pathology, file: b64_rep!))
+                            viewModel.addDocument(document: Document(title: documentTitle, date: getDateAsString(date: Date.now), type: documentType, file: b64_rep!))
                         }
                     }
                 }
@@ -29,8 +32,4 @@ struct PhotoPicker: View {
             }
         }
     }
-}
-
-#Preview {
-    PhotoPicker()
 }
