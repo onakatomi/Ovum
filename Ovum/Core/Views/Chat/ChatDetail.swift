@@ -13,6 +13,7 @@ struct ChatDetail: View {
     @State private var isNewSession: Bool = true
     @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(\.dismiss) private var dismiss
+    @State private var scrollViewHeight: CGFloat = 0
     var document: String?
     
     var body: some View {
@@ -62,6 +63,10 @@ struct ChatDetail: View {
                                     .id("bottomRect")
                             }
                             .padding([.bottom], 10)
+                            .background(GeometryReader { geometry in
+                                Color.clear
+                                    .preference(key: ScrollViewHeightPreferenceKey.self, value: geometry.size.height)
+                            })
                             .onChange(of: viewModel.currentSession.messages.count) {
                                 if (viewModel.currentSession.messages.count != 0) {
                                     withAnimation {
@@ -89,6 +94,12 @@ struct ChatDetail: View {
                                         isNewSession = false
                                     }
                                 }
+                            }
+                        }
+                        .onPreferenceChange(ScrollViewHeightPreferenceKey.self) { scrollViewHeight = $0
+                            print(scrollViewHeight)
+                            withAnimation {
+                                scrollViewProxy.scrollTo("bottomRect", anchor: .bottom)
                             }
                         }
                     }
@@ -123,6 +134,14 @@ struct ChatDetail: View {
                     .progressViewStyle(CircularProgressViewStyle(tint: AppColours.maroon))
             }
         }
+    }
+}
+
+struct ScrollViewHeightPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value += nextValue()
     }
 }
 

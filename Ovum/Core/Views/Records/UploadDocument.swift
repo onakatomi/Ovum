@@ -35,12 +35,6 @@ struct UploadDocument: View {
                 }
             }
                 .padding(.vertical, 32)
-            Image("mail")
-            Spacer().frame(height: 12)
-            Text("Or have your clinic email them to")
-                .font(Font.body)
-            Text("D327THY1@ovum.com.au")
-                .font(Font.headline)
         }
     }
 }

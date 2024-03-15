@@ -52,6 +52,11 @@ struct ChatHistory: View {
                 .background(Color(.white))
                 .cornerRadius(6)
                 .padding(.bottom, 40)
+            if filteredSessions.count == 0 {
+                Text("*No recorded chat logs; go ahead and have your first now!*")
+                    .font(.caption)
+                    .foregroundColor(AppColours.maroon)
+            }
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
                     ForEach(filteredSessions) { chatSession in

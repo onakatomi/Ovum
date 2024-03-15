@@ -3,19 +3,42 @@ import SwiftUI
 struct ChatBubble: View {
     let content: String
     let author: String
+    var disableAnimation: Bool = false
+    @State var caption: String = ""
     
     var body: some View {
         VStack(alignment: author == "Ovum" ? .leading : .trailing, spacing: 5) {
             Text(author)
                 .font(.caption)
                 .foregroundColor(.gray)
-            Text(content)
+            Text((author == "Ovum" && !disableAnimation) ? caption : content)
                 .padding(16)
                 .background(author == "Ovum" ? Color(.white) : Color(red: 0.86, green: 0.84, blue: 0.98))
                 .cornerRadius(6)
                 .font(.body)
+                .onAppear {
+                    typeWriter()
+                }
         }
         .frame(maxWidth: .infinity, alignment: author == "Ovum" ? .leading : .trailing)
+    }
+    
+    func typeWriter(at position: Int = 0) {
+        if position == 0 {
+            caption = ""
+        }
+        if position < content.count {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.007) {
+                caption.append(content[position])
+                typeWriter(at: position + 1)
+            }
+        }
+    }
+}
+
+extension String {
+    subscript(offset: Int) -> Character {
+        self[index(startIndex, offsetBy: offset)]
     }
 }
 

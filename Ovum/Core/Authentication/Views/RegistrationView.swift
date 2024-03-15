@@ -5,6 +5,7 @@ struct RegistrationView: View {
     @State private var name = ""
     @State private var password = ""
     @State private var confirmPassword = ""
+    @State private var isCreatingUser: Bool = false
     @FocusState private var focusField: Bool
     @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(\.dismiss) private var dismiss
@@ -65,9 +66,12 @@ struct RegistrationView: View {
                 
                 PurpleButton(image: "upload", text: "Sign Up") {
                     Task {
+                        focusField = false
+                        isCreatingUser = true
                         try await authViewModel.createUser(withEmail: email,
                                                            password: password,
                                                            name: name)
+                        isCreatingUser = false
                     }
                     print("Signing up...")
                 }
@@ -87,6 +91,12 @@ struct RegistrationView: View {
             }
             .padding(.vertical, 30)
             .padding(.horizontal, 20)
+            .opacity(isCreatingUser ? 0.5 : 1.0)
+            
+            if isCreatingUser {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: AppColours.mint))
+            }
         }
     }
 }

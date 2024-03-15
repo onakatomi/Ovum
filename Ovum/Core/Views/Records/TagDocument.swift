@@ -10,9 +10,9 @@ struct TagDocument: View {
         VStack(spacing: 20)  {
             InputView(text: $documentTitle, title: documentTitle, placeholder: "Enter document name", fieldIsFocused: $fieldIsFocused)
             HStack {
-                Text("Select a document type")
+                Text("*Select a document type*")
                 Spacer()
-                Picker("Select a document type", selection: $documentType) {
+                Picker("Picker", selection: $documentType) {
                     ForEach(DocumentType.allCases) { option in
                         Text(String(describing: option))
                     }

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ChatHistoryDetail: View {
     let chatSession: ChatSession
+    @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -40,8 +41,12 @@ struct ChatHistoryDetail: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 15) {
                     ForEach(chatSession.messages) { message in
-                        ChatBubble(content: message.content, author: message.author)
+                        ChatBubble(content: message.content, author: message.author == "Ovum" ? "Ovum" : authViewModel.currentUser!.name, disableAnimation: true)
                     }
+                    Rectangle()
+                        .fill(AppColours.brown)
+                        .frame(height: 1)
+                        .id("bottomRect")
                 }
             }
         }

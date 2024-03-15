@@ -102,6 +102,12 @@ struct RecordsHomeContent: View {
             }
             .font(Font.callout.bold())
             .padding(.bottom, 8)
+            if filteredDocuments.count == 0 {
+                Text("*No uploaded documents*")
+                    .font(.caption)
+                    .foregroundColor(AppColours.maroon)
+                    .padding(.vertical, 40)
+            }
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
                     ForEach(filteredDocuments) { document in

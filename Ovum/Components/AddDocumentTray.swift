@@ -35,7 +35,7 @@ struct AddDocumentTray: View {
                 .padding(.bottom, 20)
             if readyToUpload {
                 UploadDocument(documentTitle: $documentTitle, documentType: $documentType)
-                    .transition(.slide)
+                    .transition(.scale)
             } else {
                 TagDocument(documentTitle: $documentTitle, documentType: $documentType, fieldIsFocused: $focusField)
             }
