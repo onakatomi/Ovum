@@ -3,6 +3,7 @@ import SwiftUI
 struct ChatHomeContent: View {
     func viewChatHistory() { print("hey") }
     @State private var textInput = ""
+    @EnvironmentObject var router: Router
     
     var body: some View {
         

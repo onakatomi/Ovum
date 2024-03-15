@@ -34,6 +34,9 @@ struct ContentView: View {
                                             
                                         case .chatHistoryDetail(let session):
                                             ChatHistoryDetail(chatSession: session)
+                                            
+                                        case .chatOnDocument(let document):
+                                            ChatDetail(document: document.file)
                                         }
                                     }
                             }
@@ -48,9 +51,6 @@ struct ContentView: View {
                                         switch destination {
                                         case .documentDetail(let document):
                                             RecordDetail(document: document)
-                                            
-                                        case .chatOnDocument(let document):
-                                            ChatDetail(document: document.file)
                                         }
                                     }
                             }
@@ -76,25 +76,25 @@ struct ContentView: View {
             set: { selectedTab in
                 if selectedTab == router.selectedTab {
                     print("tapped same tab")
-
+                    
                     switch selectedTab {
                     case .overview:
                         withAnimation {
                             router.overviewNavigation = []
                         }
-
+                        
                     case .chat:
                         withAnimation {
                             router.chatNavigation = []
                         }
-
+                        
                     case .records:
                         withAnimation {
                             router.recordsNavigation = []
                         }
                     }
                 }
-
+                
                 // Make sure the new value is persisted.
                 router.selectedTab = selectedTab
             }
@@ -106,5 +106,5 @@ struct ContentView: View {
     ContentView()
     //        .environment(Router())
         .environment(MessageViewModel())
-//        .environment(AuthViewModel())
+    //        .environment(AuthViewModel())
 }

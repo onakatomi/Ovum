@@ -27,6 +27,7 @@
 		B24694672BA13C7900286A75 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694662BA13C7900286A75 /* AuthViewModel.swift */; };
 		B24694692BA26A3A00286A75 /* UploadDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694682BA26A3A00286A75 /* UploadDocument.swift */; };
 		B246946B2BA270A700286A75 /* TagDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246946A2BA270A700286A75 /* TagDocument.swift */; };
+		B2582D252BA40476002ABFA6 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2582D242BA40476002ABFA6 /* HealthKitManager.swift */; };
 		B2D6A3A22B8EFEF80045CCD1 /* OvumApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */; };
 		B2D6A3A42B8EFEF80045CCD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A32B8EFEF80045CCD1 /* ContentView.swift */; };
 		B2D6A3A62B8EFF050045CCD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2D6A3A52B8EFF050045CCD1 /* Assets.xcassets */; };
@@ -80,6 +81,8 @@
 		B24694662BA13C7900286A75 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		B24694682BA26A3A00286A75 /* UploadDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDocument.swift; sourceTree = "<group>"; };
 		B246946A2BA270A700286A75 /* TagDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDocument.swift; sourceTree = "<group>"; };
+		B2582D222BA403E7002ABFA6 /* Ovum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ovum.entitlements; sourceTree = "<group>"; };
+		B2582D242BA40476002ABFA6 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		B2D6A39E2B8EFEF80045CCD1 /* Ovum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ovum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvumApp.swift; sourceTree = "<group>"; };
 		B2D6A3A32B8EFEF80045CCD1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -145,6 +148,7 @@
 		B24694162BA12B1400286A75 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				B2582D232BA40464002ABFA6 /* HealthKit */,
 				B24694182BA12B3900286A75 /* Authentication */,
 				B24694192BA12B4600286A75 /* Profile */,
 				B2D6A3AF2B8F1A960045CCD1 /* Views */,
@@ -202,6 +206,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		B2582D232BA40464002ABFA6 /* HealthKit */ = {
+			isa = PBXGroup;
+			children = (
+				B2582D242BA40476002ABFA6 /* HealthKitManager.swift */,
+			);
+			path = HealthKit;
+			sourceTree = "<group>";
+		};
 		B2D6A3952B8EFEF80045CCD1 = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +234,7 @@
 		B2D6A3A02B8EFEF80045CCD1 /* Ovum */ = {
 			isa = PBXGroup;
 			children = (
+				B2582D222BA403E7002ABFA6 /* Ovum.entitlements */,
 				B24694152BA12B0700286A75 /* App */,
 				B24694162BA12B1400286A75 /* Core */,
 				B2D6A3E52B9038DB0045CCD1 /* Components */,
@@ -431,6 +444,7 @@
 				B2D6A3F92B9159590045CCD1 /* ChatBubble.swift in Sources */,
 				B246946B2BA270A700286A75 /* TagDocument.swift in Sources */,
 				B2D6A4032B96CBE90045CCD1 /* ChatTile.swift in Sources */,
+				B2582D252BA40476002ABFA6 /* HealthKitManager.swift in Sources */,
 				B2D6A4232B9E7DFE0045CCD1 /* BubbleTransitionView.swift in Sources */,
 				B2D6A3F52B91565C0045CCD1 /* Message.swift in Sources */,
 				B2D6A4292B9FCDFD0045CCD1 /* Router.swift in Sources */,
@@ -586,6 +600,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Ovum/Ovum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Ovum/Preview Content\"";
@@ -593,6 +608,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs to capture image.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "To read the health data and show it in the application.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -617,6 +633,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Ovum/Ovum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Ovum/Preview Content\"";
@@ -624,6 +641,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs to capture image.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "To read the health data and show it in the application.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
