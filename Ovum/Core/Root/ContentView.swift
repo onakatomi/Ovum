@@ -74,6 +74,26 @@ struct ContentView: View {
         Binding<ContentViewTab>(
             get: { router.selectedTab },
             set: { selectedTab in
+                
+                if router.selectedTab == ContentViewTab.chat && (router.chatNavigation.last == Ovum.ChatNavDestination.chatDetail  || (router.chatNavigation.count > 0 && router.chatNavigation.last != Ovum.ChatNavDestination.chatHistory)) {
+                    print("trying to leave chat")
+                    router.attemptAtExitUnresolved = true
+//                    router.attemptAtExitUnresolved = true
+//                    router.exitOutcome = .unresolved
+//                    while router.exitOutcome == .unresolved {
+//                        
+////                        print("while ")
+//                    }
+//                    print("while oassed")
+//                    if router.exitOutcome == .stay {
+                        withAnimation {
+                            router.chatNavigation = router.chatNavigation
+                        }
+                        return
+//                    }
+                }
+                
+                // If the option is to leave, proceed with the below.
                 if selectedTab == router.selectedTab {
                     print("tapped same tab")
                     
@@ -94,6 +114,7 @@ struct ContentView: View {
                         }
                     }
                 }
+                print("exited")
                 
                 // Make sure the new value is persisted.
                 router.selectedTab = selectedTab

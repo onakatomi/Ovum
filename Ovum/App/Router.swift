@@ -22,6 +22,12 @@ enum OverviewNavDestination {
     case unsure
 }
 
+enum ResolveOption {
+    case unresolved
+    case stay
+    case leave
+}
+
 class Router: ObservableObject {
     public enum Destination: Codable, Hashable {
         case menu
@@ -31,7 +37,10 @@ class Router: ObservableObject {
     @Published var overviewNavigation: [OverviewNavDestination] = []
     @Published var chatNavigation: [ChatNavDestination] = []
     @Published var recordsNavigation: [RecordsNavDestination] = []
+    
     @Published var tabViewsDisabled: Bool = false
+    @Published var attemptAtExitUnresolved: Bool = false
+    @Published var exitOutcome: ResolveOption = ResolveOption.stay
     
     func navigateWithinOveview(to destination: OverviewNavDestination) {
         selectedTab = .overview
@@ -72,5 +81,9 @@ class Router: ObservableObject {
             case .records:
                 recordsNavigation.removeLast(recordsNavigation.count)
         }
+    }
+    
+    func resolveExit() async {
+        
     }
 }

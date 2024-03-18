@@ -134,6 +134,16 @@ struct ChatDetail: View {
                     .progressViewStyle(CircularProgressViewStyle(tint: AppColours.maroon))
             }
         }
+        .alert("Exit chat session via top left arrow", isPresented: $router.attemptAtExitUnresolved) {
+                Button("Okay", role: .cancel) {
+                    router.exitOutcome = .leave
+                    router.attemptAtExitUnresolved = false
+//                Button("No, let's continue chatting", role: .cancel) {
+//                    router.exitOutcome = .stay
+//                    router.attemptAtExitUnresolved = false
+//                }
+            }
+        }
     }
 }
 

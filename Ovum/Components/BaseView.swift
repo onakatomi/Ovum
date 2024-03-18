@@ -55,7 +55,7 @@ struct BaseView: View {
                     .aspectRatio(contentMode: .fit)
                     .blur(radius: 10, opaque: true)
                 VStack(spacing: 0) {
-                    NavigationLink (destination: Menu().toolbar(.hidden, for: .tabBar)) {
+                    NavigationLink (destination: Menu().toolbar(.hidden, for: .tabBar)) { // Hide tabbar whilst in MenuScreen.
                         Image("menu_white")
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             .padding(.trailing, 8)

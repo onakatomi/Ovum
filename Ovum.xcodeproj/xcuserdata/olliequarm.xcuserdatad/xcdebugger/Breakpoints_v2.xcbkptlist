@@ -882,8 +882,8 @@
             filePath = "Ovum/App/Router.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "navigateToRoot(within:)"
             landmarkType = "7">
             <Locations>
@@ -930,8 +930,8 @@
             filePath = "Ovum/App/Router.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "navigateToRoot(within:)"
             landmarkType = "7">
             <Locations>
@@ -998,6 +998,54 @@
             endingLineNumber = "62"
             landmarkName = "readStepCountToday()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C926032F-E5DC-403E-86D7-79FDB2D3FFD9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Ovum/Core/Root/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "createTabViewBinding()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C926032F-E5DC-403E-86D7-79FDB2D3FFD9 - 7f1b70a55dd48bd5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Ovum.ContentViewTab) -&gt; () in Ovum.ContentView.createTabViewBinding() -&gt; SwiftUI.Binding&lt;Ovum.ContentViewTab&gt;"
+                  moduleName = "Ovum"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/olliequarm/Desktop/development/projects/swift/Ovum/Ovum/Core/Root/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "572">
+               </Location>
+               <Location
+                  uuid = "C926032F-E5DC-403E-86D7-79FDB2D3FFD9 - 7f1b70a55dd48bd5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Ovum.ContentViewTab) -&gt; () in Ovum.ContentView.createTabViewBinding() -&gt; SwiftUI.Binding&lt;Ovum.ContentViewTab&gt;"
+                  moduleName = "Ovum"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/olliequarm/Desktop/development/projects/swift/Ovum/Ovum/Core/Root/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "840">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
