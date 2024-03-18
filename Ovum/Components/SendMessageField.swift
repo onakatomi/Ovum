@@ -29,10 +29,18 @@ struct SendMessageField: View {
                         }
                     }
                 Spacer()
-                Image(systemName: "arrow.up.circle.fill")
-                    .resizable()
-                    .frame(width: 37.0, height: 37.0)
-                    .foregroundColor(AppColours.maroon)
+                Button {
+                    Task {
+                        if let handler {
+                            await handler()
+                        }
+                    }
+                } label: {
+                    Image(systemName: "arrow.up.circle.fill")
+                        .resizable()
+                        .frame(width: 37.0, height: 37.0)
+                        .foregroundColor(AppColours.maroon)
+                }
             }
             .padding(EdgeInsets(top: 7, leading: 25, bottom: 7, trailing: 9))
             .background(Color.white)
