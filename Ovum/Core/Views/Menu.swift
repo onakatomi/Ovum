@@ -35,7 +35,7 @@ struct Menu: View {
                     print("TODO")
                 }
                 .padding(.bottom, 15)
-                TransparentButton(text: "Sign Out") {
+                TransparentButton(text: "Sign Out", colour: Color(.white)) {
                     print("Signing Out")
                     authViewModel.signOut()
                 }

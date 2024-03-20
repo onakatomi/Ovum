@@ -13,9 +13,9 @@ class MessageViewModel {
     
     init() {
         messages = []
-        chatSessions = []
+        chatSessions = chatSessionsMock
 //        documents = documentsMock
-        currentSession = ChatSession(messages: [], title: "Placeholder", date: getDateAsString(date: Date.now), colour: Color(.red))
+        currentSession = ChatSession(messages: [], bodyParts: [], title: "Placeholder", date: getDateAsString(date: Date.now), colour: Color(.red))
     }
     
     func addMessage(message: Message) {
@@ -30,7 +30,7 @@ class MessageViewModel {
     
     func addSession(isNewSession: Bool) {
         if (isNewSession) {
-            currentSession = ChatSession(messages: [], title: "Chat Session2", date: getDateAsString(date: Date.now), colour: getRandomColor())
+            currentSession = ChatSession(messages: [], bodyParts: [], title: "Chat Session2", date: getDateAsString(date: Date.now), colour: getRandomColor())
             chatSessions.append(currentSession)
         }
     }
@@ -40,7 +40,7 @@ class MessageViewModel {
         if let indexOfSession {
             chatSessions[indexOfSession] = currentSession
         }
-        currentSession = ChatSession(messages: [], title: "Placeholder2", date: getDateAsString(date: Date.now), colour: Color(.red))
+        currentSession = ChatSession(messages: [], bodyParts: [], title: "Placeholder2", date: getDateAsString(date: Date.now), colour: Color(.red))
     }
     
     func getOvumResponse(message: String, authorId: String, authorName: String) async {
@@ -69,15 +69,15 @@ class MessageViewModel {
         }
     }    
     
-    func summariseConversation() async {
+    func summariseConversation(authorId: String, authorName: String) async {
         let endpoint = "/summarise_discussion"
         
         let messagesArray: [String] = currentSession.messages.map {
             $0.content
         }
         let dataToSend: [String: Any] = [
-            "user_id": "1",
-            "user_name": "Sarah",
+            "user_id": authorId,
+            "user_name": authorName,
             "messages": messagesArray
         ]
         
@@ -90,11 +90,21 @@ class MessageViewModel {
                 request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
                 let (data, _) = try await URLSession.shared.data(for: request)
                 let decoder = JSONDecoder()
-                let apiResponse = try decoder.decode(Response.self, from: data)
+                let apiResponse = try decoder.decode(SummaryResponse.self, from: data)
                 let summarisedTitle = apiResponse.response
-                print(summarisedTitle)
                 
+                let bodyParts = apiResponse.body_parts
+                let bodyPartsData = Data(bodyParts.utf8)
+                let decodedArray = try JSONDecoder().decode([String].self, from: bodyPartsData)
+                print(summarisedTitle)
+                print(bodyParts)
+//                let actualArray = decodedArray.array
                 currentSession.title = summarisedTitle
+                
+                let enumArray: [BodyPart] = decodedArray.map { bodyPartString in
+                    BodyPart(rawValue: bodyPartString)!
+                }
+                currentSession.bodyParts = enumArray
             } catch {
                 print("POST Request Failed:", error)
             }
@@ -135,6 +145,15 @@ struct Response: Codable {
     var response: String
 }
 
+struct BodyPartsArray: Codable {
+    let array: [String]
+}
+
+struct SummaryResponse: Codable {
+    var response: String
+    var body_parts: String
+}
+
 let chatData: [Message] = [
     Message(author: "John", fromOvum: false, content: "Hey"),
     Message(author: "John", fromOvum: false, content: "Are you there?"),
@@ -145,13 +164,13 @@ let chatData: [Message] = [
 ]
 
 let chatSessionsMock: [ChatSession] = [
-    ChatSession(messages: chatData, title: "Irregular bleeding patterns", date: getDateAsString(date: Date.now), colour: AppColours.pink),
-    ChatSession(messages: chatData, title: "Regular nausea", date: getDateAsString(date: Date.now), colour: AppColours.indigo),
-    ChatSession(messages: chatData, title: "Concern with knee joints", date: getDateAsString(date: Date.now), colour: AppColours.green),
-    ChatSession(messages: chatData, title: "Early period", date: getDateAsString(date: Date.now), colour: AppColours.peach),
-    ChatSession(messages: chatData, title: "Explaining your blood results", date: getDateAsString(date: Date.now), colour: AppColours.mint),
-    ChatSession(messages: chatData, title: "Irregular bleeding patterns", date: getDateAsString(date: Date.now), colour: AppColours.pink),
-    ChatSession(messages: chatData, title: "Irregular bleeding patterns", date: getDateAsString(date: Date.now), colour: AppColours.pink),
+    ChatSession(messages: chatData, bodyParts: [BodyPart.pelvic, BodyPart.breast], title: "Irregular bleeding patterns", date: getDateAsString(date: Date.now), colour: AppColours.pink),
+    ChatSession(messages: chatData, bodyParts: [BodyPart.abdomen], title: "Regular nausea", date: "20/03/2024 10:24 am", colour: AppColours.indigo),
+    ChatSession(messages: chatData, bodyParts: [BodyPart.head, BodyPart.breast], title: "Concern with knee joints", date: "20/03/2024 10:23 am", colour: AppColours.green),
+//    ChatSession(messages: chatData, bodyParts: [], title: "Early period", date: getDateAsString(date: Date.now), colour: AppColours.peach),
+//    ChatSession(messages: chatData, bodyParts: [], title: "Explaining your blood results", date: getDateAsString(date: Date.now), colour: AppColours.mint),
+//    ChatSession(messages: chatData, bodyParts: [], title: "Irregular bleeding patterns", date: getDateAsString(date: Date.now), colour: AppColours.pink),
+//    ChatSession(messages: chatData, bodyParts: [], title: "Irregular bleeding patterns", date: getDateAsString(date: Date.now), colour: AppColours.pink),
 ]
 
 let documentsMock: [Document] = [

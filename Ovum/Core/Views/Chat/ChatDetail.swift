@@ -24,7 +24,7 @@ struct ChatDetail: View {
                         Button {
                             Task {
                                 viewModel.isLoading = true
-                                await viewModel.summariseConversation()
+                                await viewModel.summariseConversation(authorId: authViewModel.currentUser!.id, authorName: authViewModel.currentUser!.name)
                                 viewModel.endSession()
                                 viewModel.isLoading = false
                                 dismiss()
@@ -83,7 +83,6 @@ struct ChatDetail: View {
                                 }
                                 if let document {
                                     Task {
-                                        print("analysing...")
                                         viewModel.addSession(isNewSession: isNewSession)
                                         awaitingResponse = true
                                         await viewModel.analyseDocument(
@@ -97,7 +96,6 @@ struct ChatDetail: View {
                             }
                         }
                         .onPreferenceChange(ScrollViewHeightPreferenceKey.self) { scrollViewHeight = $0
-                            print(scrollViewHeight)
                             withAnimation {
                                 scrollViewProxy.scrollTo("bottomRect", anchor: .bottom)
                             }

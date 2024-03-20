@@ -32,6 +32,18 @@ func getDateAsString(date: Date) -> String {
     return dateFormatter.string(from: date)
 }
 
+func convertToDate(dateString: String) -> Date? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd/MM/yyyy K:mm a"
+    return dateFormatter.date(from: dateString)
+}
+
+func monthFromDate(date: Date) -> String {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MMMM, YY"
+    return formatter.string(from: date)
+}
+
 func base64ToImage(_ base64String: String) -> Image? {
     // Convert the base64 string to data
     let afterEqualsTo: String

@@ -35,6 +35,7 @@ class HealthKitManager: ObservableObject {
     }
     
     // Obtain the user's steps for today.
+    @MainActor
     func readStepCountToday() {
         guard let stepCountType = HKQuantityType.quantityType(forIdentifier: .stepCount) else {
             return
@@ -60,7 +61,9 @@ class HealthKitManager: ObservableObject {
             }
             
             let steps = Int(sum.doubleValue(for: HKUnit.count()))
-            self.stepCountToday = steps
+            DispatchQueue.main.async {
+                self.stepCountToday = steps
+            }
         }
         healthStore.execute(query) // Takes a bit of time to execute, thus need to @Publish stepCount.
     }
