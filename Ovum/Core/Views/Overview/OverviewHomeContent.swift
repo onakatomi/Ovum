@@ -9,13 +9,13 @@ enum BodyPart: String {
     func getOffset(imageSize: CGSize) -> (widthOffset: CGFloat, heightOffset: CGFloat) {
         switch self {
         case .head:
-            return (0, -(0.6*imageSize.height/2))
+            return (0, -(0.65*imageSize.height/2))
         case .breast:
-            return ((0.23*imageSize.height/2), -(0.23*imageSize.height/2))
+            return ((0.20*imageSize.height/2), -(0.13*imageSize.height/2))
         case .abdomen:
-            return (0, 0.2*imageSize.height/2)
+            return (0, 0.20*imageSize.height/2)
         case .pelvic:
-            return (0.05*imageSize.height/2, 0.65*imageSize.height/2)
+            return (0.05*imageSize.height/2, 0.5*imageSize.height/2)
         }
     }
 }
@@ -73,7 +73,7 @@ struct OverviewHomeContent: View {
                     .scaledToFit()
                     .padding(.all, 25)
                     .background(rectReader()) // Get displayed image size.
-                VStack {
+                ZStack {
                     ForEach(orderedChatSessions[Int(sliderValue)].bodyParts, id: \.self) { bodyPart in
                         Image.getBodyPartImage(region: bodyPart, status: Status.allCases.randomElement()!, imageSize: self.imageSize)
                     }
@@ -127,7 +127,7 @@ struct OverviewHomeContent: View {
         return GeometryReader { (geometry) -> Color in
             let imageSize = geometry.size
             DispatchQueue.main.async {
-                print(">> \(imageSize)") // use image actual size in your calculations
+//                print(">> \(imageSize)") // use image actual size in your calculations
                 self.imageSize = imageSize
             }
             return .clear

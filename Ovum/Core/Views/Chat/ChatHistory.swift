@@ -6,7 +6,7 @@ struct ChatHistory: View {
     @Environment(\.dismiss) private var dismiss
     
     var filteredSessions: [ChatSession] {
-        var orderedChatSessions: [ChatSession] = viewModel.chatSessions.sorted(by: {
+        let orderedChatSessions: [ChatSession] = viewModel.chatSessions.sorted(by: {
                 convertToDate(dateString: $0.date)!.compare(convertToDate(dateString: $1.date)!) == .orderedDescending
             })
         if (searchText == "") {

@@ -9,7 +9,7 @@ class MessageViewModel {
     var documents: [Document] = []
     var isLoading: Bool = false
     
-    let baseUrl = "http://192.168.89.1:5001"
+    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
     
     init() {
         messages = []
@@ -155,18 +155,14 @@ struct SummaryResponse: Codable {
 }
 
 let chatData: [Message] = [
-    Message(author: "John", fromOvum: false, content: "Hey"),
-    Message(author: "John", fromOvum: false, content: "Are you there?"),
-    Message(author: "Ovum", fromOvum: true, content: "Hey"),
-    Message(author: "John", fromOvum: false, content: "How r u"),
-    Message(author: "Ovum", fromOvum: true, content: "Bye!"),
-    Message(author: "John", fromOvum: false, content: "Don't gooooo"),
+    Message(author: "Sample Author", fromOvum: false, content: "Example message."),
+    Message(author: "Ovum", fromOvum: true, content: "Example response."),
 ]
 
 let chatSessionsMock: [ChatSession] = [
-    ChatSession(messages: chatData, bodyParts: [BodyPart.pelvic, BodyPart.breast], title: "Irregular bleeding patterns", date: getDateAsString(date: Date.now), colour: AppColours.pink),
-    ChatSession(messages: chatData, bodyParts: [BodyPart.abdomen], title: "Regular nausea", date: "20/03/2024 10:24 am", colour: AppColours.indigo),
-    ChatSession(messages: chatData, bodyParts: [BodyPart.head, BodyPart.breast], title: "Concern with knee joints", date: "20/03/2024 10:23 am", colour: AppColours.green),
+    ChatSession(messages: chatData, bodyParts: [BodyPart.pelvic, BodyPart.breast, BodyPart.abdomen, BodyPart.head], title: "Sample Chat Session #1", date: "20/03/2024 10:24 am", colour: AppColours.pink),
+    ChatSession(messages: chatData, bodyParts: [BodyPart.abdomen], title: "Sample Chat Session #2", date: "20/03/2024 10:29 am", colour: AppColours.indigo),
+//    ChatSession(messages: chatData, bodyParts: [BodyPart.head, BodyPart.breast], title: "Concern with knee joints", date: "20/03/2024 10:23 am", colour: AppColours.green),
 //    ChatSession(messages: chatData, bodyParts: [], title: "Early period", date: getDateAsString(date: Date.now), colour: AppColours.peach),
 //    ChatSession(messages: chatData, bodyParts: [], title: "Explaining your blood results", date: getDateAsString(date: Date.now), colour: AppColours.mint),
 //    ChatSession(messages: chatData, bodyParts: [], title: "Irregular bleeding patterns", date: getDateAsString(date: Date.now), colour: AppColours.pink),
