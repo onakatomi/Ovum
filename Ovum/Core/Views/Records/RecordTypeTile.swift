@@ -78,6 +78,7 @@ struct RecordTypeTile: View {
                 .font(Font.callout.weight(.semibold))
                 .foregroundColor(AppColours.maroon)
         }
+            .contentShape(Rectangle())
     }
 }
 

@@ -106,6 +106,8 @@ struct ChatDetail: View {
                 Divider()
                     .background(AppColours.maroon)
                 SendMessageField(textInput: $inputText, isDisabled: awaitingResponse) {
+                    print(authViewModel.currentUser?.email)
+                    print(authViewModel.currentUser?.id)
                     router.tabViewsDisabled = true
                     viewModel.addSession(isNewSession: isNewSession)
                     print(viewModel.currentSession.id)

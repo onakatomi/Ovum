@@ -160,8 +160,8 @@ let chatData: [Message] = [
 ]
 
 let chatSessionsMock: [ChatSession] = [
-    ChatSession(messages: chatData, bodyParts: [BodyPart.pelvic, BodyPart.breast, BodyPart.abdomen, BodyPart.head], title: "Sample Chat Session #1", date: "20/03/2024 10:24 am", colour: AppColours.pink),
-    ChatSession(messages: chatData, bodyParts: [BodyPart.abdomen], title: "Sample Chat Session #2", date: "20/03/2024 10:29 am", colour: AppColours.indigo),
+    ChatSession(messages: chatData, bodyParts: [BodyPart.pelvic, BodyPart.breast, BodyPart.abdomen, BodyPart.head], title: "Sample Chat Session #1", date: getDateAsString(date: Date.now), colour: AppColours.pink),
+    ChatSession(messages: chatData, bodyParts: [BodyPart.abdomen], title: "Sample Chat Session #2", date: getDateAsString(date: Date.now), colour: AppColours.indigo),
 //    ChatSession(messages: chatData, bodyParts: [BodyPart.head, BodyPart.breast], title: "Concern with knee joints", date: "20/03/2024 10:23 am", colour: AppColours.green),
 //    ChatSession(messages: chatData, bodyParts: [], title: "Early period", date: getDateAsString(date: Date.now), colour: AppColours.peach),
 //    ChatSession(messages: chatData, bodyParts: [], title: "Explaining your blood results", date: getDateAsString(date: Date.now), colour: AppColours.mint),

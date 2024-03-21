@@ -23,7 +23,7 @@ func getDateAsString(date: Date) -> String {
     let dateFormatter = DateFormatter()
 
     // Set the date format you desire
-    dateFormatter.dateFormat = "dd/MM/yyyy K:mm a"
+    dateFormatter.dateFormat = "dd/MM/yyyy hh:mm:ss"
 
     // Create a Date object
     let date = Date()
@@ -34,10 +34,10 @@ func getDateAsString(date: Date) -> String {
 
 func convertToDate(dateString: String) -> Date? {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "dd/MM/yyyy K:mm a"
-    return dateFormatter.date(from: dateString)
+    dateFormatter.dateFormat = "dd/MM/yyyy hh:mm:ss"
+    let val = dateFormatter.date(from: dateString)
+    return val
 }
-
 func monthFromDate(date: Date) -> String {
     let formatter = DateFormatter()
     formatter.dateFormat = "MMMM, YY"
