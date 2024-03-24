@@ -24,6 +24,7 @@ class AuthViewModel: ObservableObject {
     // new async throws replaces URLSessions. completion blocks which aren't great
     func signIn(withEmail email: String, password: String) async throws {
         print("Signing in...")
+        print("Signing in...")
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user

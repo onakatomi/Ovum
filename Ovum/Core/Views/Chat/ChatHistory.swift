@@ -4,6 +4,7 @@ struct ChatHistory: View {
     @Environment(MessageViewModel.self) var viewModel
     @State private var searchText: String = ""
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     var filteredSessions: [ChatSession] {
         let orderedChatSessions: [ChatSession] = viewModel.chatSessions.sorted(by: {
@@ -36,6 +37,14 @@ struct ChatHistory: View {
                 .padding(.bottom, 16)
             HStack(alignment: .top) {
                 Header(firstLine: "Chat", secondLine: "History", colour: AppColours.maroon)
+                Spacer()
+                Button {
+                    Task {
+                        try await viewModel.fetchChatSessions(userId: authViewModel.currentUser!.id)                        
+                    }
+                } label: {
+                    Text("Sessions")
+                }
                 Spacer()
                 Image("chat_history")
                     .resizable()

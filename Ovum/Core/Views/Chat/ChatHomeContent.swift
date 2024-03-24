@@ -5,6 +5,7 @@ struct ChatHomeContent: View {
     @State private var textInput = ""
     @EnvironmentObject var router: Router
     
+    
     var body: some View {
         
             VStack(spacing: 0) {

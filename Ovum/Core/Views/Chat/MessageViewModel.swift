@@ -1,5 +1,7 @@
 import Foundation
 import SwiftUI
+import Firebase
+import FirebaseFirestoreSwift
 
 @Observable
 class MessageViewModel {
@@ -8,12 +10,18 @@ class MessageViewModel {
     var chatSessions: [ChatSession] = []
     var documents: [Document] = []
     var isLoading: Bool = false
-    
+    var authViewModel: AuthViewModel
     let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
+    var loadingChatSessions: Bool = false
     
     init() {
         messages = []
         chatSessions = chatSessionsMock
+        Task {
+            loadingChatSessions = true
+            try await fetchChatSessions(userId: authViewModel.currentUser!.id)
+            loadingChatSessions = false
+        }
 //        documents = documentsMock
         currentSession = ChatSession(messages: [], bodyParts: [], title: "Placeholder", date: getDateAsString(date: Date.now), colour: Color(.red))
     }
@@ -35,12 +43,48 @@ class MessageViewModel {
         }
     }
     
-    func endSession() {
-        let indexOfSession: Int? = chatSessions.firstIndex(where: {$0.id == currentSession.id})
-        if let indexOfSession {
-            chatSessions[indexOfSession] = currentSession
+    func endSession(userId: String) async throws {
+        do {
+            let indexOfSession: Int? = chatSessions.firstIndex(where: {$0.id == currentSession.id})
+            if let indexOfSession {
+                chatSessions[indexOfSession] = currentSession
+            }
+            // Add to FireBase
+            let firebaseSession: FirebaseSession = FirebaseSession(id: userId, chatSession: currentSession)
+            let encodedSession = try Firestore.Encoder().encode(firebaseSession)
+            try await Firestore.firestore().collection("chat_sessions").document(currentSession.id).setData(encodedSession)
+            // Reset current session.
+            currentSession = ChatSession(messages: [], bodyParts: [], title: "Placeholder2", date: getDateAsString(date: Date.now), colour: Color(.red))
+        } catch {
+            print("DEBUG: Failed to create user with error \(error.localizedDescription)")
         }
-        currentSession = ChatSession(messages: [], bodyParts: [], title: "Placeholder2", date: getDateAsString(date: Date.now), colour: Color(.red))
+    }
+    
+    func fetchChatSessions(userId: String) async throws {
+        
+        var chatSessions: [ChatSession] = []
+        do {
+          let querySnapshot = try await Firestore.firestore().collection("chat_sessions").whereField("id", isEqualTo: userId)
+            .getDocuments()
+            
+          for document in querySnapshot.documents {
+            print("\(document.documentID) => \(document.data())")
+              let decoded = try document.data(as: FirebaseSession.self)
+              chatSessions.append(decoded.chatSession)
+          }
+        } catch {
+          print("Error getting documents: \(error)")
+        }
+        self.chatSessions = chatSessions
+        
+//        let docRef = Firestore.firestore().collection("chat_sessions").document(userId)
+
+//        do {
+//          let chatSession = try await docRef.getDocument(as: ChatSession.self)
+//          print("chatSession: \(chatSession)")
+//        } catch {
+//          print("Error decoding city: \(error)")
+//        }
     }
     
     func getOvumResponse(message: String, authorId: String, authorName: String) async {

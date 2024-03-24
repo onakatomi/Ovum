@@ -88,7 +88,7 @@ struct ContentView: View {
 //                    if router.exitOutcome == .stay {
                         withAnimation {
                             router.chatNavigation = router.chatNavigation
-                        }
+                        }
                         return
 //                    }
                 }

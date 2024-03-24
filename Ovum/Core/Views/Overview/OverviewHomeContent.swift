@@ -1,6 +1,6 @@
 import SwiftUI
 
-enum BodyPart: String {
+enum BodyPart: String, Codable {
     case head
     case breast
     case abdomen

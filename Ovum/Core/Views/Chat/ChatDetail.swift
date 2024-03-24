@@ -25,7 +25,7 @@ struct ChatDetail: View {
                             Task {
                                 viewModel.isLoading = true
                                 await viewModel.summariseConversation(authorId: authViewModel.currentUser!.id, authorName: authViewModel.currentUser!.name)
-                                viewModel.endSession()
+                                try await viewModel.endSession(userId: authViewModel.currentUser!.id)
                                 viewModel.isLoading = false
                                 dismiss()
                             }
