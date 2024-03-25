@@ -13,7 +13,7 @@ struct SendMessageField: View {
     var body: some View {
         HStack(spacing: 0) {
             TextField(isDisabled ? "*Awaiting Ovum...*" : "", text: $textInput)
-                    .focused($focusedField, equals: .field)
+//                    .focused($focusedField, equals: .field)
                     .onAppear {
                       self.focusedField = .field
                     }

@@ -9,7 +9,8 @@ class MessageViewModel {
     var documents: [Document] = []
     var isLoading: Bool = false
     
-    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
+//    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
+    let baseUrl = "http://192.168.89.1:5001"
     
     init() {
         messages = []
@@ -35,10 +36,12 @@ class MessageViewModel {
         }
     }
     
-    func endSession() {
-        let indexOfSession: Int? = chatSessions.firstIndex(where: {$0.id == currentSession.id})
-        if let indexOfSession {
-            chatSessions[indexOfSession] = currentSession
+    func endSession(save: Bool = true) {
+        if (save == true) {
+            let indexOfSession: Int? = chatSessions.firstIndex(where: {$0.id == currentSession.id})
+            if let indexOfSession {
+                chatSessions[indexOfSession] = currentSession
+            }
         }
         currentSession = ChatSession(messages: [], bodyParts: [], title: "Placeholder2", date: getDateAsString(date: Date.now), colour: Color(.red))
     }
@@ -50,6 +53,31 @@ class MessageViewModel {
             "user_id": authorId,
             "user_name": authorName,
             "message": message
+        ]
+        if let url = URL(string: baseUrl + endpoint) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            do {
+                request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
+                let (data, _) = try await URLSession.shared.data(for: request)
+                let decoder = JSONDecoder()
+                let apiResponse = try decoder.decode(Response.self, from: data) // Decode the incoming JSON into a Swift struct
+                let responseMessage: Message = Message(author: "Ovum", fromOvum: true, content: apiResponse.response)
+                addMessage(message: responseMessage)
+            } catch {
+                print("POST Request Failed:", error)
+            }
+        }
+    }     
+    
+    func endChat(authorId: String, authorName: String) async {
+        let endpoint = "/end_chat"
+        
+        let dataToSend: [String: Any] = [
+            "user_id": authorId,
+            "user_name": authorName
         ]
         if let url = URL(string: baseUrl + endpoint) {
             var request = URLRequest(url: url)
@@ -92,14 +120,17 @@ class MessageViewModel {
                 let decoder = JSONDecoder()
                 let apiResponse = try decoder.decode(SummaryResponse.self, from: data)
                 let summarisedTitle = apiResponse.response
+                let summary = apiResponse.summary
                 
                 let bodyParts = apiResponse.body_parts
                 let bodyPartsData = Data(bodyParts.utf8)
                 let decodedArray = try JSONDecoder().decode([String].self, from: bodyPartsData)
                 print(summarisedTitle)
                 print(bodyParts)
+                print(summary)
 //                let actualArray = decodedArray.array
                 currentSession.title = summarisedTitle
+                currentSession.summary = summary
                 
                 let enumArray: [BodyPart] = decodedArray.map { bodyPartString in
                     BodyPart(rawValue: bodyPartString)!
@@ -152,6 +183,7 @@ struct BodyPartsArray: Codable {
 struct SummaryResponse: Codable {
     var response: String
     var body_parts: String
+    var summary: String
 }
 
 let chatData: [Message] = [

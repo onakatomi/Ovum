@@ -7,4 +7,5 @@ struct ChatSession: Identifiable, Hashable {
     var title: String
     var date: String
     var colour: Color
+    var summary: String?
 }

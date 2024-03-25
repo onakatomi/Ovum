@@ -49,9 +49,11 @@ extension Image {
 struct OverviewHomeContent: View {
     @StateObject var healthKitManager = HealthKitManager.shared
     @Environment(MessageViewModel.self) var viewModel
+    @EnvironmentObject var router: Router
     @State private var sliderValue: Double = 0.0
     @State private var isEditing = false
     @State var imageSize: CGSize = .zero // << or initial from NSImage
+    @State private var showSymptomTray = false
     
     var orderedChatSessions: [ChatSession] {
         viewModel.chatSessions.sorted(by: {
@@ -76,6 +78,18 @@ struct OverviewHomeContent: View {
                 ZStack {
                     ForEach(orderedChatSessions[Int(sliderValue)].bodyParts, id: \.self) { bodyPart in
                         Image.getBodyPartImage(region: bodyPart, status: Status.allCases.randomElement()!, imageSize: self.imageSize)
+                            .onTapGesture {
+                                showSymptomTray = true
+                            }
+                        
+                            .sheet(isPresented: $showSymptomTray) {
+                                SymptomTray(chatSession: orderedChatSessions[Int(sliderValue)]) {
+                                    showSymptomTray = false
+                                    router.navigateToRoot(within: .chat)
+                                    router.navigateWithinChat(to: .chatHistoryDetail(session: orderedChatSessions[Int(sliderValue)]))
+                                }
+                                    .presentationDetents([.medium])
+                            }
                     }
                 }
             }

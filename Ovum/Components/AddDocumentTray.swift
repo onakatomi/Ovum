@@ -25,6 +25,7 @@ struct AddDocumentTray: View {
     
     @State var readyToUpload: Bool = false
     @FocusState private var focusField: Bool
+    
     var body: some View {
         VStack(spacing: 0) {
             Text("Add documents")

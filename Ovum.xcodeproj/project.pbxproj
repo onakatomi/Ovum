@@ -27,6 +27,7 @@
 		B24694672BA13C7900286A75 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694662BA13C7900286A75 /* AuthViewModel.swift */; };
 		B24694692BA26A3A00286A75 /* UploadDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694682BA26A3A00286A75 /* UploadDocument.swift */; };
 		B246946B2BA270A700286A75 /* TagDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246946A2BA270A700286A75 /* TagDocument.swift */; };
+		B247B68C2BB1216E00FF17B9 /* SymptomTray.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247B68B2BB1216E00FF17B9 /* SymptomTray.swift */; };
 		B2582D252BA40476002ABFA6 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2582D242BA40476002ABFA6 /* HealthKitManager.swift */; };
 		B2D6A3A22B8EFEF80045CCD1 /* OvumApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */; };
 		B2D6A3A42B8EFEF80045CCD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A32B8EFEF80045CCD1 /* ContentView.swift */; };
@@ -81,6 +82,7 @@
 		B24694662BA13C7900286A75 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		B24694682BA26A3A00286A75 /* UploadDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDocument.swift; sourceTree = "<group>"; };
 		B246946A2BA270A700286A75 /* TagDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDocument.swift; sourceTree = "<group>"; };
+		B247B68B2BB1216E00FF17B9 /* SymptomTray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomTray.swift; sourceTree = "<group>"; };
 		B2582D222BA403E7002ABFA6 /* Ovum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ovum.entitlements; sourceTree = "<group>"; };
 		B2582D242BA40476002ABFA6 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		B2582D262BA7E752002ABFA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				B2D6A41A2B9AB3830045CCD1 /* AddDocumentTray.swift */,
+				B247B68B2BB1216E00FF17B9 /* SymptomTray.swift */,
 				B246941E2BA12E2600286A75 /* InputView.swift */,
 				B2D6A3B02B8F1AB20045CCD1 /* BaseView.swift */,
 				B2D6A4202B9E789E0045CCD1 /* BubbleBackground.swift */,
@@ -440,6 +443,7 @@
 				B2D6A3B12B8F1AB20045CCD1 /* BaseView.swift in Sources */,
 				B2D6A4142B98313A0045CCD1 /* Document.swift in Sources */,
 				B2D6A4052B97E2410045CCD1 /* SendMessageField.swift in Sources */,
+				B247B68C2BB1216E00FF17B9 /* SymptomTray.swift in Sources */,
 				B2D6A3FB2B91749D0045CCD1 /* IconButton.swift in Sources */,
 				B2D6A3A42B8EFEF80045CCD1 /* ContentView.swift in Sources */,
 				B2D6A4102B98299D0045CCD1 /* PrimaryButton.swift in Sources */,
