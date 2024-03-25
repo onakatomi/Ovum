@@ -17,7 +17,9 @@ struct Menu: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 Spacer()
                 Button {
+                    router.navigateToRoot(within: .overview)
                     router.navigateToRoot(within: .chat)
+                    router.navigateToRoot(within: .records)
                     router.navigateWithinChat(to: .chatHistory)
                 } label: {
                     Text("Chat History")

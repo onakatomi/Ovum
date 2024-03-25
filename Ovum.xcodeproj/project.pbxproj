@@ -28,6 +28,7 @@
 		B24694692BA26A3A00286A75 /* UploadDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694682BA26A3A00286A75 /* UploadDocument.swift */; };
 		B246946B2BA270A700286A75 /* TagDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246946A2BA270A700286A75 /* TagDocument.swift */; };
 		B247B68C2BB1216E00FF17B9 /* SymptomTray.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247B68B2BB1216E00FF17B9 /* SymptomTray.swift */; };
+		B247B68E2BB1307F00FF17B9 /* ChatCompleted.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247B68D2BB1307F00FF17B9 /* ChatCompleted.swift */; };
 		B2582D252BA40476002ABFA6 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2582D242BA40476002ABFA6 /* HealthKitManager.swift */; };
 		B2D6A3A22B8EFEF80045CCD1 /* OvumApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */; };
 		B2D6A3A42B8EFEF80045CCD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A32B8EFEF80045CCD1 /* ContentView.swift */; };
@@ -83,6 +84,7 @@
 		B24694682BA26A3A00286A75 /* UploadDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDocument.swift; sourceTree = "<group>"; };
 		B246946A2BA270A700286A75 /* TagDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDocument.swift; sourceTree = "<group>"; };
 		B247B68B2BB1216E00FF17B9 /* SymptomTray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomTray.swift; sourceTree = "<group>"; };
+		B247B68D2BB1307F00FF17B9 /* ChatCompleted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCompleted.swift; sourceTree = "<group>"; };
 		B2582D222BA403E7002ABFA6 /* Ovum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ovum.entitlements; sourceTree = "<group>"; };
 		B2582D242BA40476002ABFA6 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		B2582D262BA7E752002ABFA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				B2D6A3F12B914D620045CCD1 /* ChatDetail.swift */,
+				B247B68D2BB1307F00FF17B9 /* ChatCompleted.swift */,
 				B246941A2BA12C3300286A75 /* ChatHistory.swift */,
 				B2D6A4082B980ED40045CCD1 /* ChatHistoryDetail.swift */,
 				B2D6A3E82B9055640045CCD1 /* ChatHomeContent.swift */,
@@ -450,6 +453,7 @@
 				B2D6A3F92B9159590045CCD1 /* ChatBubble.swift in Sources */,
 				B246946B2BA270A700286A75 /* TagDocument.swift in Sources */,
 				B2D6A4032B96CBE90045CCD1 /* ChatTile.swift in Sources */,
+				B247B68E2BB1307F00FF17B9 /* ChatCompleted.swift in Sources */,
 				B2582D252BA40476002ABFA6 /* HealthKitManager.swift in Sources */,
 				B2D6A4232B9E7DFE0045CCD1 /* BubbleTransitionView.swift in Sources */,
 				B2D6A3F52B91565C0045CCD1 /* Message.swift in Sources */,

@@ -53,117 +53,90 @@ struct ChatDetail: View {
             // Chat component (looks like it's in a tray)
             ZStack {
                 VStack(spacing: 0) {
-                    if !sessionJustFinished {
-                        VStack {
-                            VStack(spacing: 0) {
-                                ScrollViewReader { scrollViewProxy in
-                                    ScrollView(.vertical) {
-                                        VStack(alignment: .leading, spacing: 15) {
-                                            ForEach(viewModel.currentSession.messages) { message in
-                                                ChatBubble(content: message.content, author: message.author == "Ovum" ? "Ovum" : authViewModel.currentUser!.name)
-                                            }
-                                            if (awaitingResponse) {
-                                                TypingIndicator()
-                                                    .frame(width: 80, height: 40, alignment: .leading)
-                                                    .id("typingIndicator")
-                                            }
-                                            Rectangle()
-                                                .fill(AppColours.brown)
-                                                .frame(height: 1)
-                                                .id("bottomRect")
+                    VStack {
+                        VStack(spacing: 0) {
+                            ScrollViewReader { scrollViewProxy in
+                                ScrollView(.vertical) {
+                                    VStack(alignment: .leading, spacing: 15) {
+                                        ForEach(viewModel.currentSession.messages) { message in
+                                            ChatBubble(content: message.content, author: message.author == "Ovum" ? "Ovum" : authViewModel.currentUser!.name)
                                         }
-                                        .padding([.bottom], 10)
-                                        .background(GeometryReader { geometry in
-                                            Color.clear
-                                                .preference(key: ScrollViewHeightPreferenceKey.self, value: geometry.size.height)
-                                        })
-                                        .onChange(of: viewModel.currentSession.messages.count) {
-                                            if (viewModel.currentSession.messages.count != 0) {
-                                                withAnimation {
-                                                    scrollViewProxy.scrollTo(viewModel.currentSession.messages[viewModel.currentSession.messages.count - 1].id, anchor: .top)
-                                                }
-                                            }
+                                        if (awaitingResponse) {
+                                            TypingIndicator()
+                                                .frame(width: 80, height: 40, alignment: .leading)
+                                                .id("typingIndicator")
                                         }
-                                        .onAppear {
-                                            if (!viewModel.currentSession.messages.isEmpty) {
-                                                withAnimation {
-                                                    scrollViewProxy.scrollTo("bottomRect", anchor: .bottom)
-                                                }
-                                                
-                                            }
-                                            if let document {
-                                                Task {
-                                                    viewModel.addSession(isNewSession: isNewSession)
-                                                    awaitingResponse = true
-                                                    await viewModel.analyseDocument(
-                                                        document: document,
-                                                        userId: authViewModel.currentUser!.id
-                                                    )
-                                                    awaitingResponse = false
-                                                    isNewSession = false
-                                                }
+                                        Rectangle()
+                                            .fill(AppColours.brown)
+                                            .frame(height: 1)
+                                            .id("bottomRect")
+                                    }
+                                    .padding([.bottom], 10)
+                                    .background(GeometryReader { geometry in
+                                        Color.clear
+                                            .preference(key: ScrollViewHeightPreferenceKey.self, value: geometry.size.height)
+                                    })
+                                    .onChange(of: viewModel.currentSession.messages.count) {
+                                        if (viewModel.currentSession.messages.count != 0) {
+                                            withAnimation {
+                                                scrollViewProxy.scrollTo(viewModel.currentSession.messages[viewModel.currentSession.messages.count - 1].id, anchor: .top)
                                             }
                                         }
                                     }
-                                    .onPreferenceChange(ScrollViewHeightPreferenceKey.self) { scrollViewHeight = $0
-                                        withAnimation {
-                                            scrollViewProxy.scrollTo("bottomRect", anchor: .bottom)
+                                    .onAppear {
+                                        if (!viewModel.currentSession.messages.isEmpty) {
+                                            withAnimation {
+                                                scrollViewProxy.scrollTo("bottomRect", anchor: .bottom)
+                                            }
+                                            
+                                        }
+                                        if let document {
+                                            Task {
+                                                viewModel.addSession(isNewSession: isNewSession)
+                                                awaitingResponse = true
+                                                await viewModel.analyseDocument(
+                                                    document: document,
+                                                    userId: authViewModel.currentUser!.id
+                                                )
+                                                awaitingResponse = false
+                                                isNewSession = false
+                                            }
                                         }
                                     }
                                 }
-                            }
-                            
-                            HStack {
-                                Text("Finished logging your symptom?")
-                                    .font(.subheadline)
-                                Button {
-                                    Task {
-                                        viewModel.isLoading = true
-                                        await viewModel.summariseConversation(authorId: authViewModel.currentUser!.id, authorName: authViewModel.currentUser!.name)
-                                        viewModel.endSession()
-                                        //                            let summary: String = viewModel.currentSession.summary ?? ""
-                                        viewModel.isLoading = false
-                                        sessionJustFinished = true
-                                        isNewSession = true
+                                .onPreferenceChange(ScrollViewHeightPreferenceKey.self) { scrollViewHeight = $0
+                                    withAnimation {
+                                        scrollViewProxy.scrollTo("bottomRect", anchor: .bottom)
                                     }
-                                } label: {
-                                    Text("Save to Ovum")
-                                        .font(.subheadline)
-                                        .padding(10)
-                                        .background(AppColours.green)
-                                        .cornerRadius(6)
                                 }
                             }
-                            .padding(.vertical, 20)
                         }
-                        .padding([.horizontal], 20)
-                    }
-                    
-                    if sessionJustFinished {
-                        VStack(alignment: .center, spacing: 10) {
-                            Spacer()
-                            Text("**Chat Summary:** \(viewModel.chatSessions.last?.summary ?? "No summary")")
+                        
+                        HStack {
+                            Text("Finished logging your symptom?")
                                 .font(.subheadline)
-                                .multilineTextAlignment(.center)
-                            Image("chat_completed")
-                                .padding()
-                            Text("Thank you. Do you have something else to discuss?")
-                                .font(.body)
-                                .multilineTextAlignment(.center)
-                            Spacer()
+                            Button {
+                                sessionJustFinished = true
+                            } label: {
+                                Text("Save to Ovum")
+                                    .font(.subheadline)
+                                    .padding(10)
+                                    .background(AppColours.green)
+                                    .opacity(viewModel.currentSession.messages.count < 2 ? 0.5 : 1.0)
+                                    .cornerRadius(6)
+                            }
+                            .disabled(viewModel.currentSession.messages.count < 2)
                         }
-                        .padding(.all, 30)
+                        .padding(.vertical, 20)
                     }
+                    .padding([.horizontal], 20)
+                    
+                    
                     Divider()
                         .background(AppColours.maroon)
                     SendMessageField(textInput: $inputText, isDisabled: awaitingResponse) {
                         //                            print(authViewModel.currentUser?.email)
-                        //                            print(authViewModel.currentUser?.id)
-                        if (sessionJustFinished == true) {
-                            sessionJustFinished = false
-                        }
-                        
-                        router.tabViewsDisabled = true
+                        //                            print(authViewModel.currentUser?.id)outer.tabViewsDisabled = true
                         viewModel.addSession(isNewSession: isNewSession)
                         print(viewModel.currentSession.id)
                         awaitingResponse = true
@@ -209,16 +182,33 @@ struct ChatDetail: View {
                     //                }
                 }
             }
-            .alert("Are you sure you want to exit without logging this symptom?", isPresented: $isExitAttempted) {
+            .alert("Are you sure you want to exit?", isPresented: $isExitAttempted) {
                 VStack {
-                    Button("Exit without saving", role: .destructive) {
-                        
-                        viewModel.endSession(save: false)
+                    Button("Exit", role: .destructive) {
+                        let _ = viewModel.endSession(save: false)
                         dismiss()
                     }
-                    Button("No, let's continue chatting", role: .cancel) {
+                    Button("No, let's continue chatting", role: .cancel) { }
+                }
+            } message: {
+                Text("This conversation won’t be saved to Ovum.")
+            }
+            .alert("Are you sure you want log these symptoms?", isPresented: $sessionJustFinished) {
+                VStack {
+                    Button("Cancel", role: .destructive) { }
+                    Button("Yes", role: .cancel) {
+                        Task {
+                            viewModel.isLoading = true
+                            await viewModel.summariseConversation(authorId: authViewModel.currentUser!.id, authorName: authViewModel.currentUser!.name)
+                            let finishedSession = viewModel.endSession(save: true)
+                            //                            let summary: String = viewModel.currentSession.summary ?? ""
+                            viewModel.isLoading = false
+                            router.navigateWithinChat(to: .chatComplete(session: finishedSession!)) // Will not be nil here.
+                        }
                     }
                 }
+            } message: {
+                Text("This conversation will end and a summary will be saved to your Ovum health record.")
             }
         }
         .ignoresSafeArea(.all, edges: Edge.Set(Edge.top))

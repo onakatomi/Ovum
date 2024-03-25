@@ -28,11 +28,11 @@ enum Status: CaseIterable {
     func getImageName() -> String {
         switch self {
         case .investigate:
-            return "status_investigate"
+            return "status_icon"
         case .monitor:
-            return "status_monitor"
+            return "status_icon"
         case .treated:
-            return "status_treated"
+            return "status_icon"
         }
     }
 }
@@ -76,14 +76,14 @@ struct OverviewHomeContent: View {
                     .padding(.all, 25)
                     .background(rectReader()) // Get displayed image size.
                 ZStack {
-                    ForEach(orderedChatSessions[Int(sliderValue)].bodyParts, id: \.self) { bodyPart in
+                    ForEach(Array(orderedChatSessions[Int(sliderValue)].bodyParts.enumerated()), id: \.offset) { index, bodyPart in
                         Image.getBodyPartImage(region: bodyPart, status: Status.allCases.randomElement()!, imageSize: self.imageSize)
                             .onTapGesture {
                                 showSymptomTray = true
                             }
                         
                             .sheet(isPresented: $showSymptomTray) {
-                                SymptomTray(chatSession: orderedChatSessions[Int(sliderValue)]) {
+                                SymptomTray(correspondingSymptom: orderedChatSessions[Int(sliderValue)].symptoms[index], chatSession: orderedChatSessions[Int(sliderValue)]) {
                                     showSymptomTray = false
                                     router.navigateToRoot(within: .chat)
                                     router.navigateWithinChat(to: .chatHistoryDetail(session: orderedChatSessions[Int(sliderValue)]))

@@ -16,7 +16,7 @@ class MessageViewModel {
         messages = []
         chatSessions = chatSessionsMock
 //        documents = documentsMock
-        currentSession = ChatSession(messages: [], bodyParts: [], title: "Placeholder", date: getDateAsString(date: Date.now), colour: Color(.red))
+        currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], title: "Placeholder", date: getDateAsString(date: Date.now), colour: Color(.red))
     }
     
     func addMessage(message: Message) {
@@ -31,19 +31,22 @@ class MessageViewModel {
     
     func addSession(isNewSession: Bool) {
         if (isNewSession) {
-            currentSession = ChatSession(messages: [], bodyParts: [], title: "Chat Session2", date: getDateAsString(date: Date.now), colour: getRandomColor())
+            currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], title: "Chat Session2", date: getDateAsString(date: Date.now), colour: getRandomColor())
             chatSessions.append(currentSession)
         }
     }
     
-    func endSession(save: Bool = true) {
+    func endSession(save: Bool = true) -> ChatSession? {
         if (save == true) {
             let indexOfSession: Int? = chatSessions.firstIndex(where: {$0.id == currentSession.id})
             if let indexOfSession {
                 chatSessions[indexOfSession] = currentSession
+                currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], title: "Placeholder2", date: getDateAsString(date: Date.now), colour: Color(.red))
+                return chatSessions[indexOfSession]
             }
         }
-        currentSession = ChatSession(messages: [], bodyParts: [], title: "Placeholder2", date: getDateAsString(date: Date.now), colour: Color(.red))
+        currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], title: "Placeholder2", date: getDateAsString(date: Date.now), colour: Color(.red))
+        return nil
     }
     
     func getOvumResponse(message: String, authorId: String, authorName: String) async {
@@ -124,7 +127,7 @@ class MessageViewModel {
                 
                 let bodyParts = apiResponse.body_parts
                 let bodyPartsData = Data(bodyParts.utf8)
-                let decodedArray = try JSONDecoder().decode([String].self, from: bodyPartsData)
+                let decodedArray = try JSONDecoder().decode([[String]].self, from: bodyPartsData)
                 print(summarisedTitle)
                 print(bodyParts)
                 print(summary)
@@ -132,10 +135,16 @@ class MessageViewModel {
                 currentSession.title = summarisedTitle
                 currentSession.summary = summary
                 
-                let enumArray: [BodyPart] = decodedArray.map { bodyPartString in
-                    BodyPart(rawValue: bodyPartString)!
+                let bodyPartsArray: [BodyPart] = decodedArray.map { bodyPartArrayMapping in
+                    BodyPart(rawValue: bodyPartArrayMapping[1])!
+                }   
+                
+                let symptomsArray: [String] = decodedArray.map { bodyPartArrayMapping in
+                    bodyPartArrayMapping[0]
                 }
-                currentSession.bodyParts = enumArray
+                
+                currentSession.bodyParts = bodyPartsArray
+                currentSession.symptoms = symptomsArray
             } catch {
                 print("POST Request Failed:", error)
             }
@@ -177,7 +186,7 @@ struct Response: Codable {
 }
 
 struct BodyPartsArray: Codable {
-    let array: [String]
+    let array: [[String]]
 }
 
 struct SummaryResponse: Codable {
@@ -192,13 +201,13 @@ let chatData: [Message] = [
 ]
 
 let chatSessionsMock: [ChatSession] = [
-    ChatSession(messages: chatData, bodyParts: [BodyPart.pelvic, BodyPart.breast, BodyPart.abdomen, BodyPart.head], title: "Sample Chat Session #1", date: getDateAsString(date: Date.now), colour: AppColours.pink),
-    ChatSession(messages: chatData, bodyParts: [BodyPart.abdomen], title: "Sample Chat Session #2", date: getDateAsString(date: Date.now), colour: AppColours.indigo),
+    ChatSession(messages: chatData, bodyParts: [BodyPart.pelvic, BodyPart.breast, BodyPart.abdomen, BodyPart.head], symptoms: ["Cramps", "Breast Pain", "Stomach Ache", "Headache"], title: "Sample Chat Session #1", date: getDateAsString(date: Date.now), colour: AppColours.pink, summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lorem eros, dignissim sit amet ligula at, pharetra pulvinar dui. Nulla egestas quam vitae efficitur ullamcorper. Ut faucibus velit eu massa tempor dictum. Nunc semper ex sed enim euismod vulputate. Cras sagittis risus vitae semper vulputate. Donec vel massa mi. Donec scelerisque tempus nulla, rhoncus ultricies nunc lobortis vel. Ut ut venenatis enim. Phasellus tempor posuere arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."),
+    ChatSession(messages: chatData, bodyParts: [BodyPart.abdomen], symptoms: ["stomach ache"], title: "Sample Chat Session #2", date: getDateAsString(date: Date.now), colour: AppColours.indigo, summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lorem eros, dignissim sit amet ligula at, pharetra pulvinar dui. Nulla egestas quam vitae efficitur ullamcorper. Ut faucibus velit eu massa tempor dictum. Nunc semper ex sed enim euismod vulputate. Cras sagittis risus vitae semper vulputate. Donec vel massa mi. Donec scelerisque tempus nulla, rhoncus ultricies nunc lobortis vel. Ut ut venenatis enim. Phasellus tempor posuere arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."),
 //    ChatSession(messages: chatData, bodyParts: [BodyPart.head, BodyPart.breast], title: "Concern with knee joints", date: "20/03/2024 10:23 am", colour: AppColours.green),
-//    ChatSession(messages: chatData, bodyParts: [], title: "Early period", date: getDateAsString(date: Date.now), colour: AppColours.peach),
-//    ChatSession(messages: chatData, bodyParts: [], title: "Explaining your blood results", date: getDateAsString(date: Date.now), colour: AppColours.mint),
-//    ChatSession(messages: chatData, bodyParts: [], title: "Irregular bleeding patterns", date: getDateAsString(date: Date.now), colour: AppColours.pink),
-//    ChatSession(messages: chatData, bodyParts: [], title: "Irregular bleeding patterns", date: getDateAsString(date: Date.now), colour: AppColours.pink),
+//    ChatSession(messages: chatData, bodyParts: [], symptoms: [], title: "Early period", date: getDateAsString(date: Date.now), colour: AppColours.peach),
+//    ChatSession(messages: chatData, bodyParts: [], symptoms: [], title: "Explaining your blood results", date: getDateAsString(date: Date.now), colour: AppColours.mint),
+//    ChatSession(messages: chatData, bodyParts: [], symptoms: [], title: "Irregular bleeding patterns", date: getDateAsString(date: Date.now), colour: AppColours.pink),
+//    ChatSession(messages: chatData, bodyParts: [], symptoms: [], title: "Irregular bleeding patterns", date: getDateAsString(date: Date.now), colour: AppColours.pink),
 ]
 
 let documentsMock: [Document] = [

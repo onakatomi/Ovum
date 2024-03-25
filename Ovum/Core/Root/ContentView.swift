@@ -36,7 +36,10 @@ struct ContentView: View {
                                             ChatHistoryDetail(chatSession: session)
                                             
                                         case .chatOnDocument(let document):
-                                            ChatDetail(document: document.file)
+                                            ChatDetail(document: document.file)             
+                                        
+                                        case .chatComplete(let session):
+                                            ChatCompleted(chatSession: session)
                                         }
                                     }
                             }

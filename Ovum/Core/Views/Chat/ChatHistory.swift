@@ -28,7 +28,7 @@ struct ChatHistory: View {
                     Image("back_button")
                 }
                 Spacer()
-                Image("menu_brown")
+                Image("menu")
             }
                 .padding(.bottom, 18)
             Divider()
@@ -37,7 +37,7 @@ struct ChatHistory: View {
             HStack(alignment: .top) {
                 Header(firstLine: "Chat", secondLine: "History", colour: AppColours.maroon)
                 Spacer()
-                Image("chat_history")
+                Image("add_button")
                     .resizable()
                     .frame(width: 44.0, height: 44.0)
             }
