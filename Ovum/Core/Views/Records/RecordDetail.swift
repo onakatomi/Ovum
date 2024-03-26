@@ -47,11 +47,11 @@ struct RecordDetail: View {
                 VStack(alignment: .leading) {
 //                    Spacer()
                     Text("**Document Summary:**")
-                        .font(.subheadline)
+                        .font(.body)
                         .padding(.bottom, 0)
                     ScrollView {
                         Text(caption)
-                            .font(.caption)
+                            .font(.subheadline)
                             .onAppear {
                                 typeWriter()
                             }
@@ -75,7 +75,7 @@ struct RecordDetail: View {
             caption = ""
         }
         if position < document.summary.count {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.0003) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.006) {
                 caption.append(document.summary[position])
                 typeWriter(at: position + 1)
             }

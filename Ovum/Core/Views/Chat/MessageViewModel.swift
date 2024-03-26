@@ -10,8 +10,8 @@ class MessageViewModel {
     var isLoading: Bool = false
     var isDocumentUploading: Bool = false
     
-//    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
-    let baseUrl = "http://192.168.89.1:5001"
+    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
+//    let baseUrl = "http://192.168.89.1:5001"
     
     init() {
         messages = []
