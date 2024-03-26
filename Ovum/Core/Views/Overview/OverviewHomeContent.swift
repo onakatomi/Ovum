@@ -28,11 +28,11 @@ enum Status: CaseIterable {
     func getImageName() -> String {
         switch self {
         case .investigate:
-            return "status_investigate"
+            return "status_icon"
         case .monitor:
-            return "status_monitor"
+            return "status_icon"
         case .treated:
-            return "status_treated"
+            return "status_icon"
         }
     }
 }
@@ -49,9 +49,12 @@ extension Image {
 struct OverviewHomeContent: View {
     @StateObject var healthKitManager = HealthKitManager.shared
     @Environment(MessageViewModel.self) var viewModel
+    @EnvironmentObject var router: Router
     @State private var sliderValue: Double = 0.0
     @State private var isEditing = false
     @State var imageSize: CGSize = .zero // << or initial from NSImage
+    @State private var showSymptomTray = false
+    @State private var currentlySelectedIndex = 0
     
     var orderedChatSessions: [ChatSession] {
         viewModel.chatSessions.sorted(by: {
@@ -74,8 +77,21 @@ struct OverviewHomeContent: View {
                     .padding(.all, 25)
                     .background(rectReader()) // Get displayed image size.
                 ZStack {
-                    ForEach(orderedChatSessions[Int(sliderValue)].bodyParts, id: \.self) { bodyPart in
+                    ForEach(Array(orderedChatSessions[Int(sliderValue)].bodyParts.enumerated()), id: \.offset) { index, bodyPart in
                         Image.getBodyPartImage(region: bodyPart, status: Status.allCases.randomElement()!, imageSize: self.imageSize)
+                            .onTapGesture {
+                                currentlySelectedIndex = index
+                                showSymptomTray = true
+                            }
+                        
+                            .sheet(isPresented: $showSymptomTray) {
+                                SymptomTray(correspondingSymptom: orderedChatSessions[Int(sliderValue)].symptoms[currentlySelectedIndex], chatSession: orderedChatSessions[Int(sliderValue)]) {
+                                    showSymptomTray = false
+                                    router.navigateToRoot(within: .chat)
+                                    router.navigateWithinChat(to: .chatHistoryDetail(session: orderedChatSessions[Int(sliderValue)]))
+                                }
+                                    .presentationDetents([.medium])
+                            }
                     }
                 }
             }

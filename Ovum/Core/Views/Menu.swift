@@ -2,9 +2,10 @@ import SwiftUI
 
 struct Menu: View {
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var router: Router
     @EnvironmentObject var authViewModel: AuthViewModel
     
-    var body: some View {        
+    var body: some View {
         ZStack {
             AppColours.darkBrown
             VStack(spacing: 0) {
@@ -13,8 +14,20 @@ struct Menu: View {
                 } label: {
                     Image("add_button_white")
                 }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 Spacer()
+                Button {
+                    router.navigateToRoot(within: .overview)
+                    router.navigateToRoot(within: .chat)
+                    router.navigateToRoot(within: .records)
+                    router.navigateWithinChat(to: .chatHistory)
+                } label: {
+                    Text("Chat History")
+                        .foregroundColor(.white)
+                        .font(Font.largeTitle.weight(.bold))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                ThickDivider(color: .white, width: 1, padding: 10)
                 Text("Research and Studies")
                     .foregroundColor(.white)
                     .font(Font.largeTitle.weight(.bold))

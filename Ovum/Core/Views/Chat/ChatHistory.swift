@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ChatHistory: View {
     @Environment(MessageViewModel.self) var viewModel
+    @EnvironmentObject var router: Router
     @State private var searchText: String = ""
     @Environment(\.dismiss) private var dismiss
     
@@ -22,13 +23,11 @@ struct ChatHistory: View {
         VStack(spacing: 0) {
             HStack {
                 Button {
-                    print("Action")
-                    dismiss()
+                    router.navigateToRoot(within: .chat)
                 } label: {
                     Image("back_button")
                 }
                 Spacer()
-                Image("menu_brown")
             }
                 .padding(.bottom, 18)
             Divider()
@@ -37,9 +36,14 @@ struct ChatHistory: View {
             HStack(alignment: .top) {
                 Header(firstLine: "Chat", secondLine: "History", colour: AppColours.maroon)
                 Spacer()
-                Image("chat_history")
-                    .resizable()
-                    .frame(width: 44.0, height: 44.0)
+                Button {
+                    router.navigateToRoot(within: .chat)
+                    router.navigateWithinChat(to: .chatDetail)
+                } label: {
+                    Image("add_button")
+                        .resizable()
+                        .frame(width: 33.0, height: 33.0)
+                }
             }
                 .padding(.bottom, 16)
             Divider()

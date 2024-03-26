@@ -1,9 +1,9 @@
 import SwiftUI
 
-enum DocumentType: CaseIterable, Identifiable, CustomStringConvertible {
-    case imaging
-    case pathology
-    case letter
+enum DocumentType: String, CaseIterable, Identifiable, CustomStringConvertible {
+    case imaging = "Imaging"
+    case pathology = "Pathology"
+    case letter = "Letter"
     //            return isSelected ? Image("home_white"): Image("home")
     
     func getImage(isSelected: Bool) -> Image {

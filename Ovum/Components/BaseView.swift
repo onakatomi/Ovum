@@ -68,9 +68,6 @@ struct BaseView: View {
                     HStack(alignment: .top) {
                         getHeader(type: type)
                         Spacer()
-                        getHeaderImage(type: type)
-                            .resizable()
-                            .frame(width: 49, height: 49)
                     }
                 }
                 .padding([.top], 60)

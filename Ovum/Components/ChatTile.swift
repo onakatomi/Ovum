@@ -35,5 +35,5 @@ struct ChatTile: View {
 }
 
 #Preview {
-    ChatTile(chatTile: ChatSession(messages: [Message(author: "John", fromOvum: false, content: "Are you there?")], bodyParts: [], title: "Irregular bleeding patterns", date: getDateAsString(date: Date.now), colour: AppColours.pink))
+    ChatTile(chatTile: ChatSession(messages: [Message(author: "John", fromOvum: false, content: "Are you there?")], bodyParts: [], symptoms: [], title: "Irregular bleeding patterns", date: getDateAsString(date: Date.now), colour: AppColours.pink))
 }

@@ -12,6 +12,7 @@ enum ChatNavDestination: Hashable {
     case chatHistory
     case chatHistoryDetail(session: ChatSession)
     case chatOnDocument(document: Document)
+    case chatComplete(session: ChatSession)
 }
 
 enum RecordsNavDestination: Hashable {
