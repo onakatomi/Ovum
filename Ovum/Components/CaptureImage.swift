@@ -7,6 +7,7 @@ struct CaptureImage: View {
     @State private var showCamera = false
     @State private var selectedImage: UIImage?
     @State var image: UIImage?
+    @State var isDocSuccessfullyUploaded: Bool = false
     
     var body: some View {
         VStack {
@@ -19,11 +20,7 @@ struct CaptureImage: View {
                 }
             
             if let selectedImage{
-                HStack {
-                    Text("Document successfully uploaded")
-                    Image(systemName: "checkmark.seal.fill")
-                }
-                    .foregroundColor(.green)
+                HStack {}
                     .onAppear {
                         let b64_rep = imageToBase64(selectedImage)
                         if let b64_rep {
@@ -31,9 +28,18 @@ struct CaptureImage: View {
                                 viewModel.isDocumentUploading = true
                                 await viewModel.analyseDocument(document: b64_rep, userId: authViewModel.currentUser!.id)
                                 viewModel.isDocumentUploading = false
+                                isDocSuccessfullyUploaded = true
                             }
                         }
                     }
+            }
+            
+            if (isDocSuccessfullyUploaded)  {
+                HStack {
+                    Text("Document successfully uploaded")
+                    Image(systemName: "checkmark.seal.fill")
+                }
+                    .foregroundColor(.green)
             }
         }
     }

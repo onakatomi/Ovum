@@ -75,7 +75,7 @@ struct RecordDetail: View {
             caption = ""
         }
         if position < document.summary.count {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.006) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                 caption.append(document.summary[position])
                 typeWriter(at: position + 1)
             }
