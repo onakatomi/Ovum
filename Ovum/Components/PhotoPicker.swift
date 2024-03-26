@@ -2,12 +2,12 @@ import SwiftUI
 import PhotosUI
 
 struct PhotoPicker: View {
-    @Binding var documentTitle: String
-    @Binding var documentType: DocumentType
-    
     @Environment(MessageViewModel.self) var viewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
+
     @State private var selectedItem: PhotosPickerItem?
     @State var image: UIImage?
+    @State var isDocSuccessfullyUploaded: Bool = false
    
     var body: some View {
     
@@ -18,12 +18,17 @@ struct PhotoPicker: View {
                         if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
                             image = UIImage(data: data)
                             let b64_rep = imageToBase64(image!)
-                            viewModel.addDocument(document: Document(title: documentTitle, date: getDateAsString(date: Date.now), type: documentType, file: b64_rep!))
+                            if let b64_rep {
+                                viewModel.isDocumentUploading = true
+                                await viewModel.analyseDocument(document: b64_rep, userId: authViewModel.currentUser!.id)
+                                viewModel.isDocumentUploading = false
+                                isDocSuccessfullyUploaded = true
+                            }
                         }
                     }
                 }
             
-            if (image != nil)  {
+            if (isDocSuccessfullyUploaded)  {
                 HStack {
                     Text("Document successfully uploaded")
                     Image(systemName: "checkmark.seal.fill")

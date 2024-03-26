@@ -54,6 +54,7 @@ struct OverviewHomeContent: View {
     @State private var isEditing = false
     @State var imageSize: CGSize = .zero // << or initial from NSImage
     @State private var showSymptomTray = false
+    @State private var currentlySelectedIndex = 0
     
     var orderedChatSessions: [ChatSession] {
         viewModel.chatSessions.sorted(by: {
@@ -79,11 +80,12 @@ struct OverviewHomeContent: View {
                     ForEach(Array(orderedChatSessions[Int(sliderValue)].bodyParts.enumerated()), id: \.offset) { index, bodyPart in
                         Image.getBodyPartImage(region: bodyPart, status: Status.allCases.randomElement()!, imageSize: self.imageSize)
                             .onTapGesture {
+                                currentlySelectedIndex = index
                                 showSymptomTray = true
                             }
                         
                             .sheet(isPresented: $showSymptomTray) {
-                                SymptomTray(correspondingSymptom: orderedChatSessions[Int(sliderValue)].symptoms[index], chatSession: orderedChatSessions[Int(sliderValue)]) {
+                                SymptomTray(correspondingSymptom: orderedChatSessions[Int(sliderValue)].symptoms[currentlySelectedIndex], chatSession: orderedChatSessions[Int(sliderValue)]) {
                                     showSymptomTray = false
                                     router.navigateToRoot(within: .chat)
                                     router.navigateWithinChat(to: .chatHistoryDetail(session: orderedChatSessions[Int(sliderValue)]))

@@ -41,7 +41,9 @@ struct SymptomTray: View {
                 VStack(alignment: .leading) {
                     Text("**Chat Summary**")
                         .padding(.vertical, 10)
-                    Text(chatSession.summary!)
+                    ScrollView {
+                        Text(chatSession.summary!)                        
+                    }
                 }
                 .foregroundColor(AppColours.darkBrown)
             }

@@ -18,7 +18,7 @@ struct ChatCompleted: View {
                 .background(AppColours.maroon)
                 .padding(.bottom, 16)
             HStack(alignment: .top) {
-                Header(firstLine: "Symptom", secondLine: "Logged", colour: AppColours.maroon)
+                Header(firstLine: "Symptoms", secondLine: "Logged", colour: AppColours.maroon)
                 Spacer()
                 Image("chat_completed")
                     .resizable()
@@ -37,10 +37,12 @@ struct ChatCompleted: View {
 //                        .padding(.vertical, 16)
                 }
                 Text("**Reported On**: \(chatSession.date)")
-                    .padding(.vertical, 16)
+                    .padding(.vertical, 8)
                 Text("**Chat Summary:**")
-                    .padding(.vertical, 16)
-                Text(chatSession.summary ?? "nothing")
+                    .padding(.vertical, 8)
+                ScrollView {
+                    Text(chatSession.summary ?? "nothing")
+                }
             }
             .foregroundColor(AppColours.maroon)
             Spacer()
@@ -60,5 +62,5 @@ struct ChatCompleted: View {
 }
 
 #Preview {
-    ChatCompleted(chatSession: ChatSession(messages: chatData, bodyParts: [BodyPart.abdomen], symptoms: ["stomach ache"], title: "Sample Chat Session #2", date: getDateAsString(date: Date.now), colour: AppColours.indigo, summary: "Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum."))
+    ChatCompleted(chatSession: ChatSession(messages: chatData, bodyParts: [BodyPart.abdomen], symptoms: ["stomach ache"], title: "Sample Chat Session #2", date: getDateAsString(date: Date.now), colour: AppColours.indigo, summary: "Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum."))
 }

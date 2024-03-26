@@ -7,4 +7,5 @@ struct Document: Identifiable, Hashable {
     let date: String
     let type: DocumentType
     let file: String // b64 encoded string
+    let summary: String
 }

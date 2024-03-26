@@ -14,7 +14,12 @@ struct ChatHistoryDetail: View {
                     Image("back_button")
                 }
                 Spacer()
-                Image("menu_brown")
+                NavigationLink (destination: Menu().toolbar(.hidden, for: .tabBar)) { // Hide tabbar whilst in MenuScreen.
+                    Image("menu_brown")
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.trailing, 8)
+                        .padding(.bottom, 18)
+                }
             }
             .padding(.bottom, 18)
             Divider()

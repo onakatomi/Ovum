@@ -71,6 +71,7 @@ struct ChatDetail: View {
                                             .frame(height: 1)
                                             .id("bottomRect")
                                     }
+                                    .opacity(viewModel.isLoading ? 0.5 : 1.0)
                                     .padding([.bottom], 10)
                                     .background(GeometryReader { geometry in
                                         Color.clear
@@ -125,7 +126,7 @@ struct ChatDetail: View {
                                     .opacity(viewModel.currentSession.messages.count < 2 ? 0.5 : 1.0)
                                     .cornerRadius(6)
                             }
-                            .disabled(viewModel.currentSession.messages.count < 2)
+                            .disabled(viewModel.currentSession.messages.count < 2 || viewModel.isLoading)
                         }
                         .padding(.vertical, 20)
                     }
@@ -194,7 +195,7 @@ struct ChatDetail: View {
                 Text("This conversation won’t be saved to Ovum.")
             }
             .alert("Are you sure you want log these symptoms?", isPresented: $sessionJustFinished) {
-                VStack {
+                HStack {
                     Button("Cancel", role: .destructive) { }
                     Button("Yes", role: .cancel) {
                         Task {
