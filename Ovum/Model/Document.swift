@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-struct Document: Identifiable, Hashable {
+struct Document: Codable, Identifiable, Hashable {
     var id = UUID()
     let title: String
     let date: String

@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    //    @Environment(Router.self) var router
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var router: Router
     @State var isSplashActive: Bool = true
@@ -19,7 +18,6 @@ struct ContentView: View {
                     LoggedInView(viewModel: MessageViewModel(userId: authViewModel.currentUser!.id))
                         .environmentObject(authViewModel)
                         .environmentObject(router)
-                    
                 }
             }
         }

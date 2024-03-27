@@ -20,6 +20,7 @@ class MessageViewModel: ObservableObject {
         currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], title: "Placeholder", date: getDateAsString(date: Date.now), colour: Color(.red))
         Task {
             await getAllChatSessions(userId: userId)
+            await getAllDocuments(userId: userId)
         }
     }
     
@@ -81,7 +82,7 @@ class MessageViewModel: ObservableObject {
                 let (data, _) = try await URLSession.shared.data(for: request)
                 
                 // Handle response:
-                let session = try JSONDecoder().decode(ChatSession.self, from: data)
+                let _ = try JSONDecoder().decode(ChatSession.self, from: data)
 //                chatSessions.append(session)
             } catch {
                 print("POST Request Failed:", error)
@@ -272,10 +273,74 @@ class MessageViewModel: ObservableObject {
                 
                 let doc: Document = Document(title: documentTitle, date: getDateAsString(date: Date.now), type: DocumentType(rawValue: documentCategory) ?? .pathology, file: document, summary: documentSummary)
                 addDocument(document: doc)
+                
+                let jsonEncoder = JSONEncoder()
+                let jsonResultData = try jsonEncoder.encode(doc)
+                let jsonString = String(data: jsonResultData, encoding: .utf8)
+                await addDocToCloud(encodedDocument: jsonString!, userId: userId)
+                
             } catch {
                 print("POST Request Failed:", error)
             }
         }
+    }
+    
+    func addDocToCloud(encodedDocument: String, userId: String) async {
+        let endpoint = "/add_document"
+        
+        let dataToSend: [String: Any] = [
+            "user_id": userId,
+            "document": encodedDocument
+        ]
+        
+        if let url = URL(string: baseUrl + endpoint) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            do {
+                request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
+                let (data, _) = try await URLSession.shared.data(for: request)
+                
+                // Handle response:
+                let _ = try JSONDecoder().decode(Document.self, from: data)
+            } catch {
+                print("Adding document to cloud failed:", error)
+            }
+        }
+    }
+    
+    func getAllDocuments(userId: String) async {
+        print("Fetching docs...")
+        let endpoint = "/get_all_documents/\(userId)"
+        
+        if let url = URL(string: baseUrl + endpoint) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            do {
+                let (data, _) = try await URLSession.shared.data(for: request)
+                let decoder = JSONDecoder()
+                let apiResponse = try decoder.decode(AllDocumentsResponse.self, from: data) // Decode the incoming JSON into a Swift struct
+                for document in apiResponse.all_documents {
+                    print(document.title)
+                }
+                
+                // Only append fetched sessions that don't currently exist in the array to prevent duplicates.
+                documents.append(contentsOf: apiResponse.all_documents.filter({ document in
+                    !documents.contains { existingDocument in
+                        document.id == existingDocument.id
+                    }
+                }))
+            } catch {
+                print("GET Request Failed:", error)
+            }
+        }
+    }
+    
+    struct AllDocumentsResponse: Codable {
+        var all_documents: [Document]
     }
 }
 

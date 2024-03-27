@@ -1,6 +1,6 @@
 import SwiftUI
 
-enum DocumentType: String, CaseIterable, Identifiable, CustomStringConvertible {
+enum DocumentType: String, Codable, CaseIterable, Identifiable, CustomStringConvertible {
     case imaging = "Imaging"
     case pathology = "Pathology"
     case letter = "Letter"
