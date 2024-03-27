@@ -186,8 +186,10 @@ struct ChatDetail: View {
             .alert("Are you sure you want to exit?", isPresented: $isExitAttempted) {
                 VStack {
                     Button("Exit", role: .destructive) {
-                        let _ = viewModel.endSession(save: false)
-                        dismiss()
+                        Task {
+                            let _ = await viewModel.endSession(save: false, userId: authViewModel.currentUser!.id)
+                            dismiss()
+                        }
                     }
                     Button("No, let's continue chatting", role: .cancel) { }
                 }
@@ -201,7 +203,7 @@ struct ChatDetail: View {
                         Task {
                             viewModel.isLoading = true
                             await viewModel.summariseConversation(authorId: authViewModel.currentUser!.id, authorName: authViewModel.currentUser!.name)
-                            let finishedSession = viewModel.endSession(save: true)
+                            let finishedSession = await viewModel.endSession(save: true, userId: authViewModel.currentUser!.id)
                             //                            let summary: String = viewModel.currentSession.summary ?? ""
                             viewModel.isLoading = false
                             router.navigateWithinChat(to: .chatComplete(session: finishedSession!)) // Will not be nil here.

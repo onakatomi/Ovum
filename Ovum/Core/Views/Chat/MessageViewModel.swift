@@ -10,8 +10,8 @@ class MessageViewModel {
     var isLoading: Bool = false
     var isDocumentUploading: Bool = false
     
-    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
-//    let baseUrl = "http://192.168.89.1:5001"
+//    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
+    let baseUrl = "http://192.168.89.1:5001"
     
     init() {
         messages = []
@@ -37,17 +37,91 @@ class MessageViewModel {
         }
     }
     
-    func endSession(save: Bool = true) -> ChatSession? {
+    func endSession(save: Bool = true, userId: String) async -> ChatSession? {
         if (save == true) {
             let indexOfSession: Int? = chatSessions.firstIndex(where: {$0.id == currentSession.id})
             if let indexOfSession {
                 chatSessions[indexOfSession] = currentSession
+                do {
+                    let jsonEncoder = JSONEncoder()
+                    let jsonResultData = try jsonEncoder.encode(currentSession)
+                    let jsonString = String(data: jsonResultData, encoding: .utf8)
+                    await addSessionToCloud(encodedSession: jsonString!, userId: userId)
+                } catch {
+                    print("Encoding Failed", error)
+                }
+                
+                // Reset currentSession.
                 currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], title: "Placeholder2", date: getDateAsString(date: Date.now), colour: Color(.red))
                 return chatSessions[indexOfSession]
             }
         }
         currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], title: "Placeholder2", date: getDateAsString(date: Date.now), colour: Color(.red))
         return nil
+    }
+    
+    func addSessionToCloud(encodedSession: String, userId: String) async {
+        let endpoint = "/add_session"
+        
+        let dataToSend: [String: Any] = [
+            "user_id": userId,
+            "session": encodedSession
+        ]
+        
+        if let url = URL(string: baseUrl + endpoint) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            do {
+                request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
+                let (data, _) = try await URLSession.shared.data(for: request)
+                
+                // Handle response:
+                let session = try JSONDecoder().decode(ChatSession.self, from: data)
+                chatSessions.append(session)
+            } catch {
+                print("POST Request Failed:", error)
+            }
+        }
+    }
+    
+    struct AllSessionsResponse: Codable {
+        var all_sessions: [ChatSession]
+    }
+    
+    /// This function fetches all the sessions from the cloud and adds them to current sessions if they're not in there.
+    ///
+    /// - Parameters:
+    ///   - userId: The user to fetch.
+    /// - Returns: Nothing.
+    func getAllChatSessions(userId: String) async {
+        let endpoint = "/get_all_sessions/\(userId)"
+        
+        if let url = URL(string: baseUrl + endpoint) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            do {
+//                request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
+                let (data, _) = try await URLSession.shared.data(for: request)
+                let decoder = JSONDecoder()
+                let apiResponse = try decoder.decode(AllSessionsResponse.self, from: data) // Decode the incoming JSON into a Swift struct
+                for session in apiResponse.all_sessions {
+                    print(session.title)
+                }
+                
+                // Only append fetched sessions that don't currently exist in the array to prevent duplicates.
+                chatSessions.append(contentsOf: apiResponse.all_sessions.filter({ sessionToAdd in
+                    !chatSessions.contains { existingSession in
+                        sessionToAdd.id == existingSession.id
+                    }
+                }))
+            } catch {
+                print("GET Request Failed:", error)
+            }
+        }
     }
     
     func getOvumResponse(message: String, authorId: String, authorName: String) async {
