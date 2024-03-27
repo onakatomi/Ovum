@@ -84,5 +84,5 @@ struct RecordTypeTile: View {
 
 //#Preview {
 //    ContentView(selectedTab: .records)
-//        .environment(MessageViewModel())
+//        .environmentObject(MessageViewModel(userId: "1"))
 //}

@@ -30,6 +30,7 @@
 		B247B68C2BB1216E00FF17B9 /* SymptomTray.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247B68B2BB1216E00FF17B9 /* SymptomTray.swift */; };
 		B247B68E2BB1307F00FF17B9 /* ChatCompleted.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247B68D2BB1307F00FF17B9 /* ChatCompleted.swift */; };
 		B247B6902BB3A6EC00FF17B9 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247B68F2BB3A6EC00FF17B9 /* SplashScreen.swift */; };
+		B247B6922BB3BA9C00FF17B9 /* LoggedInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247B6912BB3BA9C00FF17B9 /* LoggedInView.swift */; };
 		B2582D252BA40476002ABFA6 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2582D242BA40476002ABFA6 /* HealthKitManager.swift */; };
 		B2D6A3A22B8EFEF80045CCD1 /* OvumApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */; };
 		B2D6A3A42B8EFEF80045CCD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A32B8EFEF80045CCD1 /* ContentView.swift */; };
@@ -87,6 +88,7 @@
 		B247B68B2BB1216E00FF17B9 /* SymptomTray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomTray.swift; sourceTree = "<group>"; };
 		B247B68D2BB1307F00FF17B9 /* ChatCompleted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCompleted.swift; sourceTree = "<group>"; };
 		B247B68F2BB3A6EC00FF17B9 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		B247B6912BB3BA9C00FF17B9 /* LoggedInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInView.swift; sourceTree = "<group>"; };
 		B2582D222BA403E7002ABFA6 /* Ovum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ovum.entitlements; sourceTree = "<group>"; };
 		B2582D242BA40476002ABFA6 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		B2582D262BA7E752002ABFA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				B246941C2BA12D7700286A75 /* LoginView.swift */,
+				B247B6912BB3BA9C00FF17B9 /* LoggedInView.swift */,
 				B24694202BA131DD00286A75 /* RegistrationView.swift */,
 			);
 			path = Views;
@@ -466,6 +469,7 @@
 				B2D6A3FD2B917FB20045CCD1 /* TypingIndicator.swift in Sources */,
 				B2D6A4212B9E789E0045CCD1 /* BubbleBackground.swift in Sources */,
 				B2D6A3E92B9055640045CCD1 /* ChatHomeContent.swift in Sources */,
+				B247B6922BB3BA9C00FF17B9 /* LoggedInView.swift in Sources */,
 				B24694272BA1360600286A75 /* User.swift in Sources */,
 				B2D6A41F2B9E77BD0045CCD1 /* MapOnboardingBubbleShape.swift in Sources */,
 				B2D6A3F72B9157020045CCD1 /* MessageViewModel.swift in Sources */,

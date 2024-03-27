@@ -48,7 +48,7 @@ extension Image {
 
 struct OverviewHomeContent: View {
     @StateObject var healthKitManager = HealthKitManager.shared
-    @Environment(MessageViewModel.self) var viewModel
+    @EnvironmentObject var viewModel: MessageViewModel
     @EnvironmentObject var router: Router
     @State private var sliderValue: Double = 0.0
     @State private var isEditing = false
@@ -155,5 +155,5 @@ struct OverviewHomeContent: View {
 
 #Preview {
     OverviewHomeContent()
-        .environment(MessageViewModel())
+        .environmentObject(MessageViewModel(userId: "1"))
 }

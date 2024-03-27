@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AddDocumentTray: View {
-    @Environment(MessageViewModel.self) var viewModel
+    @EnvironmentObject var viewModel: MessageViewModel
     @FocusState private var focusField: Bool
     
     var body: some View {
@@ -33,5 +33,5 @@ struct AddDocumentTray: View {
 
 #Preview {
     RecordsHomeContent()
-        .environment(MessageViewModel())
+        .environmentObject(MessageViewModel(userId: "1"))
 }

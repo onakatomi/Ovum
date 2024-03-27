@@ -66,5 +66,5 @@ struct ChatHistoryDetail: View {
 
 #Preview {
     ChatHistory()
-        .environment(MessageViewModel())
+        .environmentObject(MessageViewModel(userId: "1"))
 }

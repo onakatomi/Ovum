@@ -30,5 +30,5 @@ struct TagDocument: View {
 
 #Preview {
     RecordsHomeContent()
-        .environment(MessageViewModel())
+        .environmentObject(MessageViewModel(userId: "1"))
 }

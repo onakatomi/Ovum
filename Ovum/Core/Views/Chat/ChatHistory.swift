@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ChatHistory: View {
-    @Environment(MessageViewModel.self) var viewModel
+    @EnvironmentObject var viewModel: MessageViewModel
     @EnvironmentObject var router: Router
     @State private var searchText: String = ""
     @Environment(\.dismiss) private var dismiss
@@ -84,7 +84,7 @@ struct ChatHistory: View {
     }
 }
 
-#Preview {
-    ChatHistory()
-        .environment(MessageViewModel())
-}
+//#Preview {
+//    ChatHistory()
+//        .environmentObject(MessageViewModel(userId: "1"))
+//}

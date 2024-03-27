@@ -56,5 +56,5 @@ struct SymptomTray: View {
 
 #Preview {
     OverviewHomeContent()
-        .environment(MessageViewModel())
+        .environmentObject(MessageViewModel(userId: "1"))
 }

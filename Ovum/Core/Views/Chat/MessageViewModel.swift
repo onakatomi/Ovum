@@ -1,23 +1,26 @@
 import Foundation
 import SwiftUI
 
-@Observable
-class MessageViewModel {
-    var messages: [Message] = []
-    var currentSession: ChatSession
-    var chatSessions: [ChatSession] = []
-    var documents: [Document] = []
-    var isLoading: Bool = false
-    var isDocumentUploading: Bool = false
+@MainActor
+class MessageViewModel: ObservableObject {
+    @Published var messages: [Message] = []
+    @Published var currentSession: ChatSession
+    @Published var chatSessions: [ChatSession] = []
+    @Published var documents: [Document] = []
+    @Published var isLoading: Bool = false
+    @Published var isDocumentUploading: Bool = false
     
 //    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
     let baseUrl = "http://192.168.89.1:5001"
     
-    init() {
+    init(userId: String) {
         messages = []
         chatSessions = chatSessionsMock
-        documents = documentsMock
+        documents = []
         currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], title: "Placeholder", date: getDateAsString(date: Date.now), colour: Color(.red))
+        Task {
+            await getAllChatSessions(userId: userId)
+        }
     }
     
     func addMessage(message: Message) {
@@ -79,7 +82,7 @@ class MessageViewModel {
                 
                 // Handle response:
                 let session = try JSONDecoder().decode(ChatSession.self, from: data)
-                chatSessions.append(session)
+//                chatSessions.append(session)
             } catch {
                 print("POST Request Failed:", error)
             }
@@ -96,6 +99,7 @@ class MessageViewModel {
     ///   - userId: The user to fetch.
     /// - Returns: Nothing.
     func getAllChatSessions(userId: String) async {
+        print("Fetching...")
         let endpoint = "/get_all_sessions/\(userId)"
         
         if let url = URL(string: baseUrl + endpoint) {

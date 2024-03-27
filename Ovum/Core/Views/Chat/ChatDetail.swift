@@ -5,7 +5,7 @@ struct ChatDetail: View {
         case inputText
     }
     
-    @Environment(MessageViewModel.self) var viewModel
+    @EnvironmentObject var viewModel: MessageViewModel
     @EnvironmentObject var router: Router
     @State private var inputText: String = ""
     @FocusState private var textFieldIsFocused: Bool
@@ -228,7 +228,7 @@ struct ScrollViewHeightPreferenceKey: PreferenceKey {
 
 #Preview {
     ChatDetail()
-        .environment(MessageViewModel())
+        .environmentObject(MessageViewModel(userId: "1"))
         .environmentObject(AuthViewModel())
         .environmentObject(Router())
 }

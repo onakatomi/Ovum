@@ -2,7 +2,7 @@ import SwiftUI
 import PhotosUI
 
 struct PhotoPicker: View {
-    @Environment(MessageViewModel.self) var viewModel
+    @EnvironmentObject var viewModel: MessageViewModel
     @EnvironmentObject var authViewModel: AuthViewModel
 
     @State private var selectedItem: PhotosPickerItem?

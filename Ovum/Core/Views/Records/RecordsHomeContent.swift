@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct RecordsHomeContent: View {
-    @Environment(MessageViewModel.self) var viewModel
+    @EnvironmentObject var viewModel: MessageViewModel
     @EnvironmentObject var router: Router
     @State private var documentFilterType: DocumentType?
     @State private var searchText: String = ""
@@ -127,5 +127,5 @@ struct RecordsHomeContent: View {
 
 #Preview {
     RecordsHomeContent()
-        .environment(MessageViewModel())
+        .environmentObject(MessageViewModel(userId: "1"))
 }

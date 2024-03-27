@@ -5,7 +5,7 @@ struct ChatHomeContent: View {
     @State private var textInput = ""
     @EnvironmentObject var router: Router
     @EnvironmentObject var authViewModel: AuthViewModel
-    @Environment(MessageViewModel.self) var viewModel
+    @EnvironmentObject var viewModel: MessageViewModel
     
     var body: some View {
         

@@ -104,5 +104,5 @@ struct BaseView: View {
 
 #Preview {
     BaseView(BaseViewType.overview)
-        .environment(MessageViewModel())
+        .environmentObject(MessageViewModel(userId: "1"))
 }

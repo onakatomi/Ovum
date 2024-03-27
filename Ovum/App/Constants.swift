@@ -23,7 +23,7 @@ func getDateAsString(date: Date) -> String {
     let dateFormatter = DateFormatter()
 
     // Set the date format you desire
-    dateFormatter.dateFormat = "dd/MM/yyyy hh:mm:ss"
+    dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
 
     // Create a Date object
     let date = Date()
@@ -34,7 +34,7 @@ func getDateAsString(date: Date) -> String {
 
 func convertToDate(dateString: String) -> Date? {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "dd/MM/yyyy hh:mm:ss"
+    dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
     let val = dateFormatter.date(from: dateString)
     return val
 }
