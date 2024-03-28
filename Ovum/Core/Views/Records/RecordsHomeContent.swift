@@ -36,6 +36,7 @@ struct RecordsHomeContent: View {
     
     var body: some View {
         VStack {
+            Spacer()
             HStack {
                 RecordTypeTile(text: "All", image: documentFilterType == nil ? Image("home_white") : Image("home"), isSelected: documentFilterType == nil)
                     .onTapGesture {
@@ -104,10 +105,10 @@ struct RecordsHomeContent: View {
             .font(Font.callout.bold())
             .padding(.bottom, 8)
             if filteredDocuments.count == 0 {
-                Text("*No uploaded documents*")
-                    .font(.caption)
-                    .foregroundColor(AppColours.maroon)
-                    .padding(.vertical, 40)
+                    Text("*No uploaded documents*")
+                        .font(.caption)
+                        .foregroundColor(AppColours.maroon)
+                        .padding(.vertical, 40)
             }
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
@@ -119,6 +120,7 @@ struct RecordsHomeContent: View {
                     .animation(.default, value: filteredDocuments)
                 }
             }
+            Spacer()
         }
         .foregroundColor(AppColours.maroon)
         .padding([.horizontal], 20)
@@ -126,6 +128,6 @@ struct RecordsHomeContent: View {
 }
 
 #Preview {
-    RecordsHomeContent()
+    BaseView(BaseViewType.documents)
         .environmentObject(MessageViewModel(userId: "1"))
 }
