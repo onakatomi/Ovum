@@ -18,7 +18,7 @@ struct ChatCompleted: View {
                 .background(AppColours.maroon)
                 .padding(.bottom, 16)
             HStack(alignment: .top) {
-                Header(firstLine: "Symptoms", secondLine: "Logged", colour: AppColours.maroon)
+                Header(firstLine: "Symptoms", secondLine: "Logged", colour: AppColours.maroon, font: .custom(AppFonts.haasGrot, size: 42))
                 Spacer()
                 Image("chat_completed")
                     .resizable()
@@ -26,22 +26,25 @@ struct ChatCompleted: View {
             }
                 .padding(.bottom, 16)
             Text("Thank you. This information has been added to Ovum.")
-                .font(.title2)
+                .font(.custom(AppFonts.testDomaine, size: 24))
+                .foregroundColor(AppColours.darkBrown)
             Divider()
                 .background(AppColours.maroon)
                 .padding(.vertical, 16)
             VStack(alignment: .leading) {
+                Text("**Reported On**: \(stripDateString(dateString: chatSession.date, format: .elegant))")
+                    .padding(.vertical, 8)
                 ForEach(chatSession.symptoms, id: \.self) { symptom in
                     Text(symptom.capitalized)
-                        .font(.largeTitle)
-//                        .padding(.vertical, 16)
+                        .font(.custom(AppFonts.testDomaine, size: 24))
+                        .padding(.vertical, 8)
                 }
-                Text("**Reported On**: \(chatSession.date)")
-                    .padding(.vertical, 8)
                 Text("**Chat Summary:**")
                     .padding(.vertical, 8)
                 ScrollView {
                     Text(chatSession.summary ?? "nothing")
+                        .font(.custom(AppFonts.haasGrot, size: 16))
+                        .kerning(0.32)
                 }
             }
             .foregroundColor(AppColours.maroon)

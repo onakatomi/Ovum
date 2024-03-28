@@ -104,7 +104,7 @@ struct OverviewHomeContent: View {
                 }
             )
             HStack {
-                Text("\(monthFromDate(date: convertToDate(dateString: orderedChatSessions[0].date)!))")
+                Text(stripDateString(dateString: orderedChatSessions[0].date, format: .basic))
                 Spacer()
                 Text("Today")
             }

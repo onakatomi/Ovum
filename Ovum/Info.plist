@@ -4,5 +4,14 @@
 <dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>NeueHaasGrotDisp-56Italic-Trial.otf</string>
+		<string>NeueHaasGrotDisp-65Medium-Trial.otf</string>
+		<string>NeueHaasGrotDisp-55Roman-Trial.otf</string>
+		<string>NeueHaasGrotDisp-66MediumItalic-Trial.otf</string>
+		<string>TestDomaineText-Regular.otf</string>
+		<string>TestDomaineText-RegularItalic.otf</string>
+	</array>
 </dict>
 </plist>

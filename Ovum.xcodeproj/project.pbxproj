@@ -31,6 +31,13 @@
 		B247B68E2BB1307F00FF17B9 /* ChatCompleted.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247B68D2BB1307F00FF17B9 /* ChatCompleted.swift */; };
 		B247B6902BB3A6EC00FF17B9 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247B68F2BB3A6EC00FF17B9 /* SplashScreen.swift */; };
 		B247B6922BB3BA9C00FF17B9 /* LoggedInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247B6912BB3BA9C00FF17B9 /* LoggedInView.swift */; };
+		B247B6A62BB4D86B00FF17B9 /* TestDomaineText-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B247B6A02BB4D86B00FF17B9 /* TestDomaineText-Regular.otf */; };
+		B247B6A72BB4D86B00FF17B9 /* NeueHaasGrotDisp-66MediumItalic-Trial.otf in Resources */ = {isa = PBXBuildFile; fileRef = B247B6A12BB4D86B00FF17B9 /* NeueHaasGrotDisp-66MediumItalic-Trial.otf */; };
+		B247B6A82BB4D86B00FF17B9 /* TestDomaineText-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B247B6A22BB4D86B00FF17B9 /* TestDomaineText-RegularItalic.otf */; };
+		B247B6A92BB4D86B00FF17B9 /* NeueHaasGrotDisp-65Medium-Trial.otf in Resources */ = {isa = PBXBuildFile; fileRef = B247B6A32BB4D86B00FF17B9 /* NeueHaasGrotDisp-65Medium-Trial.otf */; };
+		B247B6AA2BB4D86B00FF17B9 /* NeueHaasGrotDisp-55Roman-Trial.otf in Resources */ = {isa = PBXBuildFile; fileRef = B247B6A42BB4D86B00FF17B9 /* NeueHaasGrotDisp-55Roman-Trial.otf */; };
+		B247B6AB2BB4D86B00FF17B9 /* NeueHaasGrotDisp-56Italic-Trial.otf in Resources */ = {isa = PBXBuildFile; fileRef = B247B6A52BB4D86B00FF17B9 /* NeueHaasGrotDisp-56Italic-Trial.otf */; };
+		B247B6AD2BB4F53C00FF17B9 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B247B6AC2BB4F53C00FF17B9 /* HelperFunctions.swift */; };
 		B2582D252BA40476002ABFA6 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2582D242BA40476002ABFA6 /* HealthKitManager.swift */; };
 		B2D6A3A22B8EFEF80045CCD1 /* OvumApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */; };
 		B2D6A3A42B8EFEF80045CCD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A32B8EFEF80045CCD1 /* ContentView.swift */; };
@@ -89,6 +96,13 @@
 		B247B68D2BB1307F00FF17B9 /* ChatCompleted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCompleted.swift; sourceTree = "<group>"; };
 		B247B68F2BB3A6EC00FF17B9 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		B247B6912BB3BA9C00FF17B9 /* LoggedInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInView.swift; sourceTree = "<group>"; };
+		B247B6A02BB4D86B00FF17B9 /* TestDomaineText-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TestDomaineText-Regular.otf"; sourceTree = "<group>"; };
+		B247B6A12BB4D86B00FF17B9 /* NeueHaasGrotDisp-66MediumItalic-Trial.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeueHaasGrotDisp-66MediumItalic-Trial.otf"; sourceTree = "<group>"; };
+		B247B6A22BB4D86B00FF17B9 /* TestDomaineText-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TestDomaineText-RegularItalic.otf"; sourceTree = "<group>"; };
+		B247B6A32BB4D86B00FF17B9 /* NeueHaasGrotDisp-65Medium-Trial.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeueHaasGrotDisp-65Medium-Trial.otf"; sourceTree = "<group>"; };
+		B247B6A42BB4D86B00FF17B9 /* NeueHaasGrotDisp-55Roman-Trial.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeueHaasGrotDisp-55Roman-Trial.otf"; sourceTree = "<group>"; };
+		B247B6A52BB4D86B00FF17B9 /* NeueHaasGrotDisp-56Italic-Trial.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeueHaasGrotDisp-56Italic-Trial.otf"; sourceTree = "<group>"; };
+		B247B6AC2BB4F53C00FF17B9 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		B2582D222BA403E7002ABFA6 /* Ovum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ovum.entitlements; sourceTree = "<group>"; };
 		B2582D242BA40476002ABFA6 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		B2582D262BA7E752002ABFA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -150,6 +164,7 @@
 				B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */,
 				B2D6A4282B9FCDFD0045CCD1 /* Router.swift */,
 				B2D6A4182B9A96B40045CCD1 /* Constants.swift */,
+				B247B6AC2BB4F53C00FF17B9 /* HelperFunctions.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -216,6 +231,19 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		B247B69F2BB4D85600FF17B9 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B247B6A42BB4D86B00FF17B9 /* NeueHaasGrotDisp-55Roman-Trial.otf */,
+				B247B6A52BB4D86B00FF17B9 /* NeueHaasGrotDisp-56Italic-Trial.otf */,
+				B247B6A32BB4D86B00FF17B9 /* NeueHaasGrotDisp-65Medium-Trial.otf */,
+				B247B6A12BB4D86B00FF17B9 /* NeueHaasGrotDisp-66MediumItalic-Trial.otf */,
+				B247B6A02BB4D86B00FF17B9 /* TestDomaineText-Regular.otf */,
+				B247B6A22BB4D86B00FF17B9 /* TestDomaineText-RegularItalic.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		B2582D232BA40464002ABFA6 /* HealthKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +272,7 @@
 		B2D6A3A02B8EFEF80045CCD1 /* Ovum */ = {
 			isa = PBXGroup;
 			children = (
+				B247B69F2BB4D85600FF17B9 /* Fonts */,
 				B2582D262BA7E752002ABFA6 /* Info.plist */,
 				B2582D222BA403E7002ABFA6 /* Ovum.entitlements */,
 				B24694152BA12B0700286A75 /* App */,
@@ -421,7 +450,13 @@
 			files = (
 				B2D6A3A92B8EFF050045CCD1 /* Preview Assets.xcassets in Resources */,
 				B2D6A3A62B8EFF050045CCD1 /* Assets.xcassets in Resources */,
+				B247B6A92BB4D86B00FF17B9 /* NeueHaasGrotDisp-65Medium-Trial.otf in Resources */,
 				B24694292BA139CF00286A75 /* GoogleService-Info.plist in Resources */,
+				B247B6AB2BB4D86B00FF17B9 /* NeueHaasGrotDisp-56Italic-Trial.otf in Resources */,
+				B247B6AA2BB4D86B00FF17B9 /* NeueHaasGrotDisp-55Roman-Trial.otf in Resources */,
+				B247B6A72BB4D86B00FF17B9 /* NeueHaasGrotDisp-66MediumItalic-Trial.otf in Resources */,
+				B247B6A62BB4D86B00FF17B9 /* TestDomaineText-Regular.otf in Resources */,
+				B247B6A82BB4D86B00FF17B9 /* TestDomaineText-RegularItalic.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,6 +486,7 @@
 				B2D6A3EF2B914AEB0045CCD1 /* MessageInputField.swift in Sources */,
 				B2D6A4172B983DCF0045CCD1 /* OverviewHomeContent.swift in Sources */,
 				B2D6A3B12B8F1AB20045CCD1 /* BaseView.swift in Sources */,
+				B247B6AD2BB4F53C00FF17B9 /* HelperFunctions.swift in Sources */,
 				B2D6A4142B98313A0045CCD1 /* Document.swift in Sources */,
 				B2D6A4052B97E2410045CCD1 /* SendMessageField.swift in Sources */,
 				B247B68C2BB1216E00FF17B9 /* SymptomTray.swift in Sources */,

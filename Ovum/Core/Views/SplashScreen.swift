@@ -9,8 +9,8 @@ struct SplashScreen: View {
                     .resizable()
                     .frame(width: 77.03857, height: 53.78031)
                 Text("Ovum")
-                    .font(.largeTitle)
-                    .bold()
+                    .font(.custom(AppFonts.haasGrot, size: 64))
+                    .fontWeight(.bold)
                     .foregroundColor(.white)
             }
         }

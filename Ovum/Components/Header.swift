@@ -1,34 +1,23 @@
-//
-//  Header.swift
-//  Ovum
-//
-//  Created by Ollie Quarm on 29/2/2024.
-//
-
 import SwiftUI
 
 struct Header: View {
     var firstLine: String
     var secondLine: String
     var colour: Color
-    
-    init(firstLine: String, secondLine: String, colour: Color) {
-        self.firstLine = firstLine
-        self.secondLine = secondLine
-        self.colour = colour
-    }
+    let font: Font
+    var bolded: Bool = true
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
             Text(firstLine)
             Text(secondLine)
         }
-        .font(.largeTitle)
-        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+        .font(font)
+        .fontWeight(bolded ? .bold : .regular)
         .foregroundColor(colour)
     }
 }
 
-#Preview {
-    Header(firstLine: "Chat with", secondLine: "Ovum", colour: Color(.black))
-}
+//#Preview {
+//    Header(firstLine: "Chat with", secondLine: "Ovum", colour: Color(.black), font: )
+//}

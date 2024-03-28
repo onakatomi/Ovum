@@ -41,7 +41,7 @@ struct ChatDetail: View {
                     Divider()
                         .background(Color(.white))
                     HStack(alignment: .top) {
-                        Header(firstLine: "Chat with", secondLine: "Ovum", colour: Color(.white))
+                        Header(firstLine: "Chat with", secondLine: "Ovum", colour: Color(.white), font: .custom(AppFonts.haasGrot, size: 42))
                         Spacer()
                     }
                 }

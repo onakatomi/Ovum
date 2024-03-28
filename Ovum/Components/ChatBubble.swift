@@ -9,13 +9,14 @@ struct ChatBubble: View {
     var body: some View {
         VStack(alignment: author == "Ovum" ? .leading : .trailing, spacing: 5) {
             Text(author)
-                .font(.caption)
+                .font(.custom(AppFonts.haasGrot, size: 12))
                 .foregroundColor(.gray)
             Text((author == "Ovum" && !disableAnimation) ? caption : content)
                 .padding(16)
                 .background(author == "Ovum" ? Color(.white) : Color(red: 0.86, green: 0.84, blue: 0.98))
                 .cornerRadius(6)
-                .font(.body)
+                .font(.custom(AppFonts.haasGrot, size: 16))
+                .kerning(0.32)
                 .onAppear {
                     typeWriter()
                 }

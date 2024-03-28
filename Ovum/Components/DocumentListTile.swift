@@ -24,7 +24,7 @@ struct DocumentListTile: View {
                     Text(document.title)
                         .font(Font.headline.weight(.bold))
                     Text("·")
-                    Text(document.date)
+                    Text(stripDateString(dateString: document.date, format: .noTime))
                         .font(Font.headline.weight(.light))
                 }
                 .foregroundStyle(AppColours.maroon)

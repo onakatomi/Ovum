@@ -34,7 +34,7 @@ struct ChatHistory: View {
                 .background(AppColours.maroon)
                 .padding(.bottom, 16)
             HStack(alignment: .top) {
-                Header(firstLine: "Chat", secondLine: "History", colour: AppColours.maroon)
+                Header(firstLine: "Chat", secondLine: "History", colour: AppColours.maroon, font: .custom(AppFonts.testDomaine, size: 42), bolded: false)
                 Spacer()
                 Button {
                     router.navigateToRoot(within: .chat)
