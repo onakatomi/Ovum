@@ -10,8 +10,8 @@ class MessageViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var isDocumentUploading: Bool = false
     
-//    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
-    let baseUrl = "http://192.168.89.1:5001"
+    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
+//    let baseUrl = "http://192.168.89.1:5001"
     
     init(userId: String) {
         messages = []
@@ -83,7 +83,6 @@ class MessageViewModel: ObservableObject {
                 
                 // Handle response:
                 let _ = try JSONDecoder().decode(ChatSession.self, from: data)
-//                chatSessions.append(session)
             } catch {
                 print("POST Request Failed:", error)
             }

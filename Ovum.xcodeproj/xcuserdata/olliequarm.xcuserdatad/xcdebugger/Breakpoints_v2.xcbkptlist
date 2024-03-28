@@ -994,8 +994,8 @@
             filePath = "Ovum/Core/Views/Chat/MessageViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
             landmarkName = "summariseConversation(authorId:authorName:)"
             landmarkType = "7">
             <Locations>
@@ -1262,8 +1262,8 @@
             filePath = "Ovum/Core/Views/Chat/MessageViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
             landmarkName = "analyseDocument(document:userId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1278,8 +1278,8 @@
             filePath = "Ovum/Core/Views/Chat/MessageViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
             landmarkName = "analyseDocument(document:userId:)"
             landmarkType = "7">
             <Locations>
@@ -1401,8 +1401,8 @@
             filePath = "Ovum/Core/Views/Chat/MessageViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
             landmarkName = "analyseDocument(document:userId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1417,8 +1417,8 @@
             filePath = "Ovum/Core/Views/Chat/MessageViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "268"
-            endingLineNumber = "268"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
             landmarkName = "analyseDocument(document:userId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1433,8 +1433,8 @@
             filePath = "Ovum/Core/Views/Chat/MessageViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
             landmarkName = "analyseDocument(document:userId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1497,8 +1497,8 @@
             filePath = "Ovum/Core/Views/Chat/MessageViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
             landmarkName = "summariseConversation(authorId:authorName:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1561,8 +1561,8 @@
             filePath = "Ovum/Core/Views/Chat/MessageViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "summariseConversation(authorId:authorName:)"
             landmarkType = "7">
             <Locations>
@@ -1609,8 +1609,8 @@
             filePath = "Ovum/Core/Views/Chat/MessageViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
+            startingLineNumber = "237"
+            endingLineNumber = "237"
             landmarkName = "summariseConversation(authorId:authorName:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1625,8 +1625,8 @@
             filePath = "Ovum/Core/Views/Chat/MessageViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
             landmarkName = "summariseConversation(authorId:authorName:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1723,54 +1723,6 @@
                   startingLineNumber = "71"
                   endingLineNumber = "71"
                   offsetFromSymbolStart = "544">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4A9E7E2D-8569-4B56-86FB-0997B6AC4B3D"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Ovum/Core/Views/Chat/MessageViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "addSessionToCloud(encodedSession:userId:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "4A9E7E2D-8569-4B56-86FB-0997B6AC4B3D - 2dedad2bb0036164"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for Ovum.MessageViewModel.addSessionToCloud(encodedSession: Swift.String, userId: Swift.String) async -&gt; ()"
-                  moduleName = "Ovum"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/olliequarm/Desktop/development/projects/swift/Ovum/Ovum/Core/Views/Chat/MessageViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "82"
-                  endingLineNumber = "82"
-                  offsetFromSymbolStart = "576">
-               </Location>
-               <Location
-                  uuid = "4A9E7E2D-8569-4B56-86FB-0997B6AC4B3D - 2dedad2bb0036164"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for Ovum.MessageViewModel.addSessionToCloud(encodedSession: Swift.String, userId: Swift.String) async -&gt; ()"
-                  moduleName = "Ovum"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/olliequarm/Desktop/development/projects/swift/Ovum/Ovum/Core/Views/Chat/MessageViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "82"
-                  endingLineNumber = "82"
-                  offsetFromSymbolStart = "636">
                </Location>
             </Locations>
          </BreakpointContent>

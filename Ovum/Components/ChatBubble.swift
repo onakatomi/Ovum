@@ -16,7 +16,7 @@ struct ChatBubble: View {
                 .background(author == "Ovum" ? Color(.white) : Color(red: 0.86, green: 0.84, blue: 0.98))
                 .cornerRadius(6)
                 .font(.custom(AppFonts.haasGrot, size: 16))
-                .kerning(0.32)
+                .kerning(0.7)
                 .onAppear {
                     typeWriter()
                 }
