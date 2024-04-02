@@ -6,6 +6,6 @@ struct Document: Codable, Identifiable, Hashable {
     let title: String
     let date: String
     let type: DocumentType
-    let file: String // b64 encoded string
+    var file: String // b64 encoded string
     let summary: String
 }

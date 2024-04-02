@@ -65,14 +65,14 @@ struct RecordTypeTile: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 28, height: 28)
-                .padding(30)
+                .padding(25)
                 .background(
                   RoundedRectangle(cornerRadius: 6)
                     .fill(isSelected ? AppColours.maroon : .clear)
                     .stroke(AppColours.maroon, lineWidth: 1)
-                    .frame(height: 80)
+//                    .frame(height: 80)
                 )
-                .padding(.bottom, 0)
+                .padding(.bottom, 5)
 //            Text(recordType.getName())
             Text(text)
                 .font(Font.callout.weight(.semibold))
@@ -82,7 +82,7 @@ struct RecordTypeTile: View {
     }
 }
 
-//#Preview {
-//    ContentView(selectedTab: .records)
-//        .environmentObject(MessageViewModel(userId: "1"))
-//}
+#Preview {
+    BaseView(BaseViewType.documents)
+        .environmentObject(MessageViewModel(userId: "1"))
+}

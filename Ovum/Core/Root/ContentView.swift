@@ -7,22 +7,21 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
+            if (authViewModel.userSession == nil || authViewModel.currentUser?.id == nil) {
+                LoginView()
+            } else {
+                // With user's ID, instantiate the main repository.
+                LoggedInView(viewModel: MessageViewModel(userId: authViewModel.currentUser!.id))
+                    .environmentObject(authViewModel)
+                    .environmentObject(router)
+            }
             if isSplashActive {
                 SplashScreen()
                     .ignoresSafeArea()
-            } else {
-                if (authViewModel.userSession == nil || authViewModel.currentUser?.id == nil) {
-                    LoginView()
-                } else {
-                    // With user's ID, instantiate the main repository.
-                    LoggedInView(viewModel: MessageViewModel(userId: authViewModel.currentUser!.id))
-                        .environmentObject(authViewModel)
-                        .environmentObject(router)
-                }
             }
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                 withAnimation {
                     self.isSplashActive = false
                 }

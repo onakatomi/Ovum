@@ -10,8 +10,9 @@ class MessageViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var isDocumentUploading: Bool = false
     
-    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
+//    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
 //    let baseUrl = "http://192.168.89.1:5001"
+    let baseUrl = "http://192.168.89.17:5002"
     
     init(userId: String) {
         messages = []
@@ -322,20 +323,41 @@ class MessageViewModel: ObservableObject {
                 let (data, _) = try await URLSession.shared.data(for: request)
                 let decoder = JSONDecoder()
                 let apiResponse = try decoder.decode(AllDocumentsResponse.self, from: data) // Decode the incoming JSON into a Swift struct
-                for document in apiResponse.all_documents {
-                    print(document.title)
-                }
                 
-                // Only append fetched sessions that don't currently exist in the array to prevent duplicates.
-                documents.append(contentsOf: apiResponse.all_documents.filter({ document in
-                    !documents.contains { existingDocument in
-                        document.id == existingDocument.id
+                // Go through each document and replace URL with the b64 encoded string.
+                for var document in apiResponse.all_documents {
+                    guard let url = URL(string: document.file) else {
+                        print("Invalid URL")
+                        return
                     }
-                }))
+                    
+                    URLSession.shared.dataTask(with: url) { data, response, error in
+                        if let error = error {
+                            print("Error: \(error)")
+                        } else if let data = data {
+                            if let text = String(data: data, encoding: .utf8) {
+                                DispatchQueue.main.async {
+                                    document.file = text // Modify struct so that it contains the b64 contents.
+                                    // Only append fetched sessions that don't currently exist in the array to prevent duplicates.
+                                    if (!self.documents.contains { existingDocument in
+                                        document.id == existingDocument.id
+                                    }) {
+                                        self.documents.append(document)
+                                    }
+                                    print("Fetched document with title: \(document.title)")
+                                }
+                            }
+                        }
+                    }.resume()
+                }
             } catch {
                 print("GET Request Failed:", error)
             }
         }
+    }
+    
+    struct SignedURLsResponse: Codable {
+        var all_signed_urls: [String]
     }
     
     struct AllDocumentsResponse: Codable {

@@ -36,7 +36,7 @@ struct RecordsHomeContent: View {
     
     var body: some View {
         VStack {
-            Spacer()
+//            Spacer()
             HStack {
                 RecordTypeTile(text: "All", image: documentFilterType == nil ? Image("home_white") : Image("home"), isSelected: documentFilterType == nil)
                     .onTapGesture {
@@ -58,8 +58,8 @@ struct RecordsHomeContent: View {
                         documentFilterType = DocumentType.letter
                     }
             }
-            .padding([.bottom], 24)
-            .padding([.top], 35)
+            .padding([.bottom], 5)
+            .padding([.top], 20)
             Button {
                 showAddDocumentTray.toggle()
             } label: {
@@ -79,9 +79,9 @@ struct RecordsHomeContent: View {
                         .presentationDetents([.medium])
                 }
             }
-            .padding([.bottom], 24)
+            .padding([.bottom], 5)
             Divider()
-                .padding([.bottom], 24)
+                .padding([.bottom], 5)
             HStack(spacing: 14) {
                 Image("search")
                     .resizable()
@@ -91,7 +91,7 @@ struct RecordsHomeContent: View {
             .padding(EdgeInsets(top: 22, leading: 18, bottom: 22, trailing: 18))
             .background(Color(.white))
             .cornerRadius(6)
-            .padding(.bottom, 24)
+            .padding(.bottom, 10)
             HStack {
                 Text("Recent")
                 Spacer()
