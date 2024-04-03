@@ -18,6 +18,22 @@ struct ChatHomeContent: View {
                     .padding([.top], 16)
                     .multilineTextAlignment(.center)
                 Spacer()
+                Button {
+                    Task {
+                        viewModel.isNewThreadBeingGenerated = true
+                        await viewModel.generateNewThread(userId: authViewModel.currentUser!.id)
+                        viewModel.isNewThreadBeingGenerated = false
+                    }
+                } label: {
+                    Text(viewModel.isNewThreadBeingGenerated ? "Creating..."  : "New Thread")
+                        .font(.subheadline)
+                        .padding(10)
+                        .background(viewModel.isNewThreadBeingGenerated ? AppColours.maroon : AppColours.green)
+                        .opacity(viewModel.isNewThreadBeingGenerated ? 0.5 : 1.0)
+                        .cornerRadius(6)
+                        .disabled(viewModel.isNewThreadBeingGenerated)
+                }
+                Spacer()
                 Divider()
                 VStack {
                     NavigationLink(value: ChatNavDestination.chatDetail) {

@@ -9,6 +9,7 @@ class MessageViewModel: ObservableObject {
     @Published var documents: [Document] = []
     @Published var isLoading: Bool = false
     @Published var isDocumentUploading: Bool = false
+    @Published var isNewThreadBeingGenerated: Bool = false
     var authViewModel: AuthViewModel
     
 //    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
@@ -310,6 +311,36 @@ class MessageViewModel: ObservableObject {
                 print("Adding document to cloud failed:", error)
             }
         }
+    }
+    
+    func generateNewThread(userId: String) async {
+        let endpoint = "/new_thread"
+        
+        let dataToSend: [String: Any] = [
+            "user_id": userId
+        ]
+        
+        if let url = URL(string: baseUrl + endpoint) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            do {
+                request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
+                let (data, _) = try await URLSession.shared.data(for: request)
+                
+                // Handle response:
+                let apiResponse = try JSONDecoder().decode(NewThreadResponse.self, from: data)
+                print("Generated new thread with ID \(apiResponse.new_thread_id)")
+                
+            } catch {
+                print("Generating new thread failed:", error)
+            }
+        }
+    }
+    
+    struct NewThreadResponse: Codable {
+        let new_thread_id: String
     }
     
     func getAllDocuments(userId: String) async {
