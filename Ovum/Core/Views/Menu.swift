@@ -4,6 +4,7 @@ struct Menu: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var router: Router
     @EnvironmentObject var authViewModel: AuthViewModel
+//    let tab: ContentViewTab
     
     var body: some View {
         ZStack {
@@ -18,9 +19,10 @@ struct Menu: View {
                 Spacer()
                 Button {
 //                    dismiss()
-                    router.navigateToRoot(within: .overview)
+                    router.navigateBack(within: router.selectedTab)
+//                    router.navigateToRoot(within: .overview)
                     router.navigateToRoot(within: .chat)
-                    router.navigateToRoot(within: .records)
+//                    router.navigateToRoot(within: .records)
                     router.navigateWithinChat(to: .chatHistory)
                 } label: {
                     Text("Chat History")

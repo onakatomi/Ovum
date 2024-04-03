@@ -13,14 +13,16 @@ enum ChatNavDestination: Hashable {
     case chatHistoryDetail(session: ChatSession)
     case chatOnDocument(document: Document)
     case chatComplete(session: ChatSession)
+    case menu
 }
 
 enum RecordsNavDestination: Hashable {
     case documentDetail(document: Document)
+    case menu
 }
 
 enum OverviewNavDestination {
-    case unsure
+    case menu
 }
 
 enum ResolveOption {
