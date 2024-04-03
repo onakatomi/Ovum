@@ -8,7 +8,11 @@ struct ChatCompleted: View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
                 Spacer()
-                NavigationLink (destination: Menu().toolbar(.hidden, for: .tabBar)) { // Hide tabbar whilst in MenuScreen.
+                Button {
+                    withAnimation {
+                        router.navigateWithinChat(to: .menu)
+                    }
+                } label: {
                     Image("menu_brown")
                 }
                 .navigationBarBackButtonHidden()

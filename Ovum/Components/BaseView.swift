@@ -39,6 +39,7 @@ func getHeader(type: BaseViewType) -> Header {
 }
 
 struct BaseView: View {
+    @EnvironmentObject var router: Router
     
     let type: BaseViewType
     
@@ -55,7 +56,25 @@ struct BaseView: View {
                     .aspectRatio(contentMode: .fit)
                     .blur(radius: 10, opaque: true)
                 VStack(spacing: 0) {
-                    NavigationLink (destination: Menu().toolbar(.hidden, for: .tabBar)) { // Hide tabbar whilst in MenuScreen.
+                    Button {
+                        switch router.selectedTab {
+                            case .overview:
+                                withAnimation {
+                                    router.navigateWithinOveview(to: .menu)
+                                }
+                                
+                            case .chat:
+                                withAnimation {
+                                    router.navigateWithinChat(to: .menu)
+                                }
+                                
+                            case .records:
+                                withAnimation {
+                                    router.navigateWithinRecords(to: .menu)
+                                }
+                        }
+                        
+                    } label: {
                         Image("menu_white")
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             .padding(.trailing, 8)

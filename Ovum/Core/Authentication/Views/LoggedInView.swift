@@ -13,30 +13,40 @@ struct LoggedInView: View {
                     Group {
                         NavigationStack(path: $router.overviewNavigation) {
                             BaseView(BaseViewType.overview)
+                                .navigationDestination(for: OverviewNavDestination.self) { destination in
+                                    switch destination {
+                                        case .menu:
+                                            Menu().toolbar(.hidden, for: .tabBar)
+                                    }
+                                }
                         }
                         .tabItem {
                             Image((router.selectedTab == ContentViewTab.chat && router.chatNavigation.last == .chatDetail) ? "tab_overview_disabled" : (router.selectedTab == .overview ? "tab_overview_active" : "tab_overview_inactive"))
                             Text("Overview")
                         }
                         .tag(ContentViewTab.overview)
+                        
                         NavigationStack(path: $router.chatNavigation) {
                             BaseView(BaseViewType.chat)
                                 .navigationDestination(for: ChatNavDestination.self) { destination in
                                     switch destination {
-                                    case .chatHistory:
-                                        ChatHistory()
-                                        
-                                    case .chatDetail:
-                                        ChatDetail()
-                                        
-                                    case .chatHistoryDetail(let session):
-                                        ChatHistoryDetail(chatSession: session)
-                                        
-                                    case .chatOnDocument(let document):
-                                        ChatDetail(document: document.file)
-                                        
-                                    case .chatComplete(let session):
-                                        ChatCompleted(chatSession: session)
+                                        case .chatHistory:
+                                            ChatHistory()
+                                            
+                                        case .chatDetail:
+                                            ChatDetail()
+                                            
+                                        case .chatHistoryDetail(let session):
+                                            ChatHistoryDetail(chatSession: session)
+                                            
+                                        case .chatOnDocument(let document):
+                                            ChatDetail(document: document.file)
+                                            
+                                        case .chatComplete(let session):
+                                            ChatCompleted(chatSession: session)
+                                            
+                                        case .menu:
+                                            Menu().toolbar(.hidden, for: .tabBar)
                                     }
                                 }
                         }
@@ -45,12 +55,16 @@ struct LoggedInView: View {
                             Text("Chat")
                         }
                         .tag(ContentViewTab.chat)
+                        
                         NavigationStack(path: $router.recordsNavigation) {
                             BaseView(BaseViewType.documents)
                                 .navigationDestination(for: RecordsNavDestination.self) { destination in
                                     switch destination {
                                     case .documentDetail(let document):
                                         RecordDetail(document: document)
+                                        
+                                    case .menu:
+                                        Menu().toolbar(.hidden, for: .tabBar)
                                     }
                                 }
                         }
@@ -90,20 +104,20 @@ struct LoggedInView: View {
                     print("tapped same tab")
                     
                     switch selectedTab {
-                    case .overview:
-                        withAnimation {
-                            router.overviewNavigation = []
-                        }
-                        
-                    case .chat:
-                        withAnimation {
-                            router.chatNavigation = []
-                        }
-                        
-                    case .records:
-                        withAnimation {
-                            router.recordsNavigation = []
-                        }
+                        case .overview:
+                            withAnimation {
+                                router.overviewNavigation = []
+                            }
+                            
+                        case .chat:
+                            withAnimation {
+                                router.chatNavigation = []
+                            }
+                            
+                        case .records:
+                            withAnimation {
+                                router.recordsNavigation = []
+                            }
                     }
                 }
                 print("exited")
