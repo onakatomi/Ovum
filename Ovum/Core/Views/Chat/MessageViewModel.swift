@@ -9,16 +9,18 @@ class MessageViewModel: ObservableObject {
     @Published var documents: [Document] = []
     @Published var isLoading: Bool = false
     @Published var isDocumentUploading: Bool = false
+    var authViewModel: AuthViewModel
     
 //    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
 //    let baseUrl = "http://192.168.89.1:5001"
     let baseUrl = "http://192.168.89.17:5002"
     
-    init(userId: String) {
+    init(userId: String, authViewModelPassedIn: AuthViewModel) {
         messages = []
         chatSessions = chatSessionsMock
         documents = []
         currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], title: "Placeholder", date: getDateAsString(date: Date.now), colour: Color(.red))
+        authViewModel = authViewModelPassedIn
         Task {
             await getAllChatSessions(userId: userId)
             await getAllDocuments(userId: userId)
@@ -324,8 +326,11 @@ class MessageViewModel: ObservableObject {
                 let decoder = JSONDecoder()
                 let apiResponse = try decoder.decode(AllDocumentsResponse.self, from: data) // Decode the incoming JSON into a Swift struct
                 
+                let group = DispatchGroup()
+                
                 // Go through each document and replace URL with the b64 encoded string.
                 for var document in apiResponse.all_documents {
+                    group.enter()
                     guard let url = URL(string: document.file) else {
                         print("Invalid URL")
                         return
@@ -337,6 +342,7 @@ class MessageViewModel: ObservableObject {
                         } else if let data = data {
                             if let text = String(data: data, encoding: .utf8) {
                                 DispatchQueue.main.async {
+                                    defer { group.leave() }
                                     document.file = text // Modify struct so that it contains the b64 contents.
                                     // Only append fetched sessions that don't currently exist in the array to prevent duplicates.
                                     if (!self.documents.contains { existingDocument in
@@ -349,6 +355,12 @@ class MessageViewModel: ObservableObject {
                             }
                         }
                     }.resume()
+                }
+                group.notify(queue: DispatchQueue.main) {
+                    print("All things fetched")
+                    withAnimation {
+                        self.authViewModel.isAllUserDataFetched = true
+                    }
                 }
             } catch {
                 print("GET Request Failed:", error)

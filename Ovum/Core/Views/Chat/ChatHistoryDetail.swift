@@ -34,9 +34,6 @@ struct ChatHistoryDetail: View {
                         .font(Font.headline.weight(.thin))
                 }
                 Spacer()
-                Image("edit")
-                    .resizable()
-                    .frame(width: 28.0, height: 28.0)
             }
                 .padding(.bottom, 40)
             Divider()
@@ -64,7 +61,7 @@ struct ChatHistoryDetail: View {
     }
 }
 
-#Preview {
-    ChatHistory()
-        .environmentObject(MessageViewModel(userId: "1"))
-}
+//#Preview {
+//    ChatHistory()
+//        .environmentObject(MessageViewModel(userId: "1"))
+//}

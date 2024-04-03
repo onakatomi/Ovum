@@ -17,6 +17,7 @@ struct Menu: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 Spacer()
                 Button {
+//                    dismiss()
                     router.navigateToRoot(within: .overview)
                     router.navigateToRoot(within: .chat)
                     router.navigateToRoot(within: .records)

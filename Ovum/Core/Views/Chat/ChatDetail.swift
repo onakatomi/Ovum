@@ -7,11 +7,12 @@ struct ChatDetail: View {
     
     @EnvironmentObject var viewModel: MessageViewModel
     @EnvironmentObject var router: Router
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @ObservedObject private var keyboard = KeyboardResponder()
     @State private var inputText: String = ""
     @FocusState private var textFieldIsFocused: Bool
     @State private var awaitingResponse: Bool = false
     @State private var isNewSession: Bool = true
-    @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var scrollViewHeight: CGFloat = 0
     var document: String?
@@ -66,17 +67,29 @@ struct ChatDetail: View {
                                                 .frame(width: 80, height: 40, alignment: .leading)
                                                 .id("typingIndicator")
                                         }
-                                        Rectangle()
-                                            .fill(AppColours.brown)
-                                            .frame(height: 1)
-                                            .id("bottomRect")
+                                        VStack(spacing: 0) {
+                                            Rectangle()
+                                                .fill(AppColours.brown)
+                                                .frame(height: 1)
+                                                .id("bottomRect")
+                                            Rectangle()
+                                                .fill(AppColours.brown)
+                                                .frame(height: 1)
+                                                .id("bottomRect2")
+                                        }
                                     }
                                     .opacity(viewModel.isLoading ? 0.5 : 1.0)
-                                    .padding([.bottom], 10)
+//                                    .padding([.bottom], 10)
                                     .background(GeometryReader { geometry in
                                         Color.clear
                                             .preference(key: ScrollViewHeightPreferenceKey.self, value: geometry.size.height)
                                     })
+                                    .onPreferenceChange(ScrollViewHeightPreferenceKey.self) { scrollViewHeight = $0
+                                        print("Pref key change")
+                                        withAnimation {
+                                            scrollViewProxy.scrollTo("bottomRect2", anchor: .top)
+                                        }
+                                    }
                                     .onChange(of: viewModel.currentSession.messages.count) {
                                         if (viewModel.currentSession.messages.count != 0) {
                                             withAnimation {
@@ -104,10 +117,13 @@ struct ChatDetail: View {
                                             }
                                         }
                                     }
-                                }
-                                .onPreferenceChange(ScrollViewHeightPreferenceKey.self) { scrollViewHeight = $0
-                                    withAnimation {
-                                        scrollViewProxy.scrollTo("bottomRect", anchor: .bottom)
+                                    .onChange(of: keyboard.currentHeight) {
+                                        if (keyboard.currentHeight >= 370) {
+                                            print("Hey")
+                                            withAnimation {
+                                                scrollViewProxy.scrollTo("bottomRect", anchor: .bottom)
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -128,16 +144,17 @@ struct ChatDetail: View {
                             }
                             .disabled(viewModel.currentSession.messages.count < 2 || viewModel.isLoading)
                         }
-                        .padding(.vertical, 20)
+                        .padding(.top, 3)
+                        .padding(.bottom, 20)
                     }
                     .padding([.horizontal], 20)
-                    
+                    .onTapGesture {
+                        self.endEditing()
+                    }
                     
                     Divider()
                         .background(AppColours.maroon)
                     SendMessageField(textInput: $inputText, isDisabled: awaitingResponse) {
-                        //                            print(authViewModel.currentUser?.email)
-                        //                            print(authViewModel.currentUser?.id)outer.tabViewsDisabled = true
                         viewModel.addSession(isNewSession: isNewSession)
                         print(viewModel.currentSession.id)
                         awaitingResponse = true
@@ -226,9 +243,15 @@ struct ScrollViewHeightPreferenceKey: PreferenceKey {
     }
 }
 
+extension View {
+    func endEditing() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
 #Preview {
     ChatDetail()
-        .environmentObject(MessageViewModel(userId: "1"))
+        .environmentObject(MessageViewModel(userId: "1", authViewModelPassedIn: AuthViewModel()))
         .environmentObject(AuthViewModel())
         .environmentObject(Router())
 }

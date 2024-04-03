@@ -3,7 +3,6 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var router: Router
-    @State var isSplashActive: Bool = true
     
     var body: some View {
         ZStack {
@@ -11,20 +10,14 @@ struct ContentView: View {
                 LoginView()
             } else {
                 // With user's ID, instantiate the main repository.
-                LoggedInView(viewModel: MessageViewModel(userId: authViewModel.currentUser!.id))
+                LoggedInView(viewModel: MessageViewModel(userId: authViewModel.currentUser!.id, authViewModelPassedIn: authViewModel))
                     .environmentObject(authViewModel)
                     .environmentObject(router)
             }
-            if isSplashActive {
+            
+            if !authViewModel.isAllUserDataFetched {
                 SplashScreen()
                     .ignoresSafeArea()
-            }
-        }
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                withAnimation {
-                    self.isSplashActive = false
-                }
             }
         }
     }

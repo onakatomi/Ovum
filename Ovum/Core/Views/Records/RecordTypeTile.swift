@@ -82,7 +82,7 @@ struct RecordTypeTile: View {
     }
 }
 
-#Preview {
-    BaseView(BaseViewType.documents)
-        .environmentObject(MessageViewModel(userId: "1"))
-}
+//#Preview {
+//    BaseView(BaseViewType.documents)
+//        .environmentObject(MessageViewModel(userId: "1"))
+//}

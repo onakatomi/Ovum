@@ -102,7 +102,7 @@ struct BaseView: View {
     }
 }
 
-#Preview {
-    BaseView(BaseViewType.overview)
-        .environmentObject(MessageViewModel(userId: "1"))
-}
+//#Preview {
+//    BaseView(BaseViewType.overview)
+//        .environmentObject(MessageViewModel(userId: "1"))
+//}

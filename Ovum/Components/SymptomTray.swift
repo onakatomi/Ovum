@@ -53,8 +53,8 @@ struct SymptomTray: View {
         .padding(.vertical, 40)
     }
 }
-
-#Preview {
-    OverviewHomeContent()
-        .environmentObject(MessageViewModel(userId: "1"))
-}
+//
+//#Preview {
+//    OverviewHomeContent()
+//        .environmentObject(MessageViewModel(userId: "1"))
+//}

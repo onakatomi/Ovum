@@ -11,6 +11,7 @@ protocol AuthenticationFormProtocol {
 class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User? // Tell us if we have a user logged in or not when we open the app
     @Published var currentUser: User? // Our user object
+    @Published var isAllUserDataFetched: Bool = false
     
     init() {
         self.userSession = Auth.auth().currentUser // Make when re-open app get the cached user Firebase stores on phone locally.

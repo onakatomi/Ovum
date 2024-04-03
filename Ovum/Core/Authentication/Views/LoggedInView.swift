@@ -15,7 +15,7 @@ struct LoggedInView: View {
                             BaseView(BaseViewType.overview)
                         }
                         .tabItem {
-                            Image(router.selectedTab == .overview ? "tab_overview_active" : "tab_overview_inactive")
+                            Image((router.selectedTab == ContentViewTab.chat && router.chatNavigation.last == .chatDetail) ? "tab_overview_disabled" : (router.selectedTab == .overview ? "tab_overview_active" : "tab_overview_inactive"))
                             Text("Overview")
                         }
                         .tag(ContentViewTab.overview)
@@ -55,7 +55,7 @@ struct LoggedInView: View {
                                 }
                         }
                         .tabItem {
-                            Image(router.selectedTab == .records ? "tab_records_active" : "tab_records_inactive")
+                            Image((router.selectedTab == ContentViewTab.chat && router.chatNavigation.last == .chatDetail) ? "tab_records_disabled" : (router.selectedTab == .records ? "tab_records_active" : "tab_records_inactive"))
                             Text("Records")
                         }
                         .tag(ContentViewTab.records)
@@ -64,7 +64,7 @@ struct LoggedInView: View {
                     .toolbarBackground(.visible, for: .tabBar)
                 }
                 .environmentObject(router)
-                .accentColor(Color(red: 0.3, green: 0.1, blue: 0.04))
+                .accentColor(AppColours.darkBrown)
             }
             .environmentObject(viewModel)
         }
@@ -75,22 +75,14 @@ struct LoggedInView: View {
             get: { router.selectedTab },
             set: { selectedTab in
                 
-                if router.selectedTab == ContentViewTab.chat && (router.chatNavigation.last == Ovum.ChatNavDestination.chatDetail  || (router.chatNavigation.count > 0 && router.chatNavigation.last != Ovum.ChatNavDestination.chatHistory)) {
-                    print("trying to leave chat")
-                    router.attemptAtExitUnresolved = true
-                    //                    router.attemptAtExitUnresolved = true
-                    //                    router.exitOutcome = .unresolved
-                    //                    while router.exitOutcome == .unresolved {
-                    //
-                    ////                        print("while ")
-                    //                    }
-                    //                    print("while oassed")
-                    //                    if router.exitOutcome == .stay {
+                if router.selectedTab == ContentViewTab.chat && (router.chatNavigation.last == Ovum.ChatNavDestination.chatDetail) {
+                    print("Preventing action")
+                    
+                    // Required to keep current state
                     withAnimation {
                         router.chatNavigation = router.chatNavigation
                     }
                     return
-                    //                    }
                 }
                 
                 // If the option is to leave, proceed with the below.
@@ -123,6 +115,8 @@ struct LoggedInView: View {
     }
 }
 
-//#Preview {
-//    LoggedInView()
-//}
+#Preview {
+    LoggedInView(viewModel: MessageViewModel(userId: "hey", authViewModelPassedIn: AuthViewModel()))
+        .environmentObject(AuthViewModel())
+        .environmentObject(Router())
+}
