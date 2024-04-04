@@ -5,6 +5,10 @@ struct User: Identifiable, Codable {
     let id: String
     let email: String
     let name: String
+    var dob: String?
+    var isPregnant: Bool?
+    var lifecycle: String?
+    var isOnboardingCompleted: Bool?
 }
 
 extension User {

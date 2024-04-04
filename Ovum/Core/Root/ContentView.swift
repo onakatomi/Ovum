@@ -8,6 +8,8 @@ struct ContentView: View {
         ZStack {
             if (authViewModel.userSession == nil || authViewModel.currentUser?.id == nil) {
                 LoginView()
+            } else if (!authViewModel.currentUser!.isOnboardingCompleted!) {
+                OnboardingView()
             } else {
                 // With user's ID, instantiate the main repository.
                 LoggedInView(viewModel: MessageViewModel(userId: authViewModel.currentUser!.id, authViewModelPassedIn: authViewModel))
