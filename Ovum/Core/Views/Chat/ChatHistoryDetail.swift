@@ -30,7 +30,7 @@ struct ChatHistoryDetail: View {
                     Text(chatSession.title)
                         .font(Font.title3.weight(.bold))
                         .foregroundColor(AppColours.maroon)
-                    Text(chatSession.date)
+                    Text(stripDateString(dateString: chatSession.date, format: .elegant))
                         .font(Font.headline.weight(.thin))
                 }
                 Spacer()

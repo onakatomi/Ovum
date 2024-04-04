@@ -41,7 +41,7 @@ func stripDateString(dateString: String, format: DateFormats) -> String {
         case .noTime:
             formatter.dateFormat = "dd/MM/yy"
         case .elegant:
-            formatter.dateFormat = "d MMMM yyyy"
+            formatter.dateFormat = "d MMM yyyy h:mm a"
         }
         return formatter
     }()

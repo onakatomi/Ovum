@@ -80,30 +80,30 @@ struct RecordsHomeContent: View {
                 }
             }
             .padding([.bottom], 5)
-            Divider()
-                .padding([.bottom], 5)
-            HStack(spacing: 14) {
-                Image("search")
-                    .resizable()
-                    .frame(width: 18.0, height: 18.0)
-                TextField("Search documents", text: $searchText)
-            }
-            .padding(EdgeInsets(top: 22, leading: 18, bottom: 22, trailing: 18))
-            .background(Color(.white))
-            .cornerRadius(6)
-            .padding(.bottom, 10)
-            HStack {
-                Text("Recent")
-                Spacer()
-                HStack(spacing: 12) {
-                    Text("See all")
-                    Image("forward_button")
-                        .resizable()
-                        .frame(width: 4, height: 9)
-                }
-            }
-            .font(Font.callout.bold())
-            .padding(.bottom, 8)
+//            Divider()
+//                .padding([.bottom], 5)
+//            HStack(spacing: 14) {
+//                Image("search")
+//                    .resizable()
+//                    .frame(width: 18.0, height: 18.0)
+//                TextField("Search documents", text: $searchText)
+//            }
+//            .padding(EdgeInsets(top: 22, leading: 18, bottom: 22, trailing: 18))
+//            .background(Color(.white))
+//            .cornerRadius(6)
+//            .padding(.bottom, 10)
+//            HStack {
+//                Text("Recent")
+//                Spacer()
+//                HStack(spacing: 12) {
+//                    Text("See all")
+//                    Image("forward_button")
+//                        .resizable()
+//                        .frame(width: 4, height: 9)
+//                }
+//            }
+//            .font(Font.callout.bold())
+//            .padding(.bottom, 8)
             if filteredDocuments.count == 0 {
                     Text("*No uploaded documents*")
                         .font(.caption)

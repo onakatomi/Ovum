@@ -22,7 +22,8 @@ struct ChatTile: View {
                 VStack(alignment: .leading) {
                     Text(chatTile.title)
                         .font(Font.headline.weight(.bold))
-                    Text(chatTile.date)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Text(stripDateString(dateString: chatTile.date, format: .elegant))
                         .font(Font.headline.weight(.light))
                 }
                 .foregroundStyle(AppColours.maroon)

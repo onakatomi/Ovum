@@ -16,7 +16,6 @@ struct RecordDetail: View {
                         Image("back_button")
                     }
                     Spacer()
-                    Image("export")
                 }
                 .padding(.horizontal, 20)
                     .padding(.bottom, 18)
@@ -27,7 +26,7 @@ struct RecordDetail: View {
                     .font(Font.title.weight(.bold))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 20)
-                Text(document.date)
+                Text(stripDateString(dateString: document.date, format: .elegant))
                     .font(Font.title2)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 20)
@@ -55,6 +54,7 @@ struct RecordDetail: View {
                             .onAppear {
                                 typeWriter()
                             }
+                            .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
                 .padding(.horizontal, 20)

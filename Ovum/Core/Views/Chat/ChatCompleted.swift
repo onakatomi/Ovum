@@ -17,7 +17,7 @@ struct ChatCompleted: View {
                 }
                 .navigationBarBackButtonHidden()
             }
-                .padding(.bottom, 18)
+            .padding(.bottom, 18)
             Divider()
                 .background(AppColours.maroon)
                 .padding(.bottom, 16)
@@ -28,27 +28,29 @@ struct ChatCompleted: View {
                     .resizable()
                     .frame(width: 44.0, height: 44.0)
             }
-                .padding(.bottom, 16)
+            .padding(.bottom, 16)
             Text("Thank you. This information has been added to Ovum.")
                 .font(.custom(AppFonts.testDomaine, size: 24))
                 .foregroundColor(AppColours.darkBrown)
             Divider()
                 .background(AppColours.maroon)
                 .padding(.vertical, 16)
-            VStack(alignment: .leading) {
-                Text("**Reported On**: \(stripDateString(dateString: chatSession.date, format: .elegant))")
-                    .padding(.vertical, 8)
-                ForEach(chatSession.symptoms, id: \.self) { symptom in
-                    Text(symptom.capitalized)
-                        .font(.custom(AppFonts.testDomaine, size: 24))
+            ScrollView {
+                VStack(alignment: .leading) {
+                    Text("**Reported On**: \(stripDateString(dateString: chatSession.date, format: .elegant))")
                         .padding(.vertical, 8)
-                }
-                Text("**Chat Summary:**")
-                    .padding(.vertical, 8)
-                ScrollView {
+                    ForEach(chatSession.symptoms, id: \.self) { symptom in
+                        Text(symptom.capitalized)
+                            .font(.custom(AppFonts.testDomaine, size: 24))
+                            .padding(.vertical, 2)
+                    }
+                    Text("**Chat Summary:**")
+                        .padding(.vertical, 8)
+                    
                     Text(chatSession.summary ?? "nothing")
                         .font(.custom(AppFonts.haasGrot, size: 16))
                         .kerning(0.32)
+                        .lineSpacing(7)
                 }
             }
             .foregroundColor(AppColours.maroon)
@@ -56,8 +58,8 @@ struct ChatCompleted: View {
             PurpleButton(image: "upload", text: "Continue") {
                 router.navigateToRoot(within: .chat)
             }
-                .frame(width: UIScreen.main.bounds.width - 32)
-                .padding(.bottom, 30)
+            .frame(width: UIScreen.main.bounds.width - 32)
+            .padding(.bottom, 30)
         }
         .padding(.horizontal, 20)
         .background {
@@ -69,5 +71,5 @@ struct ChatCompleted: View {
 }
 
 #Preview {
-    ChatCompleted(chatSession: ChatSession(messages: chatData, bodyParts: [BodyPart.abdomen], symptoms: ["stomach ache"], title: "Sample Chat Session #2", date: getDateAsString(date: Date.now), colour: AppColours.indigo, summary: "Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum."))
+    ChatCompleted(chatSession: ChatSession(messages: chatData, bodyParts: [BodyPart.abdomen], symptoms: ["stomach ache", "fatigue"], title: "Sample Chat Session #2", date: getDateAsString(date: Date.now), colour: AppColours.indigo, summary: "Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum."))
 }

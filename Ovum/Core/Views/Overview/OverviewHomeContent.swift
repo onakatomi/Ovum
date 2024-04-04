@@ -111,10 +111,10 @@ struct OverviewHomeContent: View {
             .fontWeight(.bold)
                 .foregroundColor(AppColours.maroon)
             if orderedChatSessions.count > 0 {
-                Text(orderedChatSessions[Int(sliderValue)].date)
+                Text(stripDateString(dateString: orderedChatSessions[Int(sliderValue)].date, format: .elegant))
                     .foregroundColor(AppColours.maroon)
-                    .fontWeight(!isEditing ? .medium : .bold)
-                    .italic()
+//                    .fontWeight(!isEditing ? .medium : .bold)
+//                    .italic()
             }
 //            HStack {
 //                ForEach(orderedChatSessions[Int(sliderValue)].bodyParts, id: \.self) { bodyPart in
@@ -122,9 +122,9 @@ struct OverviewHomeContent: View {
 //                }
 //            }
             Spacer()
-            TransparentButton(text: "View Medications", colour: AppColours.maroon) {
-                print("meds")
-            }
+//            TransparentButton(text: "View Medications", colour: AppColours.maroon) {
+//                print("meds")
+//            }
             
 //            VStack {
 //                ForEach(orderedChatSessions) { session in

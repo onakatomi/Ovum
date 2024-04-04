@@ -13,7 +13,7 @@ struct SymptomTray: View {
                     VStack {
                         Text("**Symptom Reported**")
                             .font(.subheadline)
-                        Text(chatSession.date)
+                        Text(stripDateString(dateString: chatSession.date, format: .elegant))
                             .font(.subheadline)
                     }
                 }
