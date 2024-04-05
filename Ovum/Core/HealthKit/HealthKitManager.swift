@@ -7,6 +7,8 @@ import SwiftUI
 class HealthKitManager: ObservableObject {
     static let shared = HealthKitManager()
     var healthStore = HKHealthStore()
+    
+    @Published var haveAccess: Bool = false
     @Published var stepCountToday: String?
     @Published var HRV: String?
     @Published var heartRate: String?
@@ -24,7 +26,7 @@ class HealthKitManager: ObservableObject {
     func requestAuthorization() {
         // The type of data we will be reading from Health (e.g stepCount)
         let toReads = Set([
-            HKObjectType.quantityType(forIdentifier: .stepCount)!,
+            HKQuantityType(.stepCount),
             HKQuantityType(.heartRateVariabilitySDNN),
             HKQuantityType(.heartRate),
             HKQuantityType(.respiratoryRate),
@@ -47,15 +49,16 @@ class HealthKitManager: ObservableObject {
             success, error in
             if success {
                 Task {
-                    self.menstrualFlow = await self.readMenstrualData(metric: .menstrualFlow)
-                    self.sleep = await self.readSleepData(metric: .sleepAnalysis)
+                    self.haveAccess = true
                     self.stepCountToday = await self.readMetricAsTodaysCumulative(metric: .stepCount, unit: .count()) //
                     self.HRV = await self.readMetricAsLastRecorded(metric: .heartRateVariabilitySDNN, unit: .second())
-                    self.heartRate = await self.readMetricAsLastRecorded(metric: .heartRate, unit: HKUnit(from: "BPM"))
-                    self.respiratoryRate = await self.readMetricAsLastRecorded(metric: .respiratoryRate, unit: HKUnit(from: "breaths/min"))
+                    self.heartRate = await self.readMetricAsLastRecorded(metric: .heartRate, unit: HKUnit(from: "count/min"))
+                    self.respiratoryRate = await self.readMetricAsLastRecorded(metric: .respiratoryRate, unit: HKUnit(from: "count/min"))
                     self.bodyTemperature = await self.readMetricAsLastRecorded(metric: .bodyTemperature, unit: .degreeCelsius())
                     self.weight = await self.readMetricAsLastRecorded(metric: .bodyMass, unit: .gramUnit(with: .kilo))
                     self.BMI = await self.readMetricAsLastRecorded(metric: .bodyMassIndex, unit: .count())
+                    self.menstrualFlow = await self.readMenstrualData()
+                    self.sleep = await self.readSleepData()
                 }
             } else {
                 print("\(String(describing: error))")
@@ -87,7 +90,7 @@ class HealthKitManager: ObservableObject {
             let metricString: String = String(describing: count!)
             return metricString
         } catch {
-            print("Failed to read metric")
+            print("Failed to read \(metric)")
         }
         return nil
     }
@@ -125,17 +128,16 @@ class HealthKitManager: ObservableObject {
             return metricString
 //            let value = lastDataPoint.HKSample.
         } catch {
-            print("Failed to read last recorded metric")
+            print("Failed to read last recorded metric: \(metric)")
         }
         return nil
     }
     
     @MainActor
-    func readSleepData(metric: HKCategoryTypeIdentifier) async -> String? {
+    func readSleepData() async -> String? {
         do {
             // Define the type.
-            let metric = HKCategoryType(metric)
-//            let metric = HKQuantityType(metric)
+            let metric = HKCategoryType(.sleepAnalysis)
             
             // Create the descriptor.
             let descriptor = HKSampleQueryDescriptor(
@@ -160,16 +162,16 @@ class HealthKitManager: ObservableObject {
 
             return formattedTime
         } catch {
-            print("Failed to read categorical metric")
+            print("Failed to read sleep data")
         }
         return nil
     }
     
     @MainActor
-    func readMenstrualData(metric: HKCategoryTypeIdentifier) async -> String? {
+    func readMenstrualData() async -> String? {
         do {
             // Define the type.
-            let metric = HKCategoryType(metric)
+            let metric = HKCategoryType(.menstrualFlow)
 //            let metric = HKQuantityType(metric)
             
             // Create the descriptor.

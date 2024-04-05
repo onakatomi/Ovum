@@ -47,7 +47,7 @@ struct ChatCompleted: View {
                     Text("**Chat Summary:**")
                         .padding(.vertical, 8)
                     
-                    Text(chatSession.summary ?? "nothing")
+                    Text(.init(chatSession.summary ?? "nothing"))
                         .font(.custom(AppFonts.haasGrot, size: 16))
                         .kerning(0.32)
                         .lineSpacing(7)

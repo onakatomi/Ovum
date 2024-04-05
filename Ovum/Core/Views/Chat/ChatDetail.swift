@@ -8,6 +8,7 @@ struct ChatDetail: View {
     @EnvironmentObject var viewModel: MessageViewModel
     @EnvironmentObject var router: Router
     @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var healthKitManager: HealthKitManager
     @ObservedObject private var keyboard = KeyboardResponder()
     @State private var inputText: String = ""
     @FocusState private var textFieldIsFocused: Bool
@@ -85,7 +86,6 @@ struct ChatDetail: View {
                                             .preference(key: ScrollViewHeightPreferenceKey.self, value: geometry.size.height)
                                     })
                                     .onPreferenceChange(ScrollViewHeightPreferenceKey.self) { scrollViewHeight = $0
-                                        print("Pref key change")
                                         withAnimation {
                                             scrollViewProxy.scrollTo("bottomRect2", anchor: .top)
                                         }
@@ -219,7 +219,7 @@ struct ChatDetail: View {
                     Button("Yes", role: .cancel) {
                         Task {
                             viewModel.isLoading = true
-                            await viewModel.summariseConversation(authorId: authViewModel.currentUser!.id, authorName: authViewModel.currentUser!.name)
+                            await viewModel.summariseConversation(authorId: authViewModel.currentUser!.id, authorName: authViewModel.currentUser!.name, HKM: healthKitManager)
                             let finishedSession = await viewModel.endSession(save: true, userId: authViewModel.currentUser!.id)
                             //                            let summary: String = viewModel.currentSession.summary ?? ""
                             viewModel.isLoading = false

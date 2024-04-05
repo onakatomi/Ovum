@@ -183,7 +183,7 @@ class MessageViewModel: ObservableObject {
         }
     }    
     
-    func summariseConversation(authorId: String, authorName: String) async {
+    func summariseConversation(authorId: String, authorName: String, HKM: HealthKitManager) async {
         let endpoint = "/summarise_discussion"
         
         let messagesArray: [String] = currentSession.messages.map {
@@ -213,7 +213,21 @@ class MessageViewModel: ObservableObject {
                 
                 let summary = apiResponse.summary
                 let summaryData = Data(summary.utf8)
-                let decodedSummaryData = try JSONDecoder().decode(String.self, from: summaryData)
+                var decodedSummaryData = try JSONDecoder().decode(String.self, from: summaryData)
+                
+                // Append Apple Health Metrics to the summary.
+                if (HKM.haveAccess) {
+                    decodedSummaryData.append("\n\n**Apple Health Metrics:**")
+                    if let metric = HKM.stepCountToday { decodedSummaryData.append("\n- Steps: \(metric)") }
+                    if let metric = HKM.HRV { decodedSummaryData.append("\n- Heart Rate Variability: \(metric)") }
+                    if let metric = HKM.heartRate { decodedSummaryData.append("\n- Heart Rate: \(metric)") }
+                    if let metric = HKM.respiratoryRate { decodedSummaryData.append("\n- Respiratory Rate: \(metric)") }
+                    if let metric = HKM.bodyTemperature { decodedSummaryData.append("\n- Body Temperature: \(metric)") }
+                    if let metric = HKM.weight { decodedSummaryData.append("\n- Weight: \(metric)") }
+                    if let metric = HKM.BMI { decodedSummaryData.append("\n- BMI: \(metric)") }
+                    if let metric = HKM.sleep { decodedSummaryData.append("\n- Sleep: \(metric)") }
+                    if let metric = HKM.menstrualFlow { decodedSummaryData.append("\n- Menstrual Flow: \(metric)") }
+                }
                 
                 print(decodedSummarisedTitle)
                 print(decodedSummaryData)

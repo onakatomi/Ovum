@@ -11,7 +11,7 @@ struct ChatBubble: View {
             Text(author)
                 .font(.custom(AppFonts.haasGrot, size: 12))
                 .foregroundColor(.gray)
-            Text((author == "Ovum" && !disableAnimation) ? caption : content)
+            Text(.init(author == "Ovum" && !disableAnimation) ? caption : content)
                 .padding(16)
                 .background(author == "Ovum" ? Color(.white) : Color(red: 0.86, green: 0.84, blue: 0.98))
                 .cornerRadius(6)

@@ -47,12 +47,12 @@ extension Image {
 }
 
 struct OverviewHomeContent: View {
-    @StateObject var healthKitManager = HealthKitManager.shared
+    @EnvironmentObject var healthKitManager: HealthKitManager
     @EnvironmentObject var viewModel: MessageViewModel
     @EnvironmentObject var router: Router
     @State private var sliderValue: Double = 0.0
     @State private var isEditing = false
-    @State var imageSize: CGSize = .zero // << or initial from NSImage
+    @State var imageSize: CGSize = .zero
     @State private var showSymptomTray = false
     @State private var currentlySelectedIndex = 0
     
@@ -64,15 +64,14 @@ struct OverviewHomeContent: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Text("Today's steps: \(healthKitManager.stepCountToday ?? "Not recorded")")
-                Text("HRV: \(healthKitManager.HRV ?? "Not recorded")")
+            if (healthKitManager.sleep != nil && healthKitManager.menstrualFlow != nil) {
+                HStack {
+                    Text("**Sleep Time** · \(healthKitManager.sleep!)")
+                    Spacer()
+                    Text("**Flow** · \(healthKitManager.menstrualFlow!)")
+                }
             }
-            HStack {
-                Text("**Sleep** · Regular")
-                Spacer()
-                Text("**Activity** · Regular")
-            }
+            
             ZStack {
                 Image("Figure")
                     .resizable()

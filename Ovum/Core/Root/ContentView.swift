@@ -3,6 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var router: Router
+    @EnvironmentObject var healthKitManager: HealthKitManager
     
     var body: some View {
         ZStack {
@@ -13,6 +14,7 @@ struct ContentView: View {
                 LoggedInView(viewModel: MessageViewModel(userId: authViewModel.currentUser!.id, authViewModelPassedIn: authViewModel))
                     .environmentObject(authViewModel)
                     .environmentObject(router)
+                    .environmentObject(healthKitManager)
             }
             
             if !authViewModel.isAllUserDataFetched {

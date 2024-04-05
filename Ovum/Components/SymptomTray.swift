@@ -42,7 +42,7 @@ struct SymptomTray: View {
                     Text("**Chat Summary**")
                         .padding(.vertical, 10)
                     ScrollView {
-                        Text(chatSession.summary!)                        
+                        Text(.init(chatSession.summary!))                        
                     }
                 }
                 .foregroundColor(AppColours.darkBrown)
