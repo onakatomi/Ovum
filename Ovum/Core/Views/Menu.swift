@@ -36,10 +36,20 @@ struct Menu: View {
 //                    .font(Font.largeTitle.weight(.bold))
 //                    .frame(maxWidth: .infinity, alignment: .leading)
 //                ThickDivider(color: .white, width: 1, padding: 10)
-                Text("About Ovum")
-                    .foregroundColor(.white)
-                    .font(Font.largeTitle.weight(.bold))
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                NavigationLink (destination: AboutOvumView()) { // Hide tabbar whilst in MenuScreen.
+                    Text("About Ovum")
+                        .foregroundColor(.white)
+                        .font(Font.largeTitle.weight(.bold))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+//                NavigationLink {
+//                    
+//                } label: {
+//                    Text("About Ovum")
+//                        .foregroundColor(.white)
+//                        .font(Font.largeTitle.weight(.bold))
+//                        .frame(maxWidth: .infinity, alignment: .leading)                                    }
+
                 ThickDivider(color: .white, width: 1, padding: 10)
 //                Text("Settings")
 //                    .frame(maxWidth: .infinity, alignment: .leading)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B2414CAA2BBFB52800AC67D1 /* AboutOvumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2414CA92BBFB52800AC67D1 /* AboutOvumView.swift */; };
 		B246940C2BA026FA00286A75 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246940B2BA026FA00286A75 /* Menu.swift */; };
 		B246940E2BA10D1600286A75 /* PurpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246940D2BA10D1600286A75 /* PurpleButton.swift */; };
 		B24694102BA10DA100286A75 /* TransparentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246940F2BA10DA100286A75 /* TransparentButton.swift */; };
@@ -78,6 +79,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B2414CA92BBFB52800AC67D1 /* AboutOvumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutOvumView.swift; sourceTree = "<group>"; };
 		B246940B2BA026FA00286A75 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		B246940D2BA10D1600286A75 /* PurpleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurpleButton.swift; sourceTree = "<group>"; };
 		B246940F2BA10DA100286A75 /* TransparentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentButton.swift; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 				B2D6A40A2B9813E40045CCD1 /* Records */,
 				B246940B2BA026FA00286A75 /* Menu.swift */,
 				B247B68F2BB3A6EC00FF17B9 /* SplashScreen.swift */,
+				B2414CA92BBFB52800AC67D1 /* AboutOvumView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 				B24694102BA10DA100286A75 /* TransparentButton.swift in Sources */,
 				B24694252BA134B500286A75 /* SettingsRowView.swift in Sources */,
 				B2D6A4192B9A96B40045CCD1 /* Constants.swift in Sources */,
+				B2414CAA2BBFB52800AC67D1 /* AboutOvumView.swift in Sources */,
 				B246941B2BA12C3300286A75 /* ChatHistory.swift in Sources */,
 				B2D6A41D2B9AC08F0045CCD1 /* RecordDetail.swift in Sources */,
 				B2D6A3F22B914D630045CCD1 /* ChatDetail.swift in Sources */,
