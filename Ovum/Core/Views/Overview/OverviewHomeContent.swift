@@ -64,7 +64,10 @@ struct OverviewHomeContent: View {
     
     var body: some View {
         VStack {
-//            Text("Today's steps: \(healthKitManager.stepCountToday)")
+            HStack {
+                Text("Today's steps: \(healthKitManager.stepCountToday ?? "Not recorded")")
+                Text("HRV: \(healthKitManager.HRV ?? "Not recorded")")
+            }
             HStack {
                 Text("**Sleep** · Regular")
                 Spacer()
