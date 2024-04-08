@@ -11,6 +11,7 @@ struct AppColours {
     static let pink = Color(red: 0.95, green: 0.82, blue: 0.83)
     static let darkBrown = Color(red: 0.3, green: 0.1, blue: 0.04)
     static let darkBeige = Color(red: 0.7, green: 0.45, blue: 0.25)
+    static let buttonBrown = Color(red: 0.49, green: 0.27, blue: 0.18)
 }
 
 struct AppFonts {

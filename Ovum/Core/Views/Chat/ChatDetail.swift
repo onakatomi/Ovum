@@ -49,7 +49,6 @@ struct ChatDetail: View {
                 }
                 .padding([.top], 60)
                 .padding([.horizontal], 20)
-                
             }
             
             // Chat component (looks like it's in a tray)
@@ -60,6 +59,7 @@ struct ChatDetail: View {
                             ScrollViewReader { scrollViewProxy in
                                 ScrollView(.vertical) {
                                     VStack(alignment: .leading, spacing: 15) {
+                                        ChatBubble(content: "Hi \(authViewModel.currentUser!.name). What symptoms are you experiencing at the moment?", author: "Ovum")
                                         ForEach(viewModel.currentSession.messages) { message in
                                             ChatBubble(content: message.content, author: message.author == "Ovum" ? "Ovum" : authViewModel.currentUser!.name)
                                         }
@@ -167,7 +167,8 @@ struct ChatDetail: View {
                         isNewSession = false
                     }
                     .padding([.horizontal], 20)
-                    .padding([.vertical], 15)
+                    .padding([.top], 15)
+                    .padding([.bottom], 25)
                 }
                 .padding([.top], 15)
                 .background {
@@ -232,6 +233,8 @@ struct ChatDetail: View {
             }
         }
         .ignoresSafeArea(.all, edges: Edge.Set(Edge.top))
+        .ignoresSafeArea(.container, edges: Edge.Set(Edge.bottom))
+//        .ignoresSafeArea(.ke)
     }
 }
 

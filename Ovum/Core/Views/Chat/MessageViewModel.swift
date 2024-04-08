@@ -17,7 +17,6 @@ class MessageViewModel: ObservableObject {
 //    let baseUrl = "http://192.168.89.17:5002"
     
     init(userId: String, authViewModelPassedIn: AuthViewModel) {
-        print("initttt")
         messages = []
         chatSessions = chatSessionsMock
         documents = []
@@ -49,6 +48,7 @@ class MessageViewModel: ObservableObject {
     func endSession(save: Bool = true, userId: String) async -> ChatSession? {
         if (save == true) {
             let indexOfSession: Int? = chatSessions.firstIndex(where: {$0.id == currentSession.id})
+            currentSession.messages.insert(Message(author: "Ovum", fromOvum: true, content: "Hi \(authViewModel.currentUser!.name). What symptoms are you experiencing at the moment?"), at: 0)
             if let indexOfSession {
                 chatSessions[indexOfSession] = currentSession
                 do {

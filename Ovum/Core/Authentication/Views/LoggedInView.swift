@@ -34,7 +34,7 @@ struct LoggedInView: View {
                                             ChatHistory()
                                             
                                         case .chatDetail:
-                                            ChatDetail()
+                                            ChatDetail().toolbar(.hidden, for: .tabBar)
                                             
                                         case .chatHistoryDetail(let session):
                                             ChatHistoryDetail(chatSession: session)
