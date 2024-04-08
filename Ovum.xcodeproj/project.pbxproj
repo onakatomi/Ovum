@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B2414CAA2BBFB52800AC67D1 /* AboutOvumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2414CA92BBFB52800AC67D1 /* AboutOvumView.swift */; };
+		B2414CAD2BC4B32400AC67D1 /* SwiftUIImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = B2414CAC2BC4B32400AC67D1 /* SwiftUIImageViewer */; };
 		B246940C2BA026FA00286A75 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246940B2BA026FA00286A75 /* Menu.swift */; };
 		B246940E2BA10D1600286A75 /* PurpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246940D2BA10D1600286A75 /* PurpleButton.swift */; };
 		B24694102BA10DA100286A75 /* TransparentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246940F2BA10DA100286A75 /* TransparentButton.swift */; };
@@ -157,6 +158,7 @@
 				B24694442BA13B7000286A75 /* FirebaseFirestore in Frameworks */,
 				B24694382BA13B7000286A75 /* FirebaseAuth in Frameworks */,
 				B246945E2BA13B7000286A75 /* FirebaseStorage in Frameworks */,
+				B2414CAD2BC4B32400AC67D1 /* SwiftUIImageViewer in Frameworks */,
 				B24694632BA13C0700286A75 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,6 +413,7 @@
 				B24694432BA13B7000286A75 /* FirebaseFirestore */,
 				B246945D2BA13B7000286A75 /* FirebaseStorage */,
 				B24694622BA13C0700286A75 /* FirebaseFirestoreSwift */,
+				B2414CAC2BC4B32400AC67D1 /* SwiftUIImageViewer */,
 			);
 			productName = Ovum;
 			productReference = B2D6A39E2B8EFEF80045CCD1 /* Ovum.app */;
@@ -442,6 +445,7 @@
 			mainGroup = B2D6A3952B8EFEF80045CCD1;
 			packageReferences = (
 				B246942A2BA13B7000286A75 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				B2414CAB2BC4B32400AC67D1 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
 			);
 			productRefGroup = B2D6A39F2B8EFEF80045CCD1 /* Products */;
 			projectDirPath = "";
@@ -765,6 +769,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B2414CAB2BC4B32400AC67D1 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fuzzzlove/swiftui-image-viewer.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		B246942A2BA13B7000286A75 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -776,6 +788,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B2414CAC2BC4B32400AC67D1 /* SwiftUIImageViewer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B2414CAB2BC4B32400AC67D1 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */;
+			productName = SwiftUIImageViewer;
+		};
 		B24694372BA13B7000286A75 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B246942A2BA13B7000286A75 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
