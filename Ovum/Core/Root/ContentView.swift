@@ -17,7 +17,7 @@ struct ContentView: View {
                     .environmentObject(healthKitManager)
             }
             
-            if !authViewModel.isAllUserDataFetched {
+            if ((authViewModel.userSession != nil || authViewModel.currentUser?.id != nil) && !authViewModel.isAllUserDataFetched) {
                 SplashScreen()
                     .ignoresSafeArea()
             }

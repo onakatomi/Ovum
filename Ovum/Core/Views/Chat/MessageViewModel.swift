@@ -17,6 +17,7 @@ class MessageViewModel: ObservableObject {
 //    let baseUrl = "http://192.168.89.17:5002"
     
     init(userId: String, authViewModelPassedIn: AuthViewModel) {
+        print("initttt")
         messages = []
         chatSessions = chatSessionsMock
         documents = []

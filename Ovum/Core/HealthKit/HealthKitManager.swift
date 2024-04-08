@@ -87,7 +87,7 @@ class HealthKitManager: ObservableObject {
                 .doubleValue(for: unit)
             
             // Use the count here.
-            let metricString: String = String(describing: count!)
+            let metricString: String = String(describing: count)
             return metricString
         } catch {
             print("Failed to read \(metric)")
