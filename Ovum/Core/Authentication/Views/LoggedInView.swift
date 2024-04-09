@@ -15,8 +15,8 @@ struct LoggedInView: View {
                             BaseView(BaseViewType.overview)
                                 .navigationDestination(for: OverviewNavDestination.self) { destination in
                                     switch destination {
-                                        case .menu:
-                                            Menu().toolbar(.hidden, for: .tabBar)
+                                    case .menu:
+                                        Menu().toolbar(.hidden, for: .tabBar)
                                     }
                                 }
                         }
@@ -30,23 +30,23 @@ struct LoggedInView: View {
                             BaseView(BaseViewType.chat)
                                 .navigationDestination(for: ChatNavDestination.self) { destination in
                                     switch destination {
-                                        case .chatHistory:
-                                            ChatHistory()
-                                            
-                                        case .chatDetail:
-                                            ChatDetail().toolbar(.hidden, for: .tabBar)
-                                            
-                                        case .chatHistoryDetail(let session):
-                                            ChatHistoryDetail(chatSession: session)
-                                            
-                                        case .chatOnDocument(let document):
-                                            ChatDetail(document: document.file)
-                                            
-                                        case .chatComplete(let session):
-                                            ChatCompleted(chatSession: session)
-                                            
-                                        case .menu:
-                                            Menu().toolbar(.hidden, for: .tabBar)
+                                    case .chatHistory:
+                                        ChatHistory()
+                                        
+                                    case .chatDetail:
+                                        ChatDetail().toolbar(.hidden, for: .tabBar)
+                                        
+                                    case .chatHistoryDetail(let session):
+                                        ChatHistoryDetail(chatSession: session)
+                                        
+                                    case .chatOnDocument(let document):
+                                        ChatDetail(document: document.file)
+                                        
+                                    case .chatComplete(let session):
+                                        ChatCompleted(chatSession: session)
+                                        
+                                    case .menu:
+                                        Menu().toolbar(.hidden, for: .tabBar)
                                     }
                                 }
                         }
@@ -55,6 +55,31 @@ struct LoggedInView: View {
                             Text("Chat")
                         }
                         .tag(ContentViewTab.chat)
+                        
+                        NavigationStack(path: $router.medicationNavigation) {
+                            BaseView(BaseViewType.medication)
+                                .navigationDestination(for: MedicationNavDestination.self) { destination in
+                                    switch destination {
+                                    case .menu:
+                                        Menu().toolbar(.hidden, for: .tabBar)
+                                    case .medicationFrequency:
+                                        MedicationFrequency()
+                                    case .medicationHistory:
+                                        MedicationHistory()
+                                    case .shortTerm:
+                                        MedicationFormView(medicationFormType: .shortTerm)
+                                    case .ongoing:
+                                        MedicationFormView(medicationFormType: .ongoing)
+                                    case .noLongerTaking:
+                                        MedicationFormView(medicationFormType: .noLongerTaking)
+                                    }
+                                }
+                        }
+                        .tabItem {
+                            Image(router.selectedTab == ContentViewTab.medication ? "tab_medication_active" : "tab_medication_inactive")
+                            Text("Medication")
+                        }
+                        .tag(ContentViewTab.medication)
                         
                         NavigationStack(path: $router.recordsNavigation) {
                             BaseView(BaseViewType.documents)
@@ -104,20 +129,25 @@ struct LoggedInView: View {
                     print("tapped same tab")
                     
                     switch selectedTab {
-                        case .overview:
-                            withAnimation {
-                                router.overviewNavigation = []
-                            }
-                            
-                        case .chat:
-                            withAnimation {
-                                router.chatNavigation = []
-                            }
-                            
-                        case .records:
-                            withAnimation {
-                                router.recordsNavigation = []
-                            }
+                    case .overview:
+                        withAnimation {
+                            router.overviewNavigation = []
+                        }
+                        
+                    case .chat:
+                        withAnimation {
+                            router.chatNavigation = []
+                        }
+                        
+                    case .medication:
+                        withAnimation {
+                            router.medicationNavigation = []
+                        }
+                        
+                    case .records:
+                        withAnimation {
+                            router.recordsNavigation = []
+                        }
                     }
                 }
                 print("exited")

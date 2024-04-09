@@ -4,7 +4,12 @@ import SwiftUI
 enum ContentViewTab {
     case overview
     case chat
+    case medication
     case records
+}
+
+enum OverviewNavDestination {
+    case menu
 }
 
 enum ChatNavDestination: Hashable {
@@ -16,12 +21,17 @@ enum ChatNavDestination: Hashable {
     case menu
 }
 
-enum RecordsNavDestination: Hashable {
-    case documentDetail(document: Document)
+enum MedicationNavDestination: Hashable {
+    case medicationFrequency
+    case medicationHistory
+    case shortTerm
+    case ongoing
+    case noLongerTaking
     case menu
 }
 
-enum OverviewNavDestination {
+enum RecordsNavDestination: Hashable {
+    case documentDetail(document: Document)
     case menu
 }
 
@@ -39,6 +49,7 @@ class Router: ObservableObject {
     @Published var selectedTab: ContentViewTab = .chat
     @Published var overviewNavigation: [OverviewNavDestination] = []
     @Published var chatNavigation: [ChatNavDestination] = []
+    @Published var medicationNavigation: [MedicationNavDestination] = []
     @Published var recordsNavigation: [RecordsNavDestination] = []
     
     @Published var tabViewsDisabled: Bool = false
@@ -55,6 +66,11 @@ class Router: ObservableObject {
         chatNavigation.append(destination)
     }
     
+    func navigateWithinMedication(to destination: MedicationNavDestination) {
+        selectedTab = .medication
+        medicationNavigation.append(destination)
+    }
+    
     func navigateWithinRecords(to destination: RecordsNavDestination) {
         selectedTab = .records
         recordsNavigation.append(destination)
@@ -67,6 +83,9 @@ class Router: ObservableObject {
                 
             case .chat:
                 chatNavigation.removeLast()
+                
+            case .medication:
+                medicationNavigation.removeLast()
                 
             case .records:
                 recordsNavigation.removeLast()
@@ -81,12 +100,11 @@ class Router: ObservableObject {
             case .chat:
                 chatNavigation.removeLast(chatNavigation.count)
                 
+            case .medication:
+                medicationNavigation.removeLast(medicationNavigation.count)
+                
             case .records:
                 recordsNavigation.removeLast(recordsNavigation.count)
         }
-    }
-    
-    func resolveExit() async {
-        
     }
 }

@@ -7,6 +7,8 @@ class MessageViewModel: ObservableObject {
     @Published var currentSession: ChatSession
     @Published var chatSessions: [ChatSession] = []
     @Published var documents: [Document] = []
+    @Published var currentMedication: [Medication]
+    @Published var pastMedication: [Medication]
     @Published var isLoading: Bool = false
     @Published var isDocumentUploading: Bool = false
     @Published var isNewThreadBeingGenerated: Bool = false
@@ -20,6 +22,8 @@ class MessageViewModel: ObservableObject {
         messages = []
         chatSessions = chatSessionsMock
         documents = []
+        currentMedication = []
+        pastMedication = []
         currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], title: "Placeholder", date: getDateAsString(date: Date.now), colour: Color(.red))
         authViewModel = authViewModelPassedIn
         Task {

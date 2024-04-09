@@ -37,15 +37,15 @@ struct SymptomTray: View {
             Divider()
                 .background(AppColours.maroon)
                 .padding(.vertical, 16)
-            if (chatSession.summary != nil)  {
-                VStack(alignment: .leading) {
-                    Text("**Chat Summary**")
-                        .padding(.vertical, 10)
-                    ScrollView {
+            ScrollView {
+                if (chatSession.summary != nil)  {
+                    VStack(alignment: .leading) {
+                        Text("**Chat Summary**")
+                            .padding(.vertical, 10)
                         Text(.init(chatSession.summary!))                        
                     }
+                    .foregroundColor(AppColours.darkBrown)
                 }
-                .foregroundColor(AppColours.darkBrown)
             }
             Spacer()
         }

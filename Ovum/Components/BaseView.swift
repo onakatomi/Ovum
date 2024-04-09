@@ -3,6 +3,7 @@ import SwiftUI
 enum BaseViewType {
     case overview
     case chat
+    case medication
     case documents
 }
 
@@ -12,15 +13,20 @@ func getImage(type: BaseViewType) -> Image {
         return Image("overview")
     case .chat:
         return Image("chat")
+    case .medication:
+        return Image("medication")
     case .documents:
         return Image("documents")
     }
 }
+
 func getHeaderImage(type: BaseViewType) -> Image {
     switch type {
     case .overview:
         return Image("level_high")
     case .chat:
+        return Image("level_medium")
+    case .medication:
         return Image("level_medium")
     case .documents:
         return Image("level_low")
@@ -29,10 +35,12 @@ func getHeaderImage(type: BaseViewType) -> Image {
 
 func getHeader(type: BaseViewType) -> Header {
     switch (type) {
+    case BaseViewType.overview:
+        Header(firstLine: "Your health", secondLine: "Overview", colour: Color(.white), font: Font.custom(AppFonts.haasGrot, size: 42))
     case BaseViewType.chat:
         Header(firstLine: "Chat with", secondLine: "Ovum", colour: Color(.white), font: Font.custom(AppFonts.haasGrot, size: 42))
-    case BaseViewType.overview:
-        Header(firstLine: "Your health", secondLine: "overview", colour: Color(.white), font: Font.custom(AppFonts.haasGrot, size: 42))
+    case BaseViewType.medication:
+        Header(firstLine: "Your", secondLine: "Medications", colour: Color(.white), font: Font.custom(AppFonts.haasGrot, size: 42))
     case BaseViewType.documents:
         Header(firstLine: "Medical", secondLine: "Records", colour: Color(.white), font: Font.custom(AppFonts.haasGrot, size: 42))
     }
@@ -66,6 +74,11 @@ struct BaseView: View {
                             case .chat:
                                 withAnimation {
                                     router.navigateWithinChat(to: .menu)
+                                }
+                                
+                            case .medication:
+                                withAnimation {
+                                    router.navigateWithinMedication(to: .menu)
                                 }
                                 
                             case .records:
@@ -102,6 +115,8 @@ struct BaseView: View {
                         OverviewHomeContent()
                     case BaseViewType.chat:
                         ChatHomeContent()
+                    case BaseViewType.medication:
+                        MedicationHomeContent()
                     case BaseViewType.documents:
                         RecordsHomeContent()
                     }

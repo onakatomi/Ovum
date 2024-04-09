@@ -6,6 +6,7 @@ struct InputView: View {
     let title: String
     let placeholder: String
     var isSecureField = false
+    var hasBorder = false
 
     @FocusState.Binding var fieldIsFocused: Bool
     
@@ -32,7 +33,9 @@ struct InputView: View {
                     .background(
                       RoundedRectangle(cornerRadius: 6)
                         .fill(.white)
+                        .stroke(AppColours.darkBrown, lineWidth: hasBorder ? 1 : 0)
                     )
+//                    .border(Color.red, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
             }
         }
     }
