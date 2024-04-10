@@ -4,6 +4,8 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var isSigningIn: Bool = false
+    @State private var passwordResetEmail = ""
+    @State private var showPasswordResetPopup: Bool = false
     @FocusState private var focusField: Bool
     @EnvironmentObject var authViewModel: AuthViewModel
     
@@ -70,10 +72,26 @@ struct LoginView: View {
                         }
                         .foregroundColor(.white)
                     }
+                    Text("Forgot your password?")
+                        .foregroundColor(.white)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .onTapGesture {
+                            showPasswordResetPopup = true
+                        }
                 }
                 .padding(.vertical, 30)
                 .padding(.horizontal, 20)
                 .opacity(isSigningIn ? 0.5 : 1.0)
+                .alert("Reset Account Password", isPresented: $showPasswordResetPopup) {
+                    TextField("Account email", text: $passwordResetEmail)
+                        .textInputAutocapitalization(.never)
+                    Button("Send Reset Email") {
+                        authViewModel.sendPasswordReset(withEmail: passwordResetEmail)
+                    }
+                    Button("Cancel", role: .cancel) { }
+                } message: {
+                    Text("Instructions on how to reset your password will be sent to the email you enter below.")
+                }
                 
                 if isSigningIn {
                     ProgressView()

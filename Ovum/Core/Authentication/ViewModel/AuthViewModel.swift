@@ -62,6 +62,12 @@ class AuthViewModel: ObservableObject {
             print("DEBUG: Failed to sign out with error \(error.localizedDescription)")
         }
         print("Signing out...")
+        }
+    
+    func sendPasswordReset(withEmail email: String, _ callback: ((Error?) -> ())? = nil) {
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            callback?(error)
+        }
     }
     
     func deleteAccount() {
