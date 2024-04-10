@@ -45,6 +45,7 @@ struct MedicationHistory: View {
             Text("Previous")
                 .font(Font.custom(AppFonts.haasGrot, size: 24))
                 .foregroundColor(AppColours.darkBrown)
+                .padding(.bottom, 10)
             if (viewModel.pastMedication.count == 0) {
                     Text("*No recorded past medication*")
                         .font(.caption)
@@ -52,8 +53,9 @@ struct MedicationHistory: View {
                         .padding(.vertical, 40)
             }
             ScrollView {
-                VStack(alignment: .leading, spacing: 0) {
+                VStack(alignment: .leading, spacing: 12) {
                     ForEach(viewModel.pastMedication) { pastMedication in
+                        MedicationTile(medication: pastMedication)
 //                        NavigationLink(value: ChatNavDestination.chatHistoryDetail(session: chatSession)) {
 //                            ChatTile(chatTile: chatSession)
 //                        }

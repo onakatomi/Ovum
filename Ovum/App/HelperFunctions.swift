@@ -14,7 +14,7 @@ func getDateAsString(date: Date) -> String {
     dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
 
     // Create a Date object
-    let date = Date()
+//    let date = Date()
 
     // Convert the Date object to a string
     return dateFormatter.string(from: date)
@@ -59,10 +59,15 @@ func convertToDate(dateString: String) -> Date? {
     let val = dateFormatter.date(from: dateString)
     return val
 }
+
 func monthFromDate(date: Date) -> String {
     let formatter = DateFormatter()
     formatter.dateFormat = "MMMM, YY"
     return formatter.string(from: date)
+}
+
+func addOrSubtractDay(day:Int) -> Date {
+  return Calendar.current.date(byAdding: .day, value: day, to: Date())!
 }
 
 func base64ToImage(_ base64String: String) -> Image? {

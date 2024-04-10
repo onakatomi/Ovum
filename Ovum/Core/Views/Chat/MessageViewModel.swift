@@ -14,9 +14,9 @@ class MessageViewModel: ObservableObject {
     @Published var isNewThreadBeingGenerated: Bool = false
     var authViewModel: AuthViewModel
     
-    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
+//    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
 //    let baseUrl = "http://192.168.89.1:5001"
-//    let baseUrl = "http://192.168.89.17:5002"
+    let baseUrl = "http://192.168.89.21:5002"
     
     init(userId: String, authViewModelPassedIn: AuthViewModel) {
         messages = []
@@ -216,6 +216,9 @@ class MessageViewModel: ObservableObject {
                 let summarisedTitleData = Data(summarisedTitle.utf8) // Make into a UTF8 data object
                 let decodedSummarisedTitle = try JSONDecoder().decode(String.self, from: summarisedTitleData) // Decode this into a Swift string, so removing the JSON encoded slashes.
                 
+                
+//                let medication = try JSONDecoder().decode(MedicationResponse.self, from: apiResponse.medication) // Decode this into a Medication object.
+                
                 let summary = apiResponse.summary
                 let summaryData = Data(summary.utf8)
                 var decodedSummaryData = try JSONDecoder().decode(String.self, from: summaryData)
@@ -268,6 +271,19 @@ class MessageViewModel: ObservableObject {
         var response: String
         var body_parts: String
         var summary: String
+//        var medication: MedicationResponse
+    }
+    
+    struct MedicationResponse: Codable {
+        var type: String
+        var name: String
+        var form: String
+        var strength: String
+        var frequency: String
+        var stillTaking: String
+        var howLongTakingFor: String
+        var howLongTookFor: String
+        var courseEnd: String
     }
     
     // Takes in a base64 encoded string (of an image)

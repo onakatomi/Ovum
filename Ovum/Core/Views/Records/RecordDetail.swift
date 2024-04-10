@@ -51,6 +51,7 @@ struct RecordDetail: View {
                                 .overlay(alignment: .topTrailing) {
                                     closeButton
                                 }
+                                .background(AppColours.brown)
                         }
                 }
                 Spacer()

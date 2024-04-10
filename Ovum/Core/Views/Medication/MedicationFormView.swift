@@ -19,6 +19,7 @@ struct MedicationFormView: View {
     @State var lengthTakingUnit: ConsumptionLength = .days
     @State var lengthTakenUnit: ConsumptionLength = .days
     @State var courseEnd: Date = Date()
+    @State var dateRecorded: Date = Date.now
     @FocusState var focusField: Bool
     
     var body: some View {
@@ -211,7 +212,7 @@ struct MedicationFormView: View {
                     }
 //                    Spacer()
                     Button {
-                        var newMedication = Medication(
+                        let newMedication = Medication(
                             type: medicationFormType,
                             name: name,
                             form: form,
@@ -220,7 +221,8 @@ struct MedicationFormView: View {
                             stillTaking: stillTaking,
                             howLongTakingFor: returnDays(numberAsString: lengthTaking, unit: lengthTakingUnit),
                             howLongTookFor: returnDays(numberAsString: lengthTaken, unit: lengthTakenUnit),
-                            courseEnd: courseEnd
+                            courseEnd: courseEnd,
+                            dateRecorded: dateRecorded
                         )
                         if medicationFormType == .ongoing {
                             viewModel.currentMedication.append(newMedication)

@@ -14,6 +14,7 @@ struct MedicationHomeContent: View {
             }
             ScrollView {
                 ForEach(viewModel.currentMedication) { medication in
+                    MedicationTile(medication: medication)
 //                    NavigationLink(value: ChatNavDestination.chatHistoryDetail(session: chatSession)) {
 //                        ChatTile(chatTile: chatSession)
 //                    }
@@ -35,4 +36,5 @@ struct MedicationHomeContent: View {
 #Preview {
     MedicationHomeContent()
         .environmentObject(Router())
+        .environmentObject(MessageViewModel(userId: "1", authViewModelPassedIn: AuthViewModel()))
 }

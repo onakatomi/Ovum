@@ -45,11 +45,12 @@ struct Medication: Codable, Identifiable, Hashable {
     var id = UUID()
     var type: MedicationType
     var name: String
-    var form: MedicationForm
-    var strength: String
-    var frequency: MedicationIntakeFrequency
+    var form: MedicationForm?
+    var strength: String?
+    var frequency: MedicationIntakeFrequency?
     var stillTaking: Bool?
     var howLongTakingFor: Int? // Days
     var howLongTookFor: Int? // Days
     var courseEnd: Date?
+    let dateRecorded: Date
 }
