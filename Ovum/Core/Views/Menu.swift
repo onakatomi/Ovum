@@ -4,7 +4,7 @@ struct Menu: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var router: Router
     @EnvironmentObject var authViewModel: AuthViewModel
-//    let tab: ContentViewTab
+    //    let tab: ContentViewTab
     
     var body: some View {
         ZStack {
@@ -18,11 +18,11 @@ struct Menu: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 Spacer()
                 Button {
-//                    dismiss()
+                    //                    dismiss()
                     router.navigateBack(within: router.selectedTab)
-//                    router.navigateToRoot(within: .overview)
+                    //                    router.navigateToRoot(within: .overview)
                     router.navigateToRoot(within: .chat)
-//                    router.navigateToRoot(within: .records)
+                    //                    router.navigateToRoot(within: .records)
                     router.navigateWithinChat(to: .chatHistory)
                 } label: {
                     Text("Chat History")
@@ -31,38 +31,42 @@ struct Menu: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 ThickDivider(color: .white, width: 1, padding: 10)
-//                Text("Research and Studies")
-//                    .foregroundColor(.white)
-//                    .font(Font.largeTitle.weight(.bold))
-//                    .frame(maxWidth: .infinity, alignment: .leading)
-//                ThickDivider(color: .white, width: 1, padding: 10)
+                //                Text("Research and Studies")
+                //                    .foregroundColor(.white)
+                //                    .font(Font.largeTitle.weight(.bold))
+                //                    .frame(maxWidth: .infinity, alignment: .leading)
+                //                ThickDivider(color: .white, width: 1, padding: 10)
                 NavigationLink (destination: AboutOvumView()) { // Hide tabbar whilst in MenuScreen.
                     Text("About Ovum")
                         .foregroundColor(.white)
                         .font(Font.largeTitle.weight(.bold))
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-//                NavigationLink {
-//                    
-//                } label: {
-//                    Text("About Ovum")
-//                        .foregroundColor(.white)
-//                        .font(Font.largeTitle.weight(.bold))
-//                        .frame(maxWidth: .infinity, alignment: .leading)                                    }
-
+                //                NavigationLink {
+                //
+                //                } label: {
+                //                    Text("About Ovum")
+                //                        .foregroundColor(.white)
+                //                        .font(Font.largeTitle.weight(.bold))
+                //                        .frame(maxWidth: .infinity, alignment: .leading)                                    }
+                
                 ThickDivider(color: .white, width: 1, padding: 10)
-//                Text("Settings")
-//                    .frame(maxWidth: .infinity, alignment: .leading)
-//                    .foregroundColor(.white)
-//                    .font(Font.largeTitle.weight(.bold))
-//                ThickDivider(color: .white, width: 1, padding: 10)
+                //                Text("Settings")
+                //                    .frame(maxWidth: .infinity, alignment: .leading)
+                //                    .foregroundColor(.white)
+                //                    .font(Font.largeTitle.weight(.bold))
+                //                ThickDivider(color: .white, width: 1, padding: 10)
                 Spacer()
-//                PurpleButton(image: "export", text: "Export overview for doctor") {
-//                    print("TODO")
-//                }
-//                .padding(.bottom, 15)
+                //                PurpleButton(image: "export", text: "Export overview for doctor") {
+                //                    print("TODO")
+                //                }
+                //                .padding(.bottom, 15)
                 TransparentButton(text: "Sign Out", colour: Color(.white)) {
-                    print("Signing Out")
+                    router.navigateToRoot(within: .overview)
+                    router.navigateToRoot(within: .medication)
+                    router.navigateToRoot(within: .chat)
+                    router.navigateToRoot(within: .records)
+                    //                    print("Signing Out")
                     authViewModel.signOut()
                 }
                 .padding(.bottom, 30)

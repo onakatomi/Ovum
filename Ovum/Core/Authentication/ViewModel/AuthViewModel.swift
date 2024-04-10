@@ -35,7 +35,7 @@ class AuthViewModel: ObservableObject {
     }
     
     // Async function that can potentially throw an error
-    func createUser(withEmail email: String, password: String, name: String) async throws {
+    func createUser(withEmail email: String, password: String, name: String) async throws -> String {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password) // Atempt to create user; await result
             self.userSession = result.user // Set userSession property with new user
@@ -44,9 +44,13 @@ class AuthViewModel: ObservableObject {
             // There's a collection of users, which contains documents of user ids. Each document id maps to a user object. setData sets this map to the id.
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser) // Upload this to Firebase
             await fetchUser() // Fetch data we just uploaded to Firebase.
+        } catch AuthErrorCode.emailAlreadyInUse {
+            return ErrorMessages.emailTaken
         } catch {
-            print("DEBUG: Failed to create user with error \(error.localizedDescription)")
+            let err: String = "DEBUG: Failed to create user with error \(error.localizedDescription)"
+            print(err)
         }
+        return "Successful account creation"
     }
     
     func signOut() {

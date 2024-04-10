@@ -33,6 +33,9 @@ struct ChatHomeContent: View {
                         .cornerRadius(6)
                         .disabled(viewModel.isNewThreadBeingGenerated)
                 }
+                if (viewModel.latestThreadId != nil) {
+                    Text("Current thread ID: \(viewModel.latestThreadId!)")                    
+                }
                 Spacer()
                 Divider()
                 VStack {

@@ -78,65 +78,49 @@ struct OverviewHomeContent: View {
                     .scaledToFit()
                     .padding(.all, 25)
                     .background(rectReader()) // Get displayed image size.
-                ZStack {
-                    ForEach(Array(orderedChatSessions[Int(sliderValue)].bodyParts.enumerated()), id: \.offset) { index, bodyPart in
-                        Image.getBodyPartImage(region: bodyPart, status: Status.allCases.randomElement()!, imageSize: self.imageSize)
-                            .onTapGesture {
-                                currentlySelectedIndex = index
-                                showSymptomTray = true
-                            }
-                        
-                            .sheet(isPresented: $showSymptomTray) {
-                                SymptomTray(correspondingSymptom: orderedChatSessions[Int(sliderValue)].symptoms[currentlySelectedIndex], chatSession: orderedChatSessions[Int(sliderValue)]) {
-                                    showSymptomTray = false
-                                    router.navigateToRoot(within: .chat)
-                                    router.navigateWithinChat(to: .chatHistoryDetail(session: orderedChatSessions[Int(sliderValue)]))
+                if orderedChatSessions.count > 0 {
+                    ZStack {
+                        ForEach(Array(orderedChatSessions[Int(sliderValue)].bodyParts.enumerated()), id: \.offset) { index, bodyPart in
+                            Image.getBodyPartImage(region: bodyPart, status: Status.allCases.randomElement()!, imageSize: self.imageSize)
+                                .onTapGesture {
+                                    currentlySelectedIndex = index
+                                    showSymptomTray = true
                                 }
+                            
+                                .sheet(isPresented: $showSymptomTray) {
+                                    SymptomTray(correspondingSymptom: orderedChatSessions[Int(sliderValue)].symptoms[currentlySelectedIndex], chatSession: orderedChatSessions[Int(sliderValue)]) {
+                                        showSymptomTray = false
+                                        router.navigateToRoot(within: .chat)
+                                        router.navigateWithinChat(to: .chatHistoryDetail(session: orderedChatSessions[Int(sliderValue)]))
+                                    }
                                     .presentationDetents([.medium])
-                            }
+                                }
+                        }
                     }
                 }
             }
-            Slider(
-                value: $sliderValue,
-                in: 0...(Double(viewModel.chatSessions.count) - 1),
-                step: 1,
-                onEditingChanged: { editing in
-                    isEditing = editing
+            if (viewModel.chatSessions.count >= 2) {
+                Slider(
+                    value: $sliderValue,
+                    in: 0...(Double(viewModel.chatSessions.count) - 1),
+                    step: 1,
+                    onEditingChanged: { editing in
+                        isEditing = editing
+                    }
+                )
+                HStack {
+                    Text(stripDateString(dateString: orderedChatSessions[0].date, format: .basic))
+                    Spacer()
+                    Text("Today")
                 }
-            )
-            HStack {
-                Text(stripDateString(dateString: orderedChatSessions[0].date, format: .basic))
-                Spacer()
-                Text("Today")
-            }
-            .fontWeight(.bold)
+                .fontWeight(.bold)
                 .foregroundColor(AppColours.maroon)
+            }
             if orderedChatSessions.count > 0 {
                 Text(stripDateString(dateString: orderedChatSessions[Int(sliderValue)].date, format: .elegant))
                     .foregroundColor(AppColours.maroon)
-//                    .fontWeight(!isEditing ? .medium : .bold)
-//                    .italic()
             }
-//            HStack {
-//                ForEach(orderedChatSessions[Int(sliderValue)].bodyParts, id: \.self) { bodyPart in
-//                    Text(String(describing: bodyPart))
-//                }
-//            }
             Spacer()
-//            TransparentButton(text: "View Medications", colour: AppColours.maroon) {
-//                print("meds")
-//            }
-            
-//            VStack {
-//                ForEach(orderedChatSessions) { session in
-//                    HStack {
-//                        ForEach(session.bodyParts, id: \.self) { bodyPart in
-//                            Text(bodyPart)
-//                        }
-//                    }
-//                }
-//            }
         }
         .padding(.all, 20)
     }

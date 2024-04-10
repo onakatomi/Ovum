@@ -12,6 +12,7 @@ class MessageViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var isDocumentUploading: Bool = false
     @Published var isNewThreadBeingGenerated: Bool = false
+    @Published var latestThreadId: String?
     var authViewModel: AuthViewModel
     
 //    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
@@ -20,7 +21,7 @@ class MessageViewModel: ObservableObject {
     
     init(userId: String, authViewModelPassedIn: AuthViewModel) {
         messages = []
-        chatSessions = chatSessionsMock
+        chatSessions = []
         documents = []
         currentMedication = []
         pastMedication = []
@@ -108,7 +109,7 @@ class MessageViewModel: ObservableObject {
     ///   - userId: The user to fetch.
     /// - Returns: Nothing.
     func getAllChatSessions(userId: String) async {
-        print("Fetching...")
+        print("Fetching chat sessions...")
         let endpoint = "/get_all_sessions/\(userId)"
         
         if let url = URL(string: baseUrl + endpoint) {
@@ -367,7 +368,7 @@ class MessageViewModel: ObservableObject {
                 // Handle response:
                 let apiResponse = try JSONDecoder().decode(NewThreadResponse.self, from: data)
                 print("Generated new thread with ID \(apiResponse.new_thread_id)")
-                
+                self.latestThreadId = apiResponse.new_thread_id
             } catch {
                 print("Generating new thread failed:", error)
             }
