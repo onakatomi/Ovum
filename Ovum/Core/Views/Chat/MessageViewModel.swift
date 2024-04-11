@@ -138,14 +138,16 @@ class MessageViewModel: ObservableObject {
         }
     }
     
-    func getOvumResponse(message: String, authorId: String, authorName: String) async {
+    func getOvumResponse(message: String, authorId: String, authorName: String, isFirstMessageInConversation: Bool) async {
         let endpoint = "/get_next_message"
         
         let dataToSend: [String: Any] = [
             "user_id": authorId,
             "user_name": authorName,
-            "message": message
+            "message": message,
+            "is_first_message": isFirstMessageInConversation 
         ]
+        
         if let url = URL(string: baseUrl + endpoint) {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"

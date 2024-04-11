@@ -16,6 +16,7 @@
 		B2414CB82BC4D02400AC67D1 /* MedicationHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2414CB72BC4D02400AC67D1 /* MedicationHistory.swift */; };
 		B2414CBA2BC4F2A100AC67D1 /* MedicationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2414CB92BC4F2A100AC67D1 /* MedicationFormView.swift */; };
 		B2414CBC2BC518C800AC67D1 /* MedicationTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2414CBB2BC518C800AC67D1 /* MedicationTile.swift */; };
+		B2414CBE2BC7699E00AC67D1 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2414CBD2BC7699E00AC67D1 /* Notifications.swift */; };
 		B246940C2BA026FA00286A75 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246940B2BA026FA00286A75 /* Menu.swift */; };
 		B246940E2BA10D1600286A75 /* PurpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246940D2BA10D1600286A75 /* PurpleButton.swift */; };
 		B24694102BA10DA100286A75 /* TransparentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246940F2BA10DA100286A75 /* TransparentButton.swift */; };
@@ -95,6 +96,8 @@
 		B2414CB72BC4D02400AC67D1 /* MedicationHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationHistory.swift; sourceTree = "<group>"; };
 		B2414CB92BC4F2A100AC67D1 /* MedicationFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationFormView.swift; sourceTree = "<group>"; };
 		B2414CBB2BC518C800AC67D1 /* MedicationTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationTile.swift; sourceTree = "<group>"; };
+		B2414CBD2BC7699E00AC67D1 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		B2414CBF2BC769C800AC67D1 /* OvumRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OvumRelease.entitlements; sourceTree = "<group>"; };
 		B246940B2BA026FA00286A75 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		B246940D2BA10D1600286A75 /* PurpleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurpleButton.swift; sourceTree = "<group>"; };
 		B246940F2BA10DA100286A75 /* TransparentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentButton.swift; sourceTree = "<group>"; };
@@ -255,6 +258,7 @@
 				B24694202BA131DD00286A75 /* RegistrationView.swift */,
 				B247B6AE2BBCC0B300FF17B9 /* SlidingView.swift */,
 				B247B6B02BBCC4BC00FF17B9 /* KeyboardManager.swift */,
+				B2414CBD2BC7699E00AC67D1 /* Notifications.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -308,6 +312,7 @@
 		B2D6A3A02B8EFEF80045CCD1 /* Ovum */ = {
 			isa = PBXGroup;
 			children = (
+				B2414CBF2BC769C800AC67D1 /* OvumRelease.entitlements */,
 				B247B69F2BB4D85600FF17B9 /* Fonts */,
 				B2582D262BA7E752002ABFA6 /* Info.plist */,
 				B2582D222BA403E7002ABFA6 /* Ovum.entitlements */,
@@ -517,6 +522,7 @@
 				B2D6A41D2B9AC08F0045CCD1 /* RecordDetail.swift in Sources */,
 				B2D6A3F22B914D630045CCD1 /* ChatDetail.swift in Sources */,
 				B2D6A40E2B9817890045CCD1 /* RecordTypeTile.swift in Sources */,
+				B2414CBE2BC7699E00AC67D1 /* Notifications.swift in Sources */,
 				B247B6B12BBCC4BC00FF17B9 /* KeyboardManager.swift in Sources */,
 				B2D6A4272B9FBDDD0045CCD1 /* CaptureImage.swift in Sources */,
 				B2D6A3E72B9041B10045CCD1 /* Header.swift in Sources */,
@@ -746,7 +752,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Ovum/Ovum.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Ovum/OvumRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;

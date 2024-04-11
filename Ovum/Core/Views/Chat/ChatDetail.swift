@@ -162,7 +162,7 @@ struct ChatDetail: View {
                         self.inputText = "" // Reset text field.
                         let sentMessage = Message(author: authViewModel.currentUser!.id, fromOvum: false, content: textCopy) // Construct message model.
                         viewModel.addMessage(message: sentMessage) // Add to conversation session.
-                        await viewModel.getOvumResponse(message: textCopy, authorId: authViewModel.currentUser!.id, authorName: authViewModel.currentUser!.name) // Get Ovum's response.
+                        await viewModel.getOvumResponse(message: textCopy, authorId: authViewModel.currentUser!.id, authorName: authViewModel.currentUser!.name, isFirstMessageInConversation: viewModel.currentSession.messages.count == 1 ? true : false) // Get Ovum's response.
                         awaitingResponse = false
                         isNewSession = false
                     }

@@ -20,6 +20,9 @@ struct ContentView: View {
             if ((authViewModel.userSession != nil || authViewModel.currentUser?.id != nil) && !authViewModel.isAllUserDataFetched) {
                 SplashScreen()
                     .ignoresSafeArea()
+                    .onAppear() {
+                        scheduleAppReminderNotification()
+                    }
             }
         }
     }
