@@ -33,13 +33,13 @@ enum MedicationForm: String, CaseIterable, Codable, Hashable {
     case Inhaler = "Inhaler"
 }
 
-enum MedicationIntakeFrequency: String, CaseIterable, Codable, Hashable {
-    case Daily = "Daily"
-    case MultipleTimesDaily = "Multiple times daily"
-    case Weekly = "Weekly"
-    case MultipleTimesWeekly = "Multiple times a week"
-    case AsNeeded = "As needed"
-}
+//enum MedicationIntakeFrequency: String, CaseIterable, Codable, Hashable {
+//    case Daily = "Daily"
+//    case MultipleTimesDaily = "Multiple times daily"
+//    case Weekly = "Weekly"
+//    case MultipleTimesWeekly = "Multiple times a week"
+//    case AsNeeded = "As needed"
+//}
 
 struct Medication: Codable, Identifiable, Hashable {
     var id = UUID()
@@ -47,10 +47,13 @@ struct Medication: Codable, Identifiable, Hashable {
     var name: String
     var form: MedicationForm?
     var strength: String?
+    var strengthUnit: StrengthOptions?
     var frequency: MedicationIntakeFrequency?
     var stillTaking: Bool?
-    var howLongTakingFor: Int? // Days
-    var howLongTookFor: Int? // Days
+    var howLongTakingFor: String? // Days
+    var howLongTookFor: String? // Days
+    var lengthTakingUnit: ConsumptionLength?
+    var lengthTakenUnit: ConsumptionLength?
     var courseEnd: Date?
     let dateRecorded: Date
 }

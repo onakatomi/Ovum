@@ -67,11 +67,17 @@ struct LoggedInView: View {
                                     case .medicationHistory:
                                         MedicationHistory()
                                     case .shortTerm:
-                                        MedicationFormView(medicationFormType: .shortTerm)
+                                        MedicationFormView(medicationFormType: .shortTerm, medicationObj: nil)
                                     case .ongoing:
-                                        MedicationFormView(medicationFormType: .ongoing)
+                                        MedicationFormView(medicationFormType: .ongoing, medicationObj: nil)
                                     case .noLongerTaking:
-                                        MedicationFormView(medicationFormType: .noLongerTaking)
+                                        MedicationFormView(medicationFormType: .noLongerTaking, medicationObj: nil)
+                                    case .ongoingEdit(let medicationObj):
+                                        MedicationFormView(medicationFormType: .ongoing, medicationObj: medicationObj)
+                                    case .shortTermEdit(let medicationObj):
+                                        MedicationFormView(medicationFormType: .shortTerm, medicationObj: medicationObj)
+                                    case .noLongerTakingEdit(let medicationObj):
+                                        MedicationFormView(medicationFormType: .noLongerTaking, medicationObj: medicationObj)
                                     }
                                 }
                         }

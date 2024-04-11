@@ -24,9 +24,12 @@ enum ChatNavDestination: Hashable {
 enum MedicationNavDestination: Hashable {
     case medicationFrequency
     case medicationHistory
-    case shortTerm
     case ongoing
+    case shortTerm
     case noLongerTaking
+    case ongoingEdit(medication: Medication)
+    case shortTermEdit(medication: Medication)
+    case noLongerTakingEdit(medication: Medication)
     case menu
 }
 

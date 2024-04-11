@@ -13,14 +13,14 @@ struct MedicationTile: View {
                     .fontWeight(.bold)
                 Spacer()
                 Button {
-//                    switch (medication.type) {
-//                    case .ongoing:
-//                        router.navigateWithinMedication(to: .ongoing)
-//                    case .shortTerm:
-//                        router.navigateWithinMedication(to: .shortTerm)
-//                    case .noLongerTaking:
-//                        router.navigateWithinMedication(to: .noLongerTaking)
-//                    }
+                    switch (medication.type) {
+                    case .ongoing:
+                        router.navigateWithinMedication(to: .ongoingEdit(medication: medication))
+                    case .shortTerm:
+                        router.navigateWithinMedication(to: .shortTermEdit(medication: medication))
+                    case .noLongerTaking:
+                        router.navigateWithinMedication(to: .noLongerTakingEdit(medication: medication))
+                    }
                 } label: {
                     Image("edit")
                         .resizable()
@@ -35,7 +35,7 @@ struct MedicationTile: View {
                 Image("pill")
                     .resizable()
                     .frame(width: 11, height: 11)
-                Text("\(medication.form?.rawValue ?? "Unspecified form") · \(medication.strength ?? "Unspecified strength")")
+                Text("\(medication.form?.rawValue ?? "Unspecified form") · \(medication.strength ?? "Unspecified strength") \(medication.strengthUnit?.rawValue ?? "Unspecified dosage unit")")
                     .font(.custom(AppFonts.haasGrot, size: 14))
                     .foregroundColor(AppColours.buttonBrown)
             }
@@ -49,11 +49,11 @@ struct MedicationTile: View {
                         .font(.custom(AppFonts.haasGrot, size: 14))
                         .foregroundColor(AppColours.buttonBrown)
                 } else if (medication.type == .shortTerm) {
-                    Text((medication.courseEnd == nil || medication.howLongTakingFor == nil) ? "Unspecified" : "\(getStartDate(endDate: medication.courseEnd!, days: medication.howLongTakingFor!)) - \(stripDateString(dateString: getDateAsString(date: medication.courseEnd!), format: .noTime))")
+                    Text((medication.courseEnd == nil || medication.howLongTakingFor == nil) ? "Unspecified" : "\(getStartDate(endDate: medication.courseEnd!, days: Int(medication.howLongTakingFor!)!)) - \(stripDateString(dateString: getDateAsString(date: medication.courseEnd!), format: .noTime))")
                         .font(.custom(AppFonts.haasGrot, size: 14))
                         .foregroundColor(AppColours.buttonBrown)
                 } else if (medication.type == .noLongerTaking) {
-                    Text((medication.courseEnd == nil || medication.howLongTookFor == nil) ? "Unspecified" : "\(getStartDate(endDate: medication.courseEnd!, days: medication.howLongTookFor!)) - \(stripDateString(dateString: getDateAsString(date: medication.courseEnd!), format: .noTime))")
+                    Text((medication.courseEnd == nil || medication.howLongTookFor == nil) ? "Unspecified" : "\(getStartDate(endDate: medication.courseEnd!, days: Int(medication.howLongTookFor!)!)) - \(stripDateString(dateString: getDateAsString(date: medication.courseEnd!), format: .noTime))")
                         .font(.custom(AppFonts.haasGrot, size: 14))
                         .foregroundColor(AppColours.buttonBrown)
                 }
@@ -89,8 +89,8 @@ struct MedicationTile: View {
     ZStack {
         AppColours.brown
         VStack {
-            MedicationTile(medication: Medication(type: .ongoing, name: "Panadol", form: .Cream, strength: "500 mg", frequency: .Daily, howLongTakingFor: 10, courseEnd: Date.now, dateRecorded: Date.now))
-            MedicationTile(medication: Medication(type: .noLongerTaking, name: "Panadol", form: .Cream, strength: "500 mg", frequency: .Daily, howLongTookFor: 10, courseEnd: Date.now,  dateRecorded: Date.now))
+            MedicationTile(medication: Medication(type: .ongoing, name: "Panadol", form: .Cream, strength: "500 mg", frequency: .Daily, howLongTakingFor: String(describing: 10), courseEnd: Date.now, dateRecorded: Date.now))
+            MedicationTile(medication: Medication(type: .noLongerTaking, name: "Panadol", form: .Cream, strength: "500 mg", frequency: .Daily, howLongTookFor: String(describing: 10), courseEnd: Date.now,  dateRecorded: Date.now))
         }
     }
     .environmentObject(Router())
