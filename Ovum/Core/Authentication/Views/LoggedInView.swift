@@ -72,6 +72,12 @@ struct LoggedInView: View {
                                         MedicationFormView(medicationFormType: .ongoing)
                                     case .noLongerTaking:
                                         MedicationFormView(medicationFormType: .noLongerTaking)
+                                    case .ongoingEdit(let medicationObj):
+                                        MedicationFormView(medicationFormType: .ongoing, medicationObj: medicationObj)
+                                    case .shortTermEdit(let medicationObj):
+                                        MedicationFormView(medicationFormType: .shortTerm, medicationObj: medicationObj)
+                                    case .noLongerTakingEdit(let medicationObj):
+                                        MedicationFormView(medicationFormType: .noLongerTaking, medicationObj: medicationObj)
                                     }
                                 }
                         }

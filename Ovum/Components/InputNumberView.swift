@@ -1,0 +1,33 @@
+//import SwiftUI
+//
+//struct InputNumberView: View {
+//    @Binding var text: Int?
+//    
+//    let title: String
+//    let placeholder: String
+//    var isSecureField = false
+//    var hasBorder = false
+//    
+//    @FocusState.Binding var fieldIsFocused: Bool
+//    
+//    var body: some View {
+//        VStack(alignment: .leading, spacing: 12) {
+//            TextField(placeholder, text: $(String(describing: text)))
+//                .font(.system(size: 16))
+//                .multilineTextAlignment(.leading)
+//                .padding(.horizontal, 16)
+//                .padding(.vertical, 16)
+//                .focused($fieldIsFocused)
+//                .background(
+//                    RoundedRectangle(cornerRadius: 6)
+//                        .fill(.white)
+//                        .stroke(AppColours.darkBrown, lineWidth: hasBorder ? 1 : 0)
+//                )
+//            //                    .border(Color.red, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+//        }
+//    }
+//}
+//
+//#Preview {
+//    LoginView()
+//}

@@ -6,21 +6,33 @@ struct MedicationFormView: View {
     @Environment(\.dismiss) var dismiss
     
     let medicationFormType: MedicationType
+    @State var medicationObject: Medication = Medication(type: .ongoing, name: "", dateRecorded: Date.now)
     var isEditing: Bool = false
     
-    @State var name = ""
-    @State var form: MedicationForm = .Capsule
-    @State var strength = ""
-    @State var strengthUnit: StrengthOptions = .g
-    @State var frequency: MedicationIntakeFrequency = .Daily
-    @State var stillTaking: Bool?
-    @State var lengthTaking = ""
-    @State var lengthTaken = ""
-    @State var lengthTakingUnit: ConsumptionLength = .days
-    @State var lengthTakenUnit: ConsumptionLength = .days
-    @State var courseEnd: Date = Date()
-    @State var dateRecorded: Date = Date.now
+    @State var dummyBinder = ""
+    
+//    @State var name = ""
+//    @State var form: MedicationForm = .Capsule
+//    @State var strength = ""
+//    @State var strengthUnit: StrengthOptions = .g
+//    @State var frequency: MedicationIntakeFrequency = .Daily
+//    @State var stillTaking: Bool?
+//    @State var lengthTaking = ""
+//    @State var lengthTaken = ""
+//    @State var lengthTakingUnit: ConsumptionLength = .days
+//    @State var lengthTakenUnit: ConsumptionLength = .days
+//    @State var courseEnd: Date = Date()
+//    @State var dateRecorded: Date = Date.now
     @FocusState var focusField: Bool
+    
+    init(medicationFormType: MedicationType, medicationObj: Medication?) {
+        self.medicationFormType = medicationFormType
+        if (medicationObj != nil) {
+            _medicationObject = State(initialValue: medicationObj!)
+        } else {
+            _medicationObject = State(initialValue: Medication(type: medicationFormType, name: "", dateRecorded: Date.now))
+        }
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -52,7 +64,7 @@ struct MedicationFormView: View {
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .kerning(0.32)
                             .foregroundColor(AppColours.buttonBrown)
-                        InputView(text: $name, title: "Add medication name", placeholder: "Add medication name", hasBorder: true, fieldIsFocused: $focusField)
+                        InputView(text: $medicationObject.name, title: "Add medication name", placeholder: "Add medication name", hasBorder: true, fieldIsFocused: $focusField)
                     }
                     
                     VStack(alignment: .leading, spacing: 14) {
@@ -61,7 +73,7 @@ struct MedicationFormView: View {
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .kerning(0.32)
                             .foregroundColor(AppColours.buttonBrown)
-                        Picker("Form", selection: $form) {
+                        Picker("Form", selection: $medicationObject.form) {
                             ForEach(MedicationForm.allCases, id: \.self) { category in
                                 Text(category.rawValue).tag(category)
                             }
@@ -82,9 +94,9 @@ struct MedicationFormView: View {
                             .kerning(0.32)
                             .foregroundColor(AppColours.buttonBrown)
                         HStack {
-                            InputView(text: $strength, title: "Strength", placeholder: "Add number", hasBorder: true, fieldIsFocused: $focusField)
+                            InputView(text: ($medicationObject.strength.toUnwrapped(defaultValue: "")), title: "Strength", placeholder: "Add number", hasBorder: true, fieldIsFocused: $focusField)
                             //                    Spacer()
-                            Picker("Strength Units", selection: $strengthUnit) {
+                            Picker("Strength Units", selection: $medicationObject.strengthUnit) {
                                 ForEach(StrengthOptions.allCases, id: \.self) { category in
                                     Text(category.rawValue).tag(category)
                                 }
@@ -105,7 +117,7 @@ struct MedicationFormView: View {
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .kerning(0.32)
                             .foregroundColor(AppColours.buttonBrown)
-                        Picker("Frequency", selection: $frequency) {
+                        Picker("Frequency", selection: $medicationObject.frequency) {
                             ForEach(MedicationIntakeFrequency.allCases, id: \.self) { category in
                                 Text(category.rawValue).tag(category)
                             }
@@ -128,18 +140,18 @@ struct MedicationFormView: View {
                                 .foregroundColor(AppColours.buttonBrown)
                             HStack(spacing: 10) {
                                 TransparentButton(text: "Yes", colour: AppColours.buttonBrown) {
-                                    stillTaking = true
+                                    medicationObject.stillTaking = true
                                 }
                                 .background(
                                     RoundedRectangle(cornerRadius: 6)
-                                        .fill((stillTaking == nil || !stillTaking!) ? Color.clear : AppColours.indigo)
+                                        .fill((medicationObject.stillTaking == nil || !medicationObject.stillTaking!) ? Color.clear : AppColours.indigo)
                                 )
                                 TransparentButton(text: "No", colour: AppColours.buttonBrown) {
-                                    stillTaking = false
+                                    medicationObject.stillTaking = false
                                 }
                                 .background(
                                     RoundedRectangle(cornerRadius: 6)
-                                        .fill((stillTaking == nil || stillTaking!) ? Color.clear : AppColours.indigo)
+                                        .fill((medicationObject.stillTaking == nil || medicationObject.stillTaking!) ? Color.clear : AppColours.indigo)
                                 )
                             }
                         }
@@ -153,8 +165,8 @@ struct MedicationFormView: View {
                                 .kerning(0.32)
                                 .foregroundColor(AppColours.buttonBrown)
                             HStack {
-                                InputView(text: $lengthTaking, title: "How long are you taking it for?", placeholder: "Add number", hasBorder: true, fieldIsFocused: $focusField)
-                                Picker("How long are you taking it for?", selection: $lengthTakingUnit) {
+                                InputView(text: $medicationObject.howLongTakingFor.toUnwrapped(defaultValue: ""), title: "How long are you taking it for?", placeholder: "Add number", hasBorder: true, fieldIsFocused: $focusField)
+                                Picker("How long are you taking it for?", selection: $medicationObject.lengthTakingUnit) {
                                     ForEach(ConsumptionLength.allCases, id: \.self) { category in
                                         Text(category.rawValue).tag(category)
                                     }
@@ -178,8 +190,8 @@ struct MedicationFormView: View {
                                 .kerning(0.32)
                                 .foregroundColor(AppColours.buttonBrown)
                             HStack {
-                                InputView(text: $lengthTaken, title: "How long did you take it for?", placeholder: "Add number", hasBorder: true, fieldIsFocused: $focusField)
-                                Picker("How long are you taking it for?", selection: $lengthTakenUnit) {
+                                InputView(text: $medicationObject.howLongTookFor.toUnwrapped(defaultValue: ""), title: "How long did you take it for?", placeholder: "Add number", hasBorder: true, fieldIsFocused: $focusField)
+                                Picker("How long are you taking it for?", selection: $medicationObject.lengthTakenUnit) {
                                     ForEach(ConsumptionLength.allCases, id: \.self) { category in
                                         Text(category.rawValue).tag(category)
                                     }
@@ -203,7 +215,7 @@ struct MedicationFormView: View {
                                 .kerning(0.32)
                                 .foregroundColor(AppColours.buttonBrown)
                             DatePicker("Select a date:",
-                                       selection: $courseEnd,
+                                       selection: $medicationObject.courseEnd.toUnwrapped(defaultValue: Date.now),
                                        displayedComponents: [.date]
                                        
                             )
@@ -212,22 +224,22 @@ struct MedicationFormView: View {
                     }
 //                    Spacer()
                     Button {
-                        let newMedication = Medication(
-                            type: medicationFormType,
-                            name: name,
-                            form: form,
-                            strength: "\(strength) \(strengthUnit)",
-                            frequency: frequency,
-                            stillTaking: stillTaking,
-                            howLongTakingFor: returnDays(numberAsString: lengthTaking, unit: lengthTakingUnit),
-                            howLongTookFor: returnDays(numberAsString: lengthTaken, unit: lengthTakenUnit),
-                            courseEnd: courseEnd,
-                            dateRecorded: dateRecorded
-                        )
+//                        let newMedication = Medication(
+//                            type: medicationFormType,
+//                            name: name,
+//                            form: form,
+//                            strength: "\(strength) \(strengthUnit)",
+//                            frequency: frequency,
+//                            stillTaking: stillTaking,
+//                            howLongTakingFor: returnDays(numberAsString: lengthTaking, unit: lengthTakingUnit),
+//                            howLongTookFor: returnDays(numberAsString: lengthTaken, unit: lengthTakenUnit),
+//                            courseEnd: courseEnd,
+//                            dateRecorded: dateRecorded
+//                        )
                         if medicationFormType == .ongoing {
-                            viewModel.currentMedication.append(newMedication)
+                            viewModel.currentMedication.append(medicationObject)
                         } else {
-                            viewModel.pastMedication.append(newMedication)
+                            viewModel.pastMedication.append(medicationObject)
                         }
                         
                         router.navigateToRoot(within: .medication)
@@ -272,6 +284,12 @@ struct MedicationFormView: View {
             case .years:
                 return Int(numberAsString!)!*365
         }
+    }
+}
+
+extension Binding {
+     func toUnwrapped<T>(defaultValue: T) -> Binding<T> where Value == Optional<T>  {
+        Binding<T>(get: { self.wrappedValue ?? defaultValue }, set: { self.wrappedValue = $0 })
     }
 }
 

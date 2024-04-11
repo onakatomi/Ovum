@@ -17,6 +17,7 @@
 		B2414CBA2BC4F2A100AC67D1 /* MedicationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2414CB92BC4F2A100AC67D1 /* MedicationFormView.swift */; };
 		B2414CBC2BC518C800AC67D1 /* MedicationTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2414CBB2BC518C800AC67D1 /* MedicationTile.swift */; };
 		B2414CBE2BC7699E00AC67D1 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2414CBD2BC7699E00AC67D1 /* Notifications.swift */; };
+		B2414CC12BC791EE00AC67D1 /* InputNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2414CC02BC791EE00AC67D1 /* InputNumberView.swift */; };
 		B246940C2BA026FA00286A75 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246940B2BA026FA00286A75 /* Menu.swift */; };
 		B246940E2BA10D1600286A75 /* PurpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246940D2BA10D1600286A75 /* PurpleButton.swift */; };
 		B24694102BA10DA100286A75 /* TransparentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B246940F2BA10DA100286A75 /* TransparentButton.swift */; };
@@ -98,6 +99,7 @@
 		B2414CBB2BC518C800AC67D1 /* MedicationTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationTile.swift; sourceTree = "<group>"; };
 		B2414CBD2BC7699E00AC67D1 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		B2414CBF2BC769C800AC67D1 /* OvumRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OvumRelease.entitlements; sourceTree = "<group>"; };
+		B2414CC02BC791EE00AC67D1 /* InputNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputNumberView.swift; sourceTree = "<group>"; };
 		B246940B2BA026FA00286A75 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		B246940D2BA10D1600286A75 /* PurpleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurpleButton.swift; sourceTree = "<group>"; };
 		B246940F2BA10DA100286A75 /* TransparentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentButton.swift; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 			children = (
 				B2D6A41A2B9AB3830045CCD1 /* AddDocumentTray.swift */,
 				B247B68B2BB1216E00FF17B9 /* SymptomTray.swift */,
+				B2414CC02BC791EE00AC67D1 /* InputNumberView.swift */,
 				B246941E2BA12E2600286A75 /* InputView.swift */,
 				B2D6A3B02B8F1AB20045CCD1 /* BaseView.swift */,
 				B2D6A4202B9E789E0045CCD1 /* BubbleBackground.swift */,
@@ -550,6 +553,7 @@
 				B247B68E2BB1307F00FF17B9 /* ChatCompleted.swift in Sources */,
 				B2582D252BA40476002ABFA6 /* HealthKitManager.swift in Sources */,
 				B2D6A4232B9E7DFE0045CCD1 /* BubbleTransitionView.swift in Sources */,
+				B2414CC12BC791EE00AC67D1 /* InputNumberView.swift in Sources */,
 				B2D6A3F52B91565C0045CCD1 /* Message.swift in Sources */,
 				B2414CB42BC4C00500AC67D1 /* Medication.swift in Sources */,
 				B247B6AF2BBCC0B300FF17B9 /* SlidingView.swift in Sources */,
