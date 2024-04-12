@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct SymptomTray: View {
-    let correspondingSymptom: String
+//    let correspondingSymptom: String
+    let index: Int
     let chatSession: ChatSession
     var handler: (() -> Void)
     
@@ -9,8 +10,8 @@ struct SymptomTray: View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
                 HStack {
-                    Image("status_monitor")
-                    VStack {
+                    Image(mapSeveritytoStatus(severity: chatSession.severities[index]).getImageName())
+                    VStack(alignment: .leading) {
                         Text("**Symptom Reported**")
                             .font(.subheadline)
                         Text(stripDateString(dateString: chatSession.date, format: .elegant))
@@ -31,7 +32,7 @@ struct SymptomTray: View {
             Divider()
                 .background(AppColours.maroon)
                 .padding(.vertical, 16)
-            Text(correspondingSymptom.capitalized)
+            Text(chatSession.symptoms[index] == "none" ? "No symptoms reported" : chatSession.symptoms[index].capitalized)
                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 .foregroundColor(AppColours.darkBrown)
             Divider()

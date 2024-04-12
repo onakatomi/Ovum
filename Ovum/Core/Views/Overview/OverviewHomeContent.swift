@@ -5,6 +5,9 @@ enum BodyPart: String, Codable {
     case breast
     case abdomen
     case pelvic
+    case arm
+    case leg
+    case none
     
     func getOffset(imageSize: CGSize) -> (widthOffset: CGFloat, heightOffset: CGFloat) {
         switch self {
@@ -16,6 +19,12 @@ enum BodyPart: String, Codable {
             return (0, 0.20*imageSize.height/2)
         case .pelvic:
             return (0.05*imageSize.height/2, 0.5*imageSize.height/2)
+        case .arm:
+            return (-(0.22*imageSize.height/2), 0.05*imageSize.height/2)
+        case .leg:
+            return (-(0.50*imageSize.height/2), 0.37*imageSize.height/2)
+        case .none:
+            return (-0.65*imageSize.height/2, -(0.33*imageSize.height/2))
         }
     }
 }
@@ -24,16 +33,31 @@ enum Status: CaseIterable {
     case investigate
     case monitor
     case treated
+    case none
     
     func getImageName() -> String {
         switch self {
         case .investigate:
-            return "status_icon"
+            return "status_cross_red"
         case .monitor:
-            return "status_icon"
+            return "status_cross_yellow"
         case .treated:
-            return "status_icon"
+            return "status_cross_green"
+        case .none:
+            return "status_cross_blue"
         }
+    }
+}
+
+func mapSeveritytoStatus(severity: String) -> Status {
+    if (severity == "severe") {
+        return .investigate
+    } else if (severity == "mild") {
+        return .monitor
+    } else if (severity == "minor") {
+        return .treated
+    } else {
+        return .none
     }
 }
 
@@ -81,14 +105,18 @@ struct OverviewHomeContent: View {
                 if orderedChatSessions.count > 0 {
                     ZStack {
                         ForEach(Array(orderedChatSessions[Int(sliderValue)].bodyParts.enumerated()), id: \.offset) { index, bodyPart in
-                            Image.getBodyPartImage(region: bodyPart, status: Status.allCases.randomElement()!, imageSize: self.imageSize)
+                            Image.getBodyPartImage(region: bodyPart, status: mapSeveritytoStatus(severity: orderedChatSessions[Int(sliderValue)].severities[index]), imageSize: self.imageSize)
                                 .onTapGesture {
                                     currentlySelectedIndex = index
                                     showSymptomTray = true
                                 }
                             
                                 .sheet(isPresented: $showSymptomTray) {
-                                    SymptomTray(correspondingSymptom: orderedChatSessions[Int(sliderValue)].symptoms[currentlySelectedIndex], chatSession: orderedChatSessions[Int(sliderValue)]) {
+                                    SymptomTray(
+                                        index: currentlySelectedIndex,
+                                        chatSession: orderedChatSessions[Int(sliderValue)]
+                                        
+                                    ) {
                                         showSymptomTray = false
                                         router.navigateToRoot(within: .chat)
                                         router.navigateWithinChat(to: .chatHistoryDetail(session: orderedChatSessions[Int(sliderValue)]))
@@ -119,6 +147,10 @@ struct OverviewHomeContent: View {
             if orderedChatSessions.count > 0 {
                 Text(stripDateString(dateString: orderedChatSessions[Int(sliderValue)].date, format: .elegant))
                     .foregroundColor(AppColours.maroon)
+            } else {
+                Text("*Record your first chat session to visualise your symptoms*")
+                    .font(.caption)
+                    .foregroundColor(AppColours.maroon)
             }
             Spacer()
         }
@@ -139,7 +171,10 @@ struct OverviewHomeContent: View {
 
 
 
-//#Preview {
+#Preview {
+    ContentView()
 //    OverviewHomeContent()
-//        .environmentObject(MessageViewModel(userId: "1"))
-//}
+//        .environmentObject(Router())
+//        .environmentObject(HealthKitManager())
+//        .environmentObject(MessageViewModel(userId: "1", authViewModelPassedIn: AuthViewModel()))
+}

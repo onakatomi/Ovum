@@ -40,7 +40,7 @@ struct ChatCompleted: View {
                     Text("**Reported On**: \(stripDateString(dateString: chatSession.date, format: .elegant))")
                         .padding(.vertical, 8)
                     ForEach(chatSession.symptoms, id: \.self) { symptom in
-                        Text(symptom.capitalized)
+                        Text(symptom == "none" ? "No symptoms reported" : symptom.capitalized)
                             .font(.custom(AppFonts.testDomaine, size: 24))
                             .padding(.vertical, 2)
                     }
@@ -71,5 +71,5 @@ struct ChatCompleted: View {
 }
 
 #Preview {
-    ChatCompleted(chatSession: ChatSession(messages: chatData, bodyParts: [BodyPart.abdomen], symptoms: ["stomach ache", "fatigue"], title: "Sample Chat Session #2", date: getDateAsString(date: Date.now), colour: AppColours.indigo, summary: "Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum."))
+    ChatCompleted(chatSession: ChatSession(messages: chatData, bodyParts: [BodyPart.abdomen, BodyPart.head], symptoms: ["stomach ache", "fatigue"], severities: ["severe", "mild"], title: "Sample Chat Session #2", date: getDateAsString(date: Date.now), colour: AppColours.indigo, summary: "Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum.Thank you. This information has been added to Ovum."))
 }

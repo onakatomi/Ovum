@@ -22,6 +22,7 @@ struct ChatTile: View {
                 VStack(alignment: .leading) {
                     Text(chatTile.title)
                         .font(Font.headline.weight(.bold))
+                        .multilineTextAlignment(.leading)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     Text(stripDateString(dateString: chatTile.date, format: .elegant))
                         .font(Font.headline.weight(.light))
@@ -36,5 +37,5 @@ struct ChatTile: View {
 }
 
 #Preview {
-    ChatTile(chatTile: ChatSession(messages: [Message(author: "John", fromOvum: false, content: "Are you there?")], bodyParts: [], symptoms: [], title: "Irregular bleeding patterns", date: getDateAsString(date: Date.now), colour: AppColours.pink))
+    ChatTile(chatTile: ChatSession(messages: [Message(author: "John", fromOvum: false, content: "Are you there?")], bodyParts: [], symptoms: [], severities: [], title: "Irregular bleeding patterns", date: getDateAsString(date: Date.now), colour: AppColours.pink))
 }

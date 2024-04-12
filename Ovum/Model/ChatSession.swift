@@ -7,6 +7,7 @@ struct ChatSession: Codable, Identifiable, Hashable {
     var messages: [Message]
     var bodyParts: [BodyPart]
     var symptoms: [String]
+    var severities: [String]
     var title: String
     var date: String
     var colour: Color
@@ -14,7 +15,7 @@ struct ChatSession: Codable, Identifiable, Hashable {
 }
 
 extension ChatSession {
-    static var MOCK_SESSION = ChatSession(messages: [Message(author: "Ollie", fromOvum: false, content: "hey"), Message(author: "Ollie", fromOvum: false, content: "Hello!")], bodyParts: [.head], symptoms: ["headache"], title: "Sample sesh", date: getDateAsString(date: Date.now), colour: AppColours.brown, summary: "Big headache.")
+    static var MOCK_SESSION = ChatSession(messages: [Message(author: "Ollie", fromOvum: false, content: "hey"), Message(author: "Ollie", fromOvum: false, content: "Hello!")], bodyParts: [.head], symptoms: ["headache"], severities: ["severe"], title: "Sample sesh", date: getDateAsString(date: Date.now), colour: AppColours.brown, summary: "Big headache.")
 }
 
 fileprivate extension Color {

@@ -16,6 +16,7 @@ struct RegistrationView: View {
     @State private var isCreatingUser: Bool = false
     @State private var errorMessages: [String] = []
     @State private var showingAlert = false
+    @State private var isChecked = false
     @FocusState private var focusField: Bool
     @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(\.dismiss) private var dismiss
@@ -49,33 +50,67 @@ struct RegistrationView: View {
                 }
                 .padding(.bottom, 30)
                 VStack(spacing: 15) {
-                    InputView(text: $email, title: "Email Address", placeholder: "Your email", fieldIsFocused: $focusField)
-                        .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-                        .onChange(of: email) {
-                            if (email.count > 0 && !email.contains("@")) {
-                                if !errorMessages.contains(ErrorMessages.emailNotValid) {
-                                    errorMessages.append(ErrorMessages.emailNotValid)
-                                }
-                            } else {
-                                if let index = errorMessages.firstIndex(of: ErrorMessages.emailNotValid) {
-                                    errorMessages.remove(at: index)
+                    ZStack(alignment: .trailing) {
+                        InputView(text: $email, title: "Email Address", placeholder: "Your email", fieldIsFocused: $focusField)
+                            .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                            .onChange(of: email) {
+                                if (email.count > 0 && !email.contains("@")) {
+                                    if !errorMessages.contains(ErrorMessages.emailNotValid) {
+                                        errorMessages.append(ErrorMessages.emailNotValid)
+                                    }
+                                } else {
+                                    if let index = errorMessages.firstIndex(of: ErrorMessages.emailNotValid) {
+                                        errorMessages.remove(at: index)
+                                    }
                                 }
                             }
-                        }
+                            if (!email.isEmpty) {
+                                if (email.count > 0 && !email.contains("@")) {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .imageScale(.large)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(Color(.systemRed))
+                                        .padding(.trailing, 10)
+                                } else {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .imageScale(.large)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(Color(.systemGreen))
+                                        .padding(.trailing, 10)
+                                }
+                            }
+                    }
                     
-                    InputView(text: $name, title: "Name", placeholder: "Your name", fieldIsFocused: $focusField)
-                        .autocapitalization(.words)
-                        .onChange(of: name) {
-                            if ((name.count > 0 && name.count < 3) || name == "Ovum") {
-                                if !errorMessages.contains(ErrorMessages.nameNotValid) {
-                                    errorMessages.append(ErrorMessages.nameNotValid)
-                                }
-                            } else {
-                                if let index = errorMessages.firstIndex(of: ErrorMessages.nameNotValid) {
-                                    errorMessages.remove(at: index)
+                    ZStack(alignment: .trailing) {
+                        InputView(text: $name, title: "Name", placeholder: "Your name", fieldIsFocused: $focusField)
+                            .autocapitalization(.words)
+                            .onChange(of: name) {
+                                if ((name.count > 0 && name.count < 3) || name == "Ovum") {
+                                    if !errorMessages.contains(ErrorMessages.nameNotValid) {
+                                        errorMessages.append(ErrorMessages.nameNotValid)
+                                    }
+                                } else {
+                                    if let index = errorMessages.firstIndex(of: ErrorMessages.nameNotValid) {
+                                        errorMessages.remove(at: index)
+                                    }
                                 }
                             }
+                        if (!name.isEmpty) {
+                            if ((name.count > 0 && name.count < 3) || name == "Ovum") {
+                                Image(systemName: "xmark.circle.fill")
+                                    .imageScale(.large)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color(.systemRed))
+                                    .padding(.trailing, 10)
+                            } else {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .imageScale(.large)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color(.systemGreen))
+                                    .padding(.trailing, 10)
+                            }
                         }
+                    }
                     
                     ZStack(alignment: .trailing) {
                         InputView(text: $password, title: "Password", placeholder: "Enter your password", isSecureField: true, fieldIsFocused: $focusField)
@@ -150,6 +185,21 @@ struct RegistrationView: View {
                 }
                 .padding(.vertical, 5)
                 
+                Toggle(isOn: $isChecked) {
+                    HStack {
+                        Text("I have read and agree to the ")  +
+                        Text("Terms and Conditions").underline().fontWeight(.bold) +
+                        Text(" & ") +
+                        Text("Privacy Policy").underline().fontWeight(.bold)
+                    }
+                    .font(Font.custom("Haas Grot Disp Trial", size: 16))
+                    .kerning(0.32)
+                    .foregroundColor(Color(red: 0.98, green: 0.96, blue: 0.92))
+                    .multilineTextAlignment(.leading)
+                }
+                .toggleStyle(iOSCheckboxToggleStyle())
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
                 Spacer()
                 
                 PurpleButton(image: "upload", text: "Sign Up") {
@@ -204,6 +254,7 @@ extension RegistrationView: AuthenticationFormProtocol {
         && !password.isEmpty
         && password.count > 7
         && confirmPassword == password
+        && isChecked
     }
 }
 

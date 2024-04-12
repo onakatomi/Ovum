@@ -25,7 +25,7 @@ class MessageViewModel: ObservableObject {
         documents = []
         currentMedication = []
         pastMedication = []
-        currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], title: "Placeholder", date: getDateAsString(date: Date.now), colour: Color(.red))
+        currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], severities: [], title: "Placeholder", date: getDateAsString(date: Date.now), colour: Color(.red))
         authViewModel = authViewModelPassedIn
         Task {
             await getAllChatSessions(userId: userId)
@@ -45,7 +45,7 @@ class MessageViewModel: ObservableObject {
     
     func addSession(isNewSession: Bool) {
         if (isNewSession) {
-            currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], title: "Chat Session2", date: getDateAsString(date: Date.now), colour: getRandomColor())
+            currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], severities: [], title: "Chat Session2", date: getDateAsString(date: Date.now), colour: getRandomColor())
             chatSessions.append(currentSession)
         }
     }
@@ -66,11 +66,11 @@ class MessageViewModel: ObservableObject {
                 }
                 
                 // Reset currentSession.
-                currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], title: "Placeholder2", date: getDateAsString(date: Date.now), colour: Color(.red))
+                currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], severities: [], title: "Placeholder2", date: getDateAsString(date: Date.now), colour: Color(.red))
                 return chatSessions[indexOfSession]
             }
         }
-        currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], title: "Placeholder2", date: getDateAsString(date: Date.now), colour: Color(.red))
+        currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], severities: [], title: "Placeholder2", date: getDateAsString(date: Date.now), colour: Color(.red))
         return nil
     }
     
@@ -262,8 +262,13 @@ class MessageViewModel: ObservableObject {
                     bodyPartArrayMapping[0]
                 }
                 
+                let severitiesArray: [String] = decodedArray2.map { bodyPartArrayMapping in
+                    bodyPartArrayMapping[2]
+                }
+                
                 currentSession.bodyParts = bodyPartsArray
                 currentSession.symptoms = symptomsArray
+                currentSession.severities = severitiesArray
             } catch {
                 print("POST Request Failed:", error)
             }
@@ -467,8 +472,8 @@ let chatData: [Message] = [
 ]
 
 let chatSessionsMock: [ChatSession] = [
-    ChatSession(messages: chatData, bodyParts: [BodyPart.pelvic, BodyPart.breast, BodyPart.abdomen, BodyPart.head], symptoms: ["Cramps", "Breast Pain", "Stomach Ache", "Headache"], title: "Prolonged Cramps", date: getDateAsString(date: Date.now), colour: AppColours.pink, summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lorem eros, dignissim sit amet ligula at, pharetra pulvinar dui. Nulla egestas quam vitae efficitur ullamcorper. Ut faucibus velit eu massa tempor dictum. Nunc semper ex sed enim euismod vulputate. Cras sagittis risus vitae semper vulputate. Donec vel massa mi. Donec scelerisque tempus nulla, rhoncus ultricies nunc lobortis vel. Ut ut venenatis enim. Phasellus tempor posuere arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."),
-    ChatSession(messages: chatData, bodyParts: [BodyPart.abdomen], symptoms: ["stomach ache"], title: "Sore Lower Back", date: getDateAsString(date: Date.now), colour: AppColours.indigo, summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lorem eros, dignissim sit amet ligula at, pharetra pulvinar dui. Nulla egestas quam vitae efficitur ullamcorper. Ut faucibus velit eu massa tempor dictum. Nunc semper ex sed enim euismod vulputate. Cras sagittis risus vitae semper vulputate. Donec vel massa mi. Donec scelerisque tempus nulla, rhoncus ultricies nunc lobortis vel. Ut ut venenatis enim. Phasellus tempor posuere arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."),
+    ChatSession(messages: chatData, bodyParts: [BodyPart.pelvic, BodyPart.breast, BodyPart.abdomen, BodyPart.head], symptoms: ["Cramps", "Breast Pain", "Stomach Ache", "Headache"], severities: ["severe", "mild", "mild", "minor"], title: "Prolonged Cramps", date: getDateAsString(date: Date.now), colour: AppColours.pink, summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lorem eros, dignissim sit amet ligula at, pharetra pulvinar dui. Nulla egestas quam vitae efficitur ullamcorper. Ut faucibus velit eu massa tempor dictum. Nunc semper ex sed enim euismod vulputate. Cras sagittis risus vitae semper vulputate. Donec vel massa mi. Donec scelerisque tempus nulla, rhoncus ultricies nunc lobortis vel. Ut ut venenatis enim. Phasellus tempor posuere arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."),
+    ChatSession(messages: chatData, bodyParts: [BodyPart.abdomen], symptoms: ["stomach ache"], severities: ["severe"], title: "Sore Lower Back", date: getDateAsString(date: Date.now), colour: AppColours.indigo, summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lorem eros, dignissim sit amet ligula at, pharetra pulvinar dui. Nulla egestas quam vitae efficitur ullamcorper. Ut faucibus velit eu massa tempor dictum. Nunc semper ex sed enim euismod vulputate. Cras sagittis risus vitae semper vulputate. Donec vel massa mi. Donec scelerisque tempus nulla, rhoncus ultricies nunc lobortis vel. Ut ut venenatis enim. Phasellus tempor posuere arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."),
 //    ChatSession(messages: chatData, bodyParts: [BodyPart.head, BodyPart.breast], title: "Concern with knee joints", date: "20/03/2024 10:23 am", colour: AppColours.green),
 //    ChatSession(messages: chatData, bodyParts: [], symptoms: [], title: "Early period", date: getDateAsString(date: Date.now), colour: AppColours.peach),
 //    ChatSession(messages: chatData, bodyParts: [], symptoms: [], title: "Explaining your blood results", date: getDateAsString(date: Date.now), colour: AppColours.mint),

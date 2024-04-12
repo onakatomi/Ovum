@@ -23,6 +23,7 @@ struct DocumentListTile: View {
                 HStack {
                     Text(document.title)
                         .font(Font.headline.weight(.bold))
+                        .multilineTextAlignment(.leading)
                     Text("·")
                     Text(stripDateString(dateString: document.date, format: .noTime))
                         .font(Font.headline.weight(.light))

@@ -121,7 +121,7 @@ struct MedicationFormView: View {
                         )
                     }
                     
-                    if (isEditing) {
+                    if (isEditing && medicationObject.type == .ongoing) {
                         VStack(alignment: .leading, spacing: 14) {
                             Text("Are you still taking this medication?")
                                 .font(Font.custom(AppFonts.haasGrot, size: 16))
@@ -220,7 +220,13 @@ struct MedicationFormView: View {
                             // If we're editing a medication object
                             if (isEditing) {
                                 if let index = viewModel.currentMedication.firstIndex(where: { $0.id == medicationObject.id }) {
-                                    viewModel.currentMedication[index] = medicationObject
+                                    if (medicationObject.stillTaking != nil && !medicationObject.stillTaking!) {
+                                        medicationObject.type = .noLongerTaking
+                                        viewModel.currentMedication.remove(at: index)
+                                        viewModel.pastMedication.append(medicationObject)
+                                    } else {
+                                        viewModel.currentMedication[index] = medicationObject
+                                    }
                                 }
                             } else {
                                 viewModel.currentMedication.append(medicationObject)
