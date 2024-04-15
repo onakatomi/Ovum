@@ -7,17 +7,19 @@ class MessageViewModel: ObservableObject {
     @Published var currentSession: ChatSession
     @Published var chatSessions: [ChatSession] = []
     @Published var documents: [Document] = []
+    @Published var medications: [Medication] = []
     @Published var currentMedication: [Medication]
     @Published var pastMedication: [Medication]
     @Published var isLoading: Bool = false
+    @Published var isSavingMedication: Bool = false
     @Published var isDocumentUploading: Bool = false
     @Published var isNewThreadBeingGenerated: Bool = false
     @Published var latestThreadId: String?
     var authViewModel: AuthViewModel
     
-    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
+//    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
 //    let baseUrl = "http://192.168.89.1:5001"
-//    let baseUrl = "http://192.168.89.21:5002"
+    let baseUrl = "http://192.168.89.21:5002"
     
     init(userId: String, authViewModelPassedIn: AuthViewModel) {
         messages = []
@@ -30,6 +32,7 @@ class MessageViewModel: ObservableObject {
         Task {
             await getAllChatSessions(userId: userId)
             await getAllDocuments(userId: userId)
+            await getAllMedications(userId: userId)
         }
     }
     
@@ -99,6 +102,39 @@ class MessageViewModel: ObservableObject {
         }
     }
     
+    func addMedicationToCloud(medication: Medication, userId: String) async {
+        do {
+            let jsonEncoder = JSONEncoder()
+            let jsonResultData = try jsonEncoder.encode(medication)
+            let encodedMedication = String(data: jsonResultData, encoding: .utf8)
+            let endpoint = "/add_medication"
+            
+            let dataToSend: [String: Any] = [
+                "user_id": userId,
+                "medication": encodedMedication!
+            ]
+            
+            if let url = URL(string: baseUrl + endpoint) {
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                
+                do {
+                    request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
+                    let (data, _) = try await URLSession.shared.data(for: request)
+                    
+                    // Handle response:
+                    let p = try JSONDecoder().decode(Medication.self, from: data)
+                    print("hey")
+                } catch {
+                    print("POST Request Failed:", error)
+                }
+            }
+        } catch {
+            print("Encoding of medication failed", error)
+        }
+    }
+    
     struct AllSessionsResponse: Codable {
         var all_sessions: [ChatSession]
     }
@@ -134,6 +170,45 @@ class MessageViewModel: ObservableObject {
                 }))
             } catch {
                 print("GET Request Failed:", error)
+            }
+        }
+    }
+    
+    struct AllMedicationsResponse: Codable {
+        var all_medications: [Medication]
+    }
+    
+    func getAllMedications(userId: String) async {
+        print("Fetching medications...")
+        let endpoint = "/get_all_medications/\(userId)"
+        
+        if let url = URL(string: baseUrl + endpoint) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            do {
+//                request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
+                let (data, _) = try await URLSession.shared.data(for: request)
+                let decoder = JSONDecoder()
+                let apiResponse = try decoder.decode(AllMedicationsResponse.self, from: data) // Decode the incoming JSON into a Swift struct
+                for medication in apiResponse.all_medications {
+                    print(medication.name)
+                    if (medication.type == .ongoing) {
+                        currentMedication.append(medication)
+                    } else {
+                        pastMedication.append(medication)
+                    }
+                }
+                
+                // Only append fetched sessions that don't currently exist in the array to prevent duplicates.
+//                medications.append(contentsOf: apiResponse.all_medications.filter({ medicationToAdd in
+//                    !medications.contains { existingMedication in
+//                        medicationToAdd.id == existingMedication.id
+//                    }
+//                }))
+            } catch {
+                print("GET request for fetching medications failed:", error)
             }
         }
     }
