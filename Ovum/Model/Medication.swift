@@ -31,6 +31,14 @@ enum MedicationForm: String, CaseIterable, Codable, Hashable {
     case Foam = "Foam"
     case Gel = "Gel"
     case Inhaler = "Inhaler"
+    case Injection = "Injection"
+    case Liquid = "Liquid"
+    case Patch = "Patch"
+    case Powder = "Powder"
+    case Spray = "Spray"
+    case Suppository = "Suppository"
+    case Tablet = "Tablet"
+    case Topical = "Topical"
 }
 
 //enum MedicationIntakeFrequency: String, CaseIterable, Codable, Hashable {
