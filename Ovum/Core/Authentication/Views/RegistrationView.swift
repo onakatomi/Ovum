@@ -28,7 +28,7 @@ struct RegistrationView: View {
                 .resizable()
                 .ignoresSafeArea()
                 .blur(radius: 15, opaque: true)
-//            GeometryReader { geometry in
+            GeometryReader { geometry in
                 ScrollView {
                     VStack {
                         Text("Sign Up")
@@ -249,10 +249,11 @@ struct RegistrationView: View {
                     //                    self.endEditing()
                     //                }
                     .ignoresSafeArea(.keyboard)
+                    .frame(minHeight: geometry.size.height)
                 }
 //                .frame(width: geometry.size.width)
                 .scrollBounceBehavior(.basedOnSize, axes: [.vertical])
-//            }
+            }
             
             if isCreatingUser {
                 ProgressView()
