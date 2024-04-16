@@ -23,7 +23,7 @@ class AuthViewModel: ObservableObject {
     }
     
     // new async throws replaces URLSessions. completion blocks which aren't great
-    func signIn(withEmail email: String, password: String) async throws {
+    func signIn(withEmail email: String, password: String) async throws -> String {
         print("Signing in...")
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
@@ -31,7 +31,10 @@ class AuthViewModel: ObservableObject {
             await fetchUser() // Required to get logged in user from Firebase and updates currentUser
         } catch {
             print("DEBUG: Failed to log in with error \(error.localizedDescription)")
+            return ErrorMessages.invalidCredentials
         }
+        
+        return "Successful sign in"
     }
     
     // Async function that can potentially throw an error
@@ -50,6 +53,7 @@ class AuthViewModel: ObservableObject {
             let err: String = "DEBUG: Failed to create user with error \(error.localizedDescription)"
             print(err)
         }
+        
         return "Successful account creation"
     }
     
