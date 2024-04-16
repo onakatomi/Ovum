@@ -18,8 +18,7 @@ class MessageViewModel: ObservableObject {
     var authViewModel: AuthViewModel
     
 //    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
-//    let baseUrl = "http://192.168.89.1:5001"
-    let baseUrl = "http://192.168.89.21:5002"
+    let baseUrl = "http://192.168.89.39:5002"
     
     init(userId: String, authViewModelPassedIn: AuthViewModel) {
         messages = []

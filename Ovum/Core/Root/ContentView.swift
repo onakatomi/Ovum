@@ -4,6 +4,7 @@ struct ContentView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var router: Router
     @EnvironmentObject var healthKitManager: HealthKitManager
+    @StateObject var ovm = OnboardingViewModel()
     
     var body: some View {
         ZStack {
@@ -23,6 +24,12 @@ struct ContentView: View {
                     .onAppear() {
                         scheduleAppReminderNotification()
                     }
+            }
+            
+            if (authViewModel.userSession != nil && authViewModel.currentUser != nil && authViewModel.currentUser!.onboardingInfo == nil) {
+                OnboardingView(ovm: ovm)
+                    .environmentObject(authViewModel)
+                    .environmentObject(router)
             }
         }
     }
