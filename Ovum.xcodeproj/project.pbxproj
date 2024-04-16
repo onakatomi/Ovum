@@ -87,6 +87,10 @@
 		B2D6A4252B9ECA7D0045CCD1 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A4242B9ECA7D0045CCD1 /* PhotoPicker.swift */; };
 		B2D6A4272B9FBDDD0045CCD1 /* CaptureImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A4262B9FBDDD0045CCD1 /* CaptureImage.swift */; };
 		B2D6A4292B9FCDFD0045CCD1 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A4282B9FCDFD0045CCD1 /* Router.swift */; };
+		B2F4BB142BCCD9C200E93770 /* OnboardingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F4BB132BCCD9C200E93770 /* OnboardingInfo.swift */; };
+		B2F4BB162BCCDA3800E93770 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F4BB152BCCDA3800E93770 /* OnboardingView.swift */; };
+		B2F4BB182BCCDBD100E93770 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F4BB172BCCDBD100E93770 /* OnboardingViewModel.swift */; };
+		B2F4BB1A2BCE393F00E93770 /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F4BB192BCE393F00E93770 /* WarningView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -169,6 +173,10 @@
 		B2D6A4242B9ECA7D0045CCD1 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		B2D6A4262B9FBDDD0045CCD1 /* CaptureImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureImage.swift; sourceTree = "<group>"; };
 		B2D6A4282B9FCDFD0045CCD1 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		B2F4BB132BCCD9C200E93770 /* OnboardingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingInfo.swift; sourceTree = "<group>"; };
+		B2F4BB152BCCDA3800E93770 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		B2F4BB172BCCDBD100E93770 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		B2F4BB192BCE393F00E93770 /* WarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,7 +268,10 @@
 				B246941C2BA12D7700286A75 /* LoginView.swift */,
 				B247B6912BB3BA9C00FF17B9 /* LoggedInView.swift */,
 				B24694202BA131DD00286A75 /* RegistrationView.swift */,
+				B2F4BB152BCCDA3800E93770 /* OnboardingView.swift */,
+				B2F4BB172BCCDBD100E93770 /* OnboardingViewModel.swift */,
 				B247B6AE2BBCC0B300FF17B9 /* SlidingView.swift */,
+				B2F4BB192BCE393F00E93770 /* WarningView.swift */,
 				B247B6B02BBCC4BC00FF17B9 /* KeyboardManager.swift */,
 				B2414CBD2BC7699E00AC67D1 /* Notifications.swift */,
 			);
@@ -404,6 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				B2D6A3F42B91565C0045CCD1 /* Message.swift */,
+				B2F4BB132BCCD9C200E93770 /* OnboardingInfo.swift */,
 				B2D6A4062B980BAD0045CCD1 /* ChatSession.swift */,
 				B2414CB32BC4C00500AC67D1 /* Medication.swift */,
 				B2D6A4132B98313A0045CCD1 /* Document.swift */,
@@ -531,6 +543,7 @@
 				B2414CBE2BC7699E00AC67D1 /* Notifications.swift in Sources */,
 				B247B6B12BBCC4BC00FF17B9 /* KeyboardManager.swift in Sources */,
 				B2D6A4272B9FBDDD0045CCD1 /* CaptureImage.swift in Sources */,
+				B2F4BB1A2BCE393F00E93770 /* WarningView.swift in Sources */,
 				B2D6A3E72B9041B10045CCD1 /* Header.swift in Sources */,
 				B2414CB62BC4C88F00AC67D1 /* MedicationFrequency.swift in Sources */,
 				B247B6902BB3A6EC00FF17B9 /* SplashScreen.swift in Sources */,
@@ -557,6 +570,7 @@
 				B2D6A4032B96CBE90045CCD1 /* ChatTile.swift in Sources */,
 				B247B68E2BB1307F00FF17B9 /* ChatCompleted.swift in Sources */,
 				B2582D252BA40476002ABFA6 /* HealthKitManager.swift in Sources */,
+				B2F4BB182BCCDBD100E93770 /* OnboardingViewModel.swift in Sources */,
 				B2D6A4232B9E7DFE0045CCD1 /* BubbleTransitionView.swift in Sources */,
 				B2D6A3F52B91565C0045CCD1 /* Message.swift in Sources */,
 				B2414CB42BC4C00500AC67D1 /* Medication.swift in Sources */,
@@ -569,6 +583,7 @@
 				B2D6A3E92B9055640045CCD1 /* ChatHomeContent.swift in Sources */,
 				B247B6922BB3BA9C00FF17B9 /* LoggedInView.swift in Sources */,
 				B2414CBC2BC518C800AC67D1 /* MedicationTile.swift in Sources */,
+				B2F4BB162BCCDA3800E93770 /* OnboardingView.swift in Sources */,
 				B24694272BA1360600286A75 /* User.swift in Sources */,
 				B2D6A41F2B9E77BD0045CCD1 /* MapOnboardingBubbleShape.swift in Sources */,
 				B2D6A3F72B9157020045CCD1 /* MessageViewModel.swift in Sources */,
@@ -584,6 +599,7 @@
 				B2414CAF2BC4B9A100AC67D1 /* MedicationHomeContent.swift in Sources */,
 				B24694692BA26A3A00286A75 /* UploadDocument.swift in Sources */,
 				B2414CB22BC4BF8A00AC67D1 /* MedicationViewModel.swift in Sources */,
+				B2F4BB142BCCD9C200E93770 /* OnboardingInfo.swift in Sources */,
 				B24694232BA1336B00286A75 /* ProfileView.swift in Sources */,
 				B2D6A4122B98310E0045CCD1 /* DocumentListTile.swift in Sources */,
 			);

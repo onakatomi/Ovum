@@ -42,7 +42,7 @@ class AuthViewModel: ObservableObject {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password) // Atempt to create user; await result
             self.userSession = result.user // Set userSession property with new user
-            let user = User(id: result.user.uid, email: email, name: name) // Create OUR user object
+            let user = User(id: result.user.uid, email: email, name: name, warningAccepted: false, onboardingInfo: nil) // Create OUR user object
             let encodedUser = try Firestore.Encoder().encode(user) // Encode this object
             // There's a collection of users, which contains documents of user ids. Each document id maps to a user object. setData sets this map to the id.
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser) // Upload this to Firebase
@@ -76,6 +76,17 @@ class AuthViewModel: ObservableObject {
     
     func deleteAccount() {
         
+    }
+    
+    func updateUser() async {
+        do {
+            let encodedUser = try Firestore.Encoder().encode(currentUser) // Encode this object
+            // There's a collection of users, which contains documents of user ids. Each document id maps to a user object. setData sets this map to the id.
+            try await Firestore.firestore().collection("users").document(currentUser!.id).setData(encodedUser) // Upload this to Firebase
+            await fetchUser()
+        } catch {
+            print("DEBUG: Failed to update user with error \(error.localizedDescription)")
+        }
     }
     
     func fetchUser() async {
