@@ -112,9 +112,10 @@ struct OnboardingView: View {
                             Button {
                                 Task {
                                     ovm.isLoading = true
-                                    try? await Task.sleep(nanoseconds: 1_000_000_000)
                                     let info = ovm.concludeOnboarding()
                                     authViewModel.currentUser?.onboardingInfo = info
+                                    await authViewModel.updateUser()
+//                                    try? await Task.sleep(nanoseconds: 1_000_000_000)
                                     ovm.isLoading = false
                                 }
                             } label: {
