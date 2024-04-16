@@ -6,6 +6,7 @@ struct ErrorMessages {
     static let emailNotValid: String = "Please enter a valid email"
     static let emailTaken: String = "This email is already registered"
     static let nameNotValid: String = "Please enter a valid name"
+    static let invalidCredentials: String = "Invalid credentials"
 }
 
 struct RegistrationView: View {
@@ -37,8 +38,10 @@ struct RegistrationView: View {
                         //                        .font(.largeTitle)
                             .font(.system(size: 50))
                             .frame(maxWidth: .infinity, alignment: .leading)
+                        
                         ThickDivider(color: Color(.white), width: 1, padding: 0)
                             .padding(.bottom, 15)
+                        
                         VStack {
                             Text("Let’s get you started")
                                 .fontWeight(.light)
@@ -52,6 +55,7 @@ struct RegistrationView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
                         .padding(.bottom, 30)
+                        
                         VStack(spacing: 15) {
                             ZStack(alignment: .trailing) {
                                 InputView(text: $email, title: "Email Address", placeholder: "Your email", fieldIsFocused: $focusField)

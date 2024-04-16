@@ -6,6 +6,7 @@ struct LoginView: View {
     @State private var isSigningIn: Bool = false
     @State private var passwordResetEmail = ""
     @State private var showPasswordResetPopup: Bool = false
+    @State private var showInvalidCredentialsPopup: Bool = false
     @FocusState private var focusField: Bool
     @EnvironmentObject var authViewModel: AuthViewModel
     
@@ -25,8 +26,10 @@ struct LoginView: View {
                             //                        .font(.largeTitle)
                                 .font(.system(size: 50))
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                            
                             ThickDivider(color: Color(.white), width: 1, padding: 0)
                                 .padding(.bottom, 15)
+                            
                             VStack {
                                 Text("Welcome back")
                                     .fontWeight(.light)
@@ -40,6 +43,7 @@ struct LoginView: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }
                             .padding(.bottom, 30)
+                            
                             VStack {
                                 InputView(text: $email, title: "Email Address", placeholder: "Enter your email", fieldIsFocused: $focusField)
                                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
@@ -58,7 +62,10 @@ struct LoginView: View {
                                     Task {
                                         focusField = false
                                         isSigningIn = true
-                                        try await authViewModel.signIn(withEmail: email, password: password)
+                                        let result = try await authViewModel.signIn(withEmail: email, password: password)
+                                        if result == ErrorMessages.invalidCredentials {
+                                            showInvalidCredentialsPopup = true
+                                        }
                                         isSigningIn = false
                                     }
                                 }
@@ -95,6 +102,9 @@ struct LoginView: View {
                             Button("Cancel", role: .cancel) { }
                         } message: {
                             Text("Instructions on how to reset your password will be sent to the email you enter below.")
+                        }
+                        .alert("Invalid credentials", isPresented: $showInvalidCredentialsPopup) {
+                            Button("OK", role: .cancel) { }
                         }
                         .contentShape(Rectangle())
 //                        .onTapGesture {
