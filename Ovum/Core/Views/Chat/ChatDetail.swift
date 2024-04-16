@@ -119,7 +119,6 @@ struct ChatDetail: View {
                                     }
                                     .onChange(of: keyboard.currentHeight) {
                                         if (keyboard.currentHeight >= 370) {
-                                            print("Hey")
                                             withAnimation {
                                                 scrollViewProxy.scrollTo("bottomRect", anchor: .bottom)
                                             }
