@@ -2,7 +2,8 @@ import SwiftUI
 
 struct ChatCompleted: View {
     @EnvironmentObject var router: Router
-    let chatSession: ChatSession
+    var chatSession: ChatSession
+    @State private var showRatingTray = true
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -67,6 +68,12 @@ struct ChatCompleted: View {
                 .ignoresSafeArea()
         }
         .navigationBarBackButtonHidden(true)
+        .sheet(isPresented: $showRatingTray) {
+            Rating(session: chatSession.id) {
+                showRatingTray = false
+            }
+            .presentationDetents([.medium])
+        }
     }
 }
 

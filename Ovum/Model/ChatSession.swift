@@ -12,6 +12,7 @@ struct ChatSession: Codable, Identifiable, Hashable {
     var date: String
     var colour: Color
     var summary: String?
+    var rating: Int?
 }
 
 extension ChatSession {

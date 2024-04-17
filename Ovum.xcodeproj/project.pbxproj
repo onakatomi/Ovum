@@ -92,6 +92,7 @@
 		B2F4BB182BCCDBD100E93770 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F4BB172BCCDBD100E93770 /* OnboardingViewModel.swift */; };
 		B2F4BB1A2BCE393F00E93770 /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F4BB192BCE393F00E93770 /* WarningView.swift */; };
 		B2F4BB1C2BCF47D200E93770 /* TotalChatSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F4BB1B2BCF47D200E93770 /* TotalChatSummaryView.swift */; };
+		B2F4BB1E2BCF5BEF00E93770 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F4BB1D2BCF5BEF00E93770 /* Rating.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -179,6 +180,7 @@
 		B2F4BB172BCCDBD100E93770 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		B2F4BB192BCE393F00E93770 /* WarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
 		B2F4BB1B2BCF47D200E93770 /* TotalChatSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalChatSummaryView.swift; sourceTree = "<group>"; };
+		B2F4BB1D2BCF5BEF00E93770 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,6 +377,7 @@
 				B25D75582BC8C92700A8E2A4 /* CheckboxToggle.swift */,
 				B246941E2BA12E2600286A75 /* InputView.swift */,
 				B2D6A3B02B8F1AB20045CCD1 /* BaseView.swift */,
+				B2F4BB1D2BCF5BEF00E93770 /* Rating.swift */,
 				B2D6A4202B9E789E0045CCD1 /* BubbleBackground.swift */,
 				B2D6A4222B9E7DFE0045CCD1 /* BubbleTransitionView.swift */,
 				B2414CBB2BC518C800AC67D1 /* MedicationTile.swift */,
@@ -595,6 +598,7 @@
 				B24694212BA131DD00286A75 /* RegistrationView.swift in Sources */,
 				B2D6A40C2B9814220045CCD1 /* RecordsHomeContent.swift in Sources */,
 				B2D6A3A22B8EFEF80045CCD1 /* OvumApp.swift in Sources */,
+				B2F4BB1E2BCF5BEF00E93770 /* Rating.swift in Sources */,
 				B246940C2BA026FA00286A75 /* Menu.swift in Sources */,
 				B246941D2BA12D7700286A75 /* LoginView.swift in Sources */,
 				B246941F2BA12E2600286A75 /* InputView.swift in Sources */,

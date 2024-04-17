@@ -5,7 +5,7 @@ struct TotalChatSummaryView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var totalSummary = ""
-    @State private var isFetching: Bool = true
+    @State private var isFetching: Bool = false
     
     var orderedChatSessions: [ChatSession] {
         viewModel.chatSessions.sorted(by: {
@@ -100,6 +100,8 @@ struct TotalChatSummaryView: View {
                             totalSummary = "Failed to fetch site."
                         }
                     }
+                } else {
+                    Spacer()
                 }
             }
             .padding(.horizontal, 20)

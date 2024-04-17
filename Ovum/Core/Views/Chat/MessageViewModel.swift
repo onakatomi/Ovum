@@ -40,6 +40,13 @@ class MessageViewModel: ObservableObject {
         print("---> \(message.content)")
     }    
     
+    func assignRating(sessionId: String, rating: Int) {
+        guard let indexOfSession = chatSessions.firstIndex(where: {$0.id == sessionId}) else {
+            return
+        }
+        chatSessions[indexOfSession].rating = rating
+    }
+    
     func addDocument(document: Document) {
         documents.append(document)
         print("---> Doc added: \(document.title)")
@@ -291,7 +298,7 @@ class MessageViewModel: ObservableObject {
                 let apiResponse = try decoder.decode(TotalSummaryResponse.self, from: data) // Decode the incoming JSON into a Swift struct
                 let totalSummary = apiResponse.total_summary
                 let totalSummaryData = Data(totalSummary.utf8)
-                var decodedTotalSummaryData = try JSONDecoder().decode(String.self, from: totalSummaryData)
+                let decodedTotalSummaryData = try JSONDecoder().decode(String.self, from: totalSummaryData)
                 
                 return decodedTotalSummaryData
             } catch {

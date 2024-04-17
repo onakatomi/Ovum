@@ -61,7 +61,7 @@ struct RegistrationView: View {
                                 InputView(text: $email, title: "Email Address", placeholder: "Your email", fieldIsFocused: $focusField)
                                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                                     .onChange(of: email) {
-                                        if (email.count > 0 && !email.contains("@")) {
+                                        if (email.count > 0 && !isValidEmail(email)) {
                                             if !errorMessages.contains(ErrorMessages.emailNotValid) {
                                                 errorMessages.append(ErrorMessages.emailNotValid)
                                             }
@@ -72,7 +72,7 @@ struct RegistrationView: View {
                                         }
                                     }
                                 if (!email.isEmpty) {
-                                    if (email.count > 0 && !email.contains("@")) {
+                                    if (email.count > 0 && !isValidEmail(email)) {
                                         Image(systemName: "xmark.circle.fill")
                                             .imageScale(.large)
                                             .fontWeight(.bold)
@@ -272,7 +272,7 @@ struct RegistrationView: View {
 extension RegistrationView: AuthenticationFormProtocol {
     var formIsValid: Bool {
         return !email.isEmpty
-        && email.contains("@")
+        && isValidEmail(email)
         && name.count > 2
         && name != "Ovum"
         && !password.isEmpty
@@ -280,6 +280,12 @@ extension RegistrationView: AuthenticationFormProtocol {
         && confirmPassword == password
         && isChecked
     }
+}
+
+func isValidEmail(_ email: String) -> Bool {
+    let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+    let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegex)
+    return emailTest.evaluate(with: email)
 }
 
 #Preview {

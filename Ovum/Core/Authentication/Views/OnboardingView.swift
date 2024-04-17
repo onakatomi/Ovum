@@ -111,8 +111,6 @@ struct OnboardingView: View {
                         }
                         
                         HStack {
-                            Text("Impatient?")
-                                .font(.subheadline)
                             Button {
                                 Task {
                                     ovm.isLoading = true
@@ -123,14 +121,14 @@ struct OnboardingView: View {
                                     ovm.isLoading = false
                                 }
                             } label: {
-                                Text("Finish onboarding early")
+                                Text("Finish Onboarding")
                                     .font(.subheadline)
                                     .padding(10)
                                     .background(AppColours.green)
                                     .opacity(ovm.onboardingMessages.count < 2 ? 0.5 : 1.0)
                                     .cornerRadius(6)
                             }
-                            .disabled(ovm.onboardingMessages.count < 2 || ovm.isLoading)
+                            .disabled(ovm.onboardingMessages.count < 12 || ovm.isLoading)
                         }
                         .padding(.top, 3)
                         .padding(.bottom, 20)
