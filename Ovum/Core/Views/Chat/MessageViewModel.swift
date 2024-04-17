@@ -263,7 +263,44 @@ class MessageViewModel: ObservableObject {
                 print("POST Request Failed:", error)
             }
         }
-    }    
+    }      
+    
+    struct TotalSummaryResponse: Codable {
+        var total_summary: String
+    }
+    
+    func getTotalSummary(authorId: String, authorInfo: [String], summaries: [String]) async -> String {
+        let endpoint = "/get_total_summary"
+        
+        let dataToSend: [String: Any] = [
+            "user_id": authorId,
+            "info": authorInfo,
+            "summaries": summaries
+        ]
+        
+        if let url = URL(string: baseUrl + endpoint) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            do {
+                request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
+                let (data, _) = try await URLSession.shared.data(for: request)
+                let decoder = JSONDecoder()
+                
+                let apiResponse = try decoder.decode(TotalSummaryResponse.self, from: data) // Decode the incoming JSON into a Swift struct
+                let totalSummary = apiResponse.total_summary
+                let totalSummaryData = Data(totalSummary.utf8)
+                var decodedTotalSummaryData = try JSONDecoder().decode(String.self, from: totalSummaryData)
+                
+                return decodedTotalSummaryData
+            } catch {
+                print("POST Request Failed:", error)
+            }
+        }
+        
+        return "FAILED"
+    }
     
     func summariseConversation(authorId: String, authorName: String, HKM: HealthKitManager) async {
         let endpoint = "/summarise_discussion"

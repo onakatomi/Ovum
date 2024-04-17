@@ -264,6 +264,7 @@ struct MedicationFormView: View {
                         }
                     }
                     .padding(.vertical, 30)
+                    .padding(.horizontal, 1) // accomodate border
                 }
                 Spacer()
             }
@@ -307,8 +308,8 @@ extension Binding {
     }
 }
 
-//#Preview {
-//    MedicationFormView(medicationFormType: .noLongerTaking)
-//        .environmentObject(Router())
-//        .environmentObject(MessageViewModel(userId: "1", authViewModelPassedIn: AuthViewModel()))
-//}
+#Preview {
+    MedicationFormView(medicationFormType: .noLongerTaking, medicationObj: Medication(type: .ongoing, name: "", dateRecorded: Date.now))
+        .environmentObject(Router())
+        .environmentObject(MessageViewModel(userId: "1", authViewModelPassedIn: AuthViewModel()))
+}

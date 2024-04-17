@@ -91,6 +91,7 @@
 		B2F4BB162BCCDA3800E93770 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F4BB152BCCDA3800E93770 /* OnboardingView.swift */; };
 		B2F4BB182BCCDBD100E93770 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F4BB172BCCDBD100E93770 /* OnboardingViewModel.swift */; };
 		B2F4BB1A2BCE393F00E93770 /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F4BB192BCE393F00E93770 /* WarningView.swift */; };
+		B2F4BB1C2BCF47D200E93770 /* TotalChatSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F4BB1B2BCF47D200E93770 /* TotalChatSummaryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -177,6 +178,7 @@
 		B2F4BB152BCCDA3800E93770 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		B2F4BB172BCCDBD100E93770 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		B2F4BB192BCE393F00E93770 /* WarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningView.swift; sourceTree = "<group>"; };
+		B2F4BB1B2BCF47D200E93770 /* TotalChatSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalChatSummaryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +274,7 @@
 				B2F4BB172BCCDBD100E93770 /* OnboardingViewModel.swift */,
 				B247B6AE2BBCC0B300FF17B9 /* SlidingView.swift */,
 				B2F4BB192BCE393F00E93770 /* WarningView.swift */,
+				B2F4BB1B2BCF47D200E93770 /* TotalChatSummaryView.swift */,
 				B247B6B02BBCC4BC00FF17B9 /* KeyboardManager.swift */,
 				B2414CBD2BC7699E00AC67D1 /* Notifications.swift */,
 			);
@@ -540,6 +543,7 @@
 				B2D6A41D2B9AC08F0045CCD1 /* RecordDetail.swift in Sources */,
 				B2D6A3F22B914D630045CCD1 /* ChatDetail.swift in Sources */,
 				B2D6A40E2B9817890045CCD1 /* RecordTypeTile.swift in Sources */,
+				B2F4BB1C2BCF47D200E93770 /* TotalChatSummaryView.swift in Sources */,
 				B2414CBE2BC7699E00AC67D1 /* Notifications.swift in Sources */,
 				B247B6B12BBCC4BC00FF17B9 /* KeyboardManager.swift in Sources */,
 				B2D6A4272B9FBDDD0045CCD1 /* CaptureImage.swift in Sources */,

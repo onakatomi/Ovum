@@ -32,10 +32,14 @@ struct OnboardingView: View {
                     .aspectRatio(contentMode: .fit)
                     .blur(radius: 10, opaque: true)
                 VStack(spacing: 10) {
+                    Divider()
+                        .background(Color(.white))
                     HStack(alignment: .top) {
                         Header(firstLine: "Onboarding", secondLine: "Questions", colour: Color(.white), font: .custom(AppFonts.haasGrot, size: 42))
                         Spacer()
                     }
+                    
+                    .padding([.top], 30)
                 }
                 .padding([.top], 60)
                 .padding([.horizontal], 20)
@@ -115,7 +119,7 @@ struct OnboardingView: View {
                                     let info = ovm.concludeOnboarding()
                                     authViewModel.currentUser?.onboardingInfo = info
                                     await authViewModel.updateUser()
-//                                    try? await Task.sleep(nanoseconds: 1_000_000_000)
+                                    try? await Task.sleep(nanoseconds: 1_000_000_000)
                                     ovm.isLoading = false
                                 }
                             } label: {

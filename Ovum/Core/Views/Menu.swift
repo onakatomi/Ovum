@@ -36,6 +36,21 @@ struct Menu: View {
                 //                    .font(Font.largeTitle.weight(.bold))
                 //                    .frame(maxWidth: .infinity, alignment: .leading)
                 //                ThickDivider(color: .white, width: 1, padding: 10)
+                NavigationLink (destination: TotalChatSummaryView()) { // Hide tabbar whilst in MenuScreen.
+                    Text("Chat Summary")
+                        .foregroundColor(.white)
+                        .font(Font.largeTitle.weight(.bold))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                //                NavigationLink {
+                //
+                //                } label: {
+                //                    Text("About Ovum")
+                //                        .foregroundColor(.white)
+                //                        .font(Font.largeTitle.weight(.bold))
+                //                        .frame(maxWidth: .infinity, alignment: .leading)                                    }
+                
+                ThickDivider(color: .white, width: 1, padding: 10)
                 NavigationLink (destination: AboutOvumView()) { // Hide tabbar whilst in MenuScreen.
                     Text("About Ovum")
                         .foregroundColor(.white)
