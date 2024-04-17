@@ -125,6 +125,24 @@
         "revision" : "ca77123064ae046eac2be01654ee756085c2b182",
         "version" : "1.0.0"
       }
+    },
+    {
+      "identity" : "uxcam-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/uxcam/uxcam-ios-sdk",
+      "state" : {
+        "revision" : "4a7b4167bc16d686c22f01581aed75eaa19d5d98",
+        "version" : "3.6.11"
+      }
+    },
+    {
+      "identity" : "uxcam-ios-swiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/uxcam/uxcam-ios-swiftui",
+      "state" : {
+        "revision" : "e6677aa3b22d8235cac90e7e8c6e21b4167120f7",
+        "version" : "1.0.6"
+      }
     }
   ],
   "version" : 2

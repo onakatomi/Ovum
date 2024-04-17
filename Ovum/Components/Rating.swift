@@ -48,7 +48,8 @@ struct Rating: View {
                     .disabled(score == 0)
                 }
             }
-            .padding()
+            .padding(.vertical, 30)
+            .padding(.horizontal, 30)
         }
     }
     

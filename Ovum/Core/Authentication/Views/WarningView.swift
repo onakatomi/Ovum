@@ -2,6 +2,7 @@ import SwiftUI
 
 struct WarningView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
+    @Environment(\.openURL) var openURL
     
     var body: some View {
         ZStack {
@@ -38,7 +39,7 @@ struct WarningView: View {
                             .foregroundColor(AppColours.lightYellow)
                             .lineSpacing(4)
                         Button {
-                            
+                            openURL(URL(string: "https://www.ovum-ai.com.au/")!)
                         } label: {
                             Text("Learn more")
                                 .foregroundColor(.white)

@@ -93,6 +93,7 @@
 		B2F4BB1A2BCE393F00E93770 /* WarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F4BB192BCE393F00E93770 /* WarningView.swift */; };
 		B2F4BB1C2BCF47D200E93770 /* TotalChatSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F4BB1B2BCF47D200E93770 /* TotalChatSummaryView.swift */; };
 		B2F4BB1E2BCF5BEF00E93770 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F4BB1D2BCF5BEF00E93770 /* Rating.swift */; };
+		B2F4BB212BCF934800E93770 /* UXCamSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B2F4BB202BCF934800E93770 /* UXCamSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -193,6 +194,7 @@
 				B246945E2BA13B7000286A75 /* FirebaseStorage in Frameworks */,
 				B2414CAD2BC4B32400AC67D1 /* SwiftUIImageViewer in Frameworks */,
 				B24694632BA13C0700286A75 /* FirebaseFirestoreSwift in Frameworks */,
+				B2F4BB212BCF934800E93770 /* UXCamSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +474,7 @@
 				B246945D2BA13B7000286A75 /* FirebaseStorage */,
 				B24694622BA13C0700286A75 /* FirebaseFirestoreSwift */,
 				B2414CAC2BC4B32400AC67D1 /* SwiftUIImageViewer */,
+				B2F4BB202BCF934800E93770 /* UXCamSwiftUI */,
 			);
 			productName = Ovum;
 			productReference = B2D6A39E2B8EFEF80045CCD1 /* Ovum.app */;
@@ -504,6 +507,7 @@
 			packageReferences = (
 				B246942A2BA13B7000286A75 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				B2414CAB2BC4B32400AC67D1 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
+				B2F4BB1F2BCF934800E93770 /* XCRemoteSwiftPackageReference "uxcam-ios-swiftui" */,
 			);
 			productRefGroup = B2D6A39F2B8EFEF80045CCD1 /* Products */;
 			projectDirPath = "";
@@ -859,6 +863,14 @@
 				minimumVersion = 10.22.1;
 			};
 		};
+		B2F4BB1F2BCF934800E93770 /* XCRemoteSwiftPackageReference "uxcam-ios-swiftui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uxcam/uxcam-ios-swiftui";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.6;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -886,6 +898,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B246942A2BA13B7000286A75 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		B2F4BB202BCF934800E93770 /* UXCamSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B2F4BB1F2BCF934800E93770 /* XCRemoteSwiftPackageReference "uxcam-ios-swiftui" */;
+			productName = UXCamSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

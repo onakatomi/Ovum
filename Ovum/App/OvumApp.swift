@@ -1,5 +1,7 @@
 import SwiftUI
 import Firebase
+//import UXCamSwiftUI
+//import UXCam
 
 @main
 struct OvumApp: App {
@@ -8,6 +10,9 @@ struct OvumApp: App {
     @StateObject var healthKitManager = HealthKitManager()
     
     init() {
+//        UXCam.optIntoSchematicRecordings()
+//        let config = UXCamSwiftUI.Configuration(appKey: "fcjwoz22b3ns516")
+//        UXCamSwiftUI.start(with: config)
         FirebaseApp.configure()
     }
     

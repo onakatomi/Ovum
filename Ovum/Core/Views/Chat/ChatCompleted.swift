@@ -72,7 +72,7 @@ struct ChatCompleted: View {
             Rating(session: chatSession.id) {
                 showRatingTray = false
             }
-            .presentationDetents([.medium])
+            .presentationDetents([.fraction(0.25)])
         }
     }
 }

@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 enum BodyPart: String, Codable {
     case head
@@ -79,6 +80,7 @@ struct OverviewHomeContent: View {
     @State var imageSize: CGSize = .zero
     @State private var showSymptomTray = false
     @State private var currentlySelectedIndex = 0
+    private let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
     
     var orderedChatSessions: [ChatSession] {
         viewModel.chatSessions.sorted(by: {
@@ -134,8 +136,16 @@ struct OverviewHomeContent: View {
                     step: 1,
                     onEditingChanged: { editing in
                         isEditing = editing
+                        if editing {
+                            self.feedbackGenerator.prepare()
+                        } else {
+                            self.feedbackGenerator.impactOccurred()
+                        }
                     }
                 )
+                .onChange(of: sliderValue) { newValue in
+                    feedbackGenerator.impactOccurred()
+                }
                 HStack {
                     Text(stripDateString(dateString: orderedChatSessions[0].date, format: .basic))
                     Spacer()

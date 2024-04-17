@@ -978,8 +978,8 @@
             filePath = "Ovum/Core/Views/Overview/OverviewHomeContent.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "orderedChatSessions"
             landmarkType = "24">
          </BreakpointContent>
@@ -988,14 +988,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "2F3EBDF7-DDF1-4B38-8D5B-77B52F4EA8C0"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ovum/Core/Views/Overview/OverviewHomeContent.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "orderedChatSessions"
             landmarkType = "24">
             <Locations>
@@ -2822,8 +2822,8 @@
             filePath = "Ovum/Components/Rating.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "imageName(index:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2838,8 +2838,8 @@
             filePath = "Ovum/Components/Rating.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "imageName(index:)"
             landmarkType = "7">
          </BreakpointContent>
