@@ -50,8 +50,8 @@ struct TotalChatSummaryView: View {
                     .padding(.bottom, 16)
                 
                 VStack(alignment: .leading, spacing: 9) {
-                    Text("Chat Summary")
-                        .font(.custom(AppFonts.haasGrot, size: 42))
+                    Text("Medical Summary")
+                        .font(.custom(AppFonts.haasGrot, size: 37))
                         .fontWeight(.bold)
                         .foregroundColor(AppColours.darkBrown)
                     Text("Your recently logged symptoms")

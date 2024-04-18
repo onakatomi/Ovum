@@ -2822,8 +2822,8 @@
             filePath = "Ovum/Components/Rating.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "imageName(index:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2838,8 +2838,8 @@
             filePath = "Ovum/Components/Rating.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "imageName(index:)"
             landmarkType = "7">
          </BreakpointContent>

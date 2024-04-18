@@ -24,7 +24,6 @@ struct Rating: View {
                             .resizable()
                             .frame(width: 30, height: 30)
                             .onTapGesture {
-                                print("updating score to \(index)")
                                 score = index + 1
                             }
                     }

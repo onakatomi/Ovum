@@ -37,7 +37,7 @@ struct Menu: View {
                 //                    .frame(maxWidth: .infinity, alignment: .leading)
                 //                ThickDivider(color: .white, width: 1, padding: 10)
                 NavigationLink (destination: TotalChatSummaryView()) { // Hide tabbar whilst in MenuScreen.
-                    Text("Chat Summary")
+                    Text("Medical Summary")
                         .foregroundColor(.white)
                         .font(Font.largeTitle.weight(.bold))
                         .frame(maxWidth: .infinity, alignment: .leading)
