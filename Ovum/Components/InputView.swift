@@ -7,6 +7,7 @@ struct InputView: View {
     let placeholder: String
     var isSecureField = false
     var hasBorder = false
+    var isNumberField: Bool = false
 
     @FocusState.Binding var fieldIsFocused: Bool
     
@@ -25,6 +26,7 @@ struct InputView: View {
                     )
             } else {
                 TextField(placeholder, text: $text)
+                    .keyboardType(isNumberField ? .numberPad : .default)
                     .font(.system(size: 16))
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 16)

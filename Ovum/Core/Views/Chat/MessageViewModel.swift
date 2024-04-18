@@ -130,7 +130,7 @@ class MessageViewModel: ObservableObject {
                     let (data, _) = try await URLSession.shared.data(for: request)
                     
                     // Handle response:
-                    let p = try JSONDecoder().decode(Medication.self, from: data)
+                    let _ = try JSONDecoder().decode(Medication.self, from: data)
                 } catch {
                     print("POST Request Failed:", error)
                 }

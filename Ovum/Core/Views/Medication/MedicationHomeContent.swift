@@ -4,16 +4,24 @@ struct MedicationHomeContent: View {
     @EnvironmentObject var router: Router
     @EnvironmentObject var viewModel: MessageViewModel
     
+    func getHomeScreenMedications() -> [Medication] {
+        var onGoings = viewModel.currentMedication
+        let filteredShortTerms = viewModel.pastMedication.filter { medication in
+            Date.now >= medication.courseEnd!.addingTimeInterval(-Double((86400*Int(medication.howLongTakingFor!)!))) && Date.now <= medication.courseEnd!
+        }
+        return onGoings + filteredShortTerms
+    }
+    
     var body: some View {
         VStack {
-            if (viewModel.currentMedication.count == 0) {
+            if (getHomeScreenMedications().count == 0) {
                     Text("*No recorded ongoing medication*")
                         .font(.caption)
                         .foregroundColor(AppColours.maroon)
                         .padding(.vertical, 40)
             }
             ScrollView {
-                ForEach(viewModel.currentMedication) { medication in
+                ForEach(getHomeScreenMedications()) { medication in
                     MedicationTile(medication: medication)
 //                    NavigationLink(value: ChatNavDestination.chatHistoryDetail(session: chatSession)) {
 //                        ChatTile(chatTile: chatSession)

@@ -41,9 +41,11 @@ struct MedicationFormView: View {
                     .navigationBarBackButtonHidden()
                 }
                 .padding(.bottom, 18)
+                
                 Divider()
                     .background(AppColours.maroon)
                     .padding(.bottom, 0)
+                
                 ScrollView {
                     VStack(alignment: .leading, spacing: 25) {
                         VStack(alignment: .leading, spacing: 14) {
@@ -62,7 +64,7 @@ struct MedicationFormView: View {
                                 .kerning(0.32)
                                 .foregroundColor(AppColours.buttonBrown)
                             Picker("Form", selection: $medicationObject.form) {
-                                Text(.init("*Select form from below*")).tag(nil as MedicationForm?)
+                                Text(.init("*Select form*")).tag(nil as MedicationForm?)
                                 ForEach(MedicationForm.allCases, id: \.self) { category in
                                     Text(category.rawValue).tag(category as MedicationForm?)
                                 }
@@ -84,7 +86,7 @@ struct MedicationFormView: View {
                                 .kerning(0.32)
                                 .foregroundColor(AppColours.buttonBrown)
                             HStack {
-                                InputView(text: ($medicationObject.strength.toUnwrapped(defaultValue: "")), title: "Strength", placeholder: "Add number", hasBorder: true, fieldIsFocused: $focusField)
+                                InputView(text: ($medicationObject.strength.toUnwrapped(defaultValue: "")), title: "Strength", placeholder: "Add number", hasBorder: true, isNumberField: true, fieldIsFocused: $focusField)
                                 //                    Spacer()
                                 Picker("Strength Units", selection: $medicationObject.strengthUnit) {
                                     Text(.init("*Select unit*")).tag(nil as StrengthOptions?)
@@ -109,7 +111,7 @@ struct MedicationFormView: View {
                                 .kerning(0.32)
                                 .foregroundColor(AppColours.buttonBrown)
                             Picker(selection: $medicationObject.frequency, label: Text("Select a freq")) {
-                                Text(.init("*Select frequency from below*")).tag(nil as MedicationIntakeFrequency?)
+                                Text(.init("*Select frequency*")).tag(nil as MedicationIntakeFrequency?)
                                 ForEach(MedicationIntakeFrequency.allCases, id: \.self) { category in
                                     Text(category.rawValue).tag(category as MedicationIntakeFrequency?)
                                 }
@@ -157,9 +159,9 @@ struct MedicationFormView: View {
                                     .kerning(0.32)
                                     .foregroundColor(AppColours.buttonBrown)
                                 HStack {
-                                    InputView(text: $medicationObject.howLongTakingFor.toUnwrapped(defaultValue: ""), title: "How long are you taking it for?", placeholder: "Add number", hasBorder: true, fieldIsFocused: $focusField)
+                                    InputView(text: $medicationObject.howLongTakingFor.toUnwrapped(defaultValue: ""), title: "How long are you taking it for?", placeholder: "Add number", hasBorder: true, isNumberField: true, fieldIsFocused: $focusField)
                                     Picker("How long are you taking it for?", selection: $medicationObject.lengthTakingUnit) {
-                                        Text(.init("*Select length from below*")).tag(nil as ConsumptionLength?)
+                                        Text(.init("*Select length*")).tag(nil as ConsumptionLength?)
                                         ForEach(ConsumptionLength.allCases, id: \.self) { category in
                                             Text(category.rawValue).tag(category as ConsumptionLength?)
                                         }
@@ -183,10 +185,10 @@ struct MedicationFormView: View {
                                     .kerning(0.32)
                                     .foregroundColor(AppColours.buttonBrown)
                                 HStack {
-                                    InputView(text: $medicationObject.howLongTookFor.toUnwrapped(defaultValue: ""), title: "How long did you take it for?", placeholder: "Add number", hasBorder: true, fieldIsFocused: $focusField)
+                                    InputView(text: $medicationObject.howLongTookFor.toUnwrapped(defaultValue: ""), title: "How long did you take it for?", placeholder: "Add number", hasBorder: true, isNumberField: true, fieldIsFocused: $focusField)
                                     Picker("How long are you taking it for?", selection: $medicationObject.lengthTakenUnit) {
                                         ForEach(ConsumptionLength.allCases, id: \.self) { category in
-                                            Text(.init("*Select length from below*")).tag(nil as ConsumptionLength?)
+                                            Text(.init("*Select length*")).tag(nil as ConsumptionLength?)
                                             Text(category.rawValue).tag(category as ConsumptionLength?)
                                         }
                                     }
@@ -208,12 +210,15 @@ struct MedicationFormView: View {
                                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                                     .kerning(0.32)
                                     .foregroundColor(AppColours.buttonBrown)
+                                
                                 DatePicker("Select a date:",
                                            selection: $medicationObject.courseEnd.toUnwrapped(defaultValue: Date.now),
                                            displayedComponents: [.date]
-                                           
                                 )
                                 .datePickerStyle(.compact)
+                                .onTapGesture(count: 99, perform: {
+                                    // overrides tap gesture to fix ios 17.1 bug
+                                })
                             }
                         }
                         //                    Spacer()
@@ -275,6 +280,10 @@ struct MedicationFormView: View {
             }
             .navigationBarBackButtonHidden(true)
             .opacity(viewModel.isSavingMedication ? 0.5 : 1.0)
+            .onTapGesture {
+                print("helo")
+                self.endEditing()
+            }
             
             // Top layer of ZStack
             if (viewModel.isSavingMedication) {

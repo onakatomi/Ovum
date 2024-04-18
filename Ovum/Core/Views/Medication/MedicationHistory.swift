@@ -5,6 +5,14 @@ struct MedicationHistory: View {
     @EnvironmentObject var viewModel: MessageViewModel
     @Environment(\.dismiss) private var dismiss
     
+    func getHistoryScreenMedications() -> [Medication] {
+        let filteredHistorical = viewModel.pastMedication.filter { medication in
+            medication.type == .noLongerTaking ||
+            Date.now <= medication.courseEnd!.addingTimeInterval(-Double((86400*Int(medication.howLongTakingFor!)!)))
+        }
+        return filteredHistorical
+    }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
@@ -46,7 +54,7 @@ struct MedicationHistory: View {
                 .font(Font.custom(AppFonts.haasGrot, size: 24))
                 .foregroundColor(AppColours.darkBrown)
                 .padding(.bottom, 10)
-            if (viewModel.pastMedication.count == 0) {
+            if (getHistoryScreenMedications().count == 0) {
                     Text("*No recorded past medication*")
                         .font(.caption)
                         .foregroundColor(AppColours.maroon)
@@ -54,7 +62,7 @@ struct MedicationHistory: View {
             }
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
-                    ForEach(viewModel.pastMedication) { pastMedication in
+                    ForEach(getHistoryScreenMedications()) { pastMedication in
                         MedicationTile(medication: pastMedication)
 //                        NavigationLink(value: ChatNavDestination.chatHistoryDetail(session: chatSession)) {
 //                            ChatTile(chatTile: chatSession)
