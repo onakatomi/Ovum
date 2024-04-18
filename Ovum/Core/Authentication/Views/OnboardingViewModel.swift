@@ -4,7 +4,7 @@ import SwiftUI
 @MainActor
 class OnboardingViewModel: ObservableObject {
     @Published var isLoading: Bool = false
-    @Published var onboardingMessages: [Message] = [Message(author: "Ovum", fromOvum: true, content: "Hello! I'm Ovum, your women's health AI. To get started, I'll need to ask you a few onboarding questions about your health history. This should take just a few minutes.\n\nFirst things first, what’s your name?")]
+    @Published var onboardingMessages: [Message] = [Message(author: "Ovum", fromOvum: true, content: "Hello! I'm Ovum, your women's health AI. To get started, I'll need to ask you a few onboarding questions about your health history. This should take just a few minutes.\n\nFirst things first, what’s your year of birth?")]
     
 //    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
 //    let baseUrl = "http://192.168.89.21:5002"

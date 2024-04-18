@@ -143,7 +143,7 @@ struct OverviewHomeContent: View {
                         }
                     }
                 )
-                .onChange(of: sliderValue) { newValue in
+                .onChange(of: sliderValue) {
                     feedbackGenerator.impactOccurred()
                 }
                 HStack {

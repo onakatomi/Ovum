@@ -50,15 +50,26 @@ class HealthKitManager: ObservableObject {
             if success {
                 Task {
                     self.haveAccess = true
-                    self.stepCountToday = await self.readMetricAsTodaysCumulative(metric: .stepCount, unit: .count()) //
-                    self.HRV = await self.readMetricAsLastRecorded(metric: .heartRateVariabilitySDNN, unit: .second())
+                    self.fetchSleepData { totalSleepTime in
+                        if let totalSleepTime = totalSleepTime {
+                            print("User slept for \(totalSleepTime) seconds last night.")
+                            let hours = Int(totalSleepTime / 3600)
+                            let minutes = Int((totalSleepTime.truncatingRemainder(dividingBy: 3600)) / 60)
+                            let formattedTime = String(format: "%02d:%02d", hours, minutes)
+                            self.sleep = formattedTime
+                        } else {
+                            print("No sleep data available for last night.")
+                        }
+                    }
                     self.heartRate = await self.readMetricAsLastRecorded(metric: .heartRate, unit: HKUnit(from: "count/min"))
+                    self.stepCountToday = await self.readMetricAsTodaysCumulative(metric: .stepCount, unit: .count()) //
+                    self.HRV = await self.readMetricAsLastRecorded(metric: .heartRateVariabilitySDNN, unit: .secondUnit(with: .milli))
                     self.respiratoryRate = await self.readMetricAsLastRecorded(metric: .respiratoryRate, unit: HKUnit(from: "count/min"))
                     self.bodyTemperature = await self.readMetricAsLastRecorded(metric: .bodyTemperature, unit: .degreeCelsius())
                     self.weight = await self.readMetricAsLastRecorded(metric: .bodyMass, unit: .gramUnit(with: .kilo))
                     self.BMI = await self.readMetricAsLastRecorded(metric: .bodyMassIndex, unit: .count())
                     self.menstrualFlow = await self.readMenstrualData()
-                    self.sleep = await self.readSleepData()
+//                    self.sleep = await self.readSleepData2()
                 }
             } else {
                 print("\(String(describing: error))")
@@ -86,9 +97,13 @@ class HealthKitManager: ObservableObject {
                 .sumQuantity()?
                 .doubleValue(for: unit)
             
-            // Use the count here.
-            let metricString: String = String(describing: count)
-            return metricString
+            if (count == nil) {
+                return nil
+            } else {
+                // Use the count here.
+                let metricString: String = String(describing: Int(count!))
+                return metricString
+            }
         } catch {
             print("Failed to read \(metric)")
         }
@@ -99,11 +114,11 @@ class HealthKitManager: ObservableObject {
     func readMetricAsLastRecorded(metric: HKQuantityTypeIdentifier, unit: HKUnit) async -> String? {
         do {
             // Define the type.
-            let metric = HKQuantityType(metric)
+            let metricType = HKQuantityType(metric)
             
             // Create the descriptor.
             let descriptor = HKSampleQueryDescriptor(
-                predicates:[.quantitySample(type: metric)],
+                predicates: [.quantitySample(type: metricType), ],
                 sortDescriptors: [SortDescriptor(\.endDate, order: .reverse)],
                 limit: 10
             )
@@ -116,13 +131,23 @@ class HealthKitManager: ObservableObject {
                 return nil
             }
             
+            // We only proceed if we have a recording for today.
+            let timestamp = lastDataPoint.endDate
+            let string = getDateAsString(date: timestamp)
+            let isMetricRecordedToday: Bool = Calendar.current.isDateInToday(timestamp)
+            if (!isMetricRecordedToday) {
+                return nil
+            }
+            
             let value: Double = lastDataPoint.quantity.doubleValue(for: unit)
             
             let metricString: String
-            if (unit == .count()) {
-                metricString = "\(value)"
+            if (unit == .count() || unit == HKUnit(from: "count/min")) {
+                metricString = "\(Int(value)) \(makeUnitsPretty(metric: metric, unit: unit))"
             } else {
-                metricString = "\(value) \(unit.unitString)"
+                let truncated = trunc(value * 10) / 10
+                let string = String(format: "%.1f", truncated)
+                metricString = "\(string) \(makeUnitsPretty(metric: metric, unit: unit))"
             }
             
             return metricString
@@ -131,6 +156,23 @@ class HealthKitManager: ObservableObject {
             print("Failed to read last recorded metric: \(metric)")
         }
         return nil
+    }
+    
+    func makeUnitsPretty(metric: HKQuantityTypeIdentifier, unit: HKUnit) -> String {
+        switch (metric) {
+        case .heartRate:
+            return "BPM"
+        case .heartRateVariabilitySDNN:
+            return "ms"
+        case .respiratoryRate:
+            return "breaths/minute"
+        case .bodyTemperature:
+            return "°C"
+        case .heartRate:
+            return "BPM"
+        default:
+            return "\(unit)"
+        }
     }
     
     @MainActor
@@ -154,6 +196,16 @@ class HealthKitManager: ObservableObject {
                 return nil
             }
             
+            // We only proceed if we have a recording for today.
+            let timestamp2 = lastDataPoint.startDate
+            let timestamp = lastDataPoint.endDate
+            let string2 = getDateAsString(date: timestamp2)
+            let string = getDateAsString(date: timestamp)
+            let isMetricRecordedToday: Bool = Calendar.current.isDateInToday(timestamp)
+            if (!isMetricRecordedToday) {
+                return nil
+            }
+            
             let timeDifference = lastDataPoint.endDate.timeIntervalSince(lastDataPoint.startDate)
             let hours = Int(timeDifference / 3600)
             let minutes = Int((timeDifference.truncatingRemainder(dividingBy: 3600)) / 60)
@@ -165,6 +217,54 @@ class HealthKitManager: ObservableObject {
             print("Failed to read sleep data")
         }
         return nil
+    }
+    
+    @MainActor
+    func fetchSleepData(completion: @escaping (TimeInterval?) -> Void) {
+        let calendar = Calendar.current
+
+        let endDate = Date()
+        let startDate = calendar.date(byAdding: .day, value: -1, to: endDate)!
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictStartDate)
+
+        let sleepType = HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+
+        let query = HKSampleQuery(sampleType: sleepType, predicate: predicate, limit: Int(HKObjectQueryNoLimit), sortDescriptors: [sortDescriptor]) { _, results, error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                return
+            }
+
+            guard let results = results as? [HKCategorySample] else {
+                print("No data to display")
+                return
+            }
+
+//            print("Start Date: \(startDate), End Date: \(endDate)")
+//            print("Fetched \(results.count) sleep analysis samples.")
+
+            var totalSleepTime: TimeInterval = 0
+
+            for result in results {
+                if let type = HKCategoryValueSleepAnalysis(rawValue: result.value) {
+                    if HKCategoryValueSleepAnalysis.allAsleepValues.contains(type) {
+                        let sleepDuration = result.endDate.timeIntervalSince(result.startDate)
+//                        print("""
+//                        Sample start: (result.startDate), \
+//                        end: (result.endDate), \
+//                        value: (result.value), \
+//                        duration: (sleepDuration) seconds
+//                        """)
+                        totalSleepTime += sleepDuration
+                    }
+                }
+            }
+
+            completion(totalSleepTime)
+        }
+
+        healthStore.execute(query)
     }
     
     @MainActor
@@ -186,6 +286,14 @@ class HealthKitManager: ObservableObject {
             
             // Get the most recent data point
             guard let lastDataPoint = results.first else {
+                return nil
+            }
+            
+            // We only proceed if we have a recording for today.
+            let timestamp = lastDataPoint.startDate
+            let string = getDateAsString(date: timestamp)
+            let isMetricRecordedToday: Bool = Calendar.current.isDateInToday(timestamp)
+            if (!isMetricRecordedToday) {
                 return nil
             }
             

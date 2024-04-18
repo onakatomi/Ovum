@@ -36,7 +36,7 @@ func getHeaderImage(type: BaseViewType) -> Image {
 func getHeader(type: BaseViewType) -> Header {
     switch (type) {
     case BaseViewType.overview:
-        Header(firstLine: "Your health", secondLine: "Overview", colour: Color(.white), font: Font.custom(AppFonts.haasGrot, size: 42))
+        Header(firstLine: "Your Health", secondLine: "Overview", colour: Color(.white), font: Font.custom(AppFonts.haasGrot, size: 42))
     case BaseViewType.chat:
         Header(firstLine: "Chat with", secondLine: "Ovum", colour: Color(.white), font: Font.custom(AppFonts.haasGrot, size: 42))
     case BaseViewType.medication:

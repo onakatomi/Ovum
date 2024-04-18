@@ -131,7 +131,6 @@ class MessageViewModel: ObservableObject {
                     
                     // Handle response:
                     let p = try JSONDecoder().decode(Medication.self, from: data)
-                    print("hey")
                 } catch {
                     print("POST Request Failed:", error)
                 }

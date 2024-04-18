@@ -100,7 +100,6 @@ struct OnboardingView: View {
                                     }
                                     .onChange(of: keyboard.currentHeight) {
                                         if (keyboard.currentHeight >= 370) {
-                                            print("Hey")
                                             withAnimation {
                                                 scrollViewProxy.scrollTo("bottomRect", anchor: .bottom)
                                             }
@@ -128,7 +127,7 @@ struct OnboardingView: View {
                                     .opacity(ovm.onboardingMessages.count < 2 ? 0.5 : 1.0)
                                     .cornerRadius(6)
                             }
-                            .disabled(ovm.onboardingMessages.count < 12 || ovm.isLoading)
+                            .disabled(ovm.onboardingMessages.count < 2 || ovm.isLoading)
                         }
                         .padding(.top, 3)
                         .padding(.bottom, 20)
