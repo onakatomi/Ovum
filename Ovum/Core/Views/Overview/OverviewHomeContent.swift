@@ -90,12 +90,18 @@ struct OverviewHomeContent: View {
     
     var body: some View {
         VStack {
-            if (healthKitManager.sleep != nil && healthKitManager.menstrualFlow != nil) {
-                HStack {
-                    Text("**Sleep Time** · \(healthKitManager.sleep!)")
-                    Spacer()
-                    Text("**Flow** · \(healthKitManager.menstrualFlow!)")
-                }
+//            if (healthKitManager.sleep != nil && healthKitManager.menstrualFlow != nil) {
+//                HStack {
+//                    Text("**Sleep Time** · \(healthKitManager.sleep!)")
+//                    Spacer()
+//                    Text("**Flow** · \(healthKitManager.menstrualFlow!)")
+//                }
+//            }
+            
+            if orderedChatSessions.count > 0 {
+                Text(stripDateString(dateString: orderedChatSessions[Int(sliderValue)].date, format: .elegant))
+                    .foregroundColor(AppColours.maroon)
+                    .fontWeight(.bold)
             }
             
             ZStack {
@@ -129,6 +135,7 @@ struct OverviewHomeContent: View {
                     }
                 }
             }
+            
             if (viewModel.chatSessions.count >= 2) {
                 Slider(
                     value: $sliderValue,
@@ -153,15 +160,17 @@ struct OverviewHomeContent: View {
                 }
                 .fontWeight(.bold)
                 .foregroundColor(AppColours.maroon)
+                .onAppear() {
+                    sliderValue = Double(viewModel.chatSessions.count - 1)
+                }
             }
-            if orderedChatSessions.count > 0 {
-                Text(stripDateString(dateString: orderedChatSessions[Int(sliderValue)].date, format: .elegant))
-                    .foregroundColor(AppColours.maroon)
-            } else {
+            
+            if (viewModel.chatSessions.count == 0) {
                 Text("*Record your first chat session to visualise your symptoms*")
                     .font(.caption)
                     .foregroundColor(AppColours.maroon)
             }
+
             Spacer()
         }
         .padding(.all, 20)

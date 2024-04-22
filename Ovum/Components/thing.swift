@@ -9,9 +9,10 @@ enum Fruit: String, CaseIterable {
 
 enum MedicationIntakeFrequency: String, CaseIterable, Codable, Hashable {
     case Daily = "Daily"
-    case MultipleTimesDaily = "Multiple times daily"
-    case Weekly = "Weekly"
-    case MultipleTimesWeekly = "Multiple times a week"
+    case TwiceDaily = "Twice daily"
+    case ThriceDaily = "Three times a day"
+    case QwiceDaily = "Four times a day"
+    case Weekly = "Once a week"
     case AsNeeded = "As needed"
 }
 

@@ -281,7 +281,6 @@ struct MedicationFormView: View {
             .navigationBarBackButtonHidden(true)
             .opacity(viewModel.isSavingMedication ? 0.5 : 1.0)
             .onTapGesture {
-                print("helo")
                 self.endEditing()
             }
             

@@ -23,6 +23,35 @@ class HealthKitManager: ObservableObject {
         requestAuthorization()
     }
     
+    func summariseCurrentData() -> String {
+        var mainString = ""
+        var metrics: [String] = []
+        
+        // Capture metrics
+        if let metric = stepCountToday { metrics.append("- Steps: \(metric)") }
+        if let metric = HRV { metrics.append("- Heart Rate Variability: \(metric)") }
+        if let metric = heartRate { metrics.append("- Heart Rate: \(metric)") }
+        if let metric = respiratoryRate { metrics.append("- Respiratory Rate: \(metric)") }
+        if let metric = bodyTemperature { metrics.append("- Body Temperature: \(metric)") }
+        if let metric = weight { metrics.append("- Weight: \(metric)") }
+        if let metric = BMI { metrics.append("- BMI: \(metric)") }
+        if let metric = sleep {
+            if metric != "00:00" {
+                metrics.append("- Sleep: \(metric)")
+            }
+        }
+        if let metric = menstrualFlow { metrics.append("- Menstrual Flow: \(metric)") }
+        
+        if metrics.isEmpty { return "" } else {
+            mainString += "\n\n**Apple Health Metrics:**\n"
+            for metric in metrics {
+                mainString += metric + "\n" // Append each string with a space
+            }
+            return mainString
+        }
+    }
+    
+    @MainActor
     func requestAuthorization() {
         // The type of data we will be reading from Health (e.g stepCount)
         let toReads = Set([

@@ -17,8 +17,8 @@ class MessageViewModel: ObservableObject {
     @Published var latestThreadId: String?
     var authViewModel: AuthViewModel
     
-    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
-//    let baseUrl = "http://192.168.89.39:5002"
+//    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
+    let baseUrl = "http://192.168.89.39:5002"
     
     init(userId: String, authViewModelPassedIn: AuthViewModel) {
         messages = []
@@ -218,14 +218,20 @@ class MessageViewModel: ObservableObject {
         }
     }
     
-    func getOvumResponse(message: String, authorId: String, authorName: String, isFirstMessageInConversation: Bool) async {
+    func getOvumResponse(message: String, authorId: String, authorName: String, isFirstMessageInConversation: Bool, appleHealthMetrics: String, userInfo: [String]) async {
         let endpoint = "/get_next_message"
+        let documentSummaries: [String] = self.documents.map { doc in
+            doc.summary
+        }
         
         let dataToSend: [String: Any] = [
             "user_id": authorId,
             "user_name": authorName,
             "message": message,
-            "is_first_message": isFirstMessageInConversation 
+            "is_first_message": isFirstMessageInConversation,
+            "appleHealthMetrics": isFirstMessageInConversation ? appleHealthMetrics : "",
+            "userInfo": isFirstMessageInConversation ? userInfo : "",
+            "documentSummaries": isFirstMessageInConversation ? documentSummaries : ""
         ]
         
         if let url = URL(string: baseUrl + endpoint) {
@@ -344,17 +350,8 @@ class MessageViewModel: ObservableObject {
                 var decodedSummaryData = try JSONDecoder().decode(String.self, from: summaryData)
                 
                 // Append Apple Health Metrics to the summary.
-                if (HKM.haveAccess) {
-                    decodedSummaryData.append("\n\n**Apple Health Metrics:**")
-                    if let metric = HKM.stepCountToday { decodedSummaryData.append("\n- Steps: \(metric)") }
-                    if let metric = HKM.HRV { decodedSummaryData.append("\n- Heart Rate Variability: \(metric)") }
-                    if let metric = HKM.heartRate { decodedSummaryData.append("\n- Heart Rate: \(metric)") }
-                    if let metric = HKM.respiratoryRate { decodedSummaryData.append("\n- Respiratory Rate: \(metric)") }
-                    if let metric = HKM.bodyTemperature { decodedSummaryData.append("\n- Body Temperature: \(metric)") }
-                    if let metric = HKM.weight { decodedSummaryData.append("\n- Weight: \(metric)") }
-                    if let metric = HKM.BMI { decodedSummaryData.append("\n- BMI: \(metric)") }
-                    if let metric = HKM.sleep { decodedSummaryData.append("\n- Sleep: \(metric)") }
-                    if let metric = HKM.menstrualFlow { decodedSummaryData.append("\n- Menstrual Flow: \(metric)") }
+                if (HKM.haveAccess && HKM.summariseCurrentData() != "") {
+                    decodedSummaryData.append(HKM.summariseCurrentData())
                 }
                 
                 print(decodedSummarisedTitle)
