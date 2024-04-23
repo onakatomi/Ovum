@@ -2,6 +2,8 @@ import SwiftUI
 
 struct Rating: View {
     @EnvironmentObject var viewModel: MessageViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
     let session: String
     var handler: (() -> Void)
     @State var score: Int = 0
@@ -39,7 +41,9 @@ struct Rating: View {
                     }
                     Spacer()
                     Button {
-                        viewModel.assignRating(sessionId: session, rating: score)
+                        Task {
+                            await viewModel.assignRating(sessionId: session, rating: score, userId: authViewModel.currentUser!.id)
+                        }
                         handler()
                     } label: {
                         Text("Submit")

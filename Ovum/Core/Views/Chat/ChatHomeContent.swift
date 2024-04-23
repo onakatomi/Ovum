@@ -66,7 +66,8 @@ struct ChatHomeContent: View {
                 if (viewModel.latestThreadId != nil) {
                     Text("Current thread ID: \(viewModel.latestThreadId!)")
                 }
-                
+                Spacer()
+                Text("**Token Count**: \(authViewModel.currentUser?.tokenUsage ?? -1)")
                 Spacer()
                 Divider()
                 VStack {

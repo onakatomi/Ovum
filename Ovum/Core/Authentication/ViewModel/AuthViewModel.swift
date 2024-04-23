@@ -19,6 +19,7 @@ class AuthViewModel: ObservableObject {
         // Fetch user on init
         Task {
             await fetchUser()
+            await updateUser()
         }
     }
     
@@ -42,7 +43,7 @@ class AuthViewModel: ObservableObject {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password) // Atempt to create user; await result
             self.userSession = result.user // Set userSession property with new user
-            let user = User(id: result.user.uid, email: email, name: name, warningAccepted: false, onboardingInfo: nil) // Create OUR user object
+            let user = User(id: result.user.uid, email: email, name: name, warningAccepted: false, onboardingInfo: nil, tokenUsage: 0) // Create OUR user object
             let encodedUser = try Firestore.Encoder().encode(user) // Encode this object
             // There's a collection of users, which contains documents of user ids. Each document id maps to a user object. setData sets this map to the id.
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser) // Upload this to Firebase
@@ -80,6 +81,9 @@ class AuthViewModel: ObservableObject {
     
     func updateUser() async {
         do {
+            if (currentUser?.tokenUsage == nil) {
+                currentUser?.tokenUsage = 0
+            }
             let encodedUser = try Firestore.Encoder().encode(currentUser) // Encode this object
             // There's a collection of users, which contains documents of user ids. Each document id maps to a user object. setData sets this map to the id.
             try await Firestore.firestore().collection("users").document(currentUser!.id).setData(encodedUser) // Upload this to Firebase

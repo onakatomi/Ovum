@@ -65,3 +65,14 @@ struct Medication: Codable, Identifiable, Hashable {
     var courseEnd: Date?
     let dateRecorded: Date
 }
+
+func stringRepMedication(med: Medication) -> String {
+    switch med.type {
+        case .noLongerTaking:
+            return "Was previously taking \(med.name)"
+        case .shortTerm:
+            return "Was previously taking \(med.name)"
+        case .ongoing:
+            return "Currently taking \(med.name)"
+    }
+}

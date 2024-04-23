@@ -139,6 +139,7 @@ struct OnboardingView: View {
                     
                     Divider()
                         .background(AppColours.maroon)
+                    
                     SendMessageField(textInput: $inputText, isDisabled: awaitingResponse) {
                         awaitingResponse = true
                         let textCopy: String = inputText // Make copy so that message passed to API isn't blank.
@@ -146,7 +147,8 @@ struct OnboardingView: View {
                         let sentMessage = Message(author: authViewModel.currentUser!.id, fromOvum: false, content: textCopy) // Construct message model.
                         ovm.onboardingMessages.append(sentMessage)
                         
-                        await ovm.getOnboardingResponse(message: textCopy, authorId: authViewModel.currentUser!.id, authorName: authViewModel.currentUser!.name, isFirstMessageInConversation: ovm.onboardingMessages.count == 1 ? true : false) // Get Ovum's response.
+                        let tokenUsage = await ovm.getOnboardingResponse(message: textCopy, authorId: authViewModel.currentUser!.id, authorName: authViewModel.currentUser!.name, isFirstMessageInConversation: ovm.onboardingMessages.count == 1 ? true : false) // Get Ovum's response.
+                        authViewModel.currentUser?.tokenUsage! += tokenUsage
                         awaitingResponse = false
                     }
                     .padding([.horizontal], 20)

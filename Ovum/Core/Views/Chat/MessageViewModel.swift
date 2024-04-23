@@ -40,11 +40,20 @@ class MessageViewModel: ObservableObject {
         print("---> \(message.content)")
     }    
     
-    func assignRating(sessionId: String, rating: Int) {
+    func assignRating(sessionId: String, rating: Int, userId: String) async {
         guard let indexOfSession = chatSessions.firstIndex(where: {$0.id == sessionId}) else {
             return
         }
         chatSessions[indexOfSession].rating = rating
+        
+        do {
+            let jsonEncoder = JSONEncoder()
+            let jsonResultData = try jsonEncoder.encode(chatSessions[indexOfSession])
+            let jsonString = String(data: jsonResultData, encoding: .utf8)
+            await addSessionToCloud(encodedSession: jsonString!, userId: userId)
+        } catch {
+            print("Encoding Failed", error)
+        }
     }
     
     func addDocument(document: Document) {
@@ -220,8 +229,17 @@ class MessageViewModel: ObservableObject {
     
     func getOvumResponse(message: String, authorId: String, authorName: String, isFirstMessageInConversation: Bool, appleHealthMetrics: String, userInfo: [String]) async {
         let endpoint = "/get_next_message"
+        
         let documentSummaries: [String] = self.documents.map { doc in
             doc.summary
+        }
+        
+        var medicationSummaries: [String] = self.currentMedication.map { med in
+            stringRepMedication(med: med)
+        }
+        
+        for med in self.pastMedication {
+            medicationSummaries.append(stringRepMedication(med: med))
         }
         
         let dataToSend: [String: Any] = [
@@ -231,7 +249,8 @@ class MessageViewModel: ObservableObject {
             "is_first_message": isFirstMessageInConversation,
             "appleHealthMetrics": isFirstMessageInConversation ? appleHealthMetrics : "",
             "userInfo": isFirstMessageInConversation ? userInfo : "",
-            "documentSummaries": isFirstMessageInConversation ? documentSummaries : ""
+            "documentSummaries": isFirstMessageInConversation ? documentSummaries : "",
+            "medicationSummaries": isFirstMessageInConversation ? medicationSummaries : ""
         ]
         
         if let url = URL(string: baseUrl + endpoint) {
@@ -246,6 +265,8 @@ class MessageViewModel: ObservableObject {
                 let apiResponse = try decoder.decode(Response.self, from: data) // Decode the incoming JSON into a Swift struct
                 let responseMessage: Message = Message(author: "Ovum", fromOvum: true, content: apiResponse.response)
                 addMessage(message: responseMessage)
+                authViewModel.currentUser?.tokenUsage! += apiResponse.token_usage
+                print("e")
             } catch {
                 print("POST Request Failed:", error)
             }
@@ -279,6 +300,7 @@ class MessageViewModel: ObservableObject {
     
     struct TotalSummaryResponse: Codable {
         var total_summary: String
+        var token_usage: Int
     }
     
     func getTotalSummary(authorId: String, authorInfo: [String], summaries: [String]) async -> String {
@@ -302,6 +324,8 @@ class MessageViewModel: ObservableObject {
                 
                 let apiResponse = try decoder.decode(TotalSummaryResponse.self, from: data) // Decode the incoming JSON into a Swift struct
                 let totalSummary = apiResponse.total_summary
+                let tokenUsage = apiResponse.token_usage
+                authViewModel.currentUser?.tokenUsage! += tokenUsage
                 let totalSummaryData = Data(totalSummary.utf8)
                 let decodedTotalSummaryData = try JSONDecoder().decode(String.self, from: totalSummaryData)
                 
@@ -383,6 +407,9 @@ class MessageViewModel: ObservableObject {
                 currentSession.bodyParts = bodyPartsArray
                 currentSession.symptoms = symptomsArray
                 currentSession.severities = severitiesArray
+                
+                let tokenUsage = apiResponse.token_usage
+                authViewModel.currentUser?.tokenUsage! += tokenUsage
             } catch {
                 print("POST Request Failed:", error)
             }
@@ -393,6 +420,7 @@ class MessageViewModel: ObservableObject {
         var response: String
         var body_parts: String
         var summary: String
+        var token_usage: Int
 //        var medication: MedicationResponse
     }
     
@@ -430,6 +458,7 @@ class MessageViewModel: ObservableObject {
                 let documentCategory = apiResponse.category
                 let documentSummary = apiResponse.analysis
                 let documentTitle = apiResponse.title
+                let tokenUsage = apiResponse.token_usage
                 
                 let doc: Document = Document(title: documentTitle, date: getDateAsString(date: Date.now), type: DocumentType(rawValue: documentCategory) ?? .pathology, file: document, summary: documentSummary)
                 addDocument(document: doc)
@@ -438,6 +467,8 @@ class MessageViewModel: ObservableObject {
                 let jsonResultData = try jsonEncoder.encode(doc)
                 let jsonString = String(data: jsonResultData, encoding: .utf8)
                 await addDocToCloud(encodedDocument: jsonString!, userId: userId)
+                authViewModel.currentUser?.tokenUsage! += tokenUsage
+                await authViewModel.updateUser()
                 
             } catch {
                 print("POST Request Failed:", error)
@@ -569,10 +600,12 @@ struct DocumentAnalysisResponse: Codable {
     var category: String
     var analysis: String
     var title: String
+    var token_usage: Int
 }
 
 struct Response: Codable {
     var response: String
+    var token_usage: Int
 }
 
 struct BodyPartsArray: Codable {

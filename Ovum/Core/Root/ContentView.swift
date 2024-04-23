@@ -26,13 +26,18 @@ struct ContentView: View {
                     }
             }
             
-            if (authViewModel.userSession != nil && authViewModel.currentUser != nil && authViewModel.currentUser!.warningAccepted == true && authViewModel.currentUser!.onboardingInfo == nil) {
-                OnboardingView(ovm: ovm)
-                    .environmentObject(authViewModel)
-                    .environmentObject(router)
+            if (authViewModel.userSession != nil &&
+                authViewModel.currentUser != nil &&
+                authViewModel.currentUser!.warningAccepted == true &&
+                authViewModel.currentUser!.onboardingInfo == nil) {
+                    OnboardingView(ovm: ovm)
+                        .environmentObject(authViewModel)
+                        .environmentObject(router)
             }
             
-            if (authViewModel.userSession != nil && authViewModel.currentUser != nil && (authViewModel.currentUser!.warningAccepted == nil || authViewModel.currentUser!.warningAccepted == false)) {
+            if (authViewModel.userSession != nil &&
+                authViewModel.currentUser != nil &&
+                (authViewModel.currentUser!.warningAccepted == nil || authViewModel.currentUser!.warningAccepted == false)) {
                 WarningView()
                     .environmentObject(authViewModel)
             }

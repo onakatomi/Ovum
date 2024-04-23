@@ -10,7 +10,7 @@ class OnboardingViewModel: ObservableObject {
 //    let baseUrl = "http://192.168.89.21:5002"
     let baseUrl = "http://192.168.89.39:5002"
     
-    func getOnboardingResponse(message: String, authorId: String, authorName: String, isFirstMessageInConversation: Bool) async {
+    func getOnboardingResponse(message: String, authorId: String, authorName: String, isFirstMessageInConversation: Bool) async -> Int {
         let endpoint = "/get_onboarding_response"
         
         let dataToSend: [String: Any] = [
@@ -32,10 +32,13 @@ class OnboardingViewModel: ObservableObject {
                 let apiResponse = try decoder.decode(Response.self, from: data) // Decode the incoming JSON into a Swift struct
                 let responseMessage: Message = Message(author: "Ovum", fromOvum: true, content: apiResponse.response)
                 onboardingMessages.append(responseMessage)
+                return apiResponse.token_usage
             } catch {
                 print("POST Request Failed:", error)
             }
         }
+        
+        return 0 // Shouldn't reach here.
     }
     
     func concludeOnboarding() -> [String] {
