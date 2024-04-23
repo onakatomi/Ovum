@@ -29,7 +29,7 @@
 		B24694232BA1336B00286A75 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694222BA1336B00286A75 /* ProfileView.swift */; };
 		B24694252BA134B500286A75 /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694242BA134B500286A75 /* SettingsRowView.swift */; };
 		B24694272BA1360600286A75 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694262BA1360600286A75 /* User.swift */; };
-		B24694292BA139CF00286A75 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B24694282BA139CF00286A75 /* GoogleService-Info.plist */; };
+		B24694292BA139CF00286A75 /* GoogleService-Info-Dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = B24694282BA139CF00286A75 /* GoogleService-Info-Dev.plist */; };
 		B24694382BA13B7000286A75 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B24694372BA13B7000286A75 /* FirebaseAuth */; };
 		B24694442BA13B7000286A75 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B24694432BA13B7000286A75 /* FirebaseFirestore */; };
 		B246945E2BA13B7000286A75 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B246945D2BA13B7000286A75 /* FirebaseStorage */; };
@@ -120,7 +120,7 @@
 		B24694222BA1336B00286A75 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B24694242BA134B500286A75 /* SettingsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
 		B24694262BA1360600286A75 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		B24694282BA139CF00286A75 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		B24694282BA139CF00286A75 /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = SOURCE_ROOT; };
 		B24694662BA13C7900286A75 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		B24694682BA26A3A00286A75 /* UploadDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDocument.swift; sourceTree = "<group>"; };
 		B246946A2BA270A700286A75 /* TagDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDocument.swift; sourceTree = "<group>"; };
@@ -346,7 +346,7 @@
 				B2D6A3E52B9038DB0045CCD1 /* Components */,
 				B2D6A3F32B9155FA0045CCD1 /* Model */,
 				B2D6A3A52B8EFF050045CCD1 /* Assets.xcassets */,
-				B24694282BA139CF00286A75 /* GoogleService-Info.plist */,
+				B24694282BA139CF00286A75 /* GoogleService-Info-Dev.plist */,
 				B2D6A3A72B8EFF050045CCD1 /* Preview Content */,
 			);
 			path = Ovum;
@@ -529,7 +529,7 @@
 				B2D6A3A92B8EFF050045CCD1 /* Preview Assets.xcassets in Resources */,
 				B2D6A3A62B8EFF050045CCD1 /* Assets.xcassets in Resources */,
 				B247B6A92BB4D86B00FF17B9 /* NeueHaasGrotDisp-65Medium-Trial.otf in Resources */,
-				B24694292BA139CF00286A75 /* GoogleService-Info.plist in Resources */,
+				B24694292BA139CF00286A75 /* GoogleService-Info-Dev.plist in Resources */,
 				B247B6AB2BB4D86B00FF17B9 /* NeueHaasGrotDisp-56Italic-Trial.otf in Resources */,
 				B247B6AA2BB4D86B00FF17B9 /* NeueHaasGrotDisp-55Roman-Trial.otf in Resources */,
 				B247B6A72BB4D86B00FF17B9 /* NeueHaasGrotDisp-66MediumItalic-Trial.otf in Resources */,
@@ -624,6 +624,213 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		B26AA7962BD78E5A00C1FE2E /* Debug-Internal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-Xlinker",
+					"-no_warn_duplicate_libraries",
+				);
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = "Debug-Internal";
+		};
+		B26AA7972BD78E5A00C1FE2E /* Debug-Internal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				API_URL = "";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Ovum/Ovum.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Ovum/Preview Content\"";
+				DEVELOPMENT_TEAM = D9QCYUQ6WX;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D9QCYUQ6WX;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				GOOGLE_PLIST_PATH = "GoogleService-Info-Dev";
+				INFOPLIST_FILE = Ovum/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs to capture image.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "To read the health data and show it in the application.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "To read the health data and show it in the application.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				"OTHER_LDFLAGS[arch=*]" = "\"-Wl,-no_warn_duplicate_libraries\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nakatomi.Ovum;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.nakatomi.Ovum";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug-Internal";
+		};
+		B26AA7982BD78E6100C1FE2E /* Release-Internal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-Internal";
+		};
+		B26AA7992BD78E6100C1FE2E /* Release-Internal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				API_URL = "";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Ovum/OvumRelease.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Ovum/Preview Content\"";
+				DEVELOPMENT_TEAM = D9QCYUQ6WX;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D9QCYUQ6WX;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				GOOGLE_PLIST_PATH = "GoogleService-Info-Dev";
+				INFOPLIST_FILE = Ovum/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs to capture image.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "To read the health data and show it in the application.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "To read the health data and show it in the application.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nakatomi.Ovum;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.nakatomi.Ovum";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Release-Internal";
+		};
 		B2D6A3AA2B8EFF050045CCD1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -750,7 +957,8 @@
 		B2D6A3AD2B8EFF050045CCD1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				API_URL = "";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Prod";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ovum/Ovum.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -761,6 +969,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D9QCYUQ6WX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				GOOGLE_PLIST_PATH = "GoogleService-Info";
 				INFOPLIST_FILE = Ovum/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs to capture image.";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "To read the health data and show it in the application.";
@@ -777,7 +986,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				"OTHER_LDFLAGS[arch=*]" = "\"-Wl,-no_warn_duplicate_libraries\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nakatomi.Ovum;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ovum.Ovum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.nakatomi.Ovum";
@@ -790,7 +999,8 @@
 		B2D6A3AE2B8EFF050045CCD1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				API_URL = "";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Prod";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ovum/OvumRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Distribution";
@@ -802,6 +1012,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D9QCYUQ6WX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				GOOGLE_PLIST_PATH = "GoogleService-Info";
 				INFOPLIST_FILE = Ovum/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs to capture image.";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "To read the health data and show it in the application.";
@@ -817,7 +1028,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nakatomi.Ovum;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ovum.Ovum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.nakatomi.Ovum";
@@ -834,7 +1045,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B2D6A3AA2B8EFF050045CCD1 /* Debug */,
+				B26AA7962BD78E5A00C1FE2E /* Debug-Internal */,
 				B2D6A3AB2B8EFF050045CCD1 /* Release */,
+				B26AA7982BD78E6100C1FE2E /* Release-Internal */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -843,7 +1056,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B2D6A3AD2B8EFF050045CCD1 /* Debug */,
+				B26AA7972BD78E5A00C1FE2E /* Debug-Internal */,
 				B2D6A3AE2B8EFF050045CCD1 /* Release */,
+				B26AA7992BD78E6100C1FE2E /* Release-Internal */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

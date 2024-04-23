@@ -13,7 +13,11 @@ struct OvumApp: App {
 //        UXCam.optIntoSchematicRecordings()
 //        let config = UXCamSwiftUI.Configuration(appKey: "fcjwoz22b3ns516")
 //        UXCamSwiftUI.start(with: config)
-        FirebaseApp.configure()
+        if let path = Bundle.main.infoDictionary?["GOOGLE_PLIST_PATH"] as? String {
+            print("Using google service plist from \(path)")
+            FirebaseApp.configure(options: FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: path, ofType: "plist")!)!)
+        }
+//        FirebaseApp.configure()
     }
     
     var body: some Scene {

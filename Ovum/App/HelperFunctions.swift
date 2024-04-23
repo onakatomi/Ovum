@@ -7,6 +7,19 @@ func getRandomColor() -> Color {
     return chatHistoryColours[randomIndex]
 }
 
+func splitDateTime(datetimeString: String, start: Bool, number: Int) -> String {
+    let words = datetimeString.split(separator: " ")  // Split by space
+    if start {
+        let groupedWords = words.prefix(number)  // Take the first x elements
+        let result = groupedWords.joined(separator: " ")  // Reconstruct the sentence        
+        return result
+    } else {
+        let groupedWords = words.suffix(number)  // Take the last x elements
+        let result = groupedWords.joined(separator: " ")  // Reconstruct the sentence
+        return result
+    }
+}
+
 func getDateAsString(date: Date) -> String {
     let dateFormatter = DateFormatter()
 

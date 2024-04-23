@@ -90,18 +90,23 @@ struct OverviewHomeContent: View {
     
     var body: some View {
         VStack {
-//            if (healthKitManager.sleep != nil && healthKitManager.menstrualFlow != nil) {
-//                HStack {
-//                    Text("**Sleep Time** · \(healthKitManager.sleep!)")
-//                    Spacer()
-//                    Text("**Flow** · \(healthKitManager.menstrualFlow!)")
-//                }
-//            }
             
             if orderedChatSessions.count > 0 {
-                Text(stripDateString(dateString: orderedChatSessions[Int(sliderValue)].date, format: .elegant))
-                    .foregroundColor(AppColours.maroon)
-                    .fontWeight(.bold)
+                HStack {
+                    Text(splitDateTime(datetimeString: stripDateString(dateString: orderedChatSessions[Int(sliderValue)].date, format: .elegant),
+                                       start: true,
+                                       number: 3
+                                      )
+                    ).fontWeight(.bold)  +
+                    Text(" · ") +
+                    Text(splitDateTime(datetimeString: stripDateString(dateString: orderedChatSessions[Int(sliderValue)].date, format: .elegant),
+                                       start: false,
+                                       number: 2
+                                      )
+                    )
+                }
+                .foregroundColor(AppColours.maroon)
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
             
             ZStack {
@@ -170,7 +175,7 @@ struct OverviewHomeContent: View {
                     .font(.caption)
                     .foregroundColor(AppColours.maroon)
             }
-
+            
             Spacer()
         }
         .padding(.all, 20)
@@ -180,7 +185,7 @@ struct OverviewHomeContent: View {
         return GeometryReader { (geometry) -> Color in
             let imageSize = geometry.size
             DispatchQueue.main.async {
-//                print(">> \(imageSize)") // use image actual size in your calculations
+                //                print(">> \(imageSize)") // use image actual size in your calculations
                 self.imageSize = imageSize
             }
             return .clear
@@ -192,8 +197,8 @@ struct OverviewHomeContent: View {
 
 #Preview {
     ContentView()
-//    OverviewHomeContent()
-//        .environmentObject(Router())
-//        .environmentObject(HealthKitManager())
-//        .environmentObject(MessageViewModel(userId: "1", authViewModelPassedIn: AuthViewModel()))
+    //    OverviewHomeContent()
+    //        .environmentObject(Router())
+    //        .environmentObject(HealthKitManager())
+    //        .environmentObject(MessageViewModel(userId: "1", authViewModelPassedIn: AuthViewModel()))
 }
