@@ -14,13 +14,12 @@ class MessageViewModel: ObservableObject {
     @Published var isSavingMedication: Bool = false
     @Published var isDocumentUploading: Bool = false
     @Published var isNewThreadBeingGenerated: Bool = false
-    @Published var latestThreadId: String?
+    @Published var latestThreadId: String = "No thread currently assigned"
+    @Published var areDocumentsLoaded: Bool = false
     var authViewModel: AuthViewModel
     
-    let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app"
-//    let baseUrl = "http://192.168.89.39:5002"
-    
     init(userId: String, authViewModelPassedIn: AuthViewModel) {
+        print("---> init starting...")
         messages = []
         chatSessions = []
         documents = []
@@ -30,9 +29,13 @@ class MessageViewModel: ObservableObject {
         authViewModel = authViewModelPassedIn
         Task {
             await getAllChatSessions(userId: userId)
-            await getAllDocuments(userId: userId)
             await getAllMedications(userId: userId)
+            await getAllDocuments(userId: userId)
         }
+        Task {
+            await fetchCurrentThread(userId: userId)
+        }
+        print("---> init finishing...")
     }
     
     func addMessage(message: Message) {
@@ -100,7 +103,7 @@ class MessageViewModel: ObservableObject {
             "session": encodedSession
         ]
         
-        if let url = URL(string: baseUrl + endpoint) {
+        if let url = URL(string: Urls.baseUrl + endpoint) {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -129,7 +132,7 @@ class MessageViewModel: ObservableObject {
                 "medication": encodedMedication!
             ]
             
-            if let url = URL(string: baseUrl + endpoint) {
+            if let url = URL(string: Urls.baseUrl + endpoint) {
                 var request = URLRequest(url: url)
                 request.httpMethod = "POST"
                 request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -159,10 +162,10 @@ class MessageViewModel: ObservableObject {
     ///   - userId: The user to fetch.
     /// - Returns: Nothing.
     func getAllChatSessions(userId: String) async {
-        print("Fetching chat sessions...")
+        print("---> Fetching chat sessions...")
         let endpoint = "/get_all_sessions/\(userId)"
         
-        if let url = URL(string: baseUrl + endpoint) {
+        if let url = URL(string: Urls.baseUrl + endpoint) {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -193,10 +196,10 @@ class MessageViewModel: ObservableObject {
     }
     
     func getAllMedications(userId: String) async {
-        print("Fetching medications...")
+        print("---> Fetching medications...")
         let endpoint = "/get_all_medications/\(userId)"
         
-        if let url = URL(string: baseUrl + endpoint) {
+        if let url = URL(string: Urls.baseUrl + endpoint) {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -214,7 +217,7 @@ class MessageViewModel: ObservableObject {
                         pastMedication.append(medication)
                     }
                 }
-                
+                self.authViewModel.isAllUserDataFetched = true
                 // Only append fetched sessions that don't currently exist in the array to prevent duplicates.
 //                medications.append(contentsOf: apiResponse.all_medications.filter({ medicationToAdd in
 //                    !medications.contains { existingMedication in
@@ -253,7 +256,7 @@ class MessageViewModel: ObservableObject {
             "medicationSummaries": isFirstMessageInConversation ? medicationSummaries : ""
         ]
         
-        if let url = URL(string: baseUrl + endpoint) {
+        if let url = URL(string: Urls.baseUrl + endpoint) {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -280,7 +283,7 @@ class MessageViewModel: ObservableObject {
             "user_id": authorId,
             "user_name": authorName
         ]
-        if let url = URL(string: baseUrl + endpoint) {
+        if let url = URL(string: Urls.baseUrl + endpoint) {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -312,7 +315,7 @@ class MessageViewModel: ObservableObject {
             "summaries": summaries
         ]
         
-        if let url = URL(string: baseUrl + endpoint) {
+        if let url = URL(string: Urls.baseUrl + endpoint) {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -350,7 +353,7 @@ class MessageViewModel: ObservableObject {
             "messages": messagesArray
         ]
         
-        if let url = URL(string: baseUrl + endpoint) {
+        if let url = URL(string: Urls.baseUrl + endpoint) {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -437,7 +440,7 @@ class MessageViewModel: ObservableObject {
     }
     
     // Takes in a base64 encoded string (of an image)
-    func analyseDocument(document: String, userId: String) async {
+    func analyseDocument(document: String, userId: String) async -> Int {
         let endpoint = "/get_document_analysis"
         
         let dataToSend: [String: Any] = [
@@ -445,14 +448,20 @@ class MessageViewModel: ObservableObject {
             "file": document
         ]
         
-        if let url = URL(string: baseUrl + endpoint) {
+        if let url = URL(string: Urls.baseUrl + endpoint) {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             
             do {
                 request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
-                let (data, _) = try await URLSession.shared.data(for: request)
+                let (data, response) = try await URLSession.shared.data(for: request)
+                let http = response as! HTTPURLResponse
+                print("did fetch, status: \(http.statusCode), count: \(data.count)")
+                if http.statusCode == 400 {
+                    return 1
+                }
+                
                 let decoder = JSONDecoder()
                 let apiResponse = try decoder.decode(DocumentAnalysisResponse.self, from: data)
                 let documentCategory = apiResponse.category
@@ -469,11 +478,14 @@ class MessageViewModel: ObservableObject {
                 await addDocToCloud(encodedDocument: jsonString!, userId: userId)
                 authViewModel.currentUser?.tokenUsage! += tokenUsage
                 await authViewModel.updateUser()
+                return 0
                 
             } catch {
                 print("POST Request Failed:", error)
             }
         }
+        
+        return 1
     }
     
     func addDocToCloud(encodedDocument: String, userId: String) async {
@@ -484,7 +496,7 @@ class MessageViewModel: ObservableObject {
             "document": encodedDocument
         ]
         
-        if let url = URL(string: baseUrl + endpoint) {
+        if let url = URL(string: Urls.baseUrl + endpoint) {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -501,6 +513,34 @@ class MessageViewModel: ObservableObject {
         }
     }
     
+    func fetchCurrentThread(userId: String) async {
+        let endpoint = "/fetch_current_thread/\(userId)"
+        
+        if let url = URL(string: Urls.baseUrl + endpoint) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            do {
+                let (data, response) = try await URLSession.shared.data(for: request)
+                let http = response as! HTTPURLResponse
+                if http.statusCode == 400 {
+                    return
+                }
+                
+                let decoder = JSONDecoder()
+                let apiResponse = try JSONDecoder().decode(CurrentThreadResponse.self, from: data)
+                self.latestThreadId = apiResponse.thread_id
+            } catch {
+                print("GET Request Failed:", error)
+            }
+        }
+    }
+    
+    struct CurrentThreadResponse: Codable {
+        let thread_id: String
+    }
+    
     func generateNewThread(userId: String) async {
         let endpoint = "/new_thread"
         
@@ -508,7 +548,7 @@ class MessageViewModel: ObservableObject {
             "user_id": userId
         ]
         
-        if let url = URL(string: baseUrl + endpoint) {
+        if let url = URL(string: Urls.baseUrl + endpoint) {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -532,10 +572,10 @@ class MessageViewModel: ObservableObject {
     }
     
     func getAllDocuments(userId: String) async {
-        print("Fetching docs...")
+        print("---> Fetching docs...")
         let endpoint = "/get_all_documents/\(userId)"
         
-        if let url = URL(string: baseUrl + endpoint) {
+        if let url = URL(string: Urls.baseUrl + endpoint) {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -578,7 +618,7 @@ class MessageViewModel: ObservableObject {
                 group.notify(queue: DispatchQueue.main) {
                     print("All things fetched")
                     withAnimation {
-                        self.authViewModel.isAllUserDataFetched = true
+                        self.areDocumentsLoaded = true
                     }
                 }
             } catch {

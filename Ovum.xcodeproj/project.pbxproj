@@ -54,6 +54,7 @@
 		B25D75572BC7A31E00A8E2A4 /* thing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25D75562BC7A31E00A8E2A4 /* thing.swift */; };
 		B25D75592BC8C92700A8E2A4 /* CheckboxToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25D75582BC8C92700A8E2A4 /* CheckboxToggle.swift */; };
 		B26AA7952BD1E61000C1FE2E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B26AA7942BD1E61000C1FE2E /* PrivacyInfo.xcprivacy */; };
+		B29E099E2BDB265500B9EAE7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B29E099D2BDB265500B9EAE7 /* GoogleService-Info.plist */; };
 		B2D6A3A22B8EFEF80045CCD1 /* OvumApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */; };
 		B2D6A3A42B8EFEF80045CCD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A32B8EFEF80045CCD1 /* ContentView.swift */; };
 		B2D6A3A62B8EFF050045CCD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2D6A3A52B8EFF050045CCD1 /* Assets.xcassets */; };
@@ -143,6 +144,7 @@
 		B25D75562BC7A31E00A8E2A4 /* thing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = thing.swift; sourceTree = "<group>"; };
 		B25D75582BC8C92700A8E2A4 /* CheckboxToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxToggle.swift; sourceTree = "<group>"; };
 		B26AA7942BD1E61000C1FE2E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		B29E099D2BDB265500B9EAE7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B2D6A39E2B8EFEF80045CCD1 /* Ovum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ovum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvumApp.swift; sourceTree = "<group>"; };
 		B2D6A3A32B8EFEF80045CCD1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 				B2D6A3F32B9155FA0045CCD1 /* Model */,
 				B2D6A3A52B8EFF050045CCD1 /* Assets.xcassets */,
 				B24694282BA139CF00286A75 /* GoogleService-Info-Dev.plist */,
+				B29E099D2BDB265500B9EAE7 /* GoogleService-Info.plist */,
 				B2D6A3A72B8EFF050045CCD1 /* Preview Content */,
 			);
 			path = Ovum;
@@ -531,6 +534,7 @@
 				B247B6A92BB4D86B00FF17B9 /* NeueHaasGrotDisp-65Medium-Trial.otf in Resources */,
 				B24694292BA139CF00286A75 /* GoogleService-Info-Dev.plist in Resources */,
 				B247B6AB2BB4D86B00FF17B9 /* NeueHaasGrotDisp-56Italic-Trial.otf in Resources */,
+				B29E099E2BDB265500B9EAE7 /* GoogleService-Info.plist in Resources */,
 				B247B6AA2BB4D86B00FF17B9 /* NeueHaasGrotDisp-55Roman-Trial.otf in Resources */,
 				B247B6A72BB4D86B00FF17B9 /* NeueHaasGrotDisp-66MediumItalic-Trial.otf in Resources */,
 				B247B6A62BB4D86B00FF17B9 /* TestDomaineText-Regular.otf in Resources */,
@@ -730,6 +734,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				UXCAM_KEY = fcjwoz22b3ns516;
 			};
 			name = "Debug-Internal";
 		};
@@ -828,6 +833,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				UXCAM_KEY = fcjwoz22b3ns516;
 			};
 			name = "Release-Internal";
 		};
@@ -993,6 +999,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				UXCAM_KEY = 8fa8xlwhbr5gpz1;
 			};
 			name = Debug;
 		};
@@ -1035,6 +1042,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				UXCAM_KEY = 8fa8xlwhbr5gpz1;
 			};
 			name = Release;
 		};

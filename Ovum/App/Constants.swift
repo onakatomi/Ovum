@@ -19,3 +19,13 @@ struct AppFonts {
     static let haasGrot = "Haas Grot Disp Trial"
     static let testDomaine = "Test Domaine Text"
 }
+
+struct Urls {
+    static let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app" // Dev URL
+//    static let baseUrl = "https://ovumendpoints-de6mwfd5oa-uc.a.run.app" // Prod URL
+//    static let baseUrl = "http://192.168.89.39:5002"
+}
+
+enum MyError: Error {
+    case runtimeError(String)
+}

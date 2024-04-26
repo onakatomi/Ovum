@@ -47,25 +47,25 @@ struct ChatHomeContent: View {
 //                    }
 //                }
                 
-                Button {
-                    Task {
-                        viewModel.isNewThreadBeingGenerated = true
-                        await viewModel.generateNewThread(userId: authViewModel.currentUser!.id)
-                        viewModel.isNewThreadBeingGenerated = false
-                    }
-                } label: {
-                    Text(viewModel.isNewThreadBeingGenerated ? "Creating..."  : "New Thread")
-                        .font(.subheadline)
-                        .padding(10)
-                        .background(viewModel.isNewThreadBeingGenerated ? AppColours.maroon : AppColours.green)
-                        .opacity(viewModel.isNewThreadBeingGenerated ? 0.5 : 1.0)
-                        .cornerRadius(6)
-                        .disabled(viewModel.isNewThreadBeingGenerated)
-                }
-                
-                if (viewModel.latestThreadId != nil) {
-                    Text("Current thread ID: \(viewModel.latestThreadId!)")
-                }
+//                Button {
+//                    Task {
+//                        viewModel.isNewThreadBeingGenerated = true
+//                        await viewModel.generateNewThread(userId: authViewModel.currentUser!.id)
+//                        viewModel.isNewThreadBeingGenerated = false
+//                    }
+//                } label: {
+//                    Text(viewModel.isNewThreadBeingGenerated ? "Creating..."  : "New Thread")
+//                        .font(.subheadline)
+//                        .padding(10)
+//                        .background(viewModel.isNewThreadBeingGenerated ? AppColours.maroon : AppColours.green)
+//                        .opacity(viewModel.isNewThreadBeingGenerated ? 0.5 : 1.0)
+//                        .cornerRadius(6)
+//                        .disabled(viewModel.isNewThreadBeingGenerated)
+//                }
+//                
+//                if (viewModel.latestThreadId != nil) {
+//                    Text("Current thread ID: \(viewModel.latestThreadId!)")
+//                }
 //                Spacer()
 //                Text("**Token Count**: \(authViewModel.currentUser?.tokenUsage ?? -1)")
                 Spacer()

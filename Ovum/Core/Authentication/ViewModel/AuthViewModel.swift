@@ -44,9 +44,12 @@ class AuthViewModel: ObservableObject {
             let result = try await Auth.auth().createUser(withEmail: email, password: password) // Atempt to create user; await result
             self.userSession = result.user // Set userSession property with new user
             let user = User(id: result.user.uid, email: email, name: name, warningAccepted: false, onboardingInfo: nil, tokenUsage: 0) // Create OUR user object
-            let encodedUser = try Firestore.Encoder().encode(user) // Encode this object
+            
+//            let encodedUser = try Firestore.Encoder().encode(user) // Encode this object
             // There's a collection of users, which contains documents of user ids. Each document id maps to a user object. setData sets this map to the id.
-            try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser) // Upload this to Firebase
+//            try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser) // Upload this to Firebase
+
+            await setUser(user: user)
             await fetchUser() // Fetch data we just uploaded to Firebase.
         } catch AuthErrorCode.emailAlreadyInUse {
             return ErrorMessages.emailTaken
@@ -56,6 +59,45 @@ class AuthViewModel: ObservableObject {
         }
         
         return "Successful account creation"
+    }
+    
+    struct userResponse: Codable {
+        var user: User
+    }
+    
+    // Used to either create a fresh user or update a user.
+    func setUser(user: User) async {
+        do {
+            let jsonEncoder = JSONEncoder()
+            let jsonResultData = try jsonEncoder.encode(user)
+            let jsonString = String(data: jsonResultData, encoding: .utf8)
+            
+            let endpoint = "/create_user"
+            
+            let dataToSend: [String: Any] = [
+                "user_id": user.id,
+                "user_object": jsonString!
+            ]
+            
+            if let url = URL(string: Urls.baseUrl + endpoint) {
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                
+                do {
+                    request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
+                    let (data, _) = try await URLSession.shared.data(for: request)
+                    
+                    // Handle response:
+                    let apiResponse = try JSONDecoder().decode(userResponse.self, from: data)
+                    let _ = apiResponse.user
+                } catch {
+                    print("Adding user to firestore failed:", error)
+                }
+            }
+        } catch {
+            print("Creating user failed:", error)
+        }
     }
     
     func signOut() {
@@ -84,20 +126,42 @@ class AuthViewModel: ObservableObject {
             if (currentUser?.tokenUsage == nil) {
                 currentUser?.tokenUsage = 0
             }
-            let encodedUser = try Firestore.Encoder().encode(currentUser) // Encode this object
-            // There's a collection of users, which contains documents of user ids. Each document id maps to a user object. setData sets this map to the id.
-            try await Firestore.firestore().collection("users").document(currentUser!.id).setData(encodedUser) // Upload this to Firebase
+//            let encodedUser = try Firestore.Encoder().encode(currentUser) // Encode this object
+//            // There's a collection of users, which contains documents of user ids. Each document id maps to a user object. setData sets this map to the id.
+//            try await Firestore.firestore().collection("users").document(currentUser!.id).setData(encodedUser) // Upload this to Firebase
+            await setUser(user: currentUser!)
             await fetchUser()
         } catch {
             print("DEBUG: Failed to update user with error \(error.localizedDescription)")
         }
     }
     
+    struct fetchUserResponse: Codable {
+        var fetched_user: User
+    }
+    
     func fetchUser() async {
         guard let uid = Auth.auth().currentUser?.uid else { return } // Return from function if there's no current user; prevents moving to API call below.
         
-        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
-        self.currentUser = try? snapshot.data(as: User.self)
-        print("DEBUG: Current user is \(String(describing: self.currentUser ?? nil))")
+//        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
+        
+        let endpoint = "/fetch_user/\(uid)"
+        
+        if let url = URL(string: Urls.baseUrl + endpoint) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            do {
+//                request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
+                let (data, _) = try await URLSession.shared.data(for: request)
+                let decoder = JSONDecoder()
+                let apiResponse = try decoder.decode(fetchUserResponse.self, from: data) // Decode the incoming JSON into a Swift struct
+                self.currentUser = apiResponse.fetched_user
+                print("DEBUG: Current user is \(String(describing: self.currentUser ?? nil))")
+            } catch {
+                print("GET request for fetching medications failed:", error)
+            }
+        }
     }
 }

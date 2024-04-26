@@ -53,7 +53,7 @@ struct TotalChatSummaryView: View {
                     Text("Medical Summary")
                         .font(.custom(AppFonts.haasGrot, size: 37))
                         .fontWeight(.bold)
-                        .foregroundColor(AppColours.darkBrown)
+//                        .foregroundColor(AppColours.darkBrown)
                     Text("Your recently logged symptoms")
                         .font(.custom(AppFonts.testDomaine, size: 22))
                 }
@@ -87,6 +87,7 @@ struct TotalChatSummaryView: View {
                                 }
                                 
                                 Text(.init(totalSummary))
+                                    .padding(.horizontal, 5)
                             }
                         }
                     }
@@ -104,6 +105,7 @@ struct TotalChatSummaryView: View {
                     Spacer()
                 }
             }
+            .foregroundColor(AppColours.darkBrown)
             .padding(.horizontal, 20)
             .background {
                 AppColours.brown

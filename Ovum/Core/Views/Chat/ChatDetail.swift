@@ -212,6 +212,7 @@ struct ChatDetail: View {
                     Button("Exit", role: .destructive) {
                         Task {
                             let _ = await viewModel.endSession(save: false, userId: authViewModel.currentUser!.id)
+//                            await viewModel.fetchCurrentThread(userId: authViewModel.currentUser!.id)
                             await authViewModel.updateUser()
                             dismiss()
                         }
@@ -231,6 +232,7 @@ struct ChatDetail: View {
                             let finishedSession = await viewModel.endSession(save: true, userId: authViewModel.currentUser!.id)
                             //                            let summary: String = viewModel.currentSession.summary ?? ""
                             await authViewModel.updateUser()
+                            await viewModel.fetchCurrentThread(userId: authViewModel.currentUser!.id)
                             viewModel.isLoading = false
                             router.navigateWithinChat(to: .chatComplete(session: finishedSession!)) // Will not be nil here.
                         }

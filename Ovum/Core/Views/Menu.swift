@@ -4,6 +4,7 @@ struct Menu: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var router: Router
     @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var viewModel: MessageViewModel
     //    let tab: ContentViewTab
     
     var body: some View {
@@ -66,12 +67,34 @@ struct Menu: View {
                 //                        .frame(maxWidth: .infinity, alignment: .leading)                                    }
                 
                 ThickDivider(color: .white, width: 1, padding: 10)
+                Spacer()
+                VStack(alignment: .center, spacing: 10) {
+                    Button {
+                        Task {
+                            viewModel.isNewThreadBeingGenerated = true
+                            await viewModel.generateNewThread(userId: authViewModel.currentUser!.id)
+                            viewModel.isNewThreadBeingGenerated = false
+                        }
+                    } label: {
+                        Text(viewModel.isNewThreadBeingGenerated ? "Creating..."  : "New Thread")
+                            .font(.subheadline)
+                            .padding(10)
+                            .background(viewModel.isNewThreadBeingGenerated ? AppColours.maroon : AppColours.green)
+                            .opacity(viewModel.isNewThreadBeingGenerated ? 0.5 : 1.0)
+                            .cornerRadius(6)
+                            .disabled(viewModel.isNewThreadBeingGenerated)
+                    }
+                    
+                    Text("Current thread ID: **\(viewModel.latestThreadId)**")
+                        .foregroundColor(.white)
+                }
+                .padding(.vertical, 10)
                 //                Text("Settings")
                 //                    .frame(maxWidth: .infinity, alignment: .leading)
                 //                    .foregroundColor(.white)
                 //                    .font(Font.largeTitle.weight(.bold))
                 //                ThickDivider(color: .white, width: 1, padding: 10)
-                Spacer()
+//                Spacer()
                 //                PurpleButton(image: "export", text: "Export overview for doctor") {
                 //                    print("TODO")
                 //                }

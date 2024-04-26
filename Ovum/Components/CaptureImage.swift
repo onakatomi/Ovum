@@ -8,6 +8,7 @@ struct CaptureImage: View {
     @State private var selectedImage: UIImage?
     @State var image: UIImage?
     @State var isDocSuccessfullyUploaded: Bool = false
+    @State var docUploadFailed: Bool = false
     
     var body: some View {
         VStack {
@@ -26,9 +27,13 @@ struct CaptureImage: View {
                         if let b64_rep {
                             Task {
                                 viewModel.isDocumentUploading = true
-                                await viewModel.analyseDocument(document: b64_rep, userId: authViewModel.currentUser!.id)
+                                let result = await viewModel.analyseDocument(document: b64_rep, userId: authViewModel.currentUser!.id)
+                                if result == 1 {
+                                    docUploadFailed = true
+                                } else {
+                                    isDocSuccessfullyUploaded = true
+                                }
                                 viewModel.isDocumentUploading = false
-                                isDocSuccessfullyUploaded = true
                             }
                         }
                     }
@@ -40,6 +45,12 @@ struct CaptureImage: View {
                     Image(systemName: "checkmark.seal.fill")
                 }
                     .foregroundColor(.green)
+            } else if (docUploadFailed) {
+                HStack {
+                    Text("Document upload failed")
+                    Image(systemName: "xmark.seal.fill")
+                }
+                    .foregroundColor(.red)
             }
         }
     }

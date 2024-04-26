@@ -5,6 +5,7 @@ struct ContentView: View {
     @EnvironmentObject var router: Router
     @EnvironmentObject var healthKitManager: HealthKitManager
     @StateObject var ovm = OnboardingViewModel()
+    @State var showSlowPopup: Bool = false
     
     var body: some View {
         ZStack {
@@ -23,6 +24,14 @@ struct ContentView: View {
                     .ignoresSafeArea()
                     .onAppear() {
                         scheduleAppReminderNotification()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                            withAnimation {
+                                self.showSlowPopup = true
+                            }
+                        }
+                    }
+                    .alert("Check your internet connection", isPresented: $showSlowPopup) {
+                        Button("OK", role: .cancel) { }
                     }
             }
             

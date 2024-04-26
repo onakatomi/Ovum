@@ -8,30 +8,21 @@ struct RecordsHomeContent: View {
     @State private var showAddDocumentTray = false
     
     var filteredDocuments: [Document] {
+        let orderedDocuments: [Document] = viewModel.documents.sorted(by: {
+                convertToDate(dateString: $0.date)!.compare(convertToDate(dateString: $1.date)!) == .orderedDescending
+        })
+        
         // Assess if there is a type filter.
         guard documentFilterType != nil else {
-            if (searchText == "") {
-                return viewModel.documents
-            } else {
-                return viewModel.documents.filter { document in
-                    document.title.lowercased().contains(searchText.lowercased())
-                }
-            }
+            return orderedDocuments
         }
         
         // Apply filter.
-        let typeFiltered = viewModel.documents.filter { document in
+        let typeFiltered = orderedDocuments.filter { document in
             document.type == documentFilterType
         }
         
-        // Apply search query.
-        if (searchText == "") {
-            return typeFiltered
-        } else {
-            return typeFiltered.filter { document in
-                document.title.lowercased().contains(searchText.lowercased())
-            }
-        }
+        return typeFiltered
     }
     
     var body: some View {
