@@ -15,8 +15,8 @@ struct LoggedInView: View {
                             BaseView(BaseViewType.overview)
                                 .navigationDestination(for: OverviewNavDestination.self) { destination in
                                     switch destination {
-                                    case .menu:
-                                        Menu().toolbar(.hidden, for: .tabBar)
+                                        case .menu:
+                                            Menu().toolbar(.hidden, for: .tabBar)
                                     }
                                 }
                         }

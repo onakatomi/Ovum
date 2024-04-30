@@ -12,20 +12,20 @@ struct OvumApp: App {
     @StateObject var healthKitManager = HealthKitManager()
     
     init() {
-//        UXCam.optIntoSchematicRecordings()
-//        if let UXCamKey = Bundle.main.infoDictionary?["UXCAM_KEY"] as? String {
-//            print(UXCamKey)
-//            let config = UXCamSwiftUI.Configuration(appKey: UXCamKey)
-//            config.enableAutomaticScreenNameTagging = true
-//            UXCamSwiftUI.start(with: config)
-//        } else {
-//            print("Not reached....")
-//        }
-        
         UXCam.optIntoSchematicRecordings()
-        let config = UXCamSwiftUI.Configuration(appKey: "fcjwoz22b3ns516")
-        config.enableAutomaticScreenNameTagging = true
-        UXCamSwiftUI.start(with: config)
+        if let UXCamKey = Bundle.main.infoDictionary?["UXCAM_KEY"] as? String {
+            print(UXCamKey)
+            let config = UXCamSwiftUI.Configuration(appKey: UXCamKey)
+            config.enableAutomaticScreenNameTagging = true
+            UXCamSwiftUI.start(with: config)
+        } else {
+            print("Not reached....")
+        }
+        
+//        UXCam.optIntoSchematicRecordings()
+//        let config = UXCamSwiftUI.Configuration(appKey: "fcjwoz22b3ns516")
+//        config.enableAutomaticScreenNameTagging = true
+//        UXCamSwiftUI.start(with: config)
         
         if let path = Bundle.main.infoDictionary?["GOOGLE_PLIST_PATH"] as? String {
             print("Using google service plist from \(path)")

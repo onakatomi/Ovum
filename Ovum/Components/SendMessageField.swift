@@ -40,7 +40,9 @@ struct SendMessageField: View {
                         .resizable()
                         .frame(width: 37.0, height: 37.0)
                         .foregroundColor(AppColours.maroon)
+                        .opacity(textInput.isEmpty ? 0.5 : 1.0)
                 }
+                .disabled(textInput.isEmpty)
             }
             .padding(EdgeInsets(top: 7, leading: 25, bottom: 7, trailing: 9))
             .background(Color.white)

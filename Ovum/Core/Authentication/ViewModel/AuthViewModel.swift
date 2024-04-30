@@ -20,6 +20,7 @@ class AuthViewModel: ObservableObject {
         Task {
             await fetchUser()
             await updateUser()
+            await getToken()
         }
     }
     
@@ -65,7 +66,7 @@ class AuthViewModel: ObservableObject {
         var user: User
     }
     
-    // Used to either create a fresh user or update a user.
+    // Used to either create a fresh user in the backend, or update a user in the backend.
     func setUser(user: User) async {
         do {
             let jsonEncoder = JSONEncoder()
@@ -121,29 +122,40 @@ class AuthViewModel: ObservableObject {
         
     }
     
+    // Creates a fresh copy in the backend, and then fetches the result. Also ensures tokenUsage is not nil.
     func updateUser() async {
-        do {
-            if (currentUser?.tokenUsage == nil) {
-                currentUser?.tokenUsage = 0
-            }
-//            let encodedUser = try Firestore.Encoder().encode(currentUser) // Encode this object
-//            // There's a collection of users, which contains documents of user ids. Each document id maps to a user object. setData sets this map to the id.
-//            try await Firestore.firestore().collection("users").document(currentUser!.id).setData(encodedUser) // Upload this to Firebase
-            await setUser(user: currentUser!)
-            await fetchUser()
-        } catch {
-            print("DEBUG: Failed to update user with error \(error.localizedDescription)")
+        guard let _ = Auth.auth().currentUser?.uid else { return } // Return from function if there's no current user; prevents moving to API call below.
+        if (currentUser?.tokenUsage == nil) {
+            currentUser?.tokenUsage = 0
         }
+        
+        await setUser(user: currentUser!)
+        await fetchUser()
     }
     
     struct fetchUserResponse: Codable {
         var fetched_user: User
     }
     
+    func getToken() async {
+        guard let current = Auth.auth().currentUser else { return } // Return from function if there's no current user; prevents moving to API call below
+        current.getIDTokenForcingRefresh(true) { idToken, error in
+          if let error = error {
+            print("Error getting JWT token.")
+            return;
+          }
+
+          print("Created jwtToken: \(idToken!)")
+          self.currentUser?.jwtToken = idToken
+        }
+    }
+    
+    // Fetches a user object from the backend.
     func fetchUser() async {
-        guard let uid = Auth.auth().currentUser?.uid else { return } // Return from function if there's no current user; prevents moving to API call below.
         
-//        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
+        guard let uid = Auth.auth().currentUser?.uid else { return } // Return from function if there's no current user; prevents moving to API call below.
+//        signOut()
+//        return
         
         let endpoint = "/fetch_user/\(uid)"
         
@@ -154,13 +166,21 @@ class AuthViewModel: ObservableObject {
             
             do {
 //                request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
-                let (data, _) = try await URLSession.shared.data(for: request)
+                let (data, response) = try await URLSession.shared.data(for: request)
+                let http = response as! HTTPURLResponse
+                print("did fetch user, status: \(http.statusCode), count: \(data.count)")
+                if http.statusCode == 404 {
+                    print("404 fetch user")
+                    return
+                }
+                
                 let decoder = JSONDecoder()
                 let apiResponse = try decoder.decode(fetchUserResponse.self, from: data) // Decode the incoming JSON into a Swift struct
                 self.currentUser = apiResponse.fetched_user
+                
                 print("DEBUG: Current user is \(String(describing: self.currentUser ?? nil))")
             } catch {
-                print("GET request for fetching medications failed:", error)
+                print("GET request for fetching user failed:", error)
             }
         }
     }

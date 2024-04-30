@@ -8,8 +8,9 @@ struct User: Identifiable, Codable {
     var warningAccepted: Bool?
     var onboardingInfo: [String]?
     var tokenUsage: Int?
+    var jwtToken: String?
 }
 
 extension User {
-    static var MOCK_USER = User(id: NSUUID().uuidString, email: "test@gmail.com", name: "Jane", warningAccepted: false, onboardingInfo: nil, tokenUsage: 0)
+    static var MOCK_USER = User(id: NSUUID().uuidString, email: "test@gmail.com", name: "Jane", warningAccepted: false, onboardingInfo: nil, tokenUsage: 0, jwtToken: nil)
 }

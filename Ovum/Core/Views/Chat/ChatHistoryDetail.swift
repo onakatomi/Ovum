@@ -1,9 +1,10 @@
 import SwiftUI
 
 struct ChatHistoryDetail: View {
-    let chatSession: ChatSession
     @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var router: Router
+    let chatSession: ChatSession
     
     var body: some View {
         VStack(spacing: 0) {

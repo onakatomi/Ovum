@@ -17,5 +17,7 @@
 		<string>TestDomaineText-Regular.otf</string>
 		<string>TestDomaineText-RegularItalic.otf</string>
 	</array>
+	<key>UXCAM_KEY</key>
+	<string>$(UXCAM_KEY)</string>
 </dict>
 </plist>

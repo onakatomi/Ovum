@@ -8,7 +8,7 @@ enum ContentViewTab {
     case records
 }
 
-enum OverviewNavDestination {
+enum OverviewNavDestination: Hashable {
     case menu
 }
 

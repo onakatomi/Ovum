@@ -75,11 +75,11 @@ struct OverviewHomeContent: View {
     @EnvironmentObject var healthKitManager: HealthKitManager
     @EnvironmentObject var viewModel: MessageViewModel
     @EnvironmentObject var router: Router
-    @State private var sliderValue: Double = 0.0
+    @State var sliderValue: Double = 0.0
     @State private var isEditing = false
     @State var imageSize: CGSize = .zero
-    @State private var showSymptomTray = false
-    @State private var currentlySelectedIndex = 0
+    @State var showSymptomTray = false
+    @State var currentlySelectedIndex = 0
     private let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
     
     var orderedChatSessions: [ChatSession] {
