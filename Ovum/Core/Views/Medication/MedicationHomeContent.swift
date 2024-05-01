@@ -7,7 +7,7 @@ struct MedicationHomeContent: View {
     func getHomeScreenMedications() -> [Medication] {
         let onGoings = viewModel.currentMedication
         let filteredShortTerms = viewModel.pastMedication.filter { medication in
-            Date.now >= medication.courseEnd!.addingTimeInterval(-Double((86400*Int(medication.howLongTakingFor!)!))) && Date.now <= medication.courseEnd!
+            medication.type == .ongoing && Date.now >= medication.courseEnd!.addingTimeInterval(-Double((86400*Int(medication.howLongTakingFor!)!))) && Date.now <= medication.courseEnd!
         }
         return onGoings + filteredShortTerms
     }

@@ -218,10 +218,10 @@ struct ChatDetail: View {
             } message: {
                 Text("This conversation won’t be saved to Ovum.")
             }
-            .alert("Are you sure you want log these symptoms?", isPresented: $sessionJustFinished) {
+            .alert("Are you sure you want to log these symptoms?", isPresented: $sessionJustFinished) {
                 HStack {
-                    Button("Cancel", role: .destructive) { }
-                    Button("Yes", role: .cancel) {
+                    Button("Cancel", role: .cancel) { }
+                    Button("Yes") {
                         Task {
                             viewModel.isLoading = true
                             await viewModel.summariseConversation(authorName: authViewModel.currentUser!.name, HKM: healthKitManager)

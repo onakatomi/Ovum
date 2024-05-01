@@ -510,6 +510,40 @@ class MessageViewModel: ObservableObject {
         }
     }
     
+    func deleteDoc(documentId: String) async {
+        let endpoint = "/delete_document"
+        
+        let dataToSend: [String: Any] = [
+            "document_id": documentId
+        ]
+        
+        if let url = URL(string: Urls.baseUrl + endpoint) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(authViewModel.currentUser?.jwtToken! ?? "none")", forHTTPHeaderField: "Authorization")
+            
+            do {
+                request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
+                let (data, _) = try await URLSession.shared.data(for: request)
+                
+                // Handle response:
+                let apiResponse = try JSONDecoder().decode(DeletedDocumentResponse.self, from: data)
+                let docId = apiResponse.deleted_document
+                if let index = self.documents.firstIndex(where: { $0.id.uuidString == docId }) {
+                    self.documents.remove(at: index)
+                    print("Successfully deleted doc: \(docId)")
+                }
+            } catch {
+                print("Deleting doc failed:", error)
+            }
+        }
+    }
+    
+    struct DeletedDocumentResponse: Codable {
+        let deleted_document: String
+    }
+    
     func fetchCurrentThread() async {
         let endpoint = "/fetch_current_thread"
         

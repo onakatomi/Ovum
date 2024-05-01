@@ -3,13 +3,17 @@ import SwiftUIImageViewer
 
 struct RecordDetail: View {
     @EnvironmentObject var router: Router
+    @EnvironmentObject var messageViewModel: MessageViewModel
     @Environment(\.dismiss) private var dismiss
     let document: Document
     var disableAnimation: Bool = false
     @State var caption: String = ""
     @State private var isImagePresented = false
+    @State var isDeleteAttempted = false
+    @State var isDeleting = false
     
     var body: some View {
+        ZStack {
             VStack(spacing: 0) {
                 HStack {
                     Button {
@@ -18,9 +22,16 @@ struct RecordDetail: View {
                         Image("back_button")
                     }
                     Spacer()
+                    Button {
+                        isDeleteAttempted = true
+                    } label: {
+                        Image("delete")
+                            .resizable()
+                            .frame(width: 18.0, height: 18.0)
+                    }
                 }
                 .padding(.horizontal, 20)
-                    .padding(.bottom, 18)
+                .padding(.bottom, 18)
                 Divider()
                     .background(AppColours.maroon)
                     .padding(.bottom, 16)
@@ -56,7 +67,7 @@ struct RecordDetail: View {
                 }
                 Spacer()
                 VStack(alignment: .leading) {
-//                    Spacer()
+                    //                    Spacer()
                     Text("**Document Summary:**")
                         .font(.body)
                         .padding(.bottom, 0)
@@ -73,14 +84,34 @@ struct RecordDetail: View {
                 }
                 .padding(.horizontal, 20)
             }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 50)
-                .foregroundColor(AppColours.maroon)
-                .navigationBarBackButtonHidden(true)
-                .background {
-                    AppColours.brown
+            .padding(.horizontal, 20)
+            .padding(.bottom, 50)
+            .foregroundColor(AppColours.maroon)
+            .navigationBarBackButtonHidden(true)
+            .background {
+                AppColours.brown
                     .ignoresSafeArea()
+            }
+            .opacity(isDeleting ? 0.5 : 1.0)
+            .alert("Are you sure you want to delete this document?", isPresented: $isDeleteAttempted) {
+                VStack {
+                    Button("Delete", role: .destructive) {
+                        Task {
+                            isDeleting = true
+                            await messageViewModel.deleteDoc(documentId: document.id.uuidString)
+                            isDeleting = false
+                            dismiss()
+                        }
+                    }
+                    Button("Cancel", role: .cancel) { }
                 }
+            }
+            
+            if isDeleting {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: AppColours.maroon))
+            }
+        }
             
     }
     

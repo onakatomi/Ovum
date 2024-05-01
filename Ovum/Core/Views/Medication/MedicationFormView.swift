@@ -229,6 +229,7 @@ struct MedicationFormView: View {
                                     if let index = viewModel.currentMedication.firstIndex(where: { $0.id == medicationObject.id }) {
                                         if (medicationObject.stillTaking != nil && !medicationObject.stillTaking!) {
                                             medicationObject.type = .noLongerTaking
+//                                            medicationObject.courseEnd = Date.now
                                             viewModel.currentMedication.remove(at: index)
                                             viewModel.pastMedication.append(medicationObject)
                                         } else {
