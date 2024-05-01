@@ -93,13 +93,9 @@ struct TotalChatSummaryView: View {
                     }
                     .opacity(isFetching ? 0.5 : 1.0)
                     .task {
-                        do {
                             isFetching = true
-                            totalSummary = try await viewModel.getTotalSummary(authorId: authViewModel.currentUser!.id, authorInfo: authViewModel.currentUser!.onboardingInfo!, summaries: orderedChatSessionSummaries)
+                            totalSummary = await viewModel.getTotalSummary(authorInfo: authViewModel.currentUser!.onboardingInfo!, summaries: orderedChatSessionSummaries)
                             isFetching = false
-                        } catch {
-                            totalSummary = "Failed to fetch site."
-                        }
                     }
                 } else {
                     Spacer()

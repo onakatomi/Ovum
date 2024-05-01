@@ -28,12 +28,12 @@ class MessageViewModel: ObservableObject {
         currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], severities: [], title: "Placeholder", date: getDateAsString(date: Date.now), colour: Color(.red))
         authViewModel = authViewModelPassedIn
         Task {
-            await getAllChatSessions(userId: userId)
-            await getAllMedications(userId: userId)
-            await getAllDocuments(userId: userId)
+            await getAllChatSessions()
+            await getAllMedications()
+            await getAllDocuments()
         }
         Task {
-            await fetchCurrentThread(userId: userId)
+            await fetchCurrentThread()
         }
         print("---> init finishing...")
     }
@@ -53,7 +53,7 @@ class MessageViewModel: ObservableObject {
             let jsonEncoder = JSONEncoder()
             let jsonResultData = try jsonEncoder.encode(chatSessions[indexOfSession])
             let jsonString = String(data: jsonResultData, encoding: .utf8)
-            await addSessionToCloud(encodedSession: jsonString!, userId: userId)
+            await addSessionToCloud(encodedSession: jsonString!)
         } catch {
             print("Encoding Failed", error)
         }
@@ -81,7 +81,7 @@ class MessageViewModel: ObservableObject {
                     let jsonEncoder = JSONEncoder()
                     let jsonResultData = try jsonEncoder.encode(currentSession)
                     let jsonString = String(data: jsonResultData, encoding: .utf8)
-                    await addSessionToCloud(encodedSession: jsonString!, userId: userId)
+                    await addSessionToCloud(encodedSession: jsonString!)
                 } catch {
                     print("Encoding Failed", error)
                 }
@@ -95,11 +95,10 @@ class MessageViewModel: ObservableObject {
         return nil
     }
     
-    func addSessionToCloud(encodedSession: String, userId: String) async {
+    func addSessionToCloud(encodedSession: String) async {
         let endpoint = "/add_session"
         
         let dataToSend: [String: Any] = [
-            "user_id": userId,
             "session": encodedSession
         ]
         
@@ -107,6 +106,7 @@ class MessageViewModel: ObservableObject {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(authViewModel.currentUser?.jwtToken! ?? "none")", forHTTPHeaderField: "Authorization")
             
             do {
                 request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
@@ -128,7 +128,6 @@ class MessageViewModel: ObservableObject {
             let endpoint = "/add_medication"
             
             let dataToSend: [String: Any] = [
-                "user_id": userId,
                 "medication": encodedMedication!
             ]
             
@@ -136,6 +135,7 @@ class MessageViewModel: ObservableObject {
                 var request = URLRequest(url: url)
                 request.httpMethod = "POST"
                 request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.setValue("Bearer \(authViewModel.currentUser?.jwtToken! ?? "none")", forHTTPHeaderField: "Authorization")
                 
                 do {
                     request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
@@ -161,14 +161,15 @@ class MessageViewModel: ObservableObject {
     /// - Parameters:
     ///   - userId: The user to fetch.
     /// - Returns: Nothing.
-    func getAllChatSessions(userId: String) async {
+    func getAllChatSessions() async {
         print("---> Fetching chat sessions...")
-        let endpoint = "/get_all_sessions/\(userId)"
+        let endpoint = "/get_all_sessions"
         
         if let url = URL(string: Urls.baseUrl + endpoint) {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(authViewModel.currentUser?.jwtToken! ?? "none")", forHTTPHeaderField: "Authorization")
             
             do {
 //                request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
@@ -195,14 +196,15 @@ class MessageViewModel: ObservableObject {
         var all_medications: [Medication]
     }
     
-    func getAllMedications(userId: String) async {
+    func getAllMedications() async {
         print("---> Fetching medications...")
-        let endpoint = "/get_all_medications/\(userId)"
+        let endpoint = "/get_all_medications"
         
         if let url = URL(string: Urls.baseUrl + endpoint) {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(authViewModel.currentUser?.jwtToken! ?? "none")", forHTTPHeaderField: "Authorization")
             
             do {
 //                request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
@@ -230,7 +232,7 @@ class MessageViewModel: ObservableObject {
         }
     }
     
-    func getOvumResponse(message: String, authorId: String, authorName: String, isFirstMessageInConversation: Bool, appleHealthMetrics: String, userInfo: [String]) async {
+    func getOvumResponse(message: String, authorName: String, isFirstMessageInConversation: Bool, appleHealthMetrics: String, userInfo: [String]) async {
         let endpoint = "/get_next_message"
         
         let documentSummaries: [String] = self.documents.map { doc in
@@ -246,7 +248,6 @@ class MessageViewModel: ObservableObject {
         }
         
         let dataToSend: [String: Any] = [
-            "user_id": authorId,
             "user_name": authorName,
             "message": message,
             "is_first_message": isFirstMessageInConversation,
@@ -260,6 +261,7 @@ class MessageViewModel: ObservableObject {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(authViewModel.currentUser?.jwtToken! ?? "none")", forHTTPHeaderField: "Authorization")
             
             do {
                 request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
@@ -276,17 +278,17 @@ class MessageViewModel: ObservableObject {
         }
     }     
     
-    func endChat(authorId: String, authorName: String) async {
+    func endChat(authorName: String) async {
         let endpoint = "/end_chat"
         
         let dataToSend: [String: Any] = [
-            "user_id": authorId,
             "user_name": authorName
         ]
         if let url = URL(string: Urls.baseUrl + endpoint) {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(authViewModel.currentUser?.jwtToken! ?? "none")", forHTTPHeaderField: "Authorization")
             
             do {
                 request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
@@ -306,11 +308,10 @@ class MessageViewModel: ObservableObject {
         var token_usage: Int
     }
     
-    func getTotalSummary(authorId: String, authorInfo: [String], summaries: [String]) async -> String {
+    func getTotalSummary(authorInfo: [String], summaries: [String]) async -> String {
         let endpoint = "/get_total_summary"
         
         let dataToSend: [String: Any] = [
-            "user_id": authorId,
             "info": authorInfo,
             "summaries": summaries
         ]
@@ -319,6 +320,7 @@ class MessageViewModel: ObservableObject {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(authViewModel.currentUser?.jwtToken! ?? "none")", forHTTPHeaderField: "Authorization")
             
             do {
                 request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
@@ -341,14 +343,13 @@ class MessageViewModel: ObservableObject {
         return "FAILED"
     }
     
-    func summariseConversation(authorId: String, authorName: String, HKM: HealthKitManager) async {
+    func summariseConversation(authorName: String, HKM: HealthKitManager) async {
         let endpoint = "/summarise_discussion"
         
         let messagesArray: [String] = currentSession.messages.map {
             $0.content
         }
         let dataToSend: [String: Any] = [
-            "user_id": authorId,
             "user_name": authorName,
             "messages": messagesArray
         ]
@@ -357,6 +358,7 @@ class MessageViewModel: ObservableObject {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(authViewModel.currentUser?.jwtToken! ?? "none")", forHTTPHeaderField: "Authorization")
             
             do {
                 request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
@@ -368,9 +370,6 @@ class MessageViewModel: ObservableObject {
                 let summarisedTitle = apiResponse.response // Isolate the field
                 let summarisedTitleData = Data(summarisedTitle.utf8) // Make into a UTF8 data object
                 let decodedSummarisedTitle = try JSONDecoder().decode(String.self, from: summarisedTitleData) // Decode this into a Swift string, so removing the JSON encoded slashes.
-                
-                
-//                let medication = try JSONDecoder().decode(MedicationResponse.self, from: apiResponse.medication) // Decode this into a Medication object.
                 
                 let summary = apiResponse.summary
                 let summaryData = Data(summary.utf8)
@@ -391,7 +390,6 @@ class MessageViewModel: ObservableObject {
                 let decodedArray2 = try JSONDecoder().decode([[String]].self, from: bodyPartsData2)
                 print(decodedArray2)
                 
-//                let actualArray = decodedArray.array
                 currentSession.title = decodedSummarisedTitle
                 currentSession.summary = decodedSummaryData
                 
@@ -424,7 +422,6 @@ class MessageViewModel: ObservableObject {
         var body_parts: String
         var summary: String
         var token_usage: Int
-//        var medication: MedicationResponse
     }
     
     struct MedicationResponse: Codable {
@@ -440,11 +437,10 @@ class MessageViewModel: ObservableObject {
     }
     
     // Takes in a base64 encoded string (of an image)
-    func analyseDocument(document: String, userId: String) async -> Int {
+    func analyseDocument(document: String) async -> Int {
         let endpoint = "/get_document_analysis"
         
         let dataToSend: [String: Any] = [
-            "user_id": userId,
             "file": document
         ]
         
@@ -452,6 +448,7 @@ class MessageViewModel: ObservableObject {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(authViewModel.currentUser?.jwtToken! ?? "none")", forHTTPHeaderField: "Authorization")
             
             do {
                 request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
@@ -475,7 +472,7 @@ class MessageViewModel: ObservableObject {
                 let jsonEncoder = JSONEncoder()
                 let jsonResultData = try jsonEncoder.encode(doc)
                 let jsonString = String(data: jsonResultData, encoding: .utf8)
-                await addDocToCloud(encodedDocument: jsonString!, userId: userId)
+                await addDocToCloud(encodedDocument: jsonString!)
                 authViewModel.currentUser?.tokenUsage! += tokenUsage
                 await authViewModel.updateUser()
                 return 0
@@ -488,11 +485,10 @@ class MessageViewModel: ObservableObject {
         return 1
     }
     
-    func addDocToCloud(encodedDocument: String, userId: String) async {
+    func addDocToCloud(encodedDocument: String) async {
         let endpoint = "/add_document"
         
         let dataToSend: [String: Any] = [
-            "user_id": userId,
             "document": encodedDocument
         ]
         
@@ -500,6 +496,7 @@ class MessageViewModel: ObservableObject {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(authViewModel.currentUser?.jwtToken! ?? "none")", forHTTPHeaderField: "Authorization")
             
             do {
                 request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
@@ -513,13 +510,14 @@ class MessageViewModel: ObservableObject {
         }
     }
     
-    func fetchCurrentThread(userId: String) async {
-        let endpoint = "/fetch_current_thread/\(userId)"
+    func fetchCurrentThread() async {
+        let endpoint = "/fetch_current_thread"
         
         if let url = URL(string: Urls.baseUrl + endpoint) {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(authViewModel.currentUser?.jwtToken! ?? "none")", forHTTPHeaderField: "Authorization")
             
             do {
                 let (data, response) = try await URLSession.shared.data(for: request)
@@ -527,8 +525,7 @@ class MessageViewModel: ObservableObject {
                 if http.statusCode == 400 {
                     return
                 }
-                
-                let decoder = JSONDecoder()
+          
                 let apiResponse = try JSONDecoder().decode(CurrentThreadResponse.self, from: data)
                 self.latestThreadId = apiResponse.thread_id
             } catch {
@@ -544,19 +541,14 @@ class MessageViewModel: ObservableObject {
     func generateNewThread(userId: String) async {
         let endpoint = "/new_thread"
         
-        let dataToSend: [String: Any] = [
-            "user_id": userId
-        ]
-        
         if let url = URL(string: Urls.baseUrl + endpoint) {
             var request = URLRequest(url: url)
-            request.httpMethod = "POST"
+            request.httpMethod = "GET"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(authViewModel.currentUser?.jwtToken! ?? "none")", forHTTPHeaderField: "Authorization")
             
             do {
-                request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
                 let (data, _) = try await URLSession.shared.data(for: request)
-                
                 // Handle response:
                 let apiResponse = try JSONDecoder().decode(NewThreadResponse.self, from: data)
                 print("Generated new thread with ID \(apiResponse.new_thread_id)")
@@ -571,14 +563,15 @@ class MessageViewModel: ObservableObject {
         let new_thread_id: String
     }
     
-    func getAllDocuments(userId: String) async {
+    func getAllDocuments() async {
         print("---> Fetching docs...")
-        let endpoint = "/get_all_documents/\(userId)"
+        let endpoint = "/get_all_documents"
         
         if let url = URL(string: Urls.baseUrl + endpoint) {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(authViewModel.currentUser?.jwtToken! ?? "none")", forHTTPHeaderField: "Authorization")
             
             do {
                 let (data, _) = try await URLSession.shared.data(for: request)

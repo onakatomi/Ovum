@@ -20,7 +20,6 @@ class AuthViewModel: ObservableObject {
         Task {
             await fetchUser()
             await updateUser()
-            await getToken()
         }
     }
     
@@ -76,7 +75,7 @@ class AuthViewModel: ObservableObject {
             let endpoint = "/create_user"
             
             let dataToSend: [String: Any] = [
-                "user_id": user.id,
+//                "user_id": user.id,
                 "user_object": jsonString!
             ]
             
@@ -84,6 +83,7 @@ class AuthViewModel: ObservableObject {
                 var request = URLRequest(url: url)
                 request.httpMethod = "POST"
                 request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.setValue("Bearer \(currentUser?.jwtToken! ?? "none")", forHTTPHeaderField: "Authorization")
                 
                 do {
                     request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
@@ -137,32 +137,41 @@ class AuthViewModel: ObservableObject {
         var fetched_user: User
     }
     
-    func getToken() async {
-        guard let current = Auth.auth().currentUser else { return } // Return from function if there's no current user; prevents moving to API call below
-        current.getIDTokenForcingRefresh(true) { idToken, error in
-          if let error = error {
-            print("Error getting JWT token.")
-            return;
-          }
-
-          print("Created jwtToken: \(idToken!)")
-          self.currentUser?.jwtToken = idToken
+    func getUserToken() async throws -> String {
+        return try await withCheckedThrowingContinuation { continuation in
+            Auth.auth().currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
+                if let error {
+                    print("FIREBASE: There was an error getting the user token: \(error.localizedDescription)")
+                    continuation.resume(throwing: error)
+                } else {
+                    print("FIREBASE: Got user token")
+                    continuation.resume(returning: idToken!)
+                }
+            }
         }
     }
     
     // Fetches a user object from the backend.
     func fetchUser() async {
-        
-        guard let uid = Auth.auth().currentUser?.uid else { return } // Return from function if there's no current user; prevents moving to API call below.
+        guard let _ = Auth.auth().currentUser?.uid else { return } // Return from function if there's no current user; prevents moving to API call below.
 //        signOut()
 //        return
+        var token: String?
+            do {
+                let actualToken: String? = try await getUserToken()
+                token = actualToken
+            } catch {
+                print(error)
+            }
         
-        let endpoint = "/fetch_user/\(uid)"
+        
+        let endpoint = "/fetch_user"
         
         if let url = URL(string: Urls.baseUrl + endpoint) {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(token!)", forHTTPHeaderField: "Authorization")
             
             do {
 //                request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
@@ -177,8 +186,9 @@ class AuthViewModel: ObservableObject {
                 let decoder = JSONDecoder()
                 let apiResponse = try decoder.decode(fetchUserResponse.self, from: data) // Decode the incoming JSON into a Swift struct
                 self.currentUser = apiResponse.fetched_user
+                self.currentUser?.jwtToken = token
                 
-                print("DEBUG: Current user is \(String(describing: self.currentUser ?? nil))")
+                print("DEBUG: Current user is \(String(describing: self.currentUser?.id ?? nil))")
             } catch {
                 print("GET request for fetching user failed:", error)
             }

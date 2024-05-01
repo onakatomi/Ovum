@@ -85,7 +85,9 @@ class HealthKitManager: ObservableObject {
                             let hours = Int(totalSleepTime / 3600)
                             let minutes = Int((totalSleepTime.truncatingRemainder(dividingBy: 3600)) / 60)
                             let formattedTime = String(format: "%02d:%02d", hours, minutes)
-                            self.sleep = formattedTime
+                            DispatchQueue.main.async {
+                                self.sleep = formattedTime
+                            }
                         } else {
                             print("No sleep data available for last night.")
                         }

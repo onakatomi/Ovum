@@ -27,7 +27,7 @@ struct CaptureImage: View {
                         if let b64_rep {
                             Task {
                                 viewModel.isDocumentUploading = true
-                                let result = await viewModel.analyseDocument(document: b64_rep, userId: authViewModel.currentUser!.id)
+                                let result = await viewModel.analyseDocument(document: b64_rep)
                                 if result == 1 {
                                     docUploadFailed = true
                                 } else {

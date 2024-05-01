@@ -108,10 +108,7 @@ struct ChatDetail: View {
                                             Task {
                                                 viewModel.addSession(isNewSession: isNewSession)
                                                 awaitingResponse = true
-                                                await viewModel.analyseDocument(
-                                                    document: document,
-                                                    userId: authViewModel.currentUser!.id
-                                                )
+                                                let _ = await viewModel.analyseDocument(document: document)
                                                 awaitingResponse = false
                                                 isNewSession = false
                                             }
@@ -163,7 +160,6 @@ struct ChatDetail: View {
                         viewModel.addMessage(message: sentMessage) // Add to conversation session.
                         await viewModel.getOvumResponse(
                             message: textCopy,
-                            authorId: authViewModel.currentUser!.id,
                             authorName: authViewModel.currentUser!.name,
                             isFirstMessageInConversation: viewModel.currentSession.messages.count == 1 ? true : false,
                             appleHealthMetrics: healthKitManager.summariseCurrentData(),
@@ -228,11 +224,11 @@ struct ChatDetail: View {
                     Button("Yes", role: .cancel) {
                         Task {
                             viewModel.isLoading = true
-                            await viewModel.summariseConversation(authorId: authViewModel.currentUser!.id, authorName: authViewModel.currentUser!.name, HKM: healthKitManager)
+                            await viewModel.summariseConversation(authorName: authViewModel.currentUser!.name, HKM: healthKitManager)
                             let finishedSession = await viewModel.endSession(save: true, userId: authViewModel.currentUser!.id)
                             //                            let summary: String = viewModel.currentSession.summary ?? ""
                             await authViewModel.updateUser()
-                            await viewModel.fetchCurrentThread(userId: authViewModel.currentUser!.id)
+                            await viewModel.fetchCurrentThread()
                             viewModel.isLoading = false
                             router.navigateWithinChat(to: .chatComplete(session: finishedSession!)) // Will not be nil here.
                         }

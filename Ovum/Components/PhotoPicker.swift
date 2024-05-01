@@ -20,7 +20,7 @@ struct PhotoPicker: View {
                             let b64_rep = imageToBase64(image!)
                             if let b64_rep {
                                 viewModel.isDocumentUploading = true
-                                await viewModel.analyseDocument(document: b64_rep, userId: authViewModel.currentUser!.id)
+                                let _ = await viewModel.analyseDocument(document: b64_rep)
                                 viewModel.isDocumentUploading = false
                                 isDocSuccessfullyUploaded = true
                             }

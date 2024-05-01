@@ -9,7 +9,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            if (authViewModel.userSession == nil || authViewModel.currentUser?.id == nil) {
+            if (authViewModel.userSession == nil || authViewModel.currentUser?.id == nil || authViewModel.currentUser?.jwtToken == nil) {
                 LoginView()
             } else {
                 // With user's ID, instantiate the main repository.
@@ -19,7 +19,7 @@ struct ContentView: View {
                     .environmentObject(healthKitManager)
             }
             
-            if ((authViewModel.userSession != nil || authViewModel.currentUser?.id != nil) && !authViewModel.isAllUserDataFetched) {
+            if (((authViewModel.userSession != nil || authViewModel.currentUser?.id != nil) && !authViewModel.isAllUserDataFetched)) {
                 SplashScreen()
                     .ignoresSafeArea()
                     .onAppear() {
