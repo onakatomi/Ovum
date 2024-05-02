@@ -79,7 +79,6 @@ struct RecordDetail: View {
                                 typeWriter()
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
-                        
                     }
                 }
                 .padding(.horizontal, 20)
@@ -94,8 +93,8 @@ struct RecordDetail: View {
             }
             .opacity(isDeleting ? 0.5 : 1.0)
             .alert("Are you sure you want to delete this document?", isPresented: $isDeleteAttempted) {
-                VStack {
-                    Button("Delete", role: .destructive) {
+                HStack {
+                    Button("Delete") {
                         Task {
                             isDeleting = true
                             await messageViewModel.deleteDoc(documentId: document.id.uuidString)
@@ -103,7 +102,7 @@ struct RecordDetail: View {
                             dismiss()
                         }
                     }
-                    Button("Cancel", role: .cancel) { }
+                    Button("Cancel") { }
                 }
             }
             
@@ -112,7 +111,7 @@ struct RecordDetail: View {
                     .progressViewStyle(CircularProgressViewStyle(tint: AppColours.maroon))
             }
         }
-            
+        .uxcamTagScreenName("ViewDocumentScreen")
     }
     
     private var closeButton: some View {

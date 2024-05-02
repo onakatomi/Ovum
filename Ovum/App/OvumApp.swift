@@ -14,24 +14,17 @@ struct OvumApp: App {
     init() {
         UXCam.optIntoSchematicRecordings()
         if let UXCamKey = Bundle.main.infoDictionary?["UXCAM_KEY"] as? String {
-            print(UXCamKey)
             let config = UXCamSwiftUI.Configuration(appKey: UXCamKey)
-            config.enableAutomaticScreenNameTagging = true
+            config.enableAutomaticScreenNameTagging = false
             UXCamSwiftUI.start(with: config)
         } else {
-            print("Not reached....")
+            print("UXCam key not found.")
         }
-        
-//        UXCam.optIntoSchematicRecordings()
-//        let config = UXCamSwiftUI.Configuration(appKey: "fcjwoz22b3ns516")
-//        config.enableAutomaticScreenNameTagging = true
-//        UXCamSwiftUI.start(with: config)
         
         if let path = Bundle.main.infoDictionary?["GOOGLE_PLIST_PATH"] as? String {
             print("Using google service plist from \(path)")
             FirebaseApp.configure(options: FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: path, ofType: "plist")!)!)
         }
-//        FirebaseApp.configure()
     }
     
     var body: some Scene {

@@ -59,6 +59,7 @@ struct ChatHistoryDetail: View {
                 .ignoresSafeArea()
         }
         .navigationBarBackButtonHidden(true)
+        .uxcamTagScreenName("ViewChatLogScreen")
     }
 }
 

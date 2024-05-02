@@ -114,6 +114,7 @@ struct TotalChatSummaryView: View {
                     .progressViewStyle(CircularProgressViewStyle(tint: AppColours.maroon))
             }
         }
+        .uxcamTagScreenName("TotalMedicalSummaryScreen")
     }
 }
 

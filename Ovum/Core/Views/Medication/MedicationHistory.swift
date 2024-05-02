@@ -6,9 +6,11 @@ struct MedicationHistory: View {
     @Environment(\.dismiss) private var dismiss
     
     func getHistoryScreenMedications() -> [Medication] {
+        let past = viewModel.pastMedication
         let filteredHistorical = viewModel.pastMedication.filter { medication in
             medication.type == .noLongerTaking ||
-            Date.now <= medication.courseEnd!.addingTimeInterval(-Double((86400*Int(medication.howLongTakingFor!)!)))
+            Date.now > medication.courseEnd! || // Past taken short term medications
+            (medication.howLongTakingFor != "" && medication.howLongTakingFor != nil && Date.now <= medication.courseEnd!.addingTimeInterval(-Double((86400*Int(medication.howLongTakingFor!)!)))) // Future medications
         }
         return filteredHistorical
     }
@@ -64,9 +66,6 @@ struct MedicationHistory: View {
                 VStack(alignment: .leading, spacing: 12) {
                     ForEach(getHistoryScreenMedications()) { pastMedication in
                         MedicationTile(medication: pastMedication)
-//                        NavigationLink(value: ChatNavDestination.chatHistoryDetail(session: chatSession)) {
-//                            ChatTile(chatTile: chatSession)
-//                        }
                     }
                     .animation(.default, value: viewModel.pastMedication)
                 }
@@ -78,6 +77,7 @@ struct MedicationHistory: View {
                 .ignoresSafeArea()
         }
         .navigationBarBackButtonHidden(true)
+        .uxcamTagScreenName("MedicationHistoryScreen")
     }
 }
 

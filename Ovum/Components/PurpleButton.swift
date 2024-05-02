@@ -1,15 +1,8 @@
-//
-//  PurpleButton.swift
-//  Ovum
-//
-//  Created by Ollie Quarm on 13/3/2024.
-//
-
 import SwiftUI
 
 struct PurpleButton: View {
     
-    let image: String
+    var image: String? = nil
     let text: String
     let handler: (() -> Void)
     
@@ -18,7 +11,9 @@ struct PurpleButton: View {
             handler()
         } label: {
             HStack(spacing: 14) {
-                Image(image)
+                if image != nil {
+                    Image(image!)                    
+                }
                 Text(text)
             }
             .frame(maxWidth: .infinity)

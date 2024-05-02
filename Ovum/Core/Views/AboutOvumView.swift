@@ -3,7 +3,6 @@ import SwiftUI
 struct AboutOvumView: View {
     @Environment(\.dismiss) private var dismiss
     var body: some View {
-        
         VStack(alignment: .leading, spacing: 0) {
             HStack {
                 Button {
@@ -112,6 +111,7 @@ struct AboutOvumView: View {
                 .ignoresSafeArea()
         }
         .navigationBarBackButtonHidden(true)
+        .uxcamTagScreenName("AboutOvumScreen")
     }
 }
 

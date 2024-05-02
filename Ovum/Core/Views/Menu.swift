@@ -85,20 +85,19 @@ struct Menu: View {
                             .disabled(viewModel.isNewThreadBeingGenerated)
                     }
                     
-                    Text("Current thread ID: **\(viewModel.latestThreadId)**")
+                    Text("Current thread ID:\n**\(viewModel.latestThreadId)**")
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                    
+                    Text("User ID:\n**\(authViewModel.currentUser?.id ?? "none")**")
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                    
+                    Text("Email: **\(authViewModel.currentUser?.email ?? "none")**")
                         .foregroundColor(.white)
                 }
                 .padding(.vertical, 10)
-                //                Text("Settings")
-                //                    .frame(maxWidth: .infinity, alignment: .leading)
-                //                    .foregroundColor(.white)
-                //                    .font(Font.largeTitle.weight(.bold))
-                //                ThickDivider(color: .white, width: 1, padding: 10)
-//                Spacer()
-                //                PurpleButton(image: "export", text: "Export overview for doctor") {
-                //                    print("TODO")
-                //                }
-                //                .padding(.bottom, 15)
+                
                 TransparentButton(text: "Sign Out", colour: Color(.white)) {
                     router.navigateToRoot(within: .overview)
                     router.navigateToRoot(within: .medication)
@@ -120,6 +119,7 @@ struct Menu: View {
         }
         .ignoresSafeArea()
         .navigationBarBackButtonHidden()
+        .uxcamTagScreenName("MenuScreen")
     }
 }
 

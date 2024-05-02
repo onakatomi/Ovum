@@ -4,7 +4,7 @@ func scheduleAppReminderNotification() {
     // 1. Request permission to display alerts and play sounds.
     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
         if granted {
-            print("Permission already granted")
+            print("Notifications permission already granted")
         } else if let error = error {
             print(error.localizedDescription)
         }
@@ -31,7 +31,7 @@ func scheduleAppReminderNotification() {
         if let error = error {
             print(error.localizedDescription)
         } else {
-            print("Notification scheduled")
+            print("App reminder notification scheduled.")
         }
     }
 }
@@ -40,7 +40,7 @@ func logFirstSymptomNotification() {
     // 1. Request permission to display alerts and play sounds.
     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
         if granted {
-            print("Permission already granted")
+            print("Notifications permission already granted")
         } else if let error = error {
             print(error.localizedDescription)
         }
@@ -64,7 +64,7 @@ func logFirstSymptomNotification() {
         if let error = error {
             print(error.localizedDescription)
         } else {
-            print("Notification scheduled")
+            print("Log first notification scheduled.")
         }
     }
 }

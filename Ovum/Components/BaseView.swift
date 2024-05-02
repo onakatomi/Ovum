@@ -113,12 +113,16 @@ struct BaseView: View {
                     switch (type) {
                     case BaseViewType.overview:
                         OverviewHomeContent()
+                            .uxcamTagScreenName("OverviewScreen")
                     case BaseViewType.chat:
                         ChatHomeContent()
+                            .uxcamTagScreenName("ChatHomeScreen")
                     case BaseViewType.medication:
                         MedicationHomeContent()
+                            .uxcamTagScreenName("MedicationsHomeScreen")
                     case BaseViewType.documents:
                         RecordsHomeContent()
+                            .uxcamTagScreenName("DocumentsHomeScreen")
                     }
                 }
             }

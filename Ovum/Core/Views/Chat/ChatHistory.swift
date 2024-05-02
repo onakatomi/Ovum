@@ -76,6 +76,7 @@ struct ChatHistory: View {
                 }
             }
         }
+        .uxcamTagScreenName("ChatHistory")
         .padding(.horizontal, 20)
         .background {
             AppColours.brown

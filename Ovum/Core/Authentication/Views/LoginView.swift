@@ -58,7 +58,7 @@ struct LoginView: View {
                             
                             // Don't need value based setup here -- not clicking on object we destination for. View depricated but Link is not. We're just going from one place to another.
                             VStack {
-                                PurpleButton(image: "upload", text: "Sign In") {
+                                PurpleButton(text: "Sign In") {
                                     Task {
                                         focusField = false
                                         isSigningIn = true
@@ -122,6 +122,7 @@ struct LoginView: View {
                         .progressViewStyle(CircularProgressViewStyle(tint: AppColours.mint))
                 }
             }
+            .uxcamTagScreenName("SignIn")
         }
     }
 }

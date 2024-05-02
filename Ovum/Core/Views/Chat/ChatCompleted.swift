@@ -56,7 +56,7 @@ struct ChatCompleted: View {
             }
             .foregroundColor(AppColours.maroon)
             Spacer()
-            PurpleButton(image: "upload", text: "Continue") {
+            PurpleButton(text: "Continue") {
                 router.navigateToRoot(within: .chat)
             }
             .frame(width: UIScreen.main.bounds.width - 32)

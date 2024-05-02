@@ -19,7 +19,7 @@ class MessageViewModel: ObservableObject {
     var authViewModel: AuthViewModel
     
     init(userId: String, authViewModelPassedIn: AuthViewModel) {
-        print("---> init starting...")
+        print("---> MWM init starting...")
         messages = []
         chatSessions = []
         documents = []
@@ -35,7 +35,6 @@ class MessageViewModel: ObservableObject {
         Task {
             await fetchCurrentThread()
         }
-        print("---> init finishing...")
     }
     
     func addMessage(message: Message) {
@@ -162,7 +161,7 @@ class MessageViewModel: ObservableObject {
     ///   - userId: The user to fetch.
     /// - Returns: Nothing.
     func getAllChatSessions() async {
-        print("---> Fetching chat sessions...")
+        print("\n---> Fetching chat sessions:")
         let endpoint = "/get_all_sessions"
         
         if let url = URL(string: Urls.baseUrl + endpoint) {
@@ -197,7 +196,7 @@ class MessageViewModel: ObservableObject {
     }
     
     func getAllMedications() async {
-        print("---> Fetching medications...")
+        print("\n---> Fetching medications:")
         let endpoint = "/get_all_medications"
         
         if let url = URL(string: Urls.baseUrl + endpoint) {
@@ -598,7 +597,7 @@ class MessageViewModel: ObservableObject {
     }
     
     func getAllDocuments() async {
-        print("---> Fetching docs...")
+        print("\n---> Fetching docs:")
         let endpoint = "/get_all_documents"
         
         if let url = URL(string: Urls.baseUrl + endpoint) {
@@ -643,7 +642,7 @@ class MessageViewModel: ObservableObject {
                     }.resume()
                 }
                 group.notify(queue: DispatchQueue.main) {
-                    print("All things fetched")
+                    print("\n---> ALL THINGS FETCHED, STARTUP NOW FINISHED.")
                     withAnimation {
                         self.areDocumentsLoaded = true
                     }

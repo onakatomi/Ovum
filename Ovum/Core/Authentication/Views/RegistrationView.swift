@@ -210,7 +210,7 @@ struct RegistrationView: View {
                         Spacer()
                         
                         VStack(spacing: 10) {
-                            PurpleButton(image: "upload", text: "Sign Up") {
+                            PurpleButton(text: "Sign Up") {
                                 Task {
                                     focusField = false
                                     isCreatingUser = true
@@ -264,6 +264,7 @@ struct RegistrationView: View {
                     .progressViewStyle(CircularProgressViewStyle(tint: AppColours.mint))
             }
         }
+        .uxcamTagScreenName("Registration")
     }
 }
 

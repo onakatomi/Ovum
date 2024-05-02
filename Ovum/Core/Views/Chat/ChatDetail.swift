@@ -21,7 +21,6 @@ struct ChatDetail: View {
     @State var isExitAttempted = false
     
     var body: some View {
-        
         ZStack(alignment: .top) {
             Rectangle()
             ZStack(alignment: .top) {
@@ -240,7 +239,7 @@ struct ChatDetail: View {
         }
         .ignoresSafeArea(.all, edges: Edge.Set(Edge.top))
         .ignoresSafeArea(.container, edges: Edge.Set(Edge.bottom))
-//        .ignoresSafeArea(.ke)
+        .uxcamTagScreenName("ChatWithOvumScreen")
     }
 }
 

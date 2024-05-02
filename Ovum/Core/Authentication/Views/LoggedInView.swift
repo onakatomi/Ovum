@@ -156,7 +156,7 @@ struct LoggedInView: View {
                         }
                     }
                 }
-                print("exited")
+//                print("exited")
                 
                 // Make sure the new value is persisted.
                 router.selectedTab = selectedTab

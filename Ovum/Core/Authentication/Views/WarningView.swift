@@ -54,7 +54,7 @@ struct WarningView: View {
                 
                 Spacer()
 
-                PurpleButton(image: "upload", text: "Next") {
+                PurpleButton(text: "Next") {
                     Task {
                         authViewModel.currentUser?.warningAccepted = true
                     }
@@ -64,6 +64,7 @@ struct WarningView: View {
             .padding(.top, 30)
             .padding(.horizontal, 20)
         }
+        .uxcamTagScreenName("WarningScreen")
     }
 }
 

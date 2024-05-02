@@ -291,6 +291,7 @@ struct MedicationFormView: View {
                     .progressViewStyle(CircularProgressViewStyle(tint: AppColours.maroon))
             }
         }
+        .uxcamTagScreenName("EditMedicationScreen")
     }
     
     func returnDays(numberAsString: String?, unit: ConsumptionLength) -> Int? {

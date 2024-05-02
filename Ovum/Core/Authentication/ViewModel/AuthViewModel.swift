@@ -43,13 +43,10 @@ class AuthViewModel: ObservableObject {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password) // Atempt to create user; await result
             self.userSession = result.user // Set userSession property with new user
-            let user = User(id: result.user.uid, email: email, name: name, warningAccepted: false, onboardingInfo: nil, tokenUsage: 0) // Create OUR user object
+            var user = User(id: result.user.uid, email: email, name: name, warningAccepted: false, onboardingInfo: nil, tokenUsage: 0) // Create OUR user object
+            user.jwtToken = try await getUserToken()
             
-//            let encodedUser = try Firestore.Encoder().encode(user) // Encode this object
-            // There's a collection of users, which contains documents of user ids. Each document id maps to a user object. setData sets this map to the id.
-//            try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser) // Upload this to Firebase
-
-            await setUser(user: user)
+            await setUser(user: user, creatingNewUser: true)
             await fetchUser() // Fetch data we just uploaded to Firebase.
         } catch AuthErrorCode.emailAlreadyInUse {
             return ErrorMessages.emailTaken
@@ -66,7 +63,7 @@ class AuthViewModel: ObservableObject {
     }
     
     // Used to either create a fresh user in the backend, or update a user in the backend.
-    func setUser(user: User) async {
+    func setUser(user: User, creatingNewUser: Bool) async {
         do {
             let jsonEncoder = JSONEncoder()
             let jsonResultData = try jsonEncoder.encode(user)
@@ -83,7 +80,7 @@ class AuthViewModel: ObservableObject {
                 var request = URLRequest(url: url)
                 request.httpMethod = "POST"
                 request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                request.setValue("Bearer \(currentUser?.jwtToken! ?? "none")", forHTTPHeaderField: "Authorization")
+                request.setValue("Bearer \(creatingNewUser ? user.jwtToken! : currentUser?.jwtToken! ?? "none")", forHTTPHeaderField: "Authorization")
                 
                 do {
                     request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
@@ -129,7 +126,7 @@ class AuthViewModel: ObservableObject {
             currentUser?.tokenUsage = 0
         }
         
-        await setUser(user: currentUser!)
+        await setUser(user: currentUser!, creatingNewUser: false)
         await fetchUser()
     }
     
@@ -144,7 +141,7 @@ class AuthViewModel: ObservableObject {
                     print("FIREBASE: There was an error getting the user token: \(error.localizedDescription)")
                     continuation.resume(throwing: error)
                 } else {
-                    print("FIREBASE: Got user token")
+                    print("FIREBASE: Successfully got new user ID token.")
                     continuation.resume(returning: idToken!)
                 }
             }
@@ -177,7 +174,7 @@ class AuthViewModel: ObservableObject {
 //                request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
                 let (data, response) = try await URLSession.shared.data(for: request)
                 let http = response as! HTTPURLResponse
-                print("did fetch user, status: \(http.statusCode), count: \(data.count)")
+                print("Fetched user with status: \(http.statusCode)")
                 if http.statusCode == 404 {
                     print("404 fetch user")
                     return
@@ -188,7 +185,7 @@ class AuthViewModel: ObservableObject {
                 self.currentUser = apiResponse.fetched_user
                 self.currentUser?.jwtToken = token
                 
-                print("DEBUG: Current user is \(String(describing: self.currentUser?.id ?? nil))")
+                print("-> Current user is \(self.currentUser?.id ?? "none"), \(self.currentUser?.email ?? "none")")
             } catch {
                 print("GET request for fetching user failed:", error)
             }

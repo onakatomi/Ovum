@@ -12,6 +12,10 @@ struct SplashScreen: View {
                     .font(.custom(AppFonts.haasGrot, size: 64))
                     .fontWeight(.bold)
                     .foregroundColor(.white)
+                Text("Pilot")
+                    .font(.custom(AppFonts.testDomaine, size: 23))
+                    .italic()
+                    .foregroundColor(.white)
             }
         }
     }

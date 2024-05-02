@@ -147,7 +147,7 @@ struct OnboardingView: View {
                         let sentMessage = Message(author: authViewModel.currentUser!.id, fromOvum: false, content: textCopy) // Construct message model.
                         ovm.onboardingMessages.append(sentMessage)
                         
-                        let tokenUsage = await ovm.getOnboardingResponse(message: textCopy, authorId: authViewModel.currentUser!.id, authorName: authViewModel.currentUser!.name, isFirstMessageInConversation: ovm.onboardingMessages.count == 1 ? true : false) // Get Ovum's response.
+                        let tokenUsage = await ovm.getOnboardingResponse(message: textCopy, token: authViewModel.currentUser!.jwtToken!, authorName: authViewModel.currentUser!.name, isFirstMessageInConversation: ovm.onboardingMessages.count == 1 ? true : false) // Get Ovum's response.
                         authViewModel.currentUser?.tokenUsage! += tokenUsage
                         awaitingResponse = false
                     }
