@@ -17,7 +17,11 @@ struct TotalChatSummaryView: View {
         viewModel.chatSessions.sorted(by: {
             convertToDate(dateString: $0.date)!.compare(convertToDate(dateString: $1.date)!) == .orderedAscending
         }).map {
-            $0.summary!
+            if ($0.summary != nil) {
+                $0.summary!
+            } else {
+                "No summary for this chat session."
+            }
         }
     }
     

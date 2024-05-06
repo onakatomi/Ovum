@@ -37,6 +37,7 @@ enum DateFormats {
     case basic
     case elegant
     case noTime
+    case overview
 }
 
 func stripDateString(dateString: String, format: DateFormats) -> String {
@@ -55,6 +56,8 @@ func stripDateString(dateString: String, format: DateFormats) -> String {
             formatter.dateFormat = "dd/MM/yy"
         case .elegant:
             formatter.dateFormat = "d MMM yyyy h:mm a"
+        case .overview:
+            formatter.dateFormat = "dd MMM yyyy"
         }
         return formatter
     }()

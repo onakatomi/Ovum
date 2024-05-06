@@ -2,6 +2,7 @@ import SwiftUI
 
 struct Menu: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.openURL) var openURL
     @EnvironmentObject var router: Router
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var viewModel: MessageViewModel
@@ -17,7 +18,9 @@ struct Menu: View {
                     Image("add_button_white")
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
+                
                 Spacer()
+                
                 Button {
                     //                    dismiss()
                     router.navigateBack(within: router.selectedTab)
@@ -32,42 +35,27 @@ struct Menu: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 ThickDivider(color: .white, width: 1, padding: 10)
-                //                Text("Research and Studies")
-                //                    .foregroundColor(.white)
-                //                    .font(Font.largeTitle.weight(.bold))
-                //                    .frame(maxWidth: .infinity, alignment: .leading)
-                //                ThickDivider(color: .white, width: 1, padding: 10)
+                
                 NavigationLink (destination: TotalChatSummaryView()) { // Hide tabbar whilst in MenuScreen.
                     Text("Medical Summary")
                         .foregroundColor(.white)
                         .font(Font.largeTitle.weight(.bold))
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                //                NavigationLink {
-                //
-                //                } label: {
-                //                    Text("About Ovum")
-                //                        .foregroundColor(.white)
-                //                        .font(Font.largeTitle.weight(.bold))
-                //                        .frame(maxWidth: .infinity, alignment: .leading)                                    }
-                
                 ThickDivider(color: .white, width: 1, padding: 10)
-                NavigationLink (destination: AboutOvumView()) { // Hide tabbar whilst in MenuScreen.
+                
+                Button {
+                    openURL(URL(string: "https://www.ovum-ai.com.au/about")!)
+                } label: {
                     Text("About Ovum")
                         .foregroundColor(.white)
                         .font(Font.largeTitle.weight(.bold))
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                //                NavigationLink {
-                //
-                //                } label: {
-                //                    Text("About Ovum")
-                //                        .foregroundColor(.white)
-                //                        .font(Font.largeTitle.weight(.bold))
-                //                        .frame(maxWidth: .infinity, alignment: .leading)                                    }
-                
                 ThickDivider(color: .white, width: 1, padding: 10)
+                
                 Spacer()
+                
                 VStack(alignment: .center, spacing: 10) {
                     Button {
                         Task {
@@ -107,11 +95,16 @@ struct Menu: View {
                     authViewModel.signOut()
                 }
                 .padding(.bottom, 30)
-                SecondaryButton(text: "Privacy Policy") {
-                    print("TODO")
-                }
-                SecondaryButton(text: "Terms of Use") {
-                    print("TODO")
+                VStack(alignment: .center, spacing: 10) {
+                    SecondaryButton(text: "Need help?") {
+                        openURL(URL(string: "https://c5rxwa4obav.typeform.com/to/AvYgfWTO")!)
+                    }
+                    SecondaryButton(text: "Privacy Policy") {
+                        openURL(URL(string: "https://www.ovum-ai.com.au/privacy-policy")!)
+                    }
+                    SecondaryButton(text: "Terms of Use") {
+                        openURL(URL(string: "https://www.ovum-ai.com.au/terms-of-use")!)
+                    }
                 }
             }
             .padding(.horizontal, 20)

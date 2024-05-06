@@ -451,6 +451,10 @@ class MessageViewModel: ObservableObject {
             
             do {
                 request.httpBody = try JSONSerialization.data(withJSONObject: dataToSend)
+                
+                let dataSize = request.httpBody!.count // Size in bytes
+                print("Data size: \(dataSize) bytes")
+                
                 let (data, response) = try await URLSession.shared.data(for: request)
                 let http = response as! HTTPURLResponse
                 print("did fetch, status: \(http.statusCode), count: \(data.count)")

@@ -21,6 +21,7 @@ struct RegistrationView: View {
     @FocusState private var focusField: Bool
     @ObservedObject private var keyboard = KeyboardResponder()
     @EnvironmentObject var authViewModel: AuthViewModel
+    @Environment(\.openURL) var openURL
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -195,6 +196,13 @@ struct RegistrationView: View {
                         Toggle(isOn: $isChecked) {
                             HStack {
                                 Text("I have read and agree to the ")  +
+//                                Button {
+//                                    openURL(URL(string: "https://www.ovum-ai.com.au/")!)
+//                                } label: {
+//                                    Text("Terms and Conditions")
+//                                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+//                                        .underline()
+//                                }
                                 Text("Terms and Conditions").underline().fontWeight(.bold) +
                                 Text(" & ") +
                                 Text("Privacy Policy").underline().fontWeight(.bold)

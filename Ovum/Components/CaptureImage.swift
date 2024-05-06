@@ -20,7 +20,7 @@ struct CaptureImage: View {
                         .ignoresSafeArea()
                 }
             
-            if let selectedImage{
+            if let selectedImage {
                 HStack {}
                     .onAppear {
                         let b64_rep = imageToBase64(selectedImage)
@@ -87,8 +87,29 @@ class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerContro
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let selectedImage = info[.originalImage] as? UIImage else { return }
+        guard var selectedImage = info[.originalImage] as? UIImage else { return }
+        selectedImage = compressImage(image: selectedImage)
         self.picker.selectedImage = selectedImage
         self.picker.isPresented.wrappedValue.dismiss()
     }
+}
+
+extension UIImage {
+    func aspectFittedToHeight(_ newHeight: CGFloat) -> UIImage {
+        let scale = newHeight / self.size.height
+        let newWidth = self.size.width * scale
+        let newSize = CGSize(width: newWidth, height: newHeight)
+        let renderer = UIGraphicsImageRenderer(size: newSize)
+
+        return renderer.image { _ in
+            self.draw(in: CGRect(origin: .zero, size: newSize))
+        }
+    }
+}
+
+func compressImage(image: UIImage) -> UIImage {
+        let resizedImage = image.aspectFittedToHeight(300)
+        resizedImage.jpegData(compressionQuality: 0.7) // Add this line
+
+        return resizedImage
 }

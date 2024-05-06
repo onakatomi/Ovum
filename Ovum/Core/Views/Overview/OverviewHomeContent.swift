@@ -159,7 +159,7 @@ struct OverviewHomeContent: View {
                     feedbackGenerator.impactOccurred()
                 }
                 HStack {
-                    Text(stripDateString(dateString: orderedChatSessions[0].date, format: .basic))
+                    Text(stripDateString(dateString: orderedChatSessions[0].date, format: .overview))
                     Spacer()
                     Text("Today")
                 }
