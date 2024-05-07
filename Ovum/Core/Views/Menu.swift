@@ -54,6 +54,16 @@ struct Menu: View {
                 }
                 ThickDivider(color: .white, width: 1, padding: 10)
                 
+                Button {
+                    openURL(URL(string: "https://c5rxwa4obav.typeform.com/to/AvYgfWTO")!)
+                } label: {
+                    Text("Need Help?")
+                        .foregroundColor(.white)
+                        .font(Font.largeTitle.weight(.bold))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                ThickDivider(color: .white, width: 1, padding: 10)
+                
                 Spacer()
                 
                 VStack(alignment: .center, spacing: 10) {
@@ -91,14 +101,10 @@ struct Menu: View {
                     router.navigateToRoot(within: .medication)
                     router.navigateToRoot(within: .chat)
                     router.navigateToRoot(within: .records)
-                    //                    print("Signing Out")
                     authViewModel.signOut()
                 }
                 .padding(.bottom, 30)
                 VStack(alignment: .center, spacing: 10) {
-                    SecondaryButton(text: "Need help?") {
-                        openURL(URL(string: "https://c5rxwa4obav.typeform.com/to/AvYgfWTO")!)
-                    }
                     SecondaryButton(text: "Privacy Policy") {
                         openURL(URL(string: "https://www.ovum-ai.com.au/privacy-policy")!)
                     }

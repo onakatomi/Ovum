@@ -17,6 +17,7 @@ struct PhotoPicker: View {
                     Task {
                         if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
                             image = UIImage(data: data)
+                            image = compressImage(image: image!)
                             let b64_rep = imageToBase64(image!)
                             if let b64_rep {
                                 viewModel.isDocumentUploading = true
