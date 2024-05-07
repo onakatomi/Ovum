@@ -71,8 +71,8 @@ class MessageViewModel: ObservableObject {
     }
     
     func endSession(save: Bool = true, userId: String) async -> ChatSession? {
+        let indexOfSession: Int? = chatSessions.firstIndex(where: {$0.id == currentSession.id})
         if (save == true) {
-            let indexOfSession: Int? = chatSessions.firstIndex(where: {$0.id == currentSession.id})
             currentSession.messages.insert(Message(author: "Ovum", fromOvum: true, content: "Hi \(authViewModel.currentUser!.name). What symptoms are you experiencing at the moment?"), at: 0)
             if let indexOfSession {
                 chatSessions[indexOfSession] = currentSession
@@ -89,8 +89,10 @@ class MessageViewModel: ObservableObject {
                 currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], severities: [], title: "Placeholder2", date: getDateAsString(date: Date.now), colour: Color(.red))
                 return chatSessions[indexOfSession]
             }
+        } else {
+            self.chatSessions.remove(at: indexOfSession!)
+            currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], severities: [], title: "Placeholder3", date: getDateAsString(date: Date.now), colour: Color(.red))
         }
-        currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], severities: [], title: "Placeholder2", date: getDateAsString(date: Date.now), colour: Color(.red))
         return nil
     }
     

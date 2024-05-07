@@ -85,7 +85,6 @@ struct OverviewHomeContent: View {
     
     var body: some View {
         VStack {
-            
             if orderedChatSessions.count > 0 {
                 HStack {
                     Text(splitDateTime(datetimeString: stripDateString(dateString: orderedChatSessions[Int(sliderValue)].date, format: .elegant),

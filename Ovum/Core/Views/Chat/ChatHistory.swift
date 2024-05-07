@@ -4,13 +4,10 @@ struct ChatHistory: View {
     @EnvironmentObject var viewModel: MessageViewModel
     @EnvironmentObject var router: Router
     @State private var searchText: String = ""
+    @State var orderedChatSessions: [ChatSession] = []
     @Environment(\.dismiss) private var dismiss
     
-    var filteredSessions: [ChatSession] {
-        let orderedChatSessions: [ChatSession] = viewModel.chatSessions.sorted(by: {
-                convertToDate(dateString: $0.date)!.compare(convertToDate(dateString: $1.date)!) == .orderedDescending
-            })
-        
+    var filteredSessions: [ChatSession] {        
         if (searchText == "") {
             return orderedChatSessions
         } else {
@@ -83,6 +80,11 @@ struct ChatHistory: View {
                 .ignoresSafeArea()
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            orderedChatSessions = viewModel.chatSessions.sorted(by: {
+                convertToDate(dateString: $0.date)!.compare(convertToDate(dateString: $1.date)!) == .orderedDescending
+            })
+        }
     }
 }
 
