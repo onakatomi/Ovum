@@ -164,7 +164,7 @@ class HealthKitManager: ObservableObject {
             
             // We only proceed if we have a recording for today.
             let timestamp = lastDataPoint.endDate
-            let string = getDateAsString(date: timestamp)
+            let _ = getDateAsString(date: timestamp)
             let isMetricRecordedToday: Bool = Calendar.current.isDateInToday(timestamp)
             if (!isMetricRecordedToday) {
                 return nil
@@ -230,8 +230,8 @@ class HealthKitManager: ObservableObject {
             // We only proceed if we have a recording for today.
             let timestamp2 = lastDataPoint.startDate
             let timestamp = lastDataPoint.endDate
-            let string2 = getDateAsString(date: timestamp2)
-            let string = getDateAsString(date: timestamp)
+            let _ = getDateAsString(date: timestamp2)
+            let _ = getDateAsString(date: timestamp)
             let isMetricRecordedToday: Bool = Calendar.current.isDateInToday(timestamp)
             if (!isMetricRecordedToday) {
                 return nil
@@ -322,7 +322,7 @@ class HealthKitManager: ObservableObject {
             
             // We only proceed if we have a recording for today.
             let timestamp = lastDataPoint.startDate
-            let string = getDateAsString(date: timestamp)
+            let _ = getDateAsString(date: timestamp)
             let isMetricRecordedToday: Bool = Calendar.current.isDateInToday(timestamp)
             if (!isMetricRecordedToday) {
                 return nil

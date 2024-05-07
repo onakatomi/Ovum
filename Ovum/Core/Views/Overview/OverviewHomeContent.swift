@@ -80,13 +80,8 @@ struct OverviewHomeContent: View {
     @State var imageSize: CGSize = .zero
     @State var showSymptomTray = false
     @State var currentlySelectedIndex = 0
+    @State var orderedChatSessions: [ChatSession] = []
     private let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
-    
-    var orderedChatSessions: [ChatSession] {
-        viewModel.chatSessions.sorted(by: {
-            convertToDate(dateString: $0.date)!.compare(convertToDate(dateString: $1.date)!) == .orderedAscending
-        })
-    }
     
     var body: some View {
         VStack {
@@ -115,6 +110,7 @@ struct OverviewHomeContent: View {
                     .scaledToFit()
                     .padding(.all, 25)
                     .background(rectReader()) // Get displayed image size.
+                
                 if orderedChatSessions.count > 0 {
                     ZStack {
                         ForEach(Array(orderedChatSessions[Int(sliderValue)].bodyParts.enumerated()), id: \.offset) { index, bodyPart in
@@ -141,10 +137,10 @@ struct OverviewHomeContent: View {
                 }
             }
             
-            if (viewModel.chatSessions.count >= 2) {
+            if (orderedChatSessions.count >= 2) {
                 Slider(
                     value: $sliderValue,
-                    in: 0...(Double(viewModel.chatSessions.count) - 1),
+                    in: 0...(Double(orderedChatSessions.count) - 1),
                     step: 1,
                     onEditingChanged: { editing in
                         isEditing = editing
@@ -166,11 +162,11 @@ struct OverviewHomeContent: View {
                 .fontWeight(.bold)
                 .foregroundColor(AppColours.maroon)
                 .onAppear() {
-                    sliderValue = Double(viewModel.chatSessions.count - 1)
+                    sliderValue = Double(orderedChatSessions.count - 1)
                 }
             }
             
-            if (viewModel.chatSessions.count == 0) {
+            if (orderedChatSessions.count == 0) {
                 Text("*Record your first chat session to visualise your symptoms*")
                     .font(.caption)
                     .foregroundColor(AppColours.maroon)
@@ -179,6 +175,11 @@ struct OverviewHomeContent: View {
             Spacer()
         }
         .padding(.all, 20)
+        .onAppear {
+            orderedChatSessions = viewModel.chatSessions.sorted(by: {
+                convertToDate(dateString: $0.date)!.compare(convertToDate(dateString: $1.date)!) == .orderedAscending
+            })
+        }
     }
     
     private func rectReader() -> some View {

@@ -72,6 +72,7 @@ struct RegistrationView: View {
                                             }
                                         }
                                     }
+                                
                                 if (!email.isEmpty) {
                                     if (email.count > 0 && !isValidEmail(email)) {
                                         Image(systemName: "xmark.circle.fill")
@@ -138,6 +139,7 @@ struct RegistrationView: View {
                                     }
                                 }
                             }
+                            
                             ZStack(alignment: .trailing) {
                                 InputView(text: $confirmPassword, title: "Confirm Password", placeholder: "Confirm your password", isSecureField: true, fieldIsFocused: $focusField)
                                 if !password.isEmpty && !confirmPassword.isEmpty {
@@ -195,22 +197,13 @@ struct RegistrationView: View {
                         
                         Toggle(isOn: $isChecked) {
                             HStack {
-                                Text("I have read and agree to the ")  +
-//                                Button {
-//                                    openURL(URL(string: "https://www.ovum-ai.com.au/")!)
-//                                } label: {
-//                                    Text("Terms and Conditions")
-//                                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-//                                        .underline()
-//                                }
-                                Text("Terms and Conditions").underline().fontWeight(.bold) +
-                                Text(" & ") +
-                                Text("Privacy Policy").underline().fontWeight(.bold)
+                                Text("I have read and agree to the \(Text("[Terms and Conditions](https://www.ovum-ai.com.au/terms-of-use)").underline().fontWeight(.bold)) & \(Text("[Privacy Policy](https://www.ovum-ai.com.au/privacy-policy)").underline().fontWeight(.bold))")
+                                        .accentColor(.white)
+                                        .font(Font.custom("Haas Grot Disp Trial", size: 16))
+                                        .kerning(0.32)
+                                        .foregroundColor(Color(red: 0.98, green: 0.96, blue: 0.92))
+                                        .multilineTextAlignment(.leading)
                             }
-                            .font(Font.custom("Haas Grot Disp Trial", size: 16))
-                            .kerning(0.32)
-                            .foregroundColor(Color(red: 0.98, green: 0.96, blue: 0.92))
-                            .multilineTextAlignment(.leading)
                         }
                         .toggleStyle(iOSCheckboxToggleStyle())
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -273,6 +266,11 @@ struct RegistrationView: View {
             }
         }
         .uxcamTagScreenName("Registration")
+    }
+    
+    private func openTermsAndConditions() {
+        guard let url = URL(string: "https://www.example.com/terms") else { return }
+        UIApplication.shared.open(url)
     }
 }
 

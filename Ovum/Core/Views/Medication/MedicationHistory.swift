@@ -6,7 +6,6 @@ struct MedicationHistory: View {
     @Environment(\.dismiss) private var dismiss
     
     func getHistoryScreenMedications() -> [Medication] {
-        let past = viewModel.pastMedication
         let filteredHistorical = viewModel.pastMedication.filter { medication in
             medication.type == .noLongerTaking ||
             Date.now > medication.courseEnd! || // Past taken short term medications
