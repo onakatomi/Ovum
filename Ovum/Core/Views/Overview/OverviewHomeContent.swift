@@ -140,15 +140,7 @@ struct OverviewHomeContent: View {
                 Slider(
                     value: $sliderValue,
                     in: 0...(Double(orderedChatSessions.count) - 1),
-                    step: 1,
-                    onEditingChanged: { editing in
-                        isEditing = editing
-                        if editing {
-                            self.feedbackGenerator.prepare()
-                        } else {
-                            self.feedbackGenerator.impactOccurred()
-                        }
-                    }
+                    step: 1
                 )
                 .onChange(of: sliderValue) {
                     feedbackGenerator.impactOccurred()

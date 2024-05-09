@@ -206,9 +206,11 @@ struct ChatDetail: View {
                 VStack {
                     Button("Exit", role: .destructive) {
                         Task {
+                            viewModel.isLoading = true
                             let _ = await viewModel.endSession(save: false, userId: authViewModel.currentUser!.id)
 //                            await viewModel.fetchCurrentThread(userId: authViewModel.currentUser!.id)
                             await authViewModel.updateUser()
+                            viewModel.isLoading = false
                             dismiss()
                         }
                     }
@@ -236,6 +238,9 @@ struct ChatDetail: View {
             } message: {
                 Text("This conversation will end and a summary will be saved to your Ovum health record.")
             }
+        }
+        .onAppear {
+            healthKitManager.requestAuthorization()
         }
         .ignoresSafeArea(.all, edges: Edge.Set(Edge.top))
         .ignoresSafeArea(.container, edges: Edge.Set(Edge.bottom))

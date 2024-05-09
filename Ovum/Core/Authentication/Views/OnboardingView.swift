@@ -124,10 +124,10 @@ struct OnboardingView: View {
                                     .font(.subheadline)
                                     .padding(10)
                                     .background(AppColours.green)
-                                    .opacity(ovm.onboardingMessages.count < 2 ? 0.5 : 1.0)
+                                    .opacity(ovm.onboardingMessages.count < 16 ? 0.5 : 1.0)
                                     .cornerRadius(6)
                             }
-                            .disabled(ovm.onboardingMessages.count < 2 || ovm.isLoading)
+                            .disabled(ovm.onboardingMessages.count < 16 || ovm.isLoading)
                         }
                         .padding(.top, 3)
                         .padding(.bottom, 20)

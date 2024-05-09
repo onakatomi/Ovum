@@ -21,9 +21,27 @@ struct AppFonts {
 }
 
 struct Urls {
-    static let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app" // Dev URL
+//    static let baseUrl = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app" // Dev URL
 //    static let baseUrl = "https://ovumendpoints-de6mwfd5oa-uc.a.run.app" // Prod URL
 //    static let baseUrl = "http://192.168.89.21:5002"
+        
+    static var baseUrl: String {
+        if let baseUrl = Bundle.main.infoDictionary?["API_URL"] as? String {
+            print("Using API URL: \(baseUrl)")
+            return baseUrl
+        }
+        print("ERROR: No API URL set.")
+        return ""
+    }
+}
+
+struct AppCheck {
+    static var isInternal: Bool {
+        if let s = Bundle.main.infoDictionary?["INTERNAL"] as? String {
+            return !s.isEmpty
+        }
+        return false
+    }
 }
 
 enum MyError: Error {

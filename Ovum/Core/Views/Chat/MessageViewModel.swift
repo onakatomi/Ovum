@@ -31,8 +31,7 @@ class MessageViewModel: ObservableObject {
             await getAllChatSessions()
             await getAllMedications()
             await getAllDocuments()
-        }
-        Task {
+            await generateNewThread(userId: authViewModel.currentUser!.id)
             await fetchCurrentThread()
         }
     }
@@ -89,7 +88,7 @@ class MessageViewModel: ObservableObject {
                 currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], severities: [], title: "Placeholder2", date: getDateAsString(date: Date.now), colour: Color(.red))
                 return chatSessions[indexOfSession]
             }
-        } else {
+        } else if (save == false && indexOfSession != nil) {
             self.chatSessions.remove(at: indexOfSession!)
             currentSession = ChatSession(messages: [], bodyParts: [], symptoms: [], severities: [], title: "Placeholder3", date: getDateAsString(date: Date.now), colour: Color(.red))
         }

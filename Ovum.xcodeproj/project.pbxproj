@@ -29,7 +29,6 @@
 		B24694232BA1336B00286A75 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694222BA1336B00286A75 /* ProfileView.swift */; };
 		B24694252BA134B500286A75 /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694242BA134B500286A75 /* SettingsRowView.swift */; };
 		B24694272BA1360600286A75 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24694262BA1360600286A75 /* User.swift */; };
-		B24694292BA139CF00286A75 /* GoogleService-Info-Dev-old.plist in Resources */ = {isa = PBXBuildFile; fileRef = B24694282BA139CF00286A75 /* GoogleService-Info-Dev-old.plist */; };
 		B24694382BA13B7000286A75 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B24694372BA13B7000286A75 /* FirebaseAuth */; };
 		B24694442BA13B7000286A75 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B24694432BA13B7000286A75 /* FirebaseFirestore */; };
 		B246945E2BA13B7000286A75 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B246945D2BA13B7000286A75 /* FirebaseStorage */; };
@@ -56,6 +55,7 @@
 		B25D75572BC7A31E00A8E2A4 /* thing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25D75562BC7A31E00A8E2A4 /* thing.swift */; };
 		B25D75592BC8C92700A8E2A4 /* CheckboxToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25D75582BC8C92700A8E2A4 /* CheckboxToggle.swift */; };
 		B26AA7952BD1E61000C1FE2E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B26AA7942BD1E61000C1FE2E /* PrivacyInfo.xcprivacy */; };
+		B28D8E552BEC4A4100482F22 /* DebugScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28D8E542BEC4A4100482F22 /* DebugScreen.swift */; };
 		B29E099E2BDB265500B9EAE7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B29E099D2BDB265500B9EAE7 /* GoogleService-Info.plist */; };
 		B2D6A3A22B8EFEF80045CCD1 /* OvumApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */; };
 		B2D6A3A42B8EFEF80045CCD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D6A3A32B8EFEF80045CCD1 /* ContentView.swift */; };
@@ -123,7 +123,6 @@
 		B24694222BA1336B00286A75 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B24694242BA134B500286A75 /* SettingsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
 		B24694262BA1360600286A75 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		B24694282BA139CF00286A75 /* GoogleService-Info-Dev-old.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev-old.plist"; sourceTree = SOURCE_ROOT; };
 		B24694662BA13C7900286A75 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		B24694682BA26A3A00286A75 /* UploadDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDocument.swift; sourceTree = "<group>"; };
 		B246946A2BA270A700286A75 /* TagDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDocument.swift; sourceTree = "<group>"; };
@@ -147,6 +146,7 @@
 		B25D75562BC7A31E00A8E2A4 /* thing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = thing.swift; sourceTree = "<group>"; };
 		B25D75582BC8C92700A8E2A4 /* CheckboxToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxToggle.swift; sourceTree = "<group>"; };
 		B26AA7942BD1E61000C1FE2E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		B28D8E542BEC4A4100482F22 /* DebugScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugScreen.swift; sourceTree = "<group>"; };
 		B29E099D2BDB265500B9EAE7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B2D6A39E2B8EFEF80045CCD1 /* Ovum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ovum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D6A3A12B8EFEF80045CCD1 /* OvumApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvumApp.swift; sourceTree = "<group>"; };
@@ -352,7 +352,6 @@
 				B2D6A3E52B9038DB0045CCD1 /* Components */,
 				B2D6A3F32B9155FA0045CCD1 /* Model */,
 				B2D6A3A52B8EFF050045CCD1 /* Assets.xcassets */,
-				B24694282BA139CF00286A75 /* GoogleService-Info-Dev-old.plist */,
 				B258FF472BE30D4800C7D3E6 /* GoogleService-Info-Dev.plist */,
 				B29E099D2BDB265500B9EAE7 /* GoogleService-Info.plist */,
 				B2D6A3A72B8EFF050045CCD1 /* Preview Content */,
@@ -377,6 +376,7 @@
 				B2D6A40A2B9813E40045CCD1 /* Records */,
 				B246940B2BA026FA00286A75 /* Menu.swift */,
 				B247B68F2BB3A6EC00FF17B9 /* SplashScreen.swift */,
+				B28D8E542BEC4A4100482F22 /* DebugScreen.swift */,
 				B2414CA92BBFB52800AC67D1 /* AboutOvumView.swift */,
 			);
 			path = Views;
@@ -539,7 +539,6 @@
 				B258FF482BE30D4800C7D3E6 /* GoogleService-Info-Dev.plist in Resources */,
 				B2D6A3A62B8EFF050045CCD1 /* Assets.xcassets in Resources */,
 				B247B6A92BB4D86B00FF17B9 /* NeueHaasGrotDisp-65Medium-Trial.otf in Resources */,
-				B24694292BA139CF00286A75 /* GoogleService-Info-Dev-old.plist in Resources */,
 				B247B6AB2BB4D86B00FF17B9 /* NeueHaasGrotDisp-56Italic-Trial.otf in Resources */,
 				B29E099E2BDB265500B9EAE7 /* GoogleService-Info.plist in Resources */,
 				B247B6AA2BB4D86B00FF17B9 /* NeueHaasGrotDisp-55Roman-Trial.otf in Resources */,
@@ -626,6 +625,7 @@
 				B2414CAF2BC4B9A100AC67D1 /* MedicationHomeContent.swift in Sources */,
 				B24694692BA26A3A00286A75 /* UploadDocument.swift in Sources */,
 				B2414CB22BC4BF8A00AC67D1 /* MedicationViewModel.swift in Sources */,
+				B28D8E552BEC4A4100482F22 /* DebugScreen.swift in Sources */,
 				B2F4BB142BCCD9C200E93770 /* OnboardingInfo.swift in Sources */,
 				B24694232BA1336B00286A75 /* ProfileView.swift in Sources */,
 				B2D6A4122B98310E0045CCD1 /* DocumentListTile.swift in Sources */,
@@ -705,7 +705,7 @@
 		B26AA7972BD78E5A00C1FE2E /* Debug-Internal */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				API_URL = "";
+				API_URL = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ovum/Ovum.entitlements;
@@ -713,7 +713,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Ovum/Preview Content\"";
-				DEVELOPMENT_TEAM = D9QCYUQ6WX;
+				DEVELOPMENT_TEAM = 5LFRV38MSA;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D9QCYUQ6WX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -728,6 +728,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				INTERNAL = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -804,7 +805,7 @@
 		B26AA7992BD78E6100C1FE2E /* Release-Internal */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				API_URL = "";
+				API_URL = "https://ovumendpoints-2b7tck4zpq-uc.a.run.app";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ovum/OvumRelease.entitlements;
@@ -813,7 +814,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Ovum/Preview Content\"";
-				DEVELOPMENT_TEAM = D9QCYUQ6WX;
+				DEVELOPMENT_TEAM = 5LFRV38MSA;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D9QCYUQ6WX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -828,6 +829,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				INTERNAL = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -970,7 +972,7 @@
 		B2D6A3AD2B8EFF050045CCD1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				API_URL = "";
+				API_URL = "https://ovumendpoints-de6mwfd5oa-uc.a.run.app";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Prod";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ovum/Ovum.entitlements;
@@ -978,8 +980,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Ovum/Preview Content\"";
-				DEVELOPMENT_TEAM = D9QCYUQ6WX;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D9QCYUQ6WX;
+				DEVELOPMENT_TEAM = B7YP4VK563;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				GOOGLE_PLIST_PATH = "GoogleService-Info";
@@ -993,16 +994,16 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				INTERNAL = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
 				"OTHER_LDFLAGS[arch=*]" = "\"-Wl,-no_warn_duplicate_libraries\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nakatomi.Ovum;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ovum.Ovum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.nakatomi.Ovum";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.ovum.Ovum";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1013,7 +1014,7 @@
 		B2D6A3AE2B8EFF050045CCD1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				API_URL = "";
+				API_URL = "https://ovumendpoints-de6mwfd5oa-uc.a.run.app";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Prod";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ovum/OvumRelease.entitlements;
@@ -1022,8 +1023,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Ovum/Preview Content\"";
-				DEVELOPMENT_TEAM = D9QCYUQ6WX;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = D9QCYUQ6WX;
+				DEVELOPMENT_TEAM = B7YP4VK563;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				GOOGLE_PLIST_PATH = "GoogleService-Info";
@@ -1037,15 +1037,15 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				INTERNAL = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nakatomi.Ovum;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ovum.Ovum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.nakatomi.Ovum";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.ovum.Ovum";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
