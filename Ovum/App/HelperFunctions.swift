@@ -138,6 +138,19 @@ func imageToBase64(_ image: UIImage) -> String? {
     return nil // Unknown format
 }
 
+func stringBeforeComma(from input: String) -> String {
+    // Split the string into an array using "," as a separator
+    let components = input.components(separatedBy: ",")
+    
+    // Take the first element (before the first comma)
+    if let firstComponent = components.first {
+        return firstComponent
+    } else {
+        // If no comma is found, return the whole input string
+        return input
+    }
+}
+
 // Helper enum to detect image format
 enum ImageFormat {
     case png

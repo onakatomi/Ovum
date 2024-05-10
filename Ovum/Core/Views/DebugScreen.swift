@@ -39,7 +39,7 @@ struct DebugScreen: View {
                 Button {
                     Task {
                         viewModel.isNewThreadBeingGenerated = true
-                        await viewModel.generateNewThread(userId: authViewModel.currentUser!.id)
+                        await viewModel.generateNewThread()
                         viewModel.isNewThreadBeingGenerated = false
                     }
                 } label: {

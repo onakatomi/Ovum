@@ -52,6 +52,11 @@ struct RecordsHomeContent: View {
             .padding([.bottom], 5)
             .padding([.top], 20)
             Button {
+                if (viewModel.latestThreadId == "No thread currently assigned") {
+                    Task {
+                        await viewModel.generateNewThread()
+                    }
+                }
                 showAddDocumentTray.toggle()
             } label: {
                 HStack(spacing: 14) {

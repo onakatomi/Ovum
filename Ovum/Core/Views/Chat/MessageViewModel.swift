@@ -31,7 +31,7 @@ class MessageViewModel: ObservableObject {
             await getAllChatSessions()
             await getAllMedications()
             await getAllDocuments()
-            await generateNewThread(userId: authViewModel.currentUser!.id)
+//            await generateNewThread()
             await fetchCurrentThread()
         }
     }
@@ -394,7 +394,7 @@ class MessageViewModel: ObservableObject {
                 currentSession.summary = decodedSummaryData
                 
                 let bodyPartsArray: [BodyPart] = decodedArray2.map { bodyPartArrayMapping in
-                    BodyPart(rawValue: bodyPartArrayMapping[1])!
+                    BodyPart(rawValue: stringBeforeComma(from: bodyPartArrayMapping[1]))!
                 }   
                 
                 let symptomsArray: [String] = decodedArray2.map { bodyPartArrayMapping in
@@ -576,7 +576,7 @@ class MessageViewModel: ObservableObject {
         let thread_id: String
     }
     
-    func generateNewThread(userId: String) async {
+    func generateNewThread() async {
         let endpoint = "/new_thread"
         
         if let url = URL(string: Urls.baseUrl + endpoint) {
